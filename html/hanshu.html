@@ -1,0 +1,108 @@
+<li data="" class="t">一、数学函数</li>
+<li data=" ABS(">ABS(x)返回x的绝对值</li>
+<li data=" BIN(">BIN(x)返回x的二进制</li>
+<li data=" OCT(">OCT(x)返回x八进制</li>
+<li data=" HEX(">HEX(x)返回x十六进制</li>
+<li data=" CEILING(">CEILING(x)返回大于x的最小整数值</li>
+<li data=" EXP(">EXP(x)返回值e（自然对数的底）的x次方</li>
+<li data=" FLOOR(">FLOOR(x)返回小于x的最大整数值</li>
+<li data=" GREATEST(">GREATEST(x1,x2,...,xn)返回集合中最大的值</li>
+<li data=" LEAST(">LEAST(x1,x2,...,xn)返回集合中最小的值</li>
+<li data=" LN(">LN(x)返回x的自然对数</li>
+<li data=" LOG(">LOG(x,y)返回x的以y为底的对数</li>
+<li data=" MOD(">MOD(x,y)返回x/y的模（余数）</li>
+<li data=" PI(">PI()返回pi的值（圆周率）</li>
+<li data=" RAND(">RAND()返回０到１内的随机值,可以通过提供一个参数(种子)使RAND()随机数生成器生成一个指定的值。</li>
+<li data=" ROUND(">ROUND(x,y)返回参数x的四舍五入的有y位小数的值</li>
+<li data=" SIGN(">SIGN(x)返回代表数字x的符号的值</li>
+<li data=" SQRT(">SQRT(x)返回一个数的平方根</li>
+<li data=" TRUNCATE(">TRUNCATE(x,y)返回数字x截短为y位小数的结果</li>
+<li data="" class="t">二、聚合函数(常用于GROUP BY从句的SELECT查询中)</li>
+<li data=" AVG(">AVG(col)返回指定列的平均值</li>
+<li data=" COUNT(1)">COUNT(col)返回指定列中非NULL值的个数</li>
+<li data=" MIN(">MIN(col)返回指定列的最小值</li>
+<li data=" MAX(">MAX(col)返回指定列的最大值</li>
+<li data=" SUM(">SUM(col)返回指定列的所有值之和</li>
+<li data=" GROUP_CONCAT(">GROUP_CONCAT(col) 返回由属于一组的列值连接组合而成的结果</li>
+<li data="" class="t">三、字符串函数</li>
+<li data=" ASCII(">ASCII(char)返回字符的ASCII码值</li>
+<li data=" BIT_LENGTH(">BIT_LENGTH(str)返回字符串的比特长度</li>
+<li data=" CONCAT(">CONCAT(s1,s2...,sn)将s1,s2...,sn连接成字符串</li>
+<li data=" CONCAT_WS(">CONCAT_WS(sep,s1,s2...,sn)将s1,s2...,sn连接成字符串，并用sep字符间隔</li>
+<li data=" INSERT(">INSERT(str,x,y,instr)将字符串str从第x位置开始，y个字符长的子串替换为字符串instr，返回结果</li>
+<li data=" FIND_IN_SET(">FIND_IN_SET(str,list)分析逗号分隔的list列表，如果发现str，返回str在list中的位置</li>
+<li data=" LCASE(">LCASE(str)或LOWER(str)返回将字符串str中所有字符改变为小写后的结果</li>
+<li data=" LEFT(">LEFT(str,x)返回字符串str中最左边的x个字符</li>
+<li data=" LENGTH(">LENGTH(s)返回字符串str中的字符数</li>
+<li data=" LTRIM(">LTRIM(str) 从字符串str中切掉开头的空格</li>
+<li data=" POSITION(">POSITION(substr,str) 返回子串substr在字符串str中第一次出现的位置</li>
+<li data=" QUOTE(">QUOTE(str) 用反斜杠转义str中的单引号</li>
+<li data=" REPEAT(">REPEAT(str,srchstr,rplcstr)返回字符串str重复x次的结果</li>
+<li data=" REVERSE(">REVERSE(str)返回颠倒字符串str的结果</li>
+<li data=" RIGHT(">RIGHT(str,x)返回字符串str中最右边的x个字符</li>
+<li data=" RTRIM(">RTRIM(str)返回字符串str尾部的空格</li>
+<li data=" STRCMP(">STRCMP(s1,s2)比较字符串s1和s2</li>
+<li data=" TRIM(">TRIM(str)去除字符串首部和尾部的所有空格</li>
+<li data=" UCASE(">UCASE(str)返回将字符串str中所有字符转变为大写后的结果</li>
+<li data=" UPPER(">UPPER(str)返回将字符串str中所有字符转变为大写后的结果</li>
+<li data="" class="t">四、日期和时间函数</li>
+<li data=" CURDATE()">CURDATE()返回当前的日期</li>
+<li data=" CURRENT_DATE()">CURRENT_DATE()返回当前的日期</li>
+<li data=" CURTIME()">CURTIME()返回当前的时间</li>
+<li data=" CURRENT_TIME()">CURRENT_TIME()返回当前的时间</li>
+<li data=" DATE_ADD(">DATE_ADD(date,INTERVAL int keyword)返回日期date加上间隔时间int的结果(int必须按照关键字进行格式化),如：SELECTDATE_ADD(CURRENT_DATE,INTERVAL 6 MONTH);</li>
+<li data=" DATE_FORMAT('','%Y-%m-%d %H:%s:%i')">DATE_FORMAT(date,fmt)依照指定的fmt格式格式化日期date值</li>
+<li data=" DATE_SUB(">DATE_SUB(date,INTERVAL int keyword)返回日期date加上间隔时间int的结果(int必须按照关键字进行格式化),如：SELECTDATE_SUB(CURRENT_DATE,INTERVAL 6 MONTH);</li>
+<li data=" DAYOFWEEK(">DAYOFWEEK(date)返回date所代表的一星期中的第几天(1~7)</li>
+<li data=" DAYOFMONTH(">DAYOFMONTH(date)返回date是一个月的第几天(1~31)</li>
+<li data=" DAYOFYEAR(">DAYOFYEAR(date) 返回date是一年的第几天(1~366)</li>
+<li data=" DAYNAME(">DAYNAME(date)返回date的星期名，如：SELECT DAYNAME(CURRENT_DATE);</li>
+<li data=" FROM_UNIXTIME(">FROM_UNIXTIME(ts,fmt)根据指定的fmt格式，格式化UNIX时间戳ts</li>
+<li data=" HOUR(">HOUR(time)返回time的小时值(0~23)</li>
+<li data=" MINUTE(">MINUTE(time)返回time的分钟值(0~59)</li>
+<li data=" MONTH(">MONTH(date)返回date的月份值(1~12)</li>
+<li data=" MONTHNAME(">MONTHNAME(date)返回date的月份名，如：SELECT MONTHNAME(CURRENT_DATE);</li>
+<li data=" NOW()">NOW()返回当前的日期和时间</li>
+<li data=" QUARTER(">QUARTER(date)返回date在一年中的季度(1~4)，如SELECT QUARTER(CURRENT_DATE);</li>
+<li data=" WEEK(">WEEK(date)返回日期date为一年中第几周(0~53)</li>
+<li data=" YEAR(">YEAR(date)返回日期date的年份(1000~9999)</li>
+<li data="" class="t">五、加密函数</li>
+<li data=" AES_ENCRYPT(">AES_ENCRYPT(str,key)  返回用密钥key对字符串str利用高级加密标准算法加密后的结果，调用AES_ENCRYPT的结果是一个二进制字符串，以BLOB类型存储</li>
+<li data=" AES_DECRYPT(">AES_DECRYPT(str,key)  返回用密钥key对字符串str利用高级加密标准算法解密后的结果</li>
+<li data=" DECODE(">DECODE(str,key)使用key作为密钥解密加密字符串str</li>
+<li data=" ENCRYPT(">ENCRYPT(str,salt)使用UNIXcrypt()函数，用关键词salt(一个可以惟一确定口令的字符串，就像钥匙一样)加密字符串str</li>
+<li data=" ENCODE(">ENCODE(str,key)使用key作为密钥加密字符串str，调用ENCODE()的结果是一个二进制字符串，它以BLOB类型存储</li>
+<li data=" MD5(">MD5(str)计算字符串str的MD5校验和</li>
+<li data=" PASSWORD(">PASSWORD(str)返回字符串str的加密版本，这个加密过程是不可逆转的，和UNIX密码加密过程使用不同的算法。</li>
+<li data=" SHA(">SHA(str)计算字符串str的安全散列算法(SHA)校验和</li>
+<li data="" class="t">六、控制流函数</li>
+<li data=" CASE">CASE</li>
+<li data=" WHEN">WHEN</li>
+<li data=" IF(">IF</li>
+<li data=" IFNULL(">IFNULL</li>
+<li data=" NULLIF(">NULLIF(arg1,arg2) 如果arg1=arg2返回NULL；否则返回arg1</li>
+<li data=" END">END</li>
+<li data="" class="t">七、格式化函数</li>
+<li data=" DATE_FORMAT('','%Y-%m-%d %H:%i:%s')">DATE_FORMAT(date,fmt)依照字符串fmt格式化日期date值</li>
+<li data=" FORMAT(">FORMAT(x,y)把x格式化为以逗号隔开的数字序列，y是结果的小数位数</li>
+<li data=" INET_ATON(">INET_ATON(ip)返回IP地址的数字表示</li>
+<li data=" INET_NTOA(">INET_NTOA(num)返回数字所代表的IP地址</li>
+<li data=" TIME_FORMAT(">TIME_FORMAT(time,fmt)依照字符串fmt格式化时间time值</li>
+<li data="" class="t">八、类型转化函数</li>
+<li data=" CAST(">CAST()可以把一个值转化为指定的数据类型</li>
+<li data="">为了进行数据类型转化，MySQL提供了函数，它。类型有：</li>
+<li data=" BINARY">BINARY</li>
+<li data=" CHAR">CHAR</li>
+<li data=" DATE">DATE</li>
+<li data=" TIME">TIME</li>
+<li data=" DATETIME">DATETIME</li>
+<li data=" SIGNED">SIGNED</li>
+<li data=" UNSIGNED">UNSIGNED</li>
+<li data="" class="t">九、系统信息函数</li>
+<li data=" DATABASE()">DATABASE()返回当前数据库名</li>
+<li data=" BENCHMARK(">BENCHMARK(count,expr)将表达式expr重复运行count次</li>
+<li data=" CONNECTION_ID()">CONNECTION_ID()返回当前客户的连接ID</li>
+<li data=" FOUND_ROWS()">FOUND_ROWS()返回最后一个SELECT查询进行检索的总行数</li>
+<li data=" USER()">USER()返回当前登陆用户名</li>
+<li data=" SYSTEM_USER()">SYSTEM_USER()返回当前登陆用户名</li>
+<li data=" VERSION()">VERSION()返回MySQL服务器的版本

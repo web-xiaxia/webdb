@@ -1,0 +1,9 @@
+#databasesList{
+    list-style: none;
+    padding: 0;
+    padding: 0px 3px;
+
+}
+#databasesList li{
+    margin: 10px 0;
+}

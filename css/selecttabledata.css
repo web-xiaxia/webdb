@@ -1,0 +1,15 @@
+#tabledatashow,#tabledatashow2{
+    border-collapse: collapse;
+    border: 1px;
+}
+#tabledatashow td,#tabledatashow2 td{
+    padding: 3px 15px;
+    white-space: nowrap;
+}
+#tabledatashowthead tr,#tabledatashowthead2 tr{
+    background: #387EF5;
+}
+#tabledatashowthead td,#tabledatashowthead2 td{
+    color: white;
+    position: relative;
+}
