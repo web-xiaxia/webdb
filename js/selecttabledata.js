@@ -4,15 +4,77 @@ function inittabledata(){
 }
 $(function(){
 
-    $("#tablediv").scroll(function(event){
+		/*setInterval(function(event){
         //console.log(event)
         //console.log(event.target.scrollLeft)
         $("#tabledatashowthead tr").eq(0).css({left:(- event.target.scrollLeft)+"px"})
+      
 
+    },1000)*/
+    
+     function tabledivscrollTimeOut(event){
+     	
+    return setTimeout(function(){
+        //console.log(event)
+        //console.log(event.target.scrollLeft)
+        $("#tabledatashowthead tr").eq(0).css({left:(- event.target.scrollLeft)+"px"})
+     
+
+  },1000)}
+  var lasttabledivscrollTimeOut=null;
+  $("#tablediv").scroll(function(event){
+    	if(lasttabledivscrollTimeOut!=null){
+    		clearTimeout(lasttabledivscrollTimeOut)
+    	}
+    	lasttabledivscrollTimeOut=tabledivscrollTimeOut(event);
     });
+    
+    
+		/*var tabledivscrolllastTime=0;
+    $("#tablediv").scroll(function(event){
+    	var nowTime=new Date().getTime();
+        	if((nowTime-tabledivscrolllastTime)>=1000){
+        		tabledivscrolllastTime=nowTime;
+        //console.log(event)
+        //console.log(event.target.scrollLeft)
+        $("#tabledatashowthead tr").eq(0).css({left:(- event.target.scrollLeft)+"px"})
+      }
+
+    });*/
+ 
+    function tabledatascrollTimeOut(event){
+    return setTimeout(function(){
+        if(nowmaodian=="#tabledata")
+        {
+        	
+             var top=$(window).scrollTop()
+           var tabledivtop=$("#tablediv").offset().top;
+            top=tabledivtop-top
+           if(top<0)
+           {
+               top=0;
+           }
+            $("#tabledatashowthead tr").eq(0).css({top:top+"px"});
+          
+        }
+  },50)}
+  
+    var lasttabledatascrolllastTime=0;
+    $(window).scroll(function(event) {
+    	if(lasttabledatascrolllastTime!=null){
+    		clearTimeout(lasttabledatascrolllastTime)
+    	}
+    	lasttabledatascrolllastTime=tabledatascrollTimeOut(event);
+    });
+    
+    
+    /*var tabledatascrolllastTime=0;
     $(window).scroll(function(event) {
         if(nowmaodian=="#tabledata")
         {
+        	var nowTime=new Date().getTime();
+        	if((nowTime-tabledata2scrolllastTime)>=30){
+        		tabledata2scrolllastTime=nowTime;
             var top=$(window).scrollTop()
            var tabledivtop=$("#tablediv").offset().top;
             top=tabledivtop-top
@@ -21,8 +83,9 @@ $(function(){
                top=0;
            }
             $("#tabledatashowthead tr").eq(0).css({top:top+"px"});
+          }
         }
-    })
+    })*/
 
     $("#tabledatashowthead").delegate("td","click",function(){
 

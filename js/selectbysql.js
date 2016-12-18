@@ -22,12 +22,35 @@ $(function(){
     $("#zdysql").change(function(){
         setLocalStorage(localStorageName.zdysql,$(this).val(),false);
     });
-    $("#tablediv2").scroll(function(event){
+    function tablediv2scrollTimeOut(event){
+    return setTimeout(function(){
         //console.log(event)
         //console.log(event.target.scrollLeft)
         $("#tabledatashowthead2 tr").eq(0).css({left:(- event.target.scrollLeft)+"px"})
+     
+
+  },1000)}
+  var lasttablediv2scrollTimeOut=null;
+  $("#tablediv2").scroll(function(event){
+    	if(lasttablediv2scrollTimeOut!=null){
+    		clearTimeout(lasttablediv2scrollTimeOut)
+    	}
+    	lasttablediv2scrollTimeOut=tablediv2scrollTimeOut(event);
     });
-    $(window).scroll(function(event) {
+  
+    /*var tablediv2scrolllastTime=0;
+    $("#tablediv2").scroll(function(event){
+    	var nowTime=new Date().getTime();
+        	if((nowTime-tablediv2scrolllastTime)>=1000){
+        		tablediv2scrolllastTime=nowTime;
+        //console.log(event)
+        //console.log(event.target.scrollLeft)
+        $("#tabledatashowthead2 tr").eq(0).css({left:(- event.target.scrollLeft)+"px"})
+      }
+    });*/
+    
+    function tabledata2scrollTimeOut(event){
+    return setTimeout(function(){
         if(nowmaodian=="#tabledata2")
         {
             var top=$(window).scrollTop();
@@ -38,13 +61,41 @@ $(function(){
             {
                 $("#tabledatashowthead2 tr").eq(0).css({display:"none"});
             }
+          
+        }
+  },50)}
+  
+    var lasttabledata2scrolllastTime=0;
+    $(window).scroll(function(event) {
+    	if(lasttabledata2scrolllastTime!=null){
+    		clearTimeout(lasttabledata2scrolllastTime)
+    	}
+    	lasttabledata2scrolllastTime=tabledata2scrollTimeOut(event);
+    })
+    /*var tabledata2scrolllastTime=0;
+    $(window).scroll(function(event) {
+    		
+        if(nowmaodian=="#tabledata2")
+        {
+        	var nowTime=new Date().getTime();
+        	if((nowTime-tabledata2scrolllastTime)>=30){
+        		tabledata2scrolllastTime=nowTime;
+            var top=$(window).scrollTop();
+            if(top>$("#tablediv2").offset().top)
+            {
+                $("#tabledatashowthead2 tr").eq(0).css({display:""});
+            }else
+            {
+                $("#tabledatashowthead2 tr").eq(0).css({display:"none"});
+            }
+          }
         }
         //console.log(event)
         //console.log(event.target.scrollLeft)
-
+				*/
        /* $("#tabledatashowthead2 tr").eq(0).css({left: (-event.target.scrollLeft) + 8 + "px"})
         animate({scrollTop:$("#tablediv2").offset().top},gddhms);*/
-    })
+    /*})*/
     $("#zdysqlup").click(function(){
         var num=parseInt( $("#zdysql").attr("rows"));
         if(num<=3)

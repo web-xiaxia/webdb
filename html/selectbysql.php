@@ -62,7 +62,7 @@
     </div>
 
     <div id="tablediv2"  style="overflow: scroll;width: 100%;margin-top: 5px;display: none" >
-        <table id="tabledatashow2" border="1" >
+        <table id="tabledatashow2" border="1" style="position: relative" >
             <thead id="tabledatashowthead2">
 
             </thead>
