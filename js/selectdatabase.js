@@ -16,7 +16,7 @@ function initselectdatabase(){
 
 }
 $(function(){
-    $("#databasesList").css({height:($(window).height()-142)+"px",overflow:"scroll"})
+    $("#databasesList").css({height:($(window).height()-142)+"px"})
     $(window).resize(function(){
         $("#databasesList").css({height:($(window).height()-142)+"px"})
     });

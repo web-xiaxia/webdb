@@ -18,7 +18,7 @@ function inittables(){
 
 }
 $(function(){
-    $("#tablesList").css({height:($(window).height()-175)+"px",overflow:"scroll"})
+    $("#tablesList").css({height:($(window).height()-175)+"px"})
     $(window).resize(function(){
         $("#tablesList").css({height:($(window).height()-175)+"px"})
     });

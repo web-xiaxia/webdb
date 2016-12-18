@@ -3,7 +3,7 @@
     <a href="#tables" class="btn">切换数据表</a>
     <a href="#tabledata2" class="btn">自定义sql</a>
     <!--<div class="btn"  id="opentables">切换数据表</div>-->
-    <div id="tablediv" style="overflow: scroll;width: 100%;margin-top: 5px" >
+    <div id="tablediv" style="overflow: scroll;width:-webkit-overflow-scrolling: touch; 100%;margin-top: 5px" >
         <table id="tabledatashow" border="1" style="position: relative" >
             <thead id="tabledatashowthead" >
 

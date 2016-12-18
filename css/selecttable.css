@@ -1,5 +1,7 @@
 #tablesList{
     list-style: none;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
     padding: 0;
     padding: 0px 3px;
 

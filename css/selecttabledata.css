@@ -13,3 +13,9 @@
     color: white;
     position: relative;
 }
+#tablediv{
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch; 
+	width:100%;
+	margin-top: 5px
+}
