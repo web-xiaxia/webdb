@@ -271,6 +271,7 @@ function getTableData(){
                 }
                 $("#tabledatashowthead").append(ttr);
                 $("#tabledatashowthead").append(ttr2);
+                var xxtabledatashowtbody=$("#tabledatashowtbody");
                 for(var d in sqldataList)
                 {
                     var btr=$('<tr>');
@@ -284,7 +285,7 @@ function getTableData(){
                     {
                         btr.attr("data-id",sqldataList[d][tableobj.mysql_table_columns_id]);
                     }
-                    $("#tabledatashowtbody").append(btr);
+                    xxtabledatashowtbody.append(btr);
                 }
                setLocalStorage(localStorageName.tableobj,tableobj);
 

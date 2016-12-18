@@ -25,7 +25,7 @@ $(function(){
     $("#tablediv2").scroll(function(event){
         //console.log(event)
         //console.log(event.target.scrollLeft)
-        $("#tabledatashowthead2 tr").eq(0).css({left:(- event.target.scrollLeft)+8+"px"})
+        $("#tabledatashowthead2 tr").eq(0).css({left:(- event.target.scrollLeft)+"px"})
     });
     $(window).scroll(function(event) {
         if(nowmaodian=="#tabledata2")
@@ -218,7 +218,7 @@ function getTableData2(){
                         }
                         $("#tabledatashowthead2").append(ttr);
                         $("#tabledatashowthead2").append(ttr2);
-
+                        var xxtabledatashowtbody2=$("#tabledatashowtbody2");
                         for(var d in data.data)
                         {
                             var btr=$('<tr>');
@@ -228,7 +228,7 @@ function getTableData2(){
                                 var field=data.columns[d2];
                                 btr.append('<td data-columns="'+field+'">'+data.data[d][field]+'</td>')
                             }
-                            $("#tabledatashowtbody2").append(btr);
+                            xxtabledatashowtbody2.append(btr);
                         }
                         $("html,body").animate({scrollTop:$("#tablediv2").offset().top-20},gddhms);
                         var tabledatashowtheadtd= $("#tabledatashowthead2 tr").eq(0).find("td");
