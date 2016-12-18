@@ -55,7 +55,7 @@ function login(mysql_server_name,mysql_username,mysql_password){
                     {
                         dbCookie={};
                     }
-                    dbCookie[mysql_server_name+"["+mysql_username+"]"]={mysql_server_name:mysql_server_name,mysql_username:mysql_username,mysql_password:mysql_password}
+                    dbCookie["["+mysql_username+"]"+mysql_server_name]={mysql_server_name:mysql_server_name,mysql_username:mysql_username,mysql_password:mysql_password}
                     setLocalStorage(localStorageName.dbCookie,dbCookie,360*24*60*60*1000);
                 }
                 var nowconnjson={mysql_server_name:mysql_server_name, mysql_username:mysql_username,mysql_password:mysql_password};
