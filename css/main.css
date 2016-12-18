@@ -88,6 +88,7 @@ border:3px solid #387ef5;
 .float .content{
     padding: 5px;
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
     word-break:break-all;
 }
 
