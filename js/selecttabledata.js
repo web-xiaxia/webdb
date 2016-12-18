@@ -7,7 +7,7 @@ $(function(){
     $("#tablediv").scroll(function(event){
         //console.log(event)
         //console.log(event.target.scrollLeft)
-        $("#tabledatashowthead tr").eq(0).css({left:(- event.target.scrollLeft)+8+"px"})
+        $("#tabledatashowthead tr").eq(0).css({left:(- event.target.scrollLeft)+"px"})
 
     });
     $(window).scroll(function(event) {
