@@ -6,3 +6,11 @@
     padding: 5px 0;
 }
 
+#login .logintitle{
+    width: 20%;
+    min-width:80px;
+    text-align:  center;
+}
+#login .logincontent{
+    width: 95%;
+}
