@@ -144,7 +144,7 @@
             }
 
             $.ajax({
-                url:"getTableData.php",
+                url:"/webdb/getTableData.php",
                 type:"get",
                 dataType:"json",
                 data:{
@@ -214,7 +214,7 @@
             $("#tabledatashowthead2").empty();
             $("#tabledatashowtbody2").empty();
             $.ajax({
-                url:"getTableDataZdy.php",
+                url:"/webdb/getTableDataZdy.php",
                 type:"get",
                 dataType:"json",
                 data:{
@@ -308,7 +308,7 @@
                     isloadhanshu=true;
                     openLoding()
                     $.ajax({
-                        url: "hanshu.html",
+                        url: "/webdb/hanshu.html",
                         type: "get",
                         dataType: "html",
                         success: function (data) {
@@ -353,7 +353,7 @@
                 {
                     openLoding();
                     $.ajax({
-                        url:"getColumns.php",
+                        url:"/webdb/getColumns.php",
                         type:"get",
                         dataType:"json",
                         data:{

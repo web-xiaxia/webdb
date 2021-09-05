@@ -25,7 +25,7 @@ $(function(){
         dbobj.mysql_database= $(this).html();
         openLoding();
         $.ajax({
-            url:"/php/getTables.php",
+            url:"/webdb/php/getTables.php",
             type:"get",
             dataType:"json",
             data:dbobj,

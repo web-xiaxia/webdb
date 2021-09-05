@@ -33,7 +33,7 @@ $(function(){
 function login(mysql_server_name,mysql_username,mysql_password){
     openLoding()
     $.ajax({
-        url:"/php/connMysql.php",
+        url:"/webdb/php/connMysql.php",
         type:"get",
         dataType:"json",
         data:{

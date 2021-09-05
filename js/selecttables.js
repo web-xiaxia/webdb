@@ -27,7 +27,7 @@ $(function(){
         var dbobj=getLocalStorage(localStorageName.nowconn);
         dbobj.mysql_table= $(this).html();
         $.ajax({
-            url:"/php/getColumns.php",
+            url:"/webdb/php/getColumns.php",
             type:"get",
             dataType:"json",
             data:dbobj,

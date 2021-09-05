@@ -284,7 +284,7 @@ function getTableData(){
         return;
     }
     $.ajax({
-        url:"/php/getTableData.php",
+        url:"/webdb/php/getTableData.php",
         type:"get",
         dataType:"json",
         data:{

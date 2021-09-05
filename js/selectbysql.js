@@ -121,7 +121,7 @@ $(function(){
             openLoding();
             var dbobj=getLocalStorage(localStorageName.nowconn);
             $.ajax({
-                url:"/php/getColumns.php",
+                url:"/webdb/php/getColumns.php",
                 type:"get",
                 dataType:"json",
                 data:{
@@ -196,7 +196,7 @@ $(function(){
             isloadhanshu=true;
             openLoding()
             $.ajax({
-                url: "/html/hanshu.html",
+                url: "/webdb/html/hanshu.html",
                 type: "get",
                 dataType: "html",
                 success: function (data) {
@@ -219,7 +219,7 @@ function getTableData2(){
     var dbobj=getLocalStorage(localStorageName.nowconn);
     var tableobj=getLocalStorage(localStorageName.tableobj);
     $.ajax({
-        url:"/php/getTableDataZdy.php",
+        url:"/webdb/php/getTableDataZdy.php",
         type:"get",
         dataType:"json",
         data:{

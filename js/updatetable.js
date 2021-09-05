@@ -36,7 +36,7 @@ $(function(){
         var sql="update "+tableobj.mysql_table +" set "+updateobj.columns+"='"+ $("#updatevalue").val()+"' where "+updateobj.idcolumns+"= '"+updateobj.id+"'";
         var dbobj=getLocalStorage(localStorageName.nowconn);
         $.ajax({
-            url:"/php/updateData.php",
+            url:"/webdb/php/updateData.php",
             type:"get",
             dataType:"json",
             data:{
