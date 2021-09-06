@@ -18,6 +18,7 @@ function inittables(){
 
 }
 $(function(){
+
     $("#tablesList").css({height:($(window).height()-175)+"px"})
     $(window).resize(function(){
         $("#tablesList").css({height:($(window).height()-175)+"px"})
@@ -25,7 +26,7 @@ $(function(){
     $("#tablesList").delegate("li","click",function(){
         openLoding()
         var dbobj=getLocalStorage(localStorageName.nowconn);
-        dbobj.mysql_table= $(this).html();
+        dbobj.mysql_table= "`" + $(this).html() + "`";
         $.ajax({
             url:"/webdb/php/getColumns.php",
             type:"get",
@@ -67,4 +68,21 @@ $(function(){
             }
         });
     });
+    
+    //$("#tabledata_input").on("input propertychange",  function () {
+    //    var aaa=$(this).val()
+    //    var tablesList = $("#tablesList").find("li")
+    //    for(var index in tablesList){
+    //        var table = $(tablesList[index])
+    //        var displayValue = ""
+    //        if(aaa){
+    //            if (table.html().indexOf(aaa) ==-1){
+    //               displayValue="none"
+    //            }
+    //        }  
+    //
+    //
+    //        table.css({"display": displayValue}) 
+    //    }
+    //});
 })

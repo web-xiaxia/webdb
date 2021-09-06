@@ -33,7 +33,7 @@ $(function(){
     $("#unpdatebtn").click(function(){
         openLoding()
         var tableobj=getLocalStorage(localStorageName.tableobj);
-        var sql="update "+tableobj.mysql_table +" set "+updateobj.columns+"='"+ $("#updatevalue").val()+"' where "+updateobj.idcolumns+"= '"+updateobj.id+"'";
+        var sql="update `"+tableobj.mysql_table +"` set `"+updateobj.columns+"` ='"+ $("#updatevalue").val()+"' where `"+updateobj.idcolumns+"`= '"+updateobj.id+"'";
         var dbobj=getLocalStorage(localStorageName.nowconn);
         $.ajax({
             url:"/webdb/php/updateData.php",
