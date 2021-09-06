@@ -10,8 +10,8 @@ function inittabledata2(){
     $("#tablenamelistul2").empty();
     for(var d in tableList)
     {
-        $("#tablenamelistul").append('<li data=" '+tableList[d]+' ">'+tableList[d]+'</li>')
-        $("#tablenamelistul2").append('<li data=" '+tableList[d]+' ">'+tableList[d]+'</li>')
+        $("#tablenamelistul").append('<li data=" `'+tableList[d]+'` ">'+tableList[d]+'</li>')
+        $("#tablenamelistul2").append('<li data=" `'+tableList[d]+'` ">'+tableList[d]+'</li>')
     }
     $("#zdysql").val(getLocalStorage(localStorageName.zdysql,false));
 }
@@ -114,7 +114,7 @@ $(function(){
         closefloatmain("#tablenamelist2");
         openfloatmain("#tablencoumns");
         $("#tablencoumnsul").empty();
-        var tablexxx=$(this).html();
+        var tablexxx="`"+$(this).html()+"`";
         var tablecolumns=tablecolumnsobj[tablexxx];
         if(tablecolumns==null)
         {
@@ -169,7 +169,7 @@ $(function(){
             {
                 pk="<span style='color: #ffc300'>PK-> </span>"
             }
-            $("#tablencoumnsul").append('<li data="'+v+' ">'+pk+v+'</li>')
+            $("#tablencoumnsul").append('<li data="`'+v+'` ">'+pk+v+'</li>')
 
         }
     }
