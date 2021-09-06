@@ -26,10 +26,12 @@ $(function(){
     return setTimeout(function(){
         //console.log(event)
         //console.log(event.target.scrollLeft)
-        $("#tabledatashowthead2 tr").eq(0).css({left:(- event.target.scrollLeft)+"px"})
+        if ((-event.target.scrollLeft)!=$("#tabledatashowthead2 tr").eq(0).css('left') ) {
+            $("#tabledatashowthead2 tr").eq(0).css({left: (-event.target.scrollLeft) + "px"})
+        }
      
 
-  },1000)}
+  },0)}
   var lasttablediv2scrollTimeOut=null;
   $("#tablediv2").scroll(function(event){
     	if(lasttablediv2scrollTimeOut!=null){

@@ -21,6 +21,7 @@
             <option value="100">100</option>
             <option value="1000">1000</option>
         </select>
+        <span style="margin-left: 10px">表名</span><span id="tablename"></span>
         <br/>
         <a id="pagesy" href="javascript:void(0)">首页</a>
         <a id="pageup" href="javascript:void(0)">上一页</a>
