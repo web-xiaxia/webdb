@@ -35,7 +35,7 @@
                 <li data=" exists ">exists</li>
                 <li data=" group by ">group</li>
                 <li data=" order by ">order</li>
-                <li data=" limit 0,100 ">limit</li>
+                <li data=" limit 0,100 ">limit 100</li>
 
             </ul>
             <ul class="kjlb">
@@ -89,7 +89,8 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">插入表名</span><a class="close" href="javascript:void(0)">X</a></div>
-        <div class="content" >
+        <input type="text" id="tablenamelistul_input" class="btn" style="width: 80%; margin: 5px auto 5px; background: white; color: black;"/>
+        <div class="content">
             <ul class="kjlb" id="tablenamelistul">
 
             </ul>
@@ -100,7 +101,8 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">选择表</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title" ><span class="content">选择表</span><a class="close" href="javascript:void(0)">X</a></div>
+        <input type="text" id="tablenamelistul2_input" class="btn" style=" width: 80%; margin: 5px auto 5px; background: white; color: black;"/>
         <div class="content" >
             <ul class="kjlb2" id="tablenamelistul2">
 
@@ -113,7 +115,9 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">插入列名</span><a class="close" href="javascript:void(0)">X</a></div>
-        <div class="content" >
+        <input type="text" id="tablencoumnsul_input" class="btn" style="width: 80%; margin: 5px auto 5px; background: white; color: black;"/>
+        <div class="content">
+
             <ul class="kjlb" id="tablencoumnsul">
 
             </ul>

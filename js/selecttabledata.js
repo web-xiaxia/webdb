@@ -247,16 +247,6 @@ $("#tablediv").scroll(function(event){
 
 });
 
-function test_start(str, start_array) {
-
-    for (var i in start_array) {
-        if (str == start_array[i] || str.indexOf(start_array[i]) == 0) {
-            return true
-        }
-    }
-
-    return false
-}
 
 function getTableData() {
     openLoding()
@@ -289,9 +279,7 @@ function getTableData() {
     for (var d in tableobj.mysql_table_columns) {
         var column_name = tableobj.mysql_table_columns[d]['Field']
         var column_type = tableobj.mysql_table_columns[d]['Type'];
-        if (test_start(column_type, ['point', 'geometry', 'geometrycollection',
-            'json', 'multipoint', 'multipolygon', 'polygon', 'blob'])
-        ) {
+        if (as_text_column(column_type)) {
             mysql_column.push(` AsText(\`${column_name}\`) as \`${column_name}\` `)
         } else {
             mysql_column.push(` \`${column_name}\` `)

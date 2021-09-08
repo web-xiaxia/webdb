@@ -1,45 +1,49 @@
-var tablecolumnsobj={};
-function inittabledata2(){
+var tablecolumnsobj = {};
+
+function inittabledata2() {
     $("#tabledata2").slideDown(gddhms);
-    var tableList= getLocalStorage(localStorageName.tableList);
-    if(tableList==null){
-        window.location.hash="#databases";
+    var tableList = getLocalStorage(localStorageName.tableList);
+    if (tableList == null) {
+        window.location.hash = "#databases";
         return;
     }
     $("#tablenamelistul").empty();
     $("#tablenamelistul2").empty();
-    for(var d in tableList)
-    {
-        $("#tablenamelistul").append('<li data=" `'+tableList[d]+'` ">'+tableList[d]+'</li>')
-        $("#tablenamelistul2").append('<li data=" `'+tableList[d]+'` ">'+tableList[d]+'</li>')
+    for (var d in tableList) {
+        $("#tablenamelistul").append('<li data=" `' + tableList[d] + '` ">' + tableList[d] + '</li>')
+        $("#tablenamelistul2").append('<li data=" `' + tableList[d] + '` ">' + tableList[d] + '</li>')
     }
-    $("#zdysql").val(getLocalStorage(localStorageName.zdysql,false));
+    $("#zdysql").val(getLocalStorage(localStorageName.zdysql, false));
 }
-$(function(){
-    $("#zdysql").keyup(function(){
-        setLocalStorage(localStorageName.zdysql,$(this).val(),false);
-    });
-    $("#zdysql").change(function(){
-        setLocalStorage(localStorageName.zdysql,$(this).val(),false);
-    });
-    function tablediv2scrollTimeOut(event){
-    return setTimeout(function(){
-        //console.log(event)
-        //console.log(event.target.scrollLeft)
-        if ((-event.target.scrollLeft)!=$("#tabledatashowthead2 tr").eq(0).css('left') ) {
-            $("#tabledatashowthead2 tr").eq(0).css({left: (-event.target.scrollLeft) + "px"})
-        }
-     
 
-  },0)}
-  var lasttablediv2scrollTimeOut=null;
-  $("#tablediv2").scroll(function(event){
-    	if(lasttablediv2scrollTimeOut!=null){
-    		clearTimeout(lasttablediv2scrollTimeOut)
-    	}
-    	lasttablediv2scrollTimeOut=tablediv2scrollTimeOut(event);
+$(function () {
+    $("#zdysql").keyup(function () {
+        setLocalStorage(localStorageName.zdysql, $(this).val(), false);
     });
-  
+    $("#zdysql").change(function () {
+        setLocalStorage(localStorageName.zdysql, $(this).val(), false);
+    });
+
+    function tablediv2scrollTimeOut(event) {
+        return setTimeout(function () {
+            //console.log(event)
+            //console.log(event.target.scrollLeft)
+            if ((-event.target.scrollLeft) != $("#tabledatashowthead2 tr").eq(0).css('left')) {
+                $("#tabledatashowthead2 tr").eq(0).css({left: (-event.target.scrollLeft) + "px"})
+            }
+
+
+        }, 0)
+    }
+
+    var lasttablediv2scrollTimeOut = null;
+    $("#tablediv2").scroll(function (event) {
+        if (lasttablediv2scrollTimeOut != null) {
+            clearTimeout(lasttablediv2scrollTimeOut)
+        }
+        lasttablediv2scrollTimeOut = tablediv2scrollTimeOut(event);
+    });
+
     /*var tablediv2scrolllastTime=0;
     $("#tablediv2").scroll(function(event){
     	var nowTime=new Date().getTime();
@@ -50,29 +54,27 @@ $(function(){
         $("#tabledatashowthead2 tr").eq(0).css({left:(- event.target.scrollLeft)+"px"})
       }
     });*/
-    
-    function tabledata2scrollTimeOut(event){
-    return setTimeout(function(){
-        if(nowmaodian=="#tabledata2")
-        {
-            var top=$(window).scrollTop();
-            if(top>$("#tablediv2").offset().top)
-            {
-                $("#tabledatashowthead2 tr").eq(0).css({display:""});
-            }else
-            {
-                $("#tabledatashowthead2 tr").eq(0).css({display:"none"});
+
+    function tabledata2scrollTimeOut(event) {
+        return setTimeout(function () {
+            if (nowmaodian == "#tabledata2") {
+                var top = $(window).scrollTop();
+                if (top > $("#tablediv2").offset().top) {
+                    $("#tabledatashowthead2 tr").eq(0).css({display: ""});
+                } else {
+                    $("#tabledatashowthead2 tr").eq(0).css({display: "none"});
+                }
+
             }
-          
+        }, 50)
+    }
+
+    var lasttabledata2scrolllastTime = 0;
+    $(window).scroll(function (event) {
+        if (lasttabledata2scrolllastTime != null) {
+            clearTimeout(lasttabledata2scrolllastTime)
         }
-  },50)}
-  
-    var lasttabledata2scrolllastTime=0;
-    $(window).scroll(function(event) {
-    	if(lasttabledata2scrolllastTime!=null){
-    		clearTimeout(lasttabledata2scrolllastTime)
-    	}
-    	lasttabledata2scrolllastTime=tabledata2scrollTimeOut(event);
+        lasttabledata2scrolllastTime = tabledata2scrollTimeOut(event);
     })
     /*var tabledata2scrolllastTime=0;
     $(window).scroll(function(event) {
@@ -95,107 +97,110 @@ $(function(){
         //console.log(event)
         //console.log(event.target.scrollLeft)
 				*/
-       /* $("#tabledatashowthead2 tr").eq(0).css({left: (-event.target.scrollLeft) + 8 + "px"})
-        animate({scrollTop:$("#tablediv2").offset().top},gddhms);*/
+    /* $("#tabledatashowthead2 tr").eq(0).css({left: (-event.target.scrollLeft) + 8 + "px"})
+     animate({scrollTop:$("#tablediv2").offset().top},gddhms);*/
     /*})*/
-    $("#zdysqlup").click(function(){
-        var num=parseInt( $("#zdysql").attr("rows"));
-        if(num<=3)
-        {
-            $("#zdysql").attr("rows",2);
-        }else
-        {
-            $("#zdysql").attr("rows",num-2);
+    $("#zdysqlup").click(function () {
+        var num = parseInt($("#zdysql").attr("rows"));
+        if (num <= 3) {
+            $("#zdysql").attr("rows", 2);
+        } else {
+            $("#zdysql").attr("rows", num - 2);
         }
     })
-    $("#zdysqldown").click(function(){
-        var num= parseInt($("#zdysql").attr("rows"));
-        $("#zdysql").attr("rows",num+2);
+    $("#zdysqldown").click(function () {
+        var num = parseInt($("#zdysql").attr("rows"));
+        $("#zdysql").attr("rows", num + 2);
     })
-    $(".kjlb2").delegate("li","click",function(){
+    $(".kjlb2").delegate("li", "click", function () {
         closefloatmain("#tablenamelist2");
         openfloatmain("#tablencoumns");
         $("#tablencoumnsul").empty();
-        var tablexxx="`"+$(this).html()+"`";
-        var tablecolumns=tablecolumnsobj[tablexxx];
-        if(tablecolumns==null)
-        {
+        var tablexxx = "`" + $(this).html() + "`";
+        var tablecolumns = tablecolumnsobj[tablexxx];
+        if (tablecolumns == null) {
             openLoding();
-            var dbobj=getLocalStorage(localStorageName.nowconn);
+            var dbobj = getLocalStorage(localStorageName.nowconn);
             $.ajax({
-                url:"/webdb/php/getColumns.php",
-                type:"get",
-                dataType:"json",
-                data:{
-                    mysql_server_name:dbobj.mysql_server_name,
-                    mysql_username:dbobj.mysql_username,
-                    mysql_password:dbobj.mysql_password,
-                    mysql_database:dbobj.mysql_database,
+                url: "/webdb/php/getColumns.php",
+                type: "get",
+                dataType: "json",
+                data: {
+                    mysql_server_name: dbobj.mysql_server_name,
+                    mysql_username: dbobj.mysql_username,
+                    mysql_password: dbobj.mysql_password,
+                    mysql_database: dbobj.mysql_database,
                     mysql_table: tablexxx
                 },
-                success:function(data){
-                    if(data==false)
-                    {
+                success: function (data) {
+                    if (data == false) {
                         alert("数据库连接失败！");
-                       openfloatmain("#tablenamelist2");
-                        closefloatmain("#tablencoumns");;
+                        openfloatmain("#tablenamelist2");
+                        closefloatmain("#tablencoumns");
+                        ;
                         closeLoding()
-                    }else{
+                    } else {
 
-                        tablecolumnsobj[tablexxx]=data;
+                        tablecolumnsobj[tablexxx] = data;
                         closeLoding();
-                        tablecolumnsobjfun(tablecolumnsobj,tablexxx);
+                        tablecolumnsobjfun(tablecolumnsobj, tablexxx);
 
                     }
-                },error:function(){
+                }, error: function () {
                     alert("出错了！")
                     openfloatmain("#tablenamelist2");
-                    closefloatmain("#tablencoumns");;
+                    closefloatmain("#tablencoumns");
+                    ;
                     closeLoding();
                 }
             });
-        }else
-        {
-            tablecolumnsobjfun(tablecolumnsobj,tablexxx);
+        } else {
+            tablecolumnsobjfun(tablecolumnsobj, tablexxx);
         }
     });
-    function tablecolumnsobjfun(tablecolumnsobj,tablexxx){
-        $("#tablencoumnsul").empty();
-        for(var d in tablecolumnsobj[tablexxx])
-        {
-            var tablecolumnsobjtablexxx =tablecolumnsobj[tablexxx][d];
-            var v=tablecolumnsobjtablexxx['Field'];
-            var vpk=tablecolumnsobjtablexxx['Key'];
-            var pk="";
-            if(vpk=='PRI')
-            {
-                pk="<span style='color: #ffc300'>PK-> </span>"
-            }
-            $("#tablencoumnsul").append('<li data="`'+v+'` ">'+pk+v+'</li>')
 
+    function tablecolumnsobjfun(tablecolumnsobj, tablexxx) {
+        $("#tablencoumnsul").empty();
+        var all_column_name = []
+        for (var d in tablecolumnsobj[tablexxx]) {
+            var tablecolumnsobjtablexxx = tablecolumnsobj[tablexxx][d];
+            var v = tablecolumnsobjtablexxx['Field'];
+            var vpk = tablecolumnsobjtablexxx['Key'];
+            var pk = "";
+            if (vpk == 'PRI') {
+                pk = "<span style='color: #ffc300'>PK-> </span>"
+            }
+            var column_type = tablecolumnsobjtablexxx['Type'];
+            var column_name = v
+            if (as_text_column(column_type)) {
+                column_name = ` AsText(\`${v}\`) as \`${v}\``
+            }
+            all_column_name.push(column_name)
+            $("#tablencoumnsul").append(`<li data=" ${column_name} ">${pk}${v}</li>`)
         }
+        $("#tablencoumnsul").prepend(`<li data=" ${all_column_name.join(', ')} ">全部</li>`)
+        $("#tablencoumnsul").prepend(`<li data="SELECT \n  ${all_column_name.join(', ')} \nFROM \n  ${tablexxx} \nWHERE \n  ">查询</li>`)
     }
-    $(".kjlb").delegate("li","click",function (){
-        var a= $(this).attr("data");
-        if(a==null||a=="")
-        {
+
+    $(".kjlb").delegate("li", "click", function () {
+        var a = $(this).attr("data");
+        if (a == null || a == "") {
             return;
         }
-        $("#zdysql").val( $("#zdysql").val()+ a+"");
-        setLocalStorage(localStorageName.zdysql,$("#zdysql").val(),false);
-        $("html,body").animate({scrollTop:$("#zdysql").offset().top},gddhms);
-       // $("#zdysql").focus();
+        $("#zdysql").val($("#zdysql").val() + a + "");
+        setLocalStorage(localStorageName.zdysql, $("#zdysql").val(), false);
+        $("html,body").animate({scrollTop: $("#zdysql").offset().top}, gddhms);
+        // $("#zdysql").focus();
         closefloatmain('#tablenamelist');
         closefloatmain('#sqlfunlist');
         closefloatmain('#tablencoumns');
     })
 
-    var isloadhanshu=false;
-    $("#queryhanshu").click(function(){
+    var isloadhanshu = false;
+    $("#queryhanshu").click(function () {
         openfloatmain('#sqlfunlist');
-        if(isloadhanshu==false)
-        {
-            isloadhanshu=true;
+        if (isloadhanshu == false) {
+            isloadhanshu = true;
             openLoding()
             $.ajax({
                 url: "/webdb/html/hanshu.html",
@@ -205,106 +210,96 @@ $(function(){
                     $("#hanshufunlist").html(data);
                     closeLoding()
                 },
-                error:function(){
+                error: function () {
                     closeLoding();
                     alert("加载出错请重试！")
-                    isloadhanshu=false;
+                    isloadhanshu = false;
                 }
             });
         }
     });
 });
-function getTableData2(){
+
+function getTableData2() {
     openLoding()
     $("#tabledatashowthead2").empty();
     $("#tabledatashowtbody2").empty();
-    var dbobj=getLocalStorage(localStorageName.nowconn);
-    var tableobj=getLocalStorage(localStorageName.tableobj);
+    var dbobj = getLocalStorage(localStorageName.nowconn);
+    var tableobj = getLocalStorage(localStorageName.tableobj);
     $.ajax({
-        url:"/webdb/php/getTableDataZdy.php",
-        type:"get",
-        dataType:"json",
-        data:{
-            mysql_server_name:dbobj.mysql_server_name,
-            mysql_username:dbobj.mysql_username,
-            mysql_password:dbobj.mysql_password,
-            mysql_database:dbobj.mysql_database,
-            mysql_table:tableobj.mysql_table,
-            sql:$("#zdysql").val()
+        url: "/webdb/php/getTableDataZdy.php",
+        type: "get",
+        dataType: "json",
+        data: {
+            mysql_server_name: dbobj.mysql_server_name,
+            mysql_username: dbobj.mysql_username,
+            mysql_password: dbobj.mysql_password,
+            mysql_database: dbobj.mysql_database,
+            mysql_table: tableobj.mysql_table,
+            sql: $("#zdysql").val()
         },
-        success:function(data){
+        success: function (data) {
             closeLoding()
             console.log(data);
-            if(data==false)
-            {
+            if (data == false) {
                 alert("数据库连接失败")
-            }else{
-                if(data.isquery==false)
-                {
-                    if(data.updateok==1)
-                    {
+            } else {
+                if (data.isquery == false) {
+                    if (data.updateok == 1) {
                         alert("执行非查询成功")
-                    }else{
+                    } else {
                         alert("执行非查询失败")
                     }
-                }else
-                {
-                    if(data.isrun==false)
-                    {
+                } else {
+                    if (data.isrun == false) {
                         alert("未查找到数据");
-                    }else
-                    {
+                    } else {
 
                         $("#tabledatashowthead2").empty();
                         $("#tabledatashowtbody2").empty();
                         //$("#tablediv2").css({height:($(window).height()-10)+"px",display:"block"})
-                        $("#tablediv2").css({display:"block"})
-                        var ttr=$('<tr style="text-align: center;position: fixed;z-index: 2;display: none;top:0px">');
-                        var ttr2=$('<tr style="text-align: center;">');
+                        $("#tablediv2").css({display: "block"})
+                        var ttr = $('<tr style="text-align: center;position: fixed;z-index: 2;display: none;top:0px">');
+                        var ttr2 = $('<tr style="text-align: center;">');
                         ttr.append('<td>序号</td>');
                         ttr2.append('<td>序号</td>');
-                        for(var d in data.columns)
-                        {
-                            var mysql_table_column=data.columns[d];
-                            ttr.append('<td>'+mysql_table_column+'</td>');
-                            ttr2.append('<td>'+mysql_table_column+'</td>');
+                        for (var d in data.columns) {
+                            var mysql_table_column = data.columns[d];
+                            ttr.append('<td>' + mysql_table_column + '</td>');
+                            ttr2.append('<td>' + mysql_table_column + '</td>');
                         }
                         $("#tabledatashowthead2").append(ttr);
                         $("#tabledatashowthead2").append(ttr2);
-                        var xxtabledatashowtbody2=$("#tabledatashowtbody2");
-                        for(var d in data.data)
-                        {
-                            var btr=$('<tr>');
-                            btr.append('<td>'+(parseInt(d)+1)+'</td>')
-                            for(var d2 in data.columns)
-                            {
-                                var field=data.columns[d2];
-                                btr.append('<td data-columns="'+field+'">'+data.data[d][field]+'</td>')
+                        var xxtabledatashowtbody2 = $("#tabledatashowtbody2");
+                        for (var d in data.data) {
+                            var btr = $('<tr>');
+                            btr.append('<td>' + (parseInt(d) + 1) + '</td>')
+                            for (var d2 in data.columns) {
+                                var field = data.columns[d2];
+                                btr.append('<td data-columns="' + field + '">' + data.data[d][field] + '</td>')
                             }
                             xxtabledatashowtbody2.append(btr);
                         }
-                        $("html,body").animate({scrollTop:$("#tablediv2").offset().top-20},gddhms);
-                        var tabledatashowtheadtd= $("#tabledatashowthead2 tr").eq(0).find("td");
-                        var tabledatashowtheadtd1= $("#tabledatashowthead2 tr").eq(1).find("td");
-                        var tabledatashowtbodytd=$("#tabledatashowtbody2 tr").eq(0).find("td");
-                        if(tabledatashowtbodytd.length>0)
-                        {
-                            for(var i=0;i<tabledatashowtheadtd.length;i++)
-                            {
-                                var tabledatashowtheadtdwidth= tabledatashowtheadtd.eq(i).width();
-                                var tabledatashowtbodytdwidth= tabledatashowtbodytd.eq(i).width();
-                                var setwidth=tabledatashowtheadtdwidth>tabledatashowtbodytdwidth?tabledatashowtheadtdwidth:tabledatashowtbodytdwidth;
-                                tabledatashowtheadtd.eq(i).width((setwidth+1)+"px");
-                                tabledatashowtheadtd1.eq(i).width(setwidth+"px");
+                        $("html,body").animate({scrollTop: $("#tablediv2").offset().top - 20}, gddhms);
+                        var tabledatashowtheadtd = $("#tabledatashowthead2 tr").eq(0).find("td");
+                        var tabledatashowtheadtd1 = $("#tabledatashowthead2 tr").eq(1).find("td");
+                        var tabledatashowtbodytd = $("#tabledatashowtbody2 tr").eq(0).find("td");
+                        if (tabledatashowtbodytd.length > 0) {
+                            for (var i = 0; i < tabledatashowtheadtd.length; i++) {
+                                var tabledatashowtheadtdwidth = tabledatashowtheadtd.eq(i).width();
+                                var tabledatashowtbodytdwidth = tabledatashowtbodytd.eq(i).width();
+                                var setwidth = tabledatashowtheadtdwidth > tabledatashowtbodytdwidth ? tabledatashowtheadtdwidth : tabledatashowtbodytdwidth;
+                                tabledatashowtheadtd.eq(i).width((setwidth + 1) + "px");
+                                tabledatashowtheadtd1.eq(i).width(setwidth + "px");
 
                             }
-                            $("#tabledatashowthead2 tr").eq(0).width( $("#tabledatashowthead2 tr").eq(1).width()+1+"px");
+                            $("#tabledatashowthead2 tr").eq(0).width($("#tabledatashowthead2 tr").eq(1).width() + 1 + "px");
 
                         }
                     }
                 }
             }
-        },error:function(){
+        }, error: function () {
             alert("出错了！")
             closeLoding();
         }

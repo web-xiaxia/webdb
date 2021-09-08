@@ -22,8 +22,38 @@
         ?>
     </style>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
-    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="APPID" data-redirecturi="REDIRECTURI" charset="utf-8"></script>
     <script type="text/javascript">
+
+        function test_start(str, start_array) {
+
+            for (var i in start_array) {
+                if (str == start_array[i] || str.indexOf(start_array[i]) == 0) {
+                    return true
+                }
+            }
+
+            return false
+        }
+
+        function as_text_column(column_type){
+            return test_start(column_type, ['point', 'geometry', 'geometrycollection','json', 'multipoint', 'multipolygon', 'polygon', 'blob'])
+        }
+
+        function search_ul(that, ul_id) {
+            var aaa = $(that).val()
+            var tablesList = $(ul_id).find("li")
+            for (var index in tablesList) {
+                var table = tablesList[index]
+                var displayValue = "block"
+                if (aaa) {
+                    var litext = table.innerHTML
+                    if (litext && litext.indexOf(aaa) == -1) {
+                        displayValue = "none"
+                    }
+                }
+                table.style.display = displayValue
+            }
+        }
         <?php
             include 'js/url.js';
             include 'js/main.js';
@@ -37,12 +67,6 @@
     </script>
 </head>
 <body >
-<span id="qqLoginBtn"></span>
-<script type="text/javascript">
-    QC.Login({
-       btnId:"qqLoginBtn"    //插入按钮的节点id
-});
-</script>
 <?php
     include 'html/main.php';
     include 'html/lsbj.php';
