@@ -19,7 +19,7 @@ $(function () {
             //console.log(event)
             //console.log(event.target.scrollLeft)
 
-            if ((-event.target.scrollLeft)!=$("#tabledatashowthead tr").eq(0).css('left') ){
+            if ((-event.target.scrollLeft) != $("#tabledatashowthead tr").eq(0).css('left')) {
                 $("#tabledatashowthead tr").eq(0).css({left: (-event.target.scrollLeft) + "px"})
             }
 
@@ -247,6 +247,17 @@ $("#tablediv").scroll(function(event){
 
 });
 
+function test_start(str, start_array) {
+
+    for (var i in start_array) {
+        if (str == start_array[i] || str.indexOf(start_array[i]) == 0) {
+            return true
+        }
+    }
+
+    return false
+}
+
 function getTableData() {
     openLoding()
 
@@ -273,6 +284,21 @@ function getTableData() {
         window.location.hash = "#tables";
         return;
     }
+
+    var mysql_column = []
+    for (var d in tableobj.mysql_table_columns) {
+        var column_name = tableobj.mysql_table_columns[d]['Field']
+        var column_type = tableobj.mysql_table_columns[d]['Type'];
+        if (test_start(column_type, ['point', 'geometry', 'geometrycollection',
+            'json', 'multipoint', 'multipolygon', 'polygon', 'blob'])
+        ) {
+            mysql_column.push(` AsText(\`${column_name}\`) as \`${column_name}\` `)
+        } else {
+            mysql_column.push(` \`${column_name}\` `)
+        }
+
+    }
+
     $.ajax({
         url: "/webdb/php/getTableData.php",
         type: "get",
@@ -283,6 +309,7 @@ function getTableData() {
             mysql_password: dbobj.mysql_password,
             mysql_database: dbobj.mysql_database,
             mysql_table: tableobj.mysql_table,
+            mysql_column: mysql_column.join(","),
             data_num: tableobj.data_num,
             data_page: tableobj.data_page,
             query_where: query_where,

@@ -5,6 +5,8 @@
 #tabledatashow td,#tabledatashow2 td{
     padding: 3px 15px;
     white-space: nowrap;
+    max-width: 500px;
+    overflow: hidden;
 }
 #tabledatashowthead tr,#tabledatashowthead2 tr{
     background: #387EF5;
@@ -12,6 +14,7 @@
 #tabledatashowthead td,#tabledatashowthead2 td{
     color: white;
     position: relative;
+
 }
 #tablediv{
 	overflow: scroll;
