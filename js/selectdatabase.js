@@ -16,9 +16,9 @@ function initselectdatabase(){
 
 }
 $(function(){
-    $("#databasesList").css({height:($(window).height()-142)+"px"})
+    $("#databasesList").css({height:($(window).height()-115)+"px"})
     $(window).resize(function(){
-        $("#databasesList").css({height:($(window).height()-142)+"px"})
+        $("#databasesList").css({height:($(window).height()-115)+"px"})
     });
     $("#databasesList").delegate("li","click",function(){
         var dbobj=getLocalStorage(localStorageName.nowconn);

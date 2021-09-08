@@ -70,18 +70,6 @@ $(function(){
     });
     
     $("#tabledata_input").on("input propertychange",  function () {
-        var aaa=$(this).val()
-        var tablesList = $("#tablesList").find("li")
-        for(var index in tablesList){
-            var table = tablesList[index]
-            var displayValue = "block"
-            if(aaa){
-                var litext = table.innerHTML
-                if (litext && litext.indexOf(aaa) ==-1){
-                   displayValue="none"
-                }
-            }
-            table.style.display=displayValue
-        }
+        search_ul_text(this,"#tablesList")
     });
 })

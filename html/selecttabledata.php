@@ -1,28 +1,28 @@
-
 <div id="tabledata" style="display: none">
     <a href="#tables" class="btn">切换数据表</a>
     <a href="#tabledata2" class="btn">自定义sql</a>
     <!--<div class="btn"  id="opentables">切换数据表</div>-->
-    <div id="tablediv" style="overflow: scroll;width:-webkit-overflow-scrolling: touch; 100%;margin-top: 5px" >
-        <table id="tabledatashow" border="1" style="position: relative" >
-            <thead id="tabledatashowthead" >
+    <div id="tablediv" style="overflow: scroll;width:-webkit-overflow-scrolling: touch; 100%;margin-top: 5px">
+        <table id="tabledatashow" border="1" style="position: relative">
+            <thead id="tabledatashowthead">
 
             </thead>
-            <tbody id="tabledatashowtbody" >
+            <tbody id="tabledatashowtbody">
 
             </tbody>
         </table>
     </div>
     <div>
-        <span id="page">1</span>/<span id="pagesum">2</span> 共<span id="count">100</span>条
-        <select id="pagenum">
-            <option value="15">15</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="1000">1000</option>
-        </select>
-        <span style="margin-left: 10px">表名</span><span id="tablename"></span>
-        <br/>
+        <div style="overflow: hidden; white-space: nowrap; scroll">
+            <select id="pagenum">
+                <option value="15">15</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="1000">1000</option>
+            </select>
+            <span id="page" style="margin-left: 10px">1</span>/<span id="pagesum">2</span> 共<span id="count">100</span>条,
+            <span>表名</span><span id="tablename"></span>
+        </div>
         <a id="pagesy" href="javascript:void(0)">首页</a>
         <a id="pageup" href="javascript:void(0)">上一页</a>
         <a id="pagedowm" href="javascript:void(0)">下一页</a>
@@ -30,7 +30,7 @@
     </div>
 </div>
 
-<div class="floatmain" id="updatecolumn"  style="display: none;">
+<div class="floatmain" id="updatecolumn" style="display: none;">
     <div class="floatbg">
     </div>
     <div class="float">
@@ -41,7 +41,7 @@
         </div>
     </div>
 </div>
-<div class="floatmain" id="columnswindow"  style="display: none;">
+<div class="floatmain" id="columnswindow" style="display: none;">
     <div class="floatbg">
     </div>
     <div class="float">

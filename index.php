@@ -54,6 +54,23 @@
                 table.style.display = displayValue
             }
         }
+
+        function search_ul_text(that, ul_id) {
+            var aaa = $(that).val()
+            var tablesList = $(ul_id).find("li")
+            for (var index in tablesList) {
+                var table = tablesList[index]
+                var displayValue = "block"
+                if (aaa) {
+                    var litext = table.innerHTML
+                    if (litext && litext.indexOf(aaa) == -1) {
+                        displayValue = "none"
+                    }
+                }
+                table.style.display = displayValue
+            }
+        }
+
         <?php
             include 'js/url.js';
             include 'js/main.js';

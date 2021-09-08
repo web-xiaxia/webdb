@@ -24,6 +24,16 @@ $(function () {
         setLocalStorage(localStorageName.zdysql, $(this).val(), false);
     });
 
+    $("#tablenamelistul_input").on("input propertychange",  function () {
+        search_ul_text(this,"#tablenamelistul")
+    });
+    $("#tablenamelistul2_input").on("input propertychange",  function () {
+        search_ul_text(this,"#tablenamelistul2")
+    });
+    $("#tablencoumnsul_input").on("input propertychange",  function () {
+        search_ul_text(this,"#tablencoumnsul")
+    });
+
     function tablediv2scrollTimeOut(event) {
         return setTimeout(function () {
             //console.log(event)
