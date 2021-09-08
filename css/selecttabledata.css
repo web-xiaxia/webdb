@@ -38,7 +38,8 @@
     padding: 3px 3px;
 }
 .show_one_data_field_context{
-    background-color: #f4f5f5;
+    background-color: #ffffff;
     padding: 3px  10px;
     border-radius: 5px;
+    min-height: 18px;
 }

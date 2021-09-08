@@ -24,6 +24,21 @@ $(function () {
 
 
 },1000)*/
+    $("#zshow_one_data_input").on("input propertychange",  function () {
+        var aaa = $(this).val()
+        var tablesList =  $('.show_one_data_field_box')
+        for (var index in tablesList) {
+            var table = tablesList[index]
+            var displayValue = "block"
+            if (aaa) {
+                var litext = table.getAttribute('data-field')
+                if (litext && litext.indexOf(aaa) == -1) {
+                    displayValue = "none"
+                }
+            }
+            table.style.display = displayValue
+        }
+    });
 
     function tabledivscrollTimeOut(event) {
 
@@ -283,7 +298,7 @@ function show_one_data(idx, sqldataList) {
         if (!$(`#zdycolumns${field}`).is(':checked')) {
             continue
         }
-        one_data_context.append(`<div id="show_one_data${field}" > 
+        one_data_context.append(`<div id="show_one_data${field}" class="show_one_data_field_box" data-field="${field}"> 
             <div class="show_one_data_field">
                 <div class="show_one_data_field_title">${field}</div>
                 <div class="show_one_data_field_context" onclick="show_one_data_update_data('${sqldata[tableobj.mysql_table_columns_id]}','${field}',this)">${sqldata[field]}</div>
