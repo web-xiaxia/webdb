@@ -12,7 +12,8 @@ function inittabledata() {
     getTableData();
     $("#tabledata").slideDown(gddhms);
 }
-var lastSqldataList=null
+
+var lastSqldataList = null
 
 $(function () {
 
@@ -266,9 +267,14 @@ function zdycolumnsok() {
     getTableData()
 }
 
-function show_one_data(idx) {
+function show_one_data_update_data(id, columns,that) {
+    data_cli_update_data(id, columns, $(that).html())
+    closefloatmain("#zshow_one_data_window");
+}
+
+function show_one_data(idx, sqldataList) {
     var tableobj = getLocalStorage(localStorageName.tableobj);
-    var sqldata = lastSqldataList[idx]
+    var sqldata = sqldataList[idx]
     console.log(sqldata)
     var one_data_context = $("#zshow_one_data_windowcontext")
     one_data_context.empty()
@@ -277,7 +283,13 @@ function show_one_data(idx) {
         if (!$(`#zdycolumns${field}`).is(':checked')) {
             continue
         }
-        one_data_context.append(`<div id="show_one_data${field}"> ${sqldata[field]} </div>`)
+        one_data_context.append(`<div id="show_one_data${field}" > 
+            <div class="show_one_data_field">
+                <div class="show_one_data_field_title">${field}</div>
+                <div class="show_one_data_field_context" onclick="show_one_data_update_data('${sqldata[tableobj.mysql_table_columns_id]}','${field}',this)">${sqldata[field]}</div>
+            </div>
+           
+        </div>`)
     }
     openfloatmain("#zshow_one_data_window");
 }
@@ -382,7 +394,7 @@ function getTableData() {
                 for (var d in sqldataList) {
                     var sqldata = sqldataList[d]
                     var btr = $('<tr>');
-                    btr.append(`<td onclick="show_one_data(${parseInt(d)})">${(parseInt(d) + 1)}</td>`)
+                    btr.append(`<td onclick="show_one_data(${parseInt(d)},lastSqldataList)">${(parseInt(d) + 1)}</td>`)
 
                     for (var d2 in tableobj.mysql_table_columns) {
                         var field = tableobj.mysql_table_columns[d2]['Field'];
