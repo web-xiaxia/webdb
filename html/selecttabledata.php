@@ -20,13 +20,13 @@
                 <option value="100">100</option>
                 <option value="1000">1000</option>
             </select>
-            <span id="page" style="margin-left: 10px">1</span>/<span id="pagesum">2</span> 共<span id="count">100</span>条,
-            <span>表名</span><span id="tablename"></span>
+            <span id="page" style="margin-left: 10px">1</span>/<span id="pagesum">2</span> 共<span id="count">100</span>条
         </div>
         <a id="pagesy" href="javascript:void(0)">首页</a>
         <a id="pageup" href="javascript:void(0)">上一页</a>
         <a id="pagedowm" href="javascript:void(0)">下一页</a>
         <a id="pagewy" href="javascript:void(0)">尾页</a>
+        <a id="pagerefresh" href="javascript:void(0)" style="margin-left: 15px">刷新</a>
     </div>
 </div>
 

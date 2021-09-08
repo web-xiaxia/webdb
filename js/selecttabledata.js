@@ -1,10 +1,13 @@
 function inittabledata() {
-    var zdycolumnswindowcontext =$("#zdycolumnswindowcontext")
-    zdycolumnswindowcontext.empty()
     var tableobj = getLocalStorage(localStorageName.tableobj);
+    var zdycolumnswindowcontext = $("#zdycolumnswindowcontext")
+    zdycolumnswindowcontext.empty()
+    zdycolumnswindowcontext.append(`<a class="btn" href="javascript:$('.zdycolumns').prop('checked',true)" >全选</a>`)
+    zdycolumnswindowcontext.append(`<a class="btn" href="javascript:$('.zdycolumns').prop('checked',false)">全部取消</a>`)
+    zdycolumnswindowcontext.append(`表名：${tableobj.mysql_table}`)
     for (var d in tableobj.mysql_table_columns) {
         var column_name = tableobj.mysql_table_columns[d]['Field']
-        zdycolumnswindowcontext.append(`<div><input type="checkbox" id="zdycolumns${column_name}" checked> <label for="zdycolumns${column_name}">${column_name}</label> </div>`)
+        zdycolumnswindowcontext.append(`<div><input type="checkbox" class="zdycolumns" id="zdycolumns${column_name}" checked> <label for="zdycolumns${column_name}">${column_name}</label> </div>`)
     }
     getTableData();
     $("#tabledata").slideDown(gddhms);
@@ -234,6 +237,9 @@ $("#tablediv").scroll(function(event){
         setLocalStorage(localStorageName.tableobj, tableobj);
         getTableData()
     })
+    $("#pagerefresh").click(function () {
+        getTableData()
+    })
 
     $("#pagewy").click(function () {
         var tableobj = getLocalStorage(localStorageName.tableobj);
@@ -254,7 +260,7 @@ $("#tablediv").scroll(function(event){
 
 });
 
-function zdycolumnsok(){
+function zdycolumnsok() {
     closefloatmain("#zdycolumnswindow");
     getTableData()
 }
@@ -290,7 +296,7 @@ function getTableData() {
     var mysql_column = []
     for (var d in tableobj.mysql_table_columns) {
         var column_name = tableobj.mysql_table_columns[d]['Field']
-        if (!$(`#zdycolumns${column_name}`).is(':checked')){
+        if (!$(`#zdycolumns${column_name}`).is(':checked')) {
             continue
         }
         var column_type = tableobj.mysql_table_columns[d]['Type'];
@@ -330,7 +336,7 @@ function getTableData() {
                 $("#pagesum").html(tableobj.data_page_sum);
                 $("#count").html(tableobj.data_count);
                 $("#pagenum").val(tableobj.data_num);
-                $("#tablename").html(tableobj.mysql_table);
+
 
 
                 $("#tablediv").css({height: ($(window).height() - 130) + "px"})
@@ -343,7 +349,7 @@ function getTableData() {
                 ttr2.append(`<td onclick="openfloatmain('#zdycolumnswindow');">序号</td>`);
                 for (var d in tableobj.mysql_table_columns) {
                     var mysql_table_column = tableobj.mysql_table_columns[d]['Field'];
-                    if (!$(`#zdycolumns${mysql_table_column}`).is(':checked')){
+                    if (!$(`#zdycolumns${mysql_table_column}`).is(':checked')) {
                         continue
                     }
                     var oderbyobj = getLocalStorage(localStorageName.oderbyobj);
@@ -361,7 +367,7 @@ function getTableData() {
                     btr.append('<td>' + (parseInt(d) + 1) + '</td>')
                     for (var d2 in tableobj.mysql_table_columns) {
                         var field = tableobj.mysql_table_columns[d2]['Field'];
-                        if (!$(`#zdycolumns${field}`).is(':checked')){
+                        if (!$(`#zdycolumns${field}`).is(':checked')) {
                             continue
                         }
                         btr.append('<td data-columns="' + field + '">' + sqldataList[d][field] + '</td>')
