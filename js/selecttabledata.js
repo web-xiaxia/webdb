@@ -12,6 +12,7 @@ function inittabledata() {
     getTableData();
     $("#tabledata").slideDown(gddhms);
 }
+var lastSqldataList=null
 
 $(function () {
 
@@ -265,6 +266,21 @@ function zdycolumnsok() {
     getTableData()
 }
 
+function show_one_data(idx) {
+    var tableobj = getLocalStorage(localStorageName.tableobj);
+    var sqldata = lastSqldataList[idx]
+    console.log(sqldata)
+    var one_data_context = $("#zshow_one_data_windowcontext")
+    one_data_context.empty()
+    for (var d2 in tableobj.mysql_table_columns) {
+        var field = tableobj.mysql_table_columns[d2]['Field'];
+        if (!$(`#zdycolumns${field}`).is(':checked')) {
+            continue
+        }
+        one_data_context.append(`<div id="show_one_data${field}"> ${sqldata[field]} </div>`)
+    }
+    openfloatmain("#zshow_one_data_window");
+}
 
 function getTableData() {
     openLoding()
@@ -338,9 +354,10 @@ function getTableData() {
                 $("#pagenum").val(tableobj.data_num);
 
 
-
                 $("#tablediv").css({height: ($(window).height() - 130) + "px"})
                 var sqldataList = data["data"];
+                lastSqldataList = sqldataList
+
                 $("#tabledatashowthead").empty();
                 $("#tabledatashowtbody").empty();
                 var ttr = $('<tr style="text-align: center;position: fixed;z-index: 2;">');
@@ -363,17 +380,19 @@ function getTableData() {
                 $("#tabledatashowthead").append(ttr2);
                 var xxtabledatashowtbody = $("#tabledatashowtbody");
                 for (var d in sqldataList) {
+                    var sqldata = sqldataList[d]
                     var btr = $('<tr>');
-                    btr.append('<td>' + (parseInt(d) + 1) + '</td>')
+                    btr.append(`<td onclick="show_one_data(${parseInt(d)})">${(parseInt(d) + 1)}</td>`)
+
                     for (var d2 in tableobj.mysql_table_columns) {
                         var field = tableobj.mysql_table_columns[d2]['Field'];
                         if (!$(`#zdycolumns${field}`).is(':checked')) {
                             continue
                         }
-                        btr.append('<td data-columns="' + field + '">' + sqldataList[d][field] + '</td>')
+                        btr.append('<td data-columns="' + field + '">' + sqldata[field] + '</td>')
                     }
                     if (tableobj.mysql_table_columns_id != null) {
-                        btr.attr("data-id", sqldataList[d][tableobj.mysql_table_columns_id]);
+                        btr.attr("data-id", sqldata[tableobj.mysql_table_columns_id]);
                     }
                     xxtabledatashowtbody.append(btr);
                 }
