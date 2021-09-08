@@ -56,12 +56,13 @@
 </div>
 
 <div class="floatmain" id="zshow_one_data_window" style="display: none;">
-    <div class="floatbg" >
+    <div class="floatbg">
     </div>
     <div class="float">
         <div class="title"><span class="content">数据</span><a class="close" href="javascript:void(0)">X</a></div>
+        <input type="text" id="zshow_one_data_input" class="btn"
+               style=" width: 80%; margin: 5px auto 5px; background: white; color: black; text-align: left"/>
         <div class="content" style="background-color: #e7e7e7;">
-            <input type="text" id="zshow_one_data_input" class="btn" style=" width: 80%; margin: 5px auto 5px; background: white; color: black; text-align: left"/>
             <div id="zshow_one_data_windowcontext">
 
             </div>
