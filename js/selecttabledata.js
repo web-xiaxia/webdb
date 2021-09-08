@@ -1,4 +1,11 @@
 function inittabledata() {
+    var zdycolumnswindowcontext =$("#zdycolumnswindowcontext")
+    zdycolumnswindowcontext.empty()
+    var tableobj = getLocalStorage(localStorageName.tableobj);
+    for (var d in tableobj.mysql_table_columns) {
+        var column_name = tableobj.mysql_table_columns[d]['Field']
+        zdycolumnswindowcontext.append(`<div><input type="checkbox" id="zdycolumns${column_name}" checked> <label for="zdycolumns${column_name}">${column_name}</label> </div>`)
+    }
     getTableData();
     $("#tabledata").slideDown(gddhms);
 }
@@ -247,6 +254,11 @@ $("#tablediv").scroll(function(event){
 
 });
 
+function zdycolumnsok(){
+    closefloatmain("#zdycolumnswindow");
+    getTableData()
+}
+
 
 function getTableData() {
     openLoding()
@@ -278,6 +290,9 @@ function getTableData() {
     var mysql_column = []
     for (var d in tableobj.mysql_table_columns) {
         var column_name = tableobj.mysql_table_columns[d]['Field']
+        if (!$(`#zdycolumns${column_name}`).is(':checked')){
+            continue
+        }
         var column_type = tableobj.mysql_table_columns[d]['Type'];
         if (as_text_column(column_type)) {
             mysql_column.push(` AsText(\`${column_name}\`) as \`${column_name}\` `)
@@ -324,10 +339,13 @@ function getTableData() {
                 $("#tabledatashowtbody").empty();
                 var ttr = $('<tr style="text-align: center;position: fixed;z-index: 2;">');
                 var ttr2 = $('<tr style="text-align: center;">');
-                ttr.append('<td>序号</td>');
-                ttr2.append('<td>序号</td>');
+                ttr.append(`<td onclick="openfloatmain('#zdycolumnswindow');">序号</td>`);
+                ttr2.append(`<td onclick="openfloatmain('#zdycolumnswindow');">序号</td>`);
                 for (var d in tableobj.mysql_table_columns) {
                     var mysql_table_column = tableobj.mysql_table_columns[d]['Field'];
+                    if (!$(`#zdycolumns${mysql_table_column}`).is(':checked')){
+                        continue
+                    }
                     var oderbyobj = getLocalStorage(localStorageName.oderbyobj);
                     var querywhereobj = getLocalStorage(localStorageName.querywhereobj);
                     var oderbyobjcolumnname = oderbyobj[mysql_table_column];
@@ -343,6 +361,9 @@ function getTableData() {
                     btr.append('<td>' + (parseInt(d) + 1) + '</td>')
                     for (var d2 in tableobj.mysql_table_columns) {
                         var field = tableobj.mysql_table_columns[d2]['Field'];
+                        if (!$(`#zdycolumns${field}`).is(':checked')){
+                            continue
+                        }
                         btr.append('<td data-columns="' + field + '">' + sqldataList[d][field] + '</td>')
                     }
                     if (tableobj.mysql_table_columns_id != null) {

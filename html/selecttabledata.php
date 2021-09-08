@@ -41,6 +41,19 @@
         </div>
     </div>
 </div>
+<div class="floatmain" id="zdycolumnswindow" style="display: none;">
+    <div class="floatbg">
+    </div>
+    <div class="float">
+        <div class="title"><span class="content">选择显示列</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="content">
+            <div id="zdycolumnswindowcontext">
+
+            </div>
+            <a class="btn" href="javascript:void(0)" onclick="zdycolumnsok()">确定</a>
+        </div>
+    </div>
+</div>
 <div class="floatmain" id="columnswindow" style="display: none;">
     <div class="floatbg">
     </div>
