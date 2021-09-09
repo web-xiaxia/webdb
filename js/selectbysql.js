@@ -194,7 +194,7 @@ function tipColumns(tablexxx, tableMatchNowSearchColumnsText, tipdom, nowTipColu
                         continue
                     }
                     if (nowTipColumnsIndex == tipColumnsIndex) {
-                        tipLabelAdd(tipdom, field_name, `\`field_name\``, startIndex, endIndex)
+                        tipLabelAdd(tipdom, field_name, `\`${field_name}\``, startIndex, endIndex)
                     }
                 }
             }
