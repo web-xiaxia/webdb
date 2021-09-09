@@ -305,18 +305,19 @@ $(function () {
     $("#zdysql").on("input propertychange", function () {
         tipsSql(this)
     });
+    $("#zdysql").click(function () {
+        tipsSql(this)
+    });
+    $("#zdysql").focus(function () {
+        tipsSql(this)
+    });
     $("#zdysql").on("touchend", function () {
         tipsSql(this)
     });
     $("#zdysql").on("touchmove", function () {
         tipsSql(this)
     });
-    $("#zdysql").click("touchmove", function () {
-        tipsSql(this)
-    });
-    $("#zdysql").focus(function () {
-        tipsSql(this)
-    });
+
 
     $("#tablenamelistul_input").on("input propertychange", function () {
         search_ul_text(this, "#tablenamelistul")

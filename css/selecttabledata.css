@@ -48,6 +48,7 @@
 }
 
 .sqltip {
+    -webkit-overflow-scrolling: touch;
     margin: 3px;
     padding: 5px;
     overflow-x: scroll;
