@@ -15,6 +15,23 @@
         <a class="btn" href="javascript:getTableData2()" id="getTableDatazdy" >执行sql</a>
         <div style="text-align: left">
             <ul class="kjlb">
+                <li data=",">,</li>
+                <li data=".">.</li>
+                <li data="'">'</li>
+                <li data="-">-</li>
+                <li data="/">/</li>
+                <li data=" (">(</li>
+                <li data=") ">)</li>
+                <li data=";">;</li>
+            </ul>
+            <ul class="kjlb">
+                <li data=" > ">></li>
+                <li data=" < "><</li>
+                <li data=" = ">=</li>
+                <li data=" like ">like</li>
+                <li data="%">%</li>
+            </ul>
+            <ul class="kjlb">
                 <li data=" select ">select</li>
                 <li data=" * ">*</li>
                 <li data=" from ">from</li>
@@ -44,23 +61,7 @@
                 <li data=" limit 0,100 ">limit 100</li>
 
             </ul>
-            <ul class="kjlb">
-                <li data=",">,</li>
-                <li data=".">.</li>
-                <li data="'">'</li>
-                <li data="-">-</li>
-                <li data="/">/</li>
-                <li data=" (">(</li>
-                <li data=") ">)</li>
-                <li data=";">;</li>
-            </ul>
-            <ul class="kjlb">
-                <li data=" > ">></li>
-                <li data=" < "><</li>
-                <li data=" = ">=</li>
-                <li data=" like ">like</li>
-                <li data="%">%</li>
-            </ul>
+
         </div>
         <a class="btn" href="javascript:void(0)" id="queryhanshu" >插入函数</a>
         <a class="btn" href="javascript: openfloatmain('#tablenamelist');" >插入表名</a>
