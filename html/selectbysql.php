@@ -8,10 +8,10 @@
     </div>
     <div id="sqltip2" class="sqltip">
     </div>
-    <div id="zdysqlmain">
-        <textarea id="zdysql" rows="10" style="width: 100%"></textarea>
+    <div id="zdysqlmain" style="text-align: center">
+        <textarea id="zdysql" rows="10" style=" width:96%; border: 1px solid #387EF5; border-radius: 2px;"></textarea>
         <a class="btn" href="javascript:getTableData2()" id="getTableDatazdy" >执行sql</a>
-        <div>
+        <div style="text-align: left">
             <ul class="kjlb">
                 <li data=" select ">select</li>
                 <li data=" * ">*</li>

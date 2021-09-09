@@ -227,9 +227,9 @@ function tipsSearchList(nowSearchText, nowIndex) {
     var tips2_box = $("#sqltip2")
     tips1_box.empty()
     tips2_box.empty()
-    if (!matchNowSearchText) {
-        return
-    }
+    //if (!matchNowSearchText) {
+    //    return
+    //}
 
     for (var index in sqlTips) {
         var sqlTip = sqlTips[index]
