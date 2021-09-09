@@ -26,9 +26,11 @@
     width: 100%;
     margin-top: 5px
 }
-#zshow_one_data_windowcontext{
+
+#zshow_one_data_windowcontext {
     margin: 10px;
 }
+
 .show_one_data_field {
     padding-bottom: 5px;
 }
@@ -37,9 +39,28 @@
     color: #7f7f7f;
     padding: 3px 3px;
 }
-.show_one_data_field_context{
+
+.show_one_data_field_context {
     background-color: #ffffff;
-    padding: 3px  10px;
+    padding: 3px 10px;
     border-radius: 5px;
     min-height: 18px;
+}
+
+.sqltip {
+    margin: 3px;
+    padding: 5px;
+    overflow-x: scroll;
+    min-height: 25px;
+    line-height: 25px;
+    border: 1px solid #387ef5;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+.sqltip label{
+    padding: 3px  7px;
+    background-color: #387ef5;
+    border-radius: 5px;
+    color: white;
+    margin: 0px 3px;
 }

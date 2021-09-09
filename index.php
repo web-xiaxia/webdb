@@ -25,13 +25,14 @@
     <script type="text/javascript">
 
         function test_start(str, start_array) {
-
+            str = str.toLowerCase()
+            var str_length = str.length
             for (var i in start_array) {
-                if (str == start_array[i] || str.indexOf(start_array[i]) == 0) {
+                var test_str = start_array[i].toLowerCase()
+                if (test_str.length >= str_length && (str == test_str || test_str.substr(0, str_length) == str)) {
                     return true
                 }
             }
-
             return false
         }
 
@@ -40,13 +41,13 @@
         }
 
         function search_ul(that, ul_id) {
-            var aaa = $(that).val()
+            var aaa = $(that).val().toLowerCase()
             var tablesList = $(ul_id).find("li")
             for (var index in tablesList) {
                 var table = tablesList[index]
                 var displayValue = "block"
                 if (aaa) {
-                    var litext = table.innerHTML
+                    var litext = table.innerHTML.toLowerCase()
                     if (litext && litext.indexOf(aaa) == -1) {
                         displayValue = "none"
                     }

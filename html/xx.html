@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=gb2312">
+    <TITLE>获得光标在各种文本框中的位置</TITLE></HEAD>
+<BODY>
+<br/><br/><br/>
+<div id="tips_box"></div>
+<br/>
+<button onclick="xxx()">asdasd</button>
+<input id="xxx" type="text" value="123456789022">
+
+<textarea id="xxx2">1234567890</textarea>
+
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+<script>
+    var sqlTips = [{
+        "search_text": "select",
+        "show_text": "select",
+        "insert_text": "select ",
+    }, {
+        "search_text": "from",
+        "show_text": "from",
+        "insert_text": "from ",
+    }, {
+        "search_text": "where",
+        "show_text": "where",
+        "insert_text": "where ",
+    }]
+
+    function test_start(str, start_array) {
+        var str_length = str.length
+        for (var i in start_array) {
+            var test_str = start_array[i]
+            if (test_str.length >= str_length && (str == test_str || test_str.substr(0, str_length) == str)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    function tipsSearchList(nowSearchText) {
+        var tips_box = $("#tips_box")
+        tips_box.empty()
+
+        if (!nowSearchText){
+            return
+        }
+
+        for (var index in sqlTips) {
+            var sqlTip = sqlTips[index]
+            if (test_start(nowSearchText, [sqlTip.search_text])) {
+                tips_box.append(sqlTip.show_text)
+            }
+        }
+    }
+    function xxx2(that){
+        var nowText = $(that).val()
+        var nowIndex = that.selectionEnd
+        var nowIndexStr = nowText.substr(0, nowIndex)
+        var nowIndexStrSplit = nowIndexStr.split(' ')
+        var nowSearchText = nowIndexStrSplit[nowIndexStrSplit.length - 1]
+        tipsSearchList(nowSearchText)
+    }
+
+    $("#xxx").on("input propertychange", function () {
+        xxx2(this)
+    });
+    $("#xxx2").on("input propertychange", function () {
+        xxx2(this)
+    });
+
+    function xxx() {
+        var x_input = $("#xxx")[0]
+        console.log(x_input.selectionEnd)
+        x_input.focus()
+    }
+
+
+</script>
+
+</BODY>
+</HTML>

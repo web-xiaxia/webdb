@@ -4,6 +4,10 @@
     <!--<div class="btn"  id="opentables2">切换数据表</div>-->
     <div class="btn"  id="zdysqldown">增加编辑框行</div>
     <div class="btn"  id="zdysqlup">减少编辑框行</div>
+    <div id="sqltip" class="sqltip">
+    </div>
+    <div id="sqltip2" class="sqltip">
+    </div>
     <div id="zdysqlmain">
         <textarea id="zdysql" rows="10" style="width: 100%"></textarea>
         <a class="btn" href="javascript:getTableData2()" id="getTableDatazdy" >执行sql</a>
@@ -19,9 +23,9 @@
                 <li data=" delete ">delete</li>
             </ul>
             <ul class="kjlb">
-                <li data=" left jion ">left</li>
-                <li data=" right jion ">right</li>
-                <li data=" inner jion ">inner</li>
+                <li data=" left join ">left</li>
+                <li data=" right join ">right</li>
+                <li data=" inner join ">inner</li>
                 <li data=" on ">on</li>
             </ul>
             <ul class="kjlb">

@@ -16,12 +16,281 @@ function inittabledata2() {
     $("#zdysql").val(getLocalStorage(localStorageName.zdysql, false));
 }
 
+var sqlTips = [
+    {
+        "search_text": "select",
+        "show_text": "SELECT",
+        "insert_text": "SELECT ",
+    }, {
+        "search_text": "from",
+        "show_text": "FROM",
+        "insert_text": "FROM ",
+    }, {
+        "search_text": "update",
+        "show_text": "UPDATE",
+        "insert_text": "UPDATE ",
+    }, {
+        "search_text": "set",
+        "show_text": "SET",
+        "insert_text": "SET ",
+    }, {
+        "search_text": "insert",
+        "show_text": "INSERT INTO",
+        "insert_text": "INSERT INTO ",
+    }, {
+        "search_text": "values",
+        "show_text": "VALUES",
+        "insert_text": "VALUES ",
+    }, {
+        "search_text": "delete",
+        "show_text": "DELETE",
+        "insert_text": "DELETE ",
+    }, {
+        "search_text": "left",
+        "show_text": "LEFT JOIN",
+        "insert_text": "LEFT JOIN ",
+    }, {
+        "search_text": "right",
+        "show_text": "RIGHT JOIN",
+        "insert_text": "RIGHT JOIN ",
+    }, {
+        "search_text": "inner",
+        "show_text": "INNER JOIN",
+        "insert_text": "INNER JOIN ",
+    }, {
+        "search_text": "where",
+        "show_text": "WHERE",
+        "insert_text": "WHERE ",
+    }, {
+        "search_text": "is",
+        "show_text": "IS NULL",
+        "insert_text": "IS NULL ",
+    }, {
+        "search_text": "is",
+        "show_text": "IS NOT NULL",
+        "insert_text": "IS NOT NULL ",
+    }, {
+        "search_text": "exists",
+        "show_text": "EXISTS",
+        "insert_text": "EXISTS ",
+    }, {
+        "search_text": "group",
+        "show_text": "GROUP BY",
+        "insert_text": "GROUP BY ",
+    }, {
+        "search_text": "order",
+        "show_text": "ORDER BY",
+        "insert_text": "ORDER BY ",
+    }, {
+        "search_text": "limit",
+        "show_text": "LIMIT 0,1",
+        "insert_text": "LIMIT 0,1 ",
+    }, {
+        "search_text": "limit",
+        "show_text": "LIMIT 0,20",
+        "insert_text": "LIMIT 0,20 ",
+    }, {
+        "search_text": "limit",
+        "show_text": "LIMIT 0,100",
+        "insert_text": "LIMIT 0,100 ",
+    }, {
+        "search_text": "limit",
+        "show_text": "LIMIT 0,500",
+        "insert_text": "LIMIT 0,500 ",
+    }, {
+        "search_text": "abs",
+        "show_text": "ABS",
+        "insert_text": "ABS( ",
+    }, {
+        "search_text": "count",
+        "show_text": "COUNT ID",
+        "insert_text": "COUNT(id) ",
+    }, {
+        "search_text": "count",
+        "show_text": "COUNT *",
+        "insert_text": "COUNT(*) ",
+    }, {
+        "search_text": "sum",
+        "show_text": "SUM",
+        "insert_text": "SUM( ",
+    }, {
+        "search_text": "avg",
+        "show_text": "AVG",
+        "insert_text": "AVG( ",
+    }, {
+        "search_text": "round",
+        "show_text": "ROUND",
+        "insert_text": "ROUND( ",
+    }, {
+        "search_text": "group",
+        "show_text": "GROUP_CONCAT",
+        "insert_text": "GROUP_CONCAT( ",
+    }, {
+        "search_text": "concat",
+        "show_text": "CONCAT",
+        "insert_text": "CONCAT( ",
+    }, {
+        "search_text": "date",
+        "show_text": "DATE_FORMAT",
+        "insert_text": "DATE_FORMAT( ,'%Y-%m-%d %H:%s:%i')",
+    }, {
+        "search_text": "left",
+        "show_text": "LEFT",
+        "insert_text": "LEFT( ",
+    }, {
+        "search_text": "length",
+        "show_text": "LENGTH",
+        "insert_text": "LENGTH( ",
+    }, {
+        "search_text": "ltrim",
+        "show_text": "LTRIM",
+        "insert_text": "LTRIM( ",
+    }, {
+        "search_text": "right",
+        "show_text": "RIGHT",
+        "insert_text": "RIGHT( ",
+    }, {
+        "search_text": "rtrim",
+        "show_text": "RTRIM",
+        "insert_text": "RTRIM( ",
+    }, {
+        "search_text": "trim",
+        "show_text": "TRIM",
+        "insert_text": "TRIM( ",
+    }, {
+        "search_text": "ucase",
+        "show_text": "UCASE",
+        "insert_text": "UCASE( ",
+    }, {
+        "search_text": "upper",
+        "show_text": "UPPER",
+        "insert_text": "UPPER( ",
+    }
+]
+
+var tipColumnsIndex = 0;
+
+function tipColumns(tablexxx, tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex) {
+    var dbobj = getLocalStorage(localStorageName.nowconn);
+    $.ajax({
+        url: "/webdb/php/getColumns.php",
+        type: "get",
+        dataType: "json",
+        data: {
+            mysql_server_name: dbobj.mysql_server_name,
+            mysql_username: dbobj.mysql_username,
+            mysql_password: dbobj.mysql_password,
+            mysql_database: dbobj.mysql_database,
+            mysql_table: tablexxx
+        },
+        success: function (data) {
+            if (data == false) {
+                //
+            } else {
+                for (var index in data) {
+                    var field_name = data[index]['Field']
+                    console.log(field_name, tableMatchNowSearchColumnsText)
+                    if (tableMatchNowSearchColumnsText && !test_start(tableMatchNowSearchColumnsText, [field_name])) {
+                        continue
+                    }
+                    if (nowTipColumnsIndex == tipColumnsIndex) {
+                        tipLabelAdd(tipdom, field_name, `\`field_name\``, startIndex, endIndex)
+                    }
+                }
+            }
+        }, error: function () {
+            //
+        }
+    });
+}
+
+function changeSqlText(startIndex, endIndex, insertText) {
+    var sqlDom = $('#zdysql')
+    var sql = sqlDom.val()
+    sqlDom.val(`${sql.substring(0, startIndex)}${insertText}${sql.substring(endIndex, sql.length)}`)
+    sqlDom.focus()
+}
+
+function tipLabelAdd(dom, showText, insertText, startIndex, endIndex) {
+    var lll = $(`<label>${showText}</label>`)
+    lll.click(function () {
+        changeSqlText(startIndex, endIndex, insertText)
+    })
+    dom.append(lll)
+}
+
+function tipsSearchList(nowSearchText, nowIndex) {
+    var matchNowSearchText = nowSearchText.toLowerCase()
+    tipColumnsIndex = tipColumnsIndex + 1
+    console.log(nowSearchText)
+    var tips1_box = $("#sqltip")
+    var tips2_box = $("#sqltip2")
+    tips1_box.empty()
+    tips2_box.empty()
+    if (!matchNowSearchText) {
+        return
+    }
+
+    for (var index in sqlTips) {
+        var sqlTip = sqlTips[index]
+        if (sqlTip.search_text.indexOf(matchNowSearchText) != -1) {
+            tipLabelAdd(tips1_box, sqlTip.show_text, sqlTip.insert_text, nowIndex - matchNowSearchText.length, nowIndex)
+        }
+    }
+
+    var tableMatchNowSearchText = matchNowSearchText
+    var tableMatchNowSearchColumnsText = ''
+    var isColumnsMatch = false
+    if (nowSearchText.indexOf('.') != -1) {
+        var nowSearchTextSplit = nowSearchText.split('.')
+        tableMatchNowSearchText = nowSearchTextSplit[0]
+        if (nowSearchTextSplit.length > 1) {
+            tableMatchNowSearchColumnsText = nowSearchTextSplit[1]
+        }
+        isColumnsMatch = true
+    }
+
+    var tableList = getLocalStorage(localStorageName.tableList);
+    for (var index in tableList) {
+        var tableName = tableList[index]
+        var table = tableName.toLowerCase()
+
+        if (isColumnsMatch) {
+            if (table == tableMatchNowSearchText || `\`${table}\`` == tableMatchNowSearchText) {
+                tipColumns(`\`${tableName}\``, tableMatchNowSearchColumnsText, tips2_box, tipColumnsIndex, nowIndex - tableMatchNowSearchColumnsText.length, nowIndex)
+            }
+        } else {
+            if (table.indexOf(tableMatchNowSearchText) != -1) {
+                tipLabelAdd(tips2_box, tableName, `\`${tableName}\``, nowIndex - tableMatchNowSearchText.length, nowIndex)
+
+            }
+        }
+    }
+}
+
+function tipsSql(that) {
+    var nowText = $(that).val()
+    var nowIndex = that.selectionEnd
+    var nowIndexStr = nowText.substr(0, nowIndex)
+    var nowIndexStrSplit = nowIndexStr.split(' ')
+    var nowSearchText = nowIndexStrSplit[nowIndexStrSplit.length - 1]
+    console.log(nowIndex, nowIndexStr, nowIndexStrSplit, nowSearchText)
+    tipsSearchList(nowSearchText, nowIndex)
+}
+
 $(function () {
     $("#zdysql").keyup(function () {
         setLocalStorage(localStorageName.zdysql, $(this).val(), false);
     });
     $("#zdysql").change(function () {
         setLocalStorage(localStorageName.zdysql, $(this).val(), false);
+    });
+
+    $("#zdysql").on("input propertychange", function () {
+        tipsSql(this)
+    });
+    $("#zdysql").focus(function () {
+        tipsSql(this)
     });
 
     $("#tablenamelistul_input").on("input propertychange", function () {
