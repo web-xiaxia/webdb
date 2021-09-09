@@ -24,14 +24,14 @@ $(function () {
         setLocalStorage(localStorageName.zdysql, $(this).val(), false);
     });
 
-    $("#tablenamelistul_input").on("input propertychange",  function () {
-        search_ul_text(this,"#tablenamelistul")
+    $("#tablenamelistul_input").on("input propertychange", function () {
+        search_ul_text(this, "#tablenamelistul")
     });
-    $("#tablenamelistul2_input").on("input propertychange",  function () {
-        search_ul_text(this,"#tablenamelistul2")
+    $("#tablenamelistul2_input").on("input propertychange", function () {
+        search_ul_text(this, "#tablenamelistul2")
     });
-    $("#tablencoumnsul_input").on("input propertychange",  function () {
-        search_ul_text(this,"#tablencoumnsul")
+    $("#tablencoumnsul_input").on("input propertychange", function () {
+        search_ul_text(this, "#tablencoumnsul")
     });
 
     function tablediv2scrollTimeOut(event) {
@@ -236,8 +236,9 @@ function getTableData2() {
     $("#tabledatashowtbody2").empty();
     var dbobj = getLocalStorage(localStorageName.nowconn);
     var tableobj = getLocalStorage(localStorageName.tableobj);
-    var sql= $("#zdysql").val()
-    if (sql.indexOf('limit') ==-1){
+    var sql = $("#zdysql").val()
+    if (sql.indexOf('limit') == -1) {
+        closeLoding()
         alert("请加入limit")
         return
     }
@@ -292,7 +293,9 @@ function getTableData2() {
                             btr.append('<td>' + (parseInt(d) + 1) + '</td>')
                             for (var d2 in data.columns) {
                                 var field = data.columns[d2];
-                                btr.append('<td data-columns="' + field + '">' + data.data[d][field] + '</td>')
+                                var btd = $(`<td data-columns="' + field + '"></td>`)
+                                btd.text(data.data[d][field])
+                                btr.append(btd)
                             }
                             xxtabledatashowtbody2.append(btr);
                         }
