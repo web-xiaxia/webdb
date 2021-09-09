@@ -204,11 +204,18 @@ function tipColumns(tablexxx, tableMatchNowSearchColumnsText, tipdom, nowTipColu
     });
 }
 
+function changeSqlTextOld(insertText) {
+    var startIndex = $('#zdysql')[0].selectionEnd
+    changeSqlText(startIndex, startIndex, insertText)
+}
+
 function changeSqlText(startIndex, endIndex, insertText) {
     var sqlDom = $('#zdysql')
-    var sql = sqlDom.val()
-    sqlDom.val(`${sql.substring(0, startIndex)}${insertText}${sql.substring(endIndex, sql.length)}`)
+    //var sql = sqlDom.val()
+    //sqlDom.val(`${sql.substring(0, startIndex)}${insertText}${sql.substring(endIndex, sql.length)}`)
+    sqlDom[0].setRangeText(insertText, startIndex, endIndex, "end")
     sqlDom.focus()
+    tipsSql(sqlDom[0])
 }
 
 function tipLabelAdd(dom, showText, insertText, startIndex, endIndex) {
@@ -466,9 +473,9 @@ $(function () {
         if (a == null || a == "") {
             return;
         }
-        $("#zdysql").val($("#zdysql").val() + a + "");
+        changeSqlTextOld(a)
         setLocalStorage(localStorageName.zdysql, $("#zdysql").val(), false);
-        $("html,body").animate({scrollTop: $("#zdysql").offset().top}, gddhms);
+        // $("html,body").animate({scrollTop: $("#zdysql").offset().top}, gddhms);
         // $("#zdysql").focus();
         closefloatmain('#tablenamelist');
         closefloatmain('#sqlfunlist');
