@@ -205,8 +205,9 @@ function tipColumns(tablexxx, tableMatchNowSearchColumnsText, tipdom, nowTipColu
 }
 
 function changeSqlTextOld(insertText) {
-    var startIndex = $('#zdysql')[0].selectionEnd
-    changeSqlText(startIndex, startIndex, insertText)
+    var startIndex = $('#zdysql')[0].selectionStart
+    var endIndex = $('#zdysql')[0].selectionEnd
+    changeSqlText(startIndex, endIndex, insertText)
 }
 
 function changeSqlText(startIndex, endIndex, insertText) {
@@ -281,6 +282,14 @@ function tipsSql(that) {
     var nowIndexStr = nowText.substr(0, nowIndex)
     var nowIndexStrSplit = nowIndexStr.split(' ')
     var nowSearchText = nowIndexStrSplit[nowIndexStrSplit.length - 1]
+
+    var nowIndexEndStr = nowText.substr(nowIndex, nowText.length)
+    if (nowIndexEndStr && nowIndexEndStr.substr(0, 1) != ' ') {
+        var nowIndexEndText = nowIndexEndStr.split(' ')[0]
+        nowIndex = nowIndex + nowIndexEndText.length
+        nowSearchText = nowSearchText + nowIndexEndText
+    }
+
     console.log(nowIndex, nowIndexStr, nowIndexStrSplit, nowSearchText)
     tipsSearchList(nowSearchText, nowIndex)
 }
@@ -294,6 +303,15 @@ $(function () {
     });
 
     $("#zdysql").on("input propertychange", function () {
+        tipsSql(this)
+    });
+    $("#zdysql").on("touchend", function () {
+        tipsSql(this)
+    });
+    $("#zdysql").on("touchmove", function () {
+        tipsSql(this)
+    });
+    $("#zdysql").click("touchmove", function () {
         tipsSql(this)
     });
     $("#zdysql").focus(function () {
