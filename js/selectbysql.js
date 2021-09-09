@@ -236,6 +236,12 @@ function getTableData2() {
     $("#tabledatashowtbody2").empty();
     var dbobj = getLocalStorage(localStorageName.nowconn);
     var tableobj = getLocalStorage(localStorageName.tableobj);
+    var sql= $("#zdysql").val()
+    if (sql.indexOf('limit') ==-1){
+        alert("请加入limit")
+        return
+    }
+
     $.ajax({
         url: "/webdb/php/getTableDataZdy.php",
         type: "get",
@@ -246,7 +252,7 @@ function getTableData2() {
             mysql_password: dbobj.mysql_password,
             mysql_database: dbobj.mysql_database,
             mysql_table: tableobj.mysql_table,
-            sql: $("#zdysql").val()
+            sql: sql
         },
         success: function (data) {
             closeLoding()

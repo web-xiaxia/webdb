@@ -5,7 +5,7 @@
 html,body{
     padding: 0px;
     margin: 0px;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 input{
     height: 20px;
