@@ -552,7 +552,7 @@ function getTableData2() {
     var dbobj = getLocalStorage(localStorageName.nowconn);
     var tableobj = getLocalStorage(localStorageName.tableobj);
     var sql = $("#zdysql").val()
-    if (sql.indexOf('limit') == -1) {
+    if (sql.indexOf('limit') == -1 && sql.indexOf('LIMIT') == -1) {
         closeLoding()
         alert("请加入limit")
         return
