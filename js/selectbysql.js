@@ -227,7 +227,7 @@ function tipLabelAdd(dom, showText, insertText, startIndex, endIndex) {
     dom.append(lll)
 }
 
-function tipsSearchList(nowSearchText, nowIndex) {
+function tipsSearchList(nowText, nowSearchText, nowIndex) {
     var matchNowSearchText = nowSearchText.toLowerCase()
     tipColumnsIndex = tipColumnsIndex + 1
     console.log(nowSearchText)
@@ -258,6 +258,26 @@ function tipsSearchList(nowSearchText, nowIndex) {
         isColumnsMatch = true
     }
 
+    if (isColumnsMatch) {
+        var asMapping = {}
+        var fromSplit = nowText.toLowerCase().split('from')
+        if (fromSplit.length > 1) {
+            for (var z = 1; z < fromSplit.length; z++) {
+                var whereStr = fromSplit[z].split('where')[0]
+                var asSplit = whereStr.split('as')
+                for (var y = 1; y < asSplit.length; y++) {
+                    var asTableStrSplit = asSplit[y - 1].trim().split(' ')
+                    var asTableStr = asTableStrSplit[asTableStrSplit.length - 1]
+                    var asStr = asSplit[y].trim().split(' ')[0]
+                    asMapping[asStr] = asTableStr
+                }
+            }
+        }
+        if (asMapping[tableMatchNowSearchText]) {
+            tableMatchNowSearchText = asMapping[tableMatchNowSearchText]
+        }
+    }
+
     var tableList = getLocalStorage(localStorageName.tableList);
     for (var index in tableList) {
         var tableName = tableList[index]
@@ -268,7 +288,7 @@ function tipsSearchList(nowSearchText, nowIndex) {
                 tipColumns(`\`${tableName}\``, tableMatchNowSearchColumnsText, tips2_box, tipColumnsIndex, nowIndex - tableMatchNowSearchColumnsText.length, nowIndex)
             }
         } else {
-            if (table.indexOf(tableMatchNowSearchText) != -1) {
+            if (table.indexOf(tableMatchNowSearchText) != -1 || `\`${table}\``.indexOf(tableMatchNowSearchText) != -1) {
                 tipLabelAdd(tips2_box, tableName, `\`${tableName}\``, nowIndex - tableMatchNowSearchText.length, nowIndex)
 
             }
@@ -291,7 +311,7 @@ function tipsSql(that) {
     }
 
     console.log(nowIndex, nowIndexStr, nowIndexStrSplit, nowSearchText)
-    tipsSearchList(nowSearchText, nowIndex)
+    tipsSearchList(nowText, nowSearchText, nowIndex)
 }
 
 $(function () {
