@@ -314,6 +314,27 @@ function tipsSql(that) {
     tipsSearchList(nowText, nowSearchText, nowIndex)
 }
 
+
+function sql_show_one_data(columns, sqldata) {
+    console.log(columns,sqldata)
+    var one_data_context = $("#sqlzshow_one_data_windowcontext")
+    one_data_context.empty()
+    for (var d2 in columns) {
+        var field = columns[d2];
+
+        var showxxx_text=$(`<div class="show_one_data_field_context""></div>`)
+        showxxx_text.text(sqldata[field])
+
+        var showxxx_text_box=$(`<div class="show_one_data_field"></div>`)
+        showxxx_text_box.append(`<div class="show_one_data_field_title">${field}</div>`)
+        showxxx_text_box.append(showxxx_text)
+        var showxxx_text_main_box = $(`<div class="sqlshow_one_data_field_box"  data-field="${field}"></div>`)
+        showxxx_text_main_box.append(showxxx_text_box)
+        one_data_context.append(showxxx_text_main_box)
+    }
+    openfloatmain("#sqlzshow_one_data_window");
+}
+
 $(function () {
     $("#zdysql").keyup(function () {
         setLocalStorage(localStorageName.zdysql, $(this).val(), false);
@@ -347,6 +368,31 @@ $(function () {
     });
     $("#tablencoumnsul_input").on("input propertychange", function () {
         search_ul_text(this, "#tablencoumnsul")
+    });
+
+    $("#tabledatashowtbody2").delegate("td", "click", function () {
+        var _this = $(this);
+        if (_this.hasClass("xuhao")){
+            return
+        }
+        $("#sqlshowcolumn").slideDown(gddhms);
+        $("#sqlshowcolumnvalue").text(_this.html());
+    });
+
+    $("#sqlzshow_one_data_input").on("input propertychange",  function () {
+        var aaa = $(this).val()
+        var tablesList =  $('.sqlshow_one_data_field_box')
+        for (var index in tablesList) {
+            var table = tablesList[index]
+            var displayValue = "block"
+            if (aaa) {
+                var litext = table.getAttribute('data-field')
+                if (litext && litext.indexOf(aaa) == -1) {
+                    displayValue = "none"
+                }
+            }
+            table.style.display = displayValue
+        }
     });
 
     function tablediv2scrollTimeOut(event) {
@@ -593,8 +639,9 @@ function getTableData2() {
                         $("#tablediv2").css({display: "block"})
                         var ttr = $('<tr style="text-align: center;position: fixed;z-index: 2;display: none;top:0px">');
                         var ttr2 = $('<tr style="text-align: center;">');
-                        ttr.append('<td>序号</td>');
-                        ttr2.append('<td>序号</td>');
+                        ttr.append('<td class="xuhao">序号</td>');
+                        ttr2.append('<td class="xuhao">序号</td>');
+
                         for (var d in data.columns) {
                             var mysql_table_column = data.columns[d];
                             ttr.append('<td>' + mysql_table_column + '</td>');
@@ -605,7 +652,12 @@ function getTableData2() {
                         var xxtabledatashowtbody2 = $("#tabledatashowtbody2");
                         for (var d in data.data) {
                             var btr = $('<tr>');
-                            btr.append('<td>' + (parseInt(d) + 1) + '</td>')
+                            var xxtd =$(`<td class="xuhao" >${(parseInt(d) + 1)}</td>`)
+                            var sqldata = data.data[d]
+                            xxtd.click(function (){
+                                sql_show_one_data(data.columns, sqldata)
+                            })
+                            btr.append(xxtd)
                             for (var d2 in data.columns) {
                                 var field = data.columns[d2];
                                 var btd = $(`<td data-columns="' + field + '"></td>`)

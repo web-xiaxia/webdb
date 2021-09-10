@@ -133,3 +133,27 @@
         </div>
     </div>
 </div>
+<div class="floatmain" id="sqlshowcolumn" style="display: none;">
+    <div class="floatbg">
+    </div>
+    <div class="float">
+        <div class="title"><span class="content">查询数据</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="content">
+            <div id="sqlshowcolumnvalue" style="width: 98%"></div>
+        </div>
+    </div>
+</div>
+<div class="floatmain" id="sqlzshow_one_data_window" style="display: none;">
+    <div class="floatbg">
+    </div>
+    <div class="float">
+        <div class="title"><span class="content">数据</span><a class="close" href="javascript:void(0)">X</a></div>
+        <input type="text" id="sqlzshow_one_data_input" class="btn"
+               style=" width: 80%; margin: 5px auto 5px; background: white; color: black; text-align: left"/>
+        <div class="content" style="background-color: #e7e7e7;">
+            <div id="sqlzshow_one_data_windowcontext">
+
+            </div>
+        </div>
+    </div>
+</div>
