@@ -9,15 +9,15 @@
     max-width: 500px;
     overflow: hidden;
 }
-
+#tabledatashowthead, #tabledatashowthead2{
+    background: #387EF5;
+}
 #tabledatashowthead tr, #tabledatashowthead2 tr {
     background: #387EF5;
 }
 
 #tabledatashowthead td, #tabledatashowthead2 td {
     color: white;
-    position: relative;
-
 }
 
 #tablediv {

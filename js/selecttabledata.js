@@ -17,13 +17,7 @@ var lastSqldataList = null
 
 $(function () {
 
-    /*setInterval(function(event){
-    //console.log(event)
-    //console.log(event.target.scrollLeft)
-    $("#tabledatashowthead tr").eq(0).css({left:(- event.target.scrollLeft)+"px"})
 
-
-},1000)*/
     $("#zshow_one_data_input").on("input propertychange",  function () {
         var aaa = $(this).val()
         var tablesList =  $('.show_one_data_field_box')
@@ -39,84 +33,6 @@ $(function () {
             table.style.display = displayValue
         }
     });
-
-    function tabledivscrollTimeOut(event) {
-
-        return setTimeout(function () {
-            //console.log(event)
-            //console.log(event.target.scrollLeft)
-
-            if ((-event.target.scrollLeft) != $("#tabledatashowthead tr").eq(0).css('left')) {
-                $("#tabledatashowthead tr").eq(0).css({left: (-event.target.scrollLeft) + "px"})
-            }
-
-        }, 0)
-    }
-
-    var lasttabledivscrollTimeOut = null;
-    $("#tablediv").scroll(function (event) {
-        if (lasttabledivscrollTimeOut != null) {
-            clearTimeout(lasttabledivscrollTimeOut)
-        }
-        lasttabledivscrollTimeOut = tabledivscrollTimeOut(event);
-    });
-
-
-    /*var tabledivscrolllastTime=0;
-$("#tablediv").scroll(function(event){
-    var nowTime=new Date().getTime();
-        if((nowTime-tabledivscrolllastTime)>=1000){
-            tabledivscrolllastTime=nowTime;
-    //console.log(event)
-    //console.log(event.target.scrollLeft)
-    $("#tabledatashowthead tr").eq(0).css({left:(- event.target.scrollLeft)+"px"})
-  }
-
-});*/
-
-    function tabledatascrollTimeOut(event) {
-        return setTimeout(function () {
-            if (nowmaodian == "#tabledata") {
-
-                var top = $(window).scrollTop()
-                var tabledivtop = $("#tablediv").offset().top;
-                top = tabledivtop - top
-                if (top < 0) {
-                    top = 0;
-                }
-                $("#tabledatashowthead tr").eq(0).css({top: top + "px"});
-
-            }
-        }, 50)
-    }
-
-    var lasttabledatascrolllastTime = 0;
-    $(window).scroll(function (event) {
-        if (lasttabledatascrolllastTime != null) {
-            clearTimeout(lasttabledatascrolllastTime)
-        }
-        lasttabledatascrolllastTime = tabledatascrollTimeOut(event);
-    });
-
-
-    /*var tabledatascrolllastTime=0;
-    $(window).scroll(function(event) {
-        if(nowmaodian=="#tabledata")
-        {
-        	var nowTime=new Date().getTime();
-        	if((nowTime-tabledata2scrolllastTime)>=30){
-        		tabledata2scrolllastTime=nowTime;
-            var top=$(window).scrollTop()
-           var tabledivtop=$("#tablediv").offset().top;
-            top=tabledivtop-top
-           if(top<0)
-           {
-               top=0;
-           }
-            $("#tabledatashowthead tr").eq(0).css({top:top+"px"});
-          }
-        }
-    })*/
 
     $("#tabledatashowthead").delegate("td", "click", function () {
 
@@ -150,8 +66,6 @@ $("#tablediv").scroll(function(event){
             $("#columnsx").val(querywherecolumn);
             $("#datawheredel").css({"display": ""});
         }
-
-
     });
 
     $("#datawhere").click(function () {
@@ -389,10 +303,8 @@ function getTableData() {
 
                 $("#tabledatashowthead").empty();
                 $("#tabledatashowtbody").empty();
-                var ttr = $('<tr style="text-align: center;position: fixed;z-index: 2;">');
-                var ttr2 = $('<tr style="text-align: center;">');
-                ttr.append(`<td onclick="openfloatmain('#zdycolumnswindow');">序号</td>`);
-                ttr2.append(`<td onclick="openfloatmain('#zdycolumnswindow');">序号</td>`);
+                var ttr2 = $('<tr style="text-align: center;" class="table_title_sticky">');
+                ttr2.append(`<td onclick="openfloatmain('#zdycolumnswindow');" class="table_left_sticky" style="background: #5a92ef">序号</td>`);
                 for (var d in tableobj.mysql_table_columns) {
                     var mysql_table_column = tableobj.mysql_table_columns[d]['Field'];
                     if (!$(`#zdycolumns${mysql_table_column}`).is(':checked')) {
@@ -402,16 +314,14 @@ function getTableData() {
                     var querywhereobj = getLocalStorage(localStorageName.querywhereobj);
                     var oderbyobjcolumnname = oderbyobj[mysql_table_column];
                     var querywhereobjcolumn = querywhereobj[mysql_table_column];
-                    ttr.append('<td data-column="' + mysql_table_column + '" >' + mysql_table_column + (querywhereobjcolumn == null ? "" : "<span style='color:red'> ->?</span>") + (oderbyobjcolumnname == null ? "" : "<span style='color: #feff08'> ->O</span>") + '</td>')
                     ttr2.append('<td data-column="' + mysql_table_column + '" >' + mysql_table_column + (querywhereobjcolumn == null ? "" : "<span style='color:red'> ->?</span>") + (oderbyobjcolumnname == null ? "" : "<span style='color: #feff08'> ->O</span>") + '</td>')
                 }
-                $("#tabledatashowthead").append(ttr);
                 $("#tabledatashowthead").append(ttr2);
                 var xxtabledatashowtbody = $("#tabledatashowtbody");
                 for (var d in sqldataList) {
                     var sqldata = sqldataList[d]
                     var btr = $('<tr>');
-                    btr.append(`<td onclick="show_one_data(${parseInt(d)},lastSqldataList)">${(parseInt(d) + 1)}</td>`)
+                    btr.append(`<td onclick="show_one_data(${parseInt(d)},lastSqldataList)"  class="table_left_sticky">${(parseInt(d) + 1)}</td>`)
 
                     for (var d2 in tableobj.mysql_table_columns) {
                         var field = tableobj.mysql_table_columns[d2]['Field'];
@@ -428,22 +338,6 @@ function getTableData() {
                     xxtabledatashowtbody.append(btr);
                 }
                 setLocalStorage(localStorageName.tableobj, tableobj);
-
-                var tabledatashowtheadtd = $("#tabledatashowthead tr").eq(0).find("td");
-                var tabledatashowtheadtd1 = $("#tabledatashowthead tr").eq(1).find("td");
-                var tabledatashowtbodytd = $("#tabledatashowtbody tr").eq(0).find("td");
-                if (tabledatashowtbodytd.length > 0) {
-                    for (var i = 0; i < tabledatashowtheadtd.length; i++) {
-                        var tabledatashowtheadtdwidth = tabledatashowtheadtd.eq(i).width();
-                        var tabledatashowtbodytdwidth = tabledatashowtbodytd.eq(i).width();
-                        var setwidth = tabledatashowtheadtdwidth > tabledatashowtbodytdwidth ? tabledatashowtheadtdwidth : tabledatashowtbodytdwidth;
-                        tabledatashowtheadtd.eq(i).width(setwidth + 1 + "px");
-                        tabledatashowtheadtd1.eq(i).width(setwidth + "px");
-
-                    }
-                    $("#tabledatashowthead tr").eq(0).width($("#tabledatashowthead tr").eq(1).width() + 1 + "px");
-
-                }
             }
         }, error: function () {
             alert("出错了！")
