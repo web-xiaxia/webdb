@@ -18,11 +18,6 @@ function inittables(){
 
 }
 $(function(){
-
-    $("#tablesList").css({height:($(window).height()-175)+"px"})
-    $(window).resize(function(){
-        $("#tablesList").css({height:($(window).height()-175)+"px"})
-    });
     $("#tablesList").delegate("li","click",function(){
         openLoding()
         var dbobj=getLocalStorage(localStorageName.nowconn);

@@ -379,6 +379,13 @@ $(function () {
         $("#sqlshowcolumnvalue").text(_this.html());
     });
 
+    $("#tablediv2").scroll(function (){
+        var tablediv2offsettop= $("#tablediv2").offset().top
+        if (tablediv2offsettop>1){
+            $("html,body").animate({scrollTop: $("body").scrollTop()+$("#tablediv2").offset().top}, 0);
+        }
+    })
+
     $("#sqlzshow_one_data_input").on("input propertychange",  function () {
         var aaa = $(this).val()
         var tablesList =  $('.sqlshow_one_data_field_box')
@@ -395,82 +402,6 @@ $(function () {
         }
     });
 
-    function tablediv2scrollTimeOut(event) {
-        return setTimeout(function () {
-            //console.log(event)
-            //console.log(event.target.scrollLeft)
-            if ((-event.target.scrollLeft) != $("#tabledatashowthead2 tr").eq(0).css('left')) {
-                $("#tabledatashowthead2 tr").eq(0).css({left: (-event.target.scrollLeft) + "px"})
-            }
-
-
-        }, 0)
-    }
-
-    var lasttablediv2scrollTimeOut = null;
-    $("#tablediv2").scroll(function (event) {
-        if (lasttablediv2scrollTimeOut != null) {
-            clearTimeout(lasttablediv2scrollTimeOut)
-        }
-        lasttablediv2scrollTimeOut = tablediv2scrollTimeOut(event);
-    });
-
-    /*var tablediv2scrolllastTime=0;
-    $("#tablediv2").scroll(function(event){
-    	var nowTime=new Date().getTime();
-        	if((nowTime-tablediv2scrolllastTime)>=1000){
-        		tablediv2scrolllastTime=nowTime;
-        //console.log(event)
-        //console.log(event.target.scrollLeft)
-        $("#tabledatashowthead2 tr").eq(0).css({left:(- event.target.scrollLeft)+"px"})
-      }
-    });*/
-
-    function tabledata2scrollTimeOut(event) {
-        return setTimeout(function () {
-            if (nowmaodian == "#tabledata2") {
-                var top = $(window).scrollTop();
-                if (top > $("#tablediv2").offset().top) {
-                    $("#tabledatashowthead2 tr").eq(0).css({display: ""});
-                } else {
-                    $("#tabledatashowthead2 tr").eq(0).css({display: "none"});
-                }
-
-            }
-        }, 50)
-    }
-
-    var lasttabledata2scrolllastTime = 0;
-    $(window).scroll(function (event) {
-        if (lasttabledata2scrolllastTime != null) {
-            clearTimeout(lasttabledata2scrolllastTime)
-        }
-        lasttabledata2scrolllastTime = tabledata2scrollTimeOut(event);
-    })
-    /*var tabledata2scrolllastTime=0;
-    $(window).scroll(function(event) {
-    		
-        if(nowmaodian=="#tabledata2")
-        {
-        	var nowTime=new Date().getTime();
-        	if((nowTime-tabledata2scrolllastTime)>=30){
-        		tabledata2scrolllastTime=nowTime;
-            var top=$(window).scrollTop();
-            if(top>$("#tablediv2").offset().top)
-            {
-                $("#tabledatashowthead2 tr").eq(0).css({display:""});
-            }else
-            {
-                $("#tabledatashowthead2 tr").eq(0).css({display:"none"});
-            }
-          }
-        }
-        //console.log(event)
-        //console.log(event.target.scrollLeft)
-				*/
-    /* $("#tabledatashowthead2 tr").eq(0).css({left: (-event.target.scrollLeft) + 8 + "px"})
-     animate({scrollTop:$("#tablediv2").offset().top},gddhms);*/
-    /*})*/
     $("#zdysqlup").click(function () {
         var num = parseInt($("#zdysql").attr("rows"));
         if (num <= 3) {
@@ -635,24 +566,19 @@ function getTableData2() {
 
                         $("#tabledatashowthead2").empty();
                         $("#tabledatashowtbody2").empty();
-                        //$("#tablediv2").css({height:($(window).height()-10)+"px",display:"block"})
                         $("#tablediv2").css({display: "block"})
-                        var ttr = $('<tr style="text-align: center;position: fixed;z-index: 2;display: none;top:0px">');
-                        var ttr2 = $('<tr style="text-align: center;">');
-                        ttr.append('<td class="xuhao">序号</td>');
-                        ttr2.append('<td class="xuhao">序号</td>');
+                        var ttr2 = $('<tr style="text-align: center;" class="table_title_sticky">');
+                        ttr2.append('<td class="xuhao table_left_sticky" style="background: #5a92ef">序号</td>');
 
                         for (var d in data.columns) {
                             var mysql_table_column = data.columns[d];
-                            ttr.append('<td>' + mysql_table_column + '</td>');
                             ttr2.append('<td>' + mysql_table_column + '</td>');
                         }
-                        $("#tabledatashowthead2").append(ttr);
                         $("#tabledatashowthead2").append(ttr2);
                         var xxtabledatashowtbody2 = $("#tabledatashowtbody2");
                         for (var d in data.data) {
                             var btr = $('<tr>');
-                            var xxtd =$(`<td class="xuhao" >${(parseInt(d) + 1)}</td>`)
+                            var xxtd =$(`<td class="xuhao table_left_sticky">${(parseInt(d) + 1)}</td>`)
                             var sqldata = data.data[d]
                             xxtd.click(function (){
                                 sql_show_one_data(data.columns, sqldata)
@@ -666,22 +592,7 @@ function getTableData2() {
                             }
                             xxtabledatashowtbody2.append(btr);
                         }
-                        $("html,body").animate({scrollTop: $("#tablediv2").offset().top - 20}, gddhms);
-                        var tabledatashowtheadtd = $("#tabledatashowthead2 tr").eq(0).find("td");
-                        var tabledatashowtheadtd1 = $("#tabledatashowthead2 tr").eq(1).find("td");
-                        var tabledatashowtbodytd = $("#tabledatashowtbody2 tr").eq(0).find("td");
-                        if (tabledatashowtbodytd.length > 0) {
-                            for (var i = 0; i < tabledatashowtheadtd.length; i++) {
-                                var tabledatashowtheadtdwidth = tabledatashowtheadtd.eq(i).width();
-                                var tabledatashowtbodytdwidth = tabledatashowtbodytd.eq(i).width();
-                                var setwidth = tabledatashowtheadtdwidth > tabledatashowtbodytdwidth ? tabledatashowtheadtdwidth : tabledatashowtbodytdwidth;
-                                tabledatashowtheadtd.eq(i).width((setwidth + 1) + "px");
-                                tabledatashowtheadtd1.eq(i).width(setwidth + "px");
-
-                            }
-                            $("#tabledatashowthead2 tr").eq(0).width($("#tabledatashowthead2 tr").eq(1).width() + 1 + "px");
-
-                        }
+                        $("html,body").animate({scrollTop: $("body").scrollTop()+$("#tablediv2").offset().top}, 0);
                     }
                 }
             }

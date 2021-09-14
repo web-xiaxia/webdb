@@ -1,3 +1,6 @@
+#tables{
+    height: 100%;
+}
 #tablesList{
     list-style: none;
     overflow: scroll;

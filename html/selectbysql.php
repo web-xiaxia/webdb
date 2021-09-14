@@ -70,7 +70,7 @@
         <a class="btn" href="javascript:openfloatmain('#tablenamelist2');"  >插入列名</a>
     </div>
 
-    <div id="tablediv2"  style="overflow: scroll;width: 100%;margin-top: 5px;display: none" >
+    <div id="tablediv2"  style="overflow: scroll;width: 100%;margin-top: 5px;display: none; height: 100%;" >
         <table id="tabledatashow2" border="1" style="position: relative" >
             <thead id="tabledatashowthead2">
 

@@ -1,3 +1,6 @@
+#databases{
+    height: 100%;
+}
 #databasesList{
     list-style: none;
     padding: 0;
