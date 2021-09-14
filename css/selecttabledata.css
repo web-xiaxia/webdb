@@ -65,6 +65,9 @@
     color: white;
     margin: 0px 3px;
 }
+#tabledata{
+    height: 100%;
+}
 #tabledata2{
     height: 100%;
 }

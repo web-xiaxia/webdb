@@ -296,8 +296,6 @@ function getTableData() {
                 $("#count").html(tableobj.data_count);
                 $("#pagenum").val(tableobj.data_num);
 
-
-                $("#tablediv").css({height: ($(window).height() - 130) + "px"})
                 var sqldataList = data["data"];
                 lastSqldataList = sqldataList
 

@@ -1,8 +1,9 @@
-<div id="tabledata" style="display: none">
-    <a href="#tables" class="btn">切换数据表</a>
-    <a href="#tabledata2" class="btn">自定义sql</a>
-    <!--<div class="btn"  id="opentables">切换数据表</div>-->
-    <div id="tablediv" style="overflow: scroll;width:-webkit-overflow-scrolling: touch; 100%;margin-top: 5px">
+<div id="tabledata" style="display: none;padding: 80px 0 36px 0 ;box-sizing:border-box;-webkit-overflow-scrolling: touch;">
+    <div style="height:70px ; margin: -80px 0 0;">
+        <a href="#tables" class="btn">切换数据表</a>
+        <a href="#tabledata2" class="btn">自定义sql</a>
+    </div>
+    <div id="tablediv" style="overflow: scroll;height: 100%;box-sizing:border-box; -webkit-overflow-scrolling: touch; width: 100%;margin-top: 5px">
         <table id="tabledatashow" border="1" style="position: relative">
             <thead id="tabledatashowthead">
 
@@ -12,7 +13,7 @@
             </tbody>
         </table>
     </div>
-    <div>
+    <div style="position: fixed;bottom: 0; border-top:1px solid #e5e5e5; background:white;z-index: 1001;width: 100%;">
         <div style="overflow: hidden; white-space: nowrap; scroll">
             <select id="pagenum">
                 <option value="15">15</option>
