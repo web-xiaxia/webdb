@@ -84,6 +84,9 @@ input[type="checkbox"] {
     align-items: center;
     justify-content: center;
     display: flex;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
 }
 
 .floatmain .floatbg {
@@ -109,8 +112,16 @@ input[type="checkbox"] {
     z-index: 1501;
     margin: 0 auto 10%;
     border: 2px solid #387ef5;
+    padding:35px 0 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
 }
 
+.float .title{
+    margin: -35px 0 0;
+}
 .float .title .content {
     color: white;
 }
@@ -130,9 +141,14 @@ input[type="checkbox"] {
 
 .float .content {
     padding: 5px;
-    overflow: scroll;
     -webkit-overflow-scrolling: touch;
     word-break: break-all;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
 }
 
 #lodingbg {
