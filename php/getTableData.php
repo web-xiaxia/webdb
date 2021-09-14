@@ -26,16 +26,16 @@ if (mysqli_connect_error()) {
 }
 $db->query("SET NAMES utf8");
 $datar = new Datar();
-$sql = "select count(1) as count from  " . $mysql_table . " where 1=1 " . $query_where;
-$datar->e = $sql;
-//echo $sql;
-$result = $db->query($sql);
-
-while ($row = $result->fetch_assoc())//循环读出数据
-{
-    $count = $row['count'];
-}
-$datar->count = $count;
+//$sql = "select count(1) as count from  " . $mysql_table . " where 1=1 " . $query_where;
+//$datar->e = $sql;
+////echo $sql;
+//$result = $db->query($sql);
+//
+//while ($row = $result->fetch_assoc())//循环读出数据
+//{
+//    $count = $row['count'];
+//}
+//$datar->count = $count;
 $sql2 = "select " . $mysql_column . " from  " . $mysql_table . " where 1=1 " . $query_where . ($query_orderby != "" ? " order by " . $query_orderby : "") . " limit " . (($data_page - 1) * $data_num) . "," . ($data_num);
 //echo $sql2;
 $datar->e2 = $sql2;

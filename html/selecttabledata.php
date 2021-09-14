@@ -1,9 +1,11 @@
-<div id="tabledata" style="display: none;padding: 80px 0 36px 0 ;box-sizing:border-box;-webkit-overflow-scrolling: touch;">
+<div id="tabledata"
+     style="display: none;padding: 80px 0 14px 0 ;box-sizing:border-box;-webkit-overflow-scrolling: touch;">
     <div style="height:70px ; margin: -80px 0 0;">
         <a href="#tables" class="btn">切换数据表</a>
         <a href="#tabledata2" class="btn">自定义sql</a>
     </div>
-    <div id="tablediv" style="overflow: scroll;height: 100%;box-sizing:border-box; -webkit-overflow-scrolling: touch; width: 100%;margin-top: 5px">
+    <div id="tablediv"
+         style="overflow: scroll;height: 100%;box-sizing:border-box; -webkit-overflow-scrolling: touch; width: 100%;margin-top: 5px">
         <table id="tabledatashow" border="1" style="position: relative">
             <thead id="tabledatashowthead">
 
@@ -13,20 +15,18 @@
             </tbody>
         </table>
     </div>
-    <div style="position: fixed;bottom: 0; border-top:1px solid #e5e5e5; background:white;z-index: 1001;width: 100%;">
-        <div style="overflow: hidden; white-space: nowrap; scroll">
-            <select id="pagenum">
-                <option value="15">15</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-                <option value="1000">1000</option>
-            </select>
-            <span id="page" style="margin-left: 10px">1</span>/<span id="pagesum">2</span> 共<span id="count">100</span>条
-        </div>
+    <div style="position: fixed;bottom: 0; border-top:1px solid #e5e5e5; background:white;z-index: 1001;width: 100%; padding-left: 10px">
         <a id="pagesy" href="javascript:void(0)">首页</a>
         <a id="pageup" href="javascript:void(0)">上一页</a>
         <a id="pagedowm" href="javascript:void(0)">下一页</a>
-        <a id="pagewy" href="javascript:void(0)">尾页</a>
+
+        <select id="pagenum" style="height: 17px;font-size: 13px; line-height: 17px;">
+            <option value="15">15</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="1000">1000</option>
+        </select>
+
         <a id="pagerefresh" href="javascript:void(0)" style="margin-left: 15px">刷新</a>
     </div>
 </div>

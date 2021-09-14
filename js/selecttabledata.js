@@ -160,22 +160,11 @@ $(function () {
     })
     $("#pagedowm").click(function () {
         var tableobj = getLocalStorage(localStorageName.tableobj);
-        if (tableobj.data_page >= tableobj.data_page_sum) {
-            tableobj.data_page = tableobj.data_page_sum;
-        } else {
-            tableobj.data_page += 1;
-        }
+        tableobj.data_page += 1;
         setLocalStorage(localStorageName.tableobj, tableobj);
         getTableData()
     })
     $("#pagerefresh").click(function () {
-        getTableData()
-    })
-
-    $("#pagewy").click(function () {
-        var tableobj = getLocalStorage(localStorageName.tableobj);
-        tableobj.data_page = tableobj.data_page_sum;
-        setLocalStorage(localStorageName.tableobj, tableobj);
         getTableData()
     })
 
@@ -228,9 +217,6 @@ function show_one_data(idx, sqldataList) {
 function getTableData() {
     openLoding()
 
-    $("#page").html(0);
-    $("#pagesum").html(0);
-    $("#count").html(0);
     $("#tabledatashowthead").empty();
     $("#tabledatashowtbody").empty();
     var querywhereobj = getLocalStorage(localStorageName.querywhereobj);
@@ -289,13 +275,6 @@ function getTableData() {
             if (data == false) {
                 alert("数据库连接失败")
             } else {
-                tableobj.data_count = data["count"];
-                $("#page").html(tableobj.data_page);
-                tableobj.data_page_sum = parseInt((parseInt(tableobj.data_count) + parseInt(tableobj.data_num) - 1) / parseInt(tableobj.data_num));
-                $("#pagesum").html(tableobj.data_page_sum);
-                $("#count").html(tableobj.data_count);
-                $("#pagenum").val(tableobj.data_num);
-
                 var sqldataList = data["data"];
                 lastSqldataList = sqldataList
 
