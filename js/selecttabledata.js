@@ -33,7 +33,6 @@ $(function () {
     });
 
     $("#columnsxt").change(function () {
-        console.log(111)
         var columnsx = $("#columnsx")
         columnsx.val('')
         columnsx.attr('placeholder', $(this).find("option:selected").attr('tips'))
@@ -183,8 +182,12 @@ $(function () {
         if (a == null || a == "") {
             return;
         }
-        $("#columnsx").val($("#columnsx").val() + a + "");
-
+        var columnsx = $("#columnsx")
+        var columnsxdom = columnsx[0]
+        var startIndex = columnsxdom.selectionStart
+        var endIndex = columnsxdom.selectionEnd
+        columnsxdom.setRangeText(a, startIndex, endIndex, "end")
+        columnsxdom.focus()
     });
 
 
