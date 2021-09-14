@@ -1,4 +1,3 @@
-
 <div id="tables" style="display: none;padding: 35px 0 0"  class="window">
     <div class="title" style="margin: -35px 0 0;">选择数据表</div>
     <div style="height: 100%;box-sizing:border-box;padding: 117px 0 0;">
