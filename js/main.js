@@ -73,16 +73,13 @@ var htmlover=0;
 function openLoding()
 {
     htmlover++;
-    $("html").css({overflow:"hidden"});
     $("#loding").css({display:""});
     var lodingcontent=$("#lodingcontent");
-    lodingcontent.css({left:$(window).width()/2-lodingcontent.width()/2+"px",top:$(window).height()/2-lodingcontent.height()/2+"px"})
 }
 function closeLoding()
 {
     htmlover--;
     if(htmlover<=0) {
-        $("html").css({overflow: ""});
         htmlover=0;
     }
     $("#loding").css({display:"none"});
@@ -94,28 +91,19 @@ function GetQueryString(name)
     if (r!=null) return unescape(r[2]); return null;
 }
 $(function(){
-    $(".float .content").css({height:($(window).height()-$(window).height()*0.3)+"px"});
-    $(".floatmain .float").css({top:($(window).height()*0.1)+"px"});
-    $(window).resize(function(){
-        $(".float .content").css({height:($(window).height()-$(window).height()*0.3)+"px"});
-        $(".floatmain .float").css({top:($(window).height()*0.1)+"px"});
-    });
     $(".close").click(function(){
-        $("html").css({overflow:""});
         $(this).parents(".floatmain").css("display","none");
     })
 });
 function openfloatmain(id)
 {
     htmlover++;
-    $("html").css({overflow:"hidden"});
     $(id).css("display","");
 }function closefloatmain(id)
 {
     htmlover--;
     if( htmlover<=0)
     {
-        $("html").css({overflow:""});
         htmlover=0;
     }
     $(id).css("display","none");
