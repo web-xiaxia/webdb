@@ -111,9 +111,11 @@
                 <option value="sql" sql-str="">SQL</option>
             </select>
             <a class="btn" style="width: auto;display: inline-block; min-width: 30px; height: 10px; line-height: 10px;"
-               href="javascript:$('#columnsxt').val('=')">=</a>
+               href="javascript:columnsx_set('=')">=</a>
+            <a class="btn" style="width: auto;display: inline-block; min-width: 30px; height: 10px; line-height: 10px;"
+               href="javascript:columnsx_set('in')">in</a>
             <a class="btn" style="width: auto;display: inline-block; min-width: 30px;  height: 10px;line-height: 10px;"
-               href="javascript:$('#columnsxt').val('contains')">Contains</a>
+               href="javascript:columnsx_set('contains')">Contains</a>
             <input id="columnsx" style="width: 98%">
             <a class="btn" href="javascript:void(0)" id="datawhere">筛选</a>
             <a class="btn" href="javascript:void(0)" id="datawheredel">删除筛选</a>

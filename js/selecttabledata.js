@@ -11,11 +11,21 @@ function inittabledata() {
     $("#tabledata").slideDown(gddhms);
 }
 
+function columnsx_set(val){
+    $('#columnsxt').val(val);
+    columnsx_init($("#columnsxt"))
+
+}
+function columnsx_init(that){
+    var columnsx = $("#columnsx")
+    columnsx.val('')
+    columnsx.attr('placeholder', that.find("option:selected").attr('tips')||'')
+    $('#columnsx')[0].focus()
+}
+
 var lastSqldataList = null
 
 $(function () {
-
-
     $("#zshow_one_data_input").on("input propertychange", function () {
         var aaa = $(this).val()
         var tablesList = $('.show_one_data_field_box')
@@ -33,9 +43,7 @@ $(function () {
     });
 
     $("#columnsxt").change(function () {
-        var columnsx = $("#columnsx")
-        columnsx.val('')
-        columnsx.attr('placeholder', $(this).find("option:selected").attr('tips'))
+        columnsx_init($(this))
     })
 
     $("#tabledatashowthead").delegate("td", "click", function () {
