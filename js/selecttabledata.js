@@ -1,10 +1,8 @@
 function inittabledata() {
     var tableobj = getLocalStorage(localStorageName.tableobj);
+    $('#zdycolumnsyablename').html(`表名：${tableobj.mysql_table}`)
     var zdycolumnswindowcontext = $("#zdycolumnswindowcontext")
     zdycolumnswindowcontext.empty()
-    zdycolumnswindowcontext.append(`<a class="btn" href="javascript:$('.zdycolumns').prop('checked',true)" >全选</a>`)
-    zdycolumnswindowcontext.append(`<a class="btn" href="javascript:$('.zdycolumns').prop('checked',false)">全部取消</a>`)
-    zdycolumnswindowcontext.append(`表名：${tableobj.mysql_table}`)
     for (var d in tableobj.mysql_table_columns) {
         var column_name = tableobj.mysql_table_columns[d]['Field']
         zdycolumnswindowcontext.append(`<div><input type="checkbox" class="zdycolumns" id="zdycolumns${column_name}" checked> <label for="zdycolumns${column_name}">${column_name}</label> </div>`)

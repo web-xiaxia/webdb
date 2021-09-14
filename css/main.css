@@ -140,7 +140,7 @@ input[type="checkbox"] {
 }
 
 .float .content {
-    padding: 5px;
+    padding: 0 5px;
     -webkit-overflow-scrolling: touch;
     word-break: break-all;
     overflow-x: hidden;

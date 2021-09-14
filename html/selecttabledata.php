@@ -48,10 +48,17 @@
     <div class="float">
         <div class="title"><span class="content">选择显示列</span><a class="close" href="javascript:void(0)">X</a></div>
         <div class="content">
+            <div style="position: sticky; top:0px; background: white;">
+                <div id="zdycolumnsyablename"></div>
+                <a class="btn" href="javascript:$('.zdycolumns').prop('checked',true)">全选</a>
+                <a class="btn" href="javascript:$('.zdycolumns').prop('checked',false)">全部取消</a>
+            </div>
             <div id="zdycolumnswindowcontext">
 
             </div>
-            <a class="btn" href="javascript:void(0)" onclick="zdycolumnsok()">确定</a>
+            <div style="position: sticky;bottom: 0px; background: white;">
+                <a class="btn" href="javascript:void(0)" onclick="zdycolumnsok()">确定</a>
+            </div>
         </div>
     </div>
 </div>
@@ -61,9 +68,12 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">数据</span><a class="close" href="javascript:void(0)">X</a></div>
-        <input type="text" id="zshow_one_data_input" class="btn"
-               style=" width: 80%; margin: 5px auto 5px; background: white; color: black; text-align: left"/>
+
         <div class="content" style="background-color: #e7e7e7;">
+            <div style="position: sticky; top:0px; background: white;padding:  5px 0 ">
+                <input type="text" id="zshow_one_data_input" class="btn"
+                       style=" background: white;  width: 80%; margin: 0px auto ;  color: black; text-align: left"/>
+            </div>
             <div id="zshow_one_data_windowcontext">
 
             </div>
@@ -100,8 +110,10 @@
                 <option value="has_suffix" sql-str="{column} like '%{value}'">Has suffix</option>
                 <option value="sql" sql-str="">SQL</option>
             </select>
-            <a class="btn" style="width: auto;display: inline-block; min-width: 30px; height: 10px; line-height: 10px;" href="javascript:$('#columnsxt').val('=')">=</a>
-            <a class="btn" style="width: auto;display: inline-block; min-width: 30px;  height: 10px;line-height: 10px;" href="javascript:$('#columnsxt').val('contains')">Contains</a>
+            <a class="btn" style="width: auto;display: inline-block; min-width: 30px; height: 10px; line-height: 10px;"
+               href="javascript:$('#columnsxt').val('=')">=</a>
+            <a class="btn" style="width: auto;display: inline-block; min-width: 30px;  height: 10px;line-height: 10px;"
+               href="javascript:$('#columnsxt').val('contains')">Contains</a>
             <input id="columnsx" style="width: 98%">
             <a class="btn" href="javascript:void(0)" id="datawhere">筛选</a>
             <a class="btn" href="javascript:void(0)" id="datawheredel">删除筛选</a>

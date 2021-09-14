@@ -98,8 +98,11 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">插入表名</span><a class="close" href="javascript:void(0)">X</a></div>
-        <input type="text" id="tablenamelistul_input" class="btn" style="width: 80%; margin: 5px auto 5px; background: white; color: black;"/>
+
         <div class="content">
+            <div style="position: sticky; top:0px; background: white;padding:  5px 0 ">
+                <input type="text" id="tablenamelistul_input" class="btn" style="width: 80%; margin: 0 auto; background: white; color: black;"/>
+            </div>
             <ul class="kjlb" id="tablenamelistul">
 
             </ul>
@@ -111,8 +114,10 @@
     </div>
     <div class="float">
         <div class="title" ><span class="content">选择表</span><a class="close" href="javascript:void(0)">X</a></div>
-        <input type="text" id="tablenamelistul2_input" class="btn" style=" width: 80%; margin: 5px auto 5px; background: white; color: black;"/>
         <div class="content" >
+            <div style="position: sticky; top:0px; background: white;padding:  5px 0 ">
+                <input type="text" id="tablenamelistul2_input" class="btn" style=" width: 80%; margin: 0 auto; background: white; color: black;"/>
+            </div>
             <ul class="kjlb2" id="tablenamelistul2">
 
             </ul>
@@ -124,9 +129,11 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">插入列名</span><a class="close" href="javascript:void(0)">X</a></div>
-        <input type="text" id="tablencoumnsul_input" class="btn" style="width: 80%; margin: 5px auto 5px; background: white; color: black;"/>
-        <div class="content">
 
+        <div class="content">
+            <div style="position: sticky; top:0px; background: white;padding:  5px 0 ">
+                <input type="text" id="tablencoumnsul_input" class="btn" style="width: 80%; margin: 0 auto; background: white; color: black;"/>
+            </div>
             <ul class="kjlb" id="tablencoumnsul">
 
             </ul>
@@ -148,9 +155,12 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">数据</span><a class="close" href="javascript:void(0)">X</a></div>
-        <input type="text" id="sqlzshow_one_data_input" class="btn"
-               style=" width: 80%; margin: 5px auto 5px; background: white; color: black; text-align: left"/>
+
         <div class="content" style="background-color: #e7e7e7;">
+            <div style="position: sticky; top:0px; background: white;padding:  5px 0 ">
+                <input type="text" id="sqlzshow_one_data_input" class="btn"
+                       style=" width: 80%; margin: 0 auto; background: white; color: black; text-align: left"/>
+            </div>
             <div id="sqlzshow_one_data_windowcontext">
 
             </div>
