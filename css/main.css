@@ -80,7 +80,10 @@ input[type="checkbox"] {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 1500;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 .floatmain .floatbg {
@@ -99,11 +102,12 @@ input[type="checkbox"] {
     left: 5%;
     border-radius: 7px;
     background: white;
-    position: fixed;
     width: 90%;
     max-width: 500px;
-    margin: 0 auto;
-    z-index: 999;
+    height: 90%;
+    max-height: 800px;
+    z-index: 1501;
+    margin: 0 auto 10%;
     border: 2px solid #387ef5;
 }
 
@@ -114,6 +118,7 @@ input[type="checkbox"] {
 .float .title .close {
     color: white;
     border: 1px solid white;
+    border-radius: 2px;
     float: right;
     display: inline-block;
     line-height: 17px;

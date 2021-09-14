@@ -1,5 +1,5 @@
 <div id="tabledata"
-     style="display: none;padding: 80px 0 14px 0 ;box-sizing:border-box;-webkit-overflow-scrolling: touch;">
+     style="display: none;padding: 80px 0 20px 0 ;box-sizing:border-box;-webkit-overflow-scrolling: touch;">
     <div style="height:70px ; margin: -80px 0 0;">
         <a href="#tables" class="btn">切换数据表</a>
         <a href="#tabledata2" class="btn">自定义sql</a>
@@ -15,7 +15,7 @@
             </tbody>
         </table>
     </div>
-    <div style="position: fixed;bottom: 0; border-top:1px solid #e5e5e5; background:white;z-index: 1001;width: 100%; padding-left: 10px">
+    <div style="position: fixed;bottom: 0; border-top:1px solid #e5e5e5; background:white;z-index: 1001;width: 100%; padding: 3px 0 3px 13px">
         <a id="pagesy" href="javascript:void(0)">首页</a>
         <a id="pageup" href="javascript:void(0)">上一页</a>
         <a id="pagedowm" href="javascript:void(0)">下一页</a>
@@ -81,6 +81,27 @@
             <a class="btn" href="javascript:void(0)" id="escorder">顺序</a>
             <a class="btn" href="javascript:void(0)" id="descorder">倒序</a>
             <hr color="#387EF5">
+            <select id="columnsxt">
+                <option value="=" sql-str="{column} = '{value}'">=</option>
+                <option value="<>" sql-str="{column} <> '{value}'"><></option>
+                <option value="<" sql-str="{column} < '{value}'"><</option>
+                <option value=">" sql-str="{column} > '{value}'">></option>
+                <option value="<=" sql-str="{column} <= '{value}'"><=</option>
+                <option value=">=" sql-str="{column} >= '{value}'">>=</option>
+                <option value="in" sql-str="{column} in ({value})" tips="1,2,3">IN</option>
+                <option value="not_in" sql-str="{column} not in ({value})" tips="1,2,3">NOT IN</option>
+                <option value="is_null" sql-str="{column} is null">IS NULL</option>
+                <option value="is_not_null" sql-str="{column} is not null">IS NOT NULL</option>
+                <option value="between" sql-str="{column} between {value} " tips="1 AND 3">BETWEEN</option>
+                <option value="not_between" sql-str="{column} not between {value} " tips="1 AND 3">NOT BETWEEN</option>
+                <option value="contains" sql-str="{column} like '%{value}%'">Contains</option>
+                <option value="not_contains" sql-str="{column} not like '%{value}%'">Not contains</option>
+                <option value="has_prefix" sql-str="{column} like '{value}%'">Has prefix</option>
+                <option value="has_suffix" sql-str="{column} like '%{value}'">Has suffix</option>
+                <option value="sql" sql-str="">SQL</option>
+            </select>
+            <a class="btn" style="width: auto;display: inline-block; min-width: 30px; height: 10px; line-height: 10px;" href="javascript:$('#columnsxt').val('=')">=</a>
+            <a class="btn" style="width: auto;display: inline-block; min-width: 30px;  height: 10px;line-height: 10px;" href="javascript:$('#columnsxt').val('contains')">Contains</a>
             <input id="columnsx" style="width: 98%">
             <a class="btn" href="javascript:void(0)" id="datawhere">筛选</a>
             <a class="btn" href="javascript:void(0)" id="datawheredel">删除筛选</a>
@@ -91,7 +112,6 @@
                 <li data=" not">not</li>
                 <li data=" null">null</li>
                 <li data=" in">in</li>
-                <li data=" exists">exists</li>
             </ul>
             <ul class="kjlb3">
                 <li data=",">,</li>

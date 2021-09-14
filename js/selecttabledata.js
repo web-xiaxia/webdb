@@ -18,9 +18,9 @@ var lastSqldataList = null
 $(function () {
 
 
-    $("#zshow_one_data_input").on("input propertychange",  function () {
+    $("#zshow_one_data_input").on("input propertychange", function () {
         var aaa = $(this).val()
-        var tablesList =  $('.show_one_data_field_box')
+        var tablesList = $('.show_one_data_field_box')
         for (var index in tablesList) {
             var table = tablesList[index]
             var displayValue = "block"
@@ -33,6 +33,13 @@ $(function () {
             table.style.display = displayValue
         }
     });
+
+    $("#columnsxt").change(function () {
+        console.log(111)
+        var columnsx = $("#columnsx")
+        columnsx.val('')
+        columnsx.attr('placeholder', $(this).find("option:selected").attr('tips'))
+    })
 
     $("#tabledatashowthead").delegate("td", "click", function () {
 
@@ -60,27 +67,32 @@ $(function () {
         var querywhereobj = getLocalStorage(localStorageName.querywhereobj)
         var querywherecolumn = querywhereobj[column];
         if (querywherecolumn == null) {
-            $("#columnsx").val(" and " + column + " = ");
+            $("#columnsx").val("");
+            $("#columnsxt").val("contains");
             $("#datawheredel").css({"display": "none"});
         } else {
-            $("#columnsx").val(querywherecolumn);
+            $("#columnsxt").val(querywherecolumn.input_type);
+            $("#columnsx").val(querywherecolumn.input_val);
             $("#datawheredel").css({"display": ""});
         }
     });
 
     $("#datawhere").click(function () {
-        closefloatmain("#columnswindow");
         var columnname = $("#columnname").html();
         var x = $("#columnsx").val();
         // alert((" and "+columnname+" = ").trim().length);
         // alert( x.trim().length)
-        if ((" and " + columnname + " = ").trim().length >= x.trim().length) {
-            alert("筛选失败，你没输条件吧！")
-            return;
-        }
+        closefloatmain("#columnswindow");
+        var columnsxt = $("#columnsxt")
+        var input_type = columnsxt.val()
+        var where_val = columnsxt.find("option:selected").attr('sql-str').replace('{column}', columnname).replace('{value}', x)
         var querywhereobj = getLocalStorage(localStorageName.querywhereobj);
         var tableobj = getLocalStorage(localStorageName.tableobj);
-        querywhereobj[columnname] = x;
+        querywhereobj[columnname] = {
+            'input_val': x,
+            'input_type': input_type,
+            'where_val': where_val,
+        };
         tableobj.data_page = 1;
         setLocalStorage(localStorageName.querywhereobj, querywhereobj)
         setLocalStorage(localStorageName.tableobj, tableobj)
@@ -185,7 +197,7 @@ function zdycolumnsok() {
     getTableData()
 }
 
-function show_one_data_update_data(id, columns,that) {
+function show_one_data_update_data(id, columns, that) {
     data_cli_update_data(id, columns, $(that).html())
     closefloatmain("#zshow_one_data_window");
 }
@@ -201,10 +213,10 @@ function show_one_data(idx, sqldataList) {
         if (!$(`#zdycolumns${field}`).is(':checked')) {
             continue
         }
-        var showxxx_text=$(`<div class="show_one_data_field_context" onclick="show_one_data_update_data('${sqldata[tableobj.mysql_table_columns_id]}','${field}',this)"></div>`)
+        var showxxx_text = $(`<div class="show_one_data_field_context" onclick="show_one_data_update_data('${sqldata[tableobj.mysql_table_columns_id]}','${field}',this)"></div>`)
         showxxx_text.text(sqldata[field])
 
-        var showxxx_text_box=$(`<div class="show_one_data_field"></div>`)
+        var showxxx_text_box = $(`<div class="show_one_data_field"></div>`)
         showxxx_text_box.append(`<div class="show_one_data_field_title">${field}</div>`)
         showxxx_text_box.append(showxxx_text)
         var showxxx_text_main_box = $(`<div id="show_one_data${field}" class="show_one_data_field_box" data-field="${field}"></div>`)
@@ -222,7 +234,7 @@ function getTableData() {
     var querywhereobj = getLocalStorage(localStorageName.querywhereobj);
     var query_where = "";
     for (var ddd in querywhereobj) {
-        query_where += " " + querywhereobj[ddd] + " ";
+        query_where += " and " + querywhereobj[ddd].where_val + " ";
     }
     var oderbyobj = getLocalStorage(localStorageName.oderbyobj);
     var query_orderby = "";
@@ -305,7 +317,7 @@ function getTableData() {
                         if (!$(`#zdycolumns${field}`).is(':checked')) {
                             continue
                         }
-                        var btd=$(`<td data-columns="\`field\`"></td>`)
+                        var btd = $(`<td data-columns="\`field\`"></td>`)
                         btd.text(sqldata[field])
                         btr.append(btd)
                     }
