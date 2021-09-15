@@ -252,7 +252,7 @@ function getTableData() {
         query_orderby += " " + (rrrrr == false ? "" : ",") + oderbyobj[ddd] + " ";
         rrrrr = true;
     }
-    var dbobj = getLocalStorage(localStorageName.nowconn);
+    var dbobj = getLocalStorage(localStorageName.nowconn);//todo
     var tableobj = getLocalStorage(localStorageName.tableobj);
     if (tableobj == null) {
         window.location.hash = "#tables";

@@ -62,11 +62,9 @@ var localStorageName={
     connObj:"connObj:",
     databasesList:"databasesList:",
     tableList:"tableList:",
+    tableobj:"tableobj:",
 
-    nowconn:"nowconn",
 
-
-    tableobj:"tableobj",
     querywhereobj:"querywhereobj",
     oderbyobj:"oderbyobj"
 }

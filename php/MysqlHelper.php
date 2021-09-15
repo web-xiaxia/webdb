@@ -70,9 +70,7 @@ class MysqlHelper
 
     public function getDatabases(): array
     {
-        $db = $this->getDb();
-        $result = $db->query("show databases");
-        $db->close();
+        $result = $this->query("show databases");
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
         {
@@ -86,9 +84,7 @@ class MysqlHelper
 
     public function getTables($mysql_database): array
     {
-        $db = $this->getDb();
-        $result = $db->query("select table_name from information_schema.tables where table_schema='" . $mysql_database . "' and  table_type='base table'");
-        $db->close();
+        $result = $this->query("select table_name from information_schema.tables where table_schema='" . $mysql_database . "' and  table_type='base table'");
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
         {
@@ -99,10 +95,35 @@ class MysqlHelper
         );
     }
 
+    public function getColumns($mysql_database, $mysql_table): array
+    {
+        $result = $this->query(" show columns from   " . $mysql_table);
+        $array = array();
+        while ($row = $result->fetch_assoc())//循环读出数据
+        {
+            array_push($array, $row);
+        }
+        return array(
+            'columns' => $array
+        );
+    }
+
+    public function query($sql)
+    {
+        $db = $this->getDb();
+        try {
+            return $db->query($sql);
+        } finally {
+            $db->close();
+        }
+    }
+
     public function getDb($mysql_table = null): mysqli
     {
         $db = new mysqli($this->mysql_server_name, $this->mysql_username, $this->mysql_password, $mysql_table);
         $db->query("SET NAMES utf8mb4");
         return $db;
     }
+
+
 }

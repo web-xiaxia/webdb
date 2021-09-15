@@ -66,8 +66,17 @@ function login(mysql_server_name, mysql_username, mysql_password, cookie_login, 
                     if (dbCookie == null) {
                         dbCookie = [];
                     }
-                    dbCookie.push(conn_name)
-                    setLocalStorage(localStorageName.dbCookie, dbCookie, 360 * 24 * 60 * 60 * 1000);
+
+                    var canSave = true
+                    for (var d in dbCookie) {
+                        if (dbCookie[d] == conn_name) {
+                            canSave = false
+                        }
+                    }
+                    if (canSave) {
+                        dbCookie.push(conn_name)
+                        setLocalStorage(localStorageName.dbCookie, dbCookie, 360 * 24 * 60 * 60 * 1000);
+                    }
                 }
 
                 window.location.hash = "#databases?conn_name=" + conn_name;

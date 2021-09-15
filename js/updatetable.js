@@ -37,7 +37,7 @@ $(function () {
         openLoding()
         var tableobj = getLocalStorage(localStorageName.tableobj);
         var sql = "update `" + tableobj.mysql_table + "` set `" + updateobj.columns + "` ='" + $("#updatevalue").val() + "' where `" + updateobj.idcolumns + "`= '" + updateobj.id + "'";
-        var dbobj = getLocalStorage(localStorageName.nowconn);
+        var dbobj = getLocalStorage(localStorageName.nowconn);//todo
         $.ajax({
             url: "/webdb/php/updateData.php",
             type: "get",

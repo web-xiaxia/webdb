@@ -171,7 +171,7 @@ var sqlTips = [
 var tipColumnsIndex = 0;
 
 function tipColumns(tablexxx, tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex) {
-    var dbobj = getLocalStorage(localStorageName.nowconn);
+    var dbobj = getLocalStorage(localStorageName.nowconn);//todo
     $.ajax({
         url: "/webdb/php/getColumns.php",
         type: "get",
@@ -422,7 +422,7 @@ $(function () {
         var tablecolumns = tablecolumnsobj[tablexxx];
         if (tablecolumns == null) {
             openLoding();
-            var dbobj = getLocalStorage(localStorageName.nowconn);
+            var dbobj = getLocalStorage(localStorageName.nowconn); //todo
             $.ajax({
                 url: "/webdb/php/getColumns.php",
                 type: "get",
@@ -526,7 +526,7 @@ function getTableData2() {
     openLoding()
     $("#tabledatashowthead2").empty();
     $("#tabledatashowtbody2").empty();
-    var dbobj = getLocalStorage(localStorageName.nowconn);
+    var dbobj = getLocalStorage(localStorageName.nowconn);//todo
     var tableobj = getLocalStorage(localStorageName.tableobj);
     var sql = $("#zdysql").val()
     if (sql.indexOf('limit') == -1 && sql.indexOf('LIMIT') == -1) {

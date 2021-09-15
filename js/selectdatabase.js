@@ -32,7 +32,7 @@ $(function () {
                     alert("数据库连接失败！");
                     closeLoding()
                 } else {
-                    setLocalStorage(localStorageName.tableList+conn_name, data.tables);
+                    setLocalStorage(localStorageName.tableList + conn_name + ':' + mysql_database, data.tables);
 
                     window.location.hash = `#tables?conn_name=${conn_name}&database=${mysql_database}`;
                     closeLoding()
