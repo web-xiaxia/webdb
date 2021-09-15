@@ -1,18 +1,18 @@
-
 <div id="tabledata2" style="display: none">
-    <a href="#tables" class="btn">切换数据表</a>
+    <a href="javascript:btnHash('#tables')" class="btn">切换数据表</a>
     <!--<div class="btn"  id="opentables2">切换数据表</div>-->
-    <div class="btn"  id="zdysqldown">增加编辑框行</div>
-    <div class="btn"  id="zdysqlup">减少编辑框行</div>
+    <div class="btn" id="zdysqldown">增加编辑框行</div>
+    <div class="btn" id="zdysqlup">减少编辑框行</div>
     <div id="sqltip" class="sqltip">
     </div>
     <div id="sqltip2" class="sqltip">
     </div>
     <div id="zdysqlmain" style="text-align: center;">
         <div style="padding: 0 5px;">
-        <textarea id="zdysql" rows="10" style="width: 100%; border: 1px solid #387EF5; border-radius: 2px;"></textarea>
+            <textarea id="zdysql" rows="10"
+                      style="width: 100%; border: 1px solid #387EF5; border-radius: 2px;"></textarea>
         </div>
-        <a class="btn" href="javascript:getTableData2()" id="getTableDatazdy" >执行sql</a>
+        <a class="btn" href="javascript:getTableData2()" id="getTableDatazdy">执行sql</a>
         <div style="text-align: left">
             <ul class="kjlb">
                 <li data=",">,</li>
@@ -22,8 +22,6 @@
                 <li data="`">`</li>
                 <li data="-">-</li>
                 <li data="/">/</li>
-                <li data=" (">(</li>
-                <li data=") ">)</li>
                 <li data=";">;</li>
             </ul>
             <ul class="kjlb">
@@ -32,6 +30,8 @@
                 <li data=" = ">=</li>
                 <li data=" like ">like</li>
                 <li data="%">%</li>
+                <li data=" (">(</li>
+                <li data=") ">)</li>
             </ul>
             <ul class="kjlb">
                 <li data=" select ">select</li>
@@ -65,13 +65,13 @@
             </ul>
 
         </div>
-        <a class="btn" href="javascript:void(0)" id="queryhanshu" >插入函数</a>
-        <a class="btn" href="javascript: openfloatmain('#tablenamelist');" >插入表名</a>
-        <a class="btn" href="javascript:openfloatmain('#tablenamelist2');"  >插入列名</a>
+        <a class="btn" href="javascript:void(0)" id="queryhanshu">插入函数</a>
+        <a class="btn" href="javascript: openfloatmain('#tablenamelist');">插入表名</a>
+        <a class="btn" href="javascript:openfloatmain('#tablenamelist2');">插入列名</a>
     </div>
 
-    <div id="tablediv2"  style="overflow: scroll;width: 100%;margin-top: 5px;display: none; height: 100%;" >
-        <table id="tabledatashow2" border="1" style="position: relative" >
+    <div id="tablediv2" style="overflow: scroll;width: 100%;margin-top: 5px;display: none; height: 100%;">
+        <table id="tabledatashow2" border="1" style="position: relative">
             <thead id="tabledatashowthead2">
 
             </thead>
@@ -81,19 +81,19 @@
         </table>
     </div>
 </div>
-<div class="floatmain" id="sqlfunlist"  style="display: none;">
+<div class="floatmain" id="sqlfunlist" style="display: none;">
     <div class="floatbg">
     </div>
     <div class="float">
         <div class="title"><span class="content">插入函数</span><a class="close" href="javascript:void(0)">X</a></div>
-        <div class="content" >
-            <ul class="kjlb" id="hanshufunlist" >
+        <div class="content">
+            <ul class="kjlb" id="hanshufunlist">
 
             </ul>
         </div>
     </div>
 </div>
-<div class="floatmain" id="tablenamelist"  style="display: none;">
+<div class="floatmain" id="tablenamelist" style="display: none;">
     <div class="floatbg">
     </div>
     <div class="float">
@@ -101,7 +101,8 @@
 
         <div class="content">
             <div style="position: sticky; top:0px; background: white;padding:  5px 0 ">
-                <input type="text" id="tablenamelistul_input" class="btn" style="width: 80%; margin: 0 auto; background: white; color: black;"/>
+                <input type="text" id="tablenamelistul_input" class="btn"
+                       style="width: 80%; margin: 0 auto; background: white; color: black;"/>
             </div>
             <ul class="kjlb" id="tablenamelistul">
 
@@ -109,14 +110,15 @@
         </div>
     </div>
 </div>
-<div class="floatmain" id="tablenamelist2"  style="display: none;">
+<div class="floatmain" id="tablenamelist2" style="display: none;">
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title" ><span class="content">选择表</span><a class="close" href="javascript:void(0)">X</a></div>
-        <div class="content" >
+        <div class="title"><span class="content">选择表</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="content">
             <div style="position: sticky; top:0px; background: white;padding:  5px 0 ">
-                <input type="text" id="tablenamelistul2_input" class="btn" style=" width: 80%; margin: 0 auto; background: white; color: black;"/>
+                <input type="text" id="tablenamelistul2_input" class="btn"
+                       style=" width: 80%; margin: 0 auto; background: white; color: black;"/>
             </div>
             <ul class="kjlb2" id="tablenamelistul2">
 
@@ -124,7 +126,7 @@
         </div>
     </div>
 </div>
-<div class="floatmain" id="tablencoumns"  style="display: none;">
+<div class="floatmain" id="tablencoumns" style="display: none;">
     <div class="floatbg">
     </div>
     <div class="float">
@@ -132,7 +134,8 @@
 
         <div class="content">
             <div style="position: sticky; top:0px; background: white;padding:  5px 0 ">
-                <input type="text" id="tablencoumnsul_input" class="btn" style="width: 80%; margin: 0 auto; background: white; color: black;"/>
+                <input type="text" id="tablencoumnsul_input" class="btn"
+                       style="width: 80%; margin: 0 auto; background: white; color: black;"/>
             </div>
             <ul class="kjlb" id="tablencoumnsul">
 

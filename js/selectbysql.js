@@ -2,9 +2,11 @@ var tablecolumnsobj = {};
 
 function inittabledata2() {
     $("#tabledata2").slideDown(gddhms);
-    var tableList = getLocalStorage(localStorageName.tableList);
+    var conn_name = GetMaoQueryString('conn_name')
+    var database = GetMaoQueryString('database')
+    var tableList = getLocalStorage(localStorageName.tableList + conn_name + ':' + database);
     if (tableList == null) {
-        window.location.hash = "#databases";
+        window.location.hash = "#databases?conn_name" + conn_name;
         return;
     }
     $("#tablenamelistul").empty();
@@ -171,17 +173,16 @@ var sqlTips = [
 var tipColumnsIndex = 0;
 
 function tipColumns(tablexxx, tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex) {
-    var dbobj = getLocalStorage(localStorageName.nowconn);//todo
+    var conn_name = GetMaoQueryString('conn_name')
+    var database = GetMaoQueryString('database')
     $.ajax({
         url: "/webdb/php/getColumns.php",
         type: "get",
         dataType: "json",
         data: {
-            mysql_server_name: dbobj.mysql_server_name,
-            mysql_username: dbobj.mysql_username,
-            mysql_password: dbobj.mysql_password,
-            mysql_database: dbobj.mysql_database,
-            mysql_table: tablexxx
+            'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
+            'mysql_database': database,
+            'mysql_table': tablexxx
         },
         success: function (data) {
             if (data == false) {
@@ -316,16 +317,16 @@ function tipsSql(that) {
 
 
 function sql_show_one_data(columns, sqldata) {
-    console.log(columns,sqldata)
+    console.log(columns, sqldata)
     var one_data_context = $("#sqlzshow_one_data_windowcontext")
     one_data_context.empty()
     for (var d2 in columns) {
         var field = columns[d2];
 
-        var showxxx_text=$(`<div class="show_one_data_field_context""></div>`)
+        var showxxx_text = $(`<div class="show_one_data_field_context""></div>`)
         showxxx_text.text(sqldata[field])
 
-        var showxxx_text_box=$(`<div class="show_one_data_field"></div>`)
+        var showxxx_text_box = $(`<div class="show_one_data_field"></div>`)
         showxxx_text_box.append(`<div class="show_one_data_field_title">${field}</div>`)
         showxxx_text_box.append(showxxx_text)
         var showxxx_text_main_box = $(`<div class="sqlshow_one_data_field_box"  data-field="${field}"></div>`)
@@ -372,23 +373,23 @@ $(function () {
 
     $("#tabledatashowtbody2").delegate("td", "click", function () {
         var _this = $(this);
-        if (_this.hasClass("xuhao")){
+        if (_this.hasClass("xuhao")) {
             return
         }
         $("#sqlshowcolumn").slideDown(gddhms);
         $("#sqlshowcolumnvalue").text(_this.html());
     });
 
-    $("#tablediv2").scroll(function (){
-        var tablediv2offsettop= $("#tablediv2").offset().top
-        if (tablediv2offsettop>1){
-            $("html,body").animate({scrollTop: $("body").scrollTop()+$("#tablediv2").offset().top}, 0);
+    $("#tablediv2").scroll(function () {
+        var tablediv2offsettop = $("#tablediv2").offset().top
+        if (tablediv2offsettop > 1) {
+            $("html,body").animate({scrollTop: $("body").scrollTop() + $("#tablediv2").offset().top}, 0);
         }
     })
 
-    $("#sqlzshow_one_data_input").on("input propertychange",  function () {
+    $("#sqlzshow_one_data_input").on("input propertychange", function () {
         var aaa = $(this).val()
-        var tablesList =  $('.sqlshow_one_data_field_box')
+        var tablesList = $('.sqlshow_one_data_field_box')
         for (var index in tablesList) {
             var table = tablesList[index]
             var displayValue = "block"
@@ -422,17 +423,16 @@ $(function () {
         var tablecolumns = tablecolumnsobj[tablexxx];
         if (tablecolumns == null) {
             openLoding();
-            var dbobj = getLocalStorage(localStorageName.nowconn); //todo
+            var conn_name = GetMaoQueryString('conn_name')
+            var database = GetMaoQueryString('database')
             $.ajax({
                 url: "/webdb/php/getColumns.php",
                 type: "get",
                 dataType: "json",
                 data: {
-                    mysql_server_name: dbobj.mysql_server_name,
-                    mysql_username: dbobj.mysql_username,
-                    mysql_password: dbobj.mysql_password,
-                    mysql_database: dbobj.mysql_database,
-                    mysql_table: tablexxx
+                    'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
+                    'mysql_database': database,
+                    'mysql_table': tablexxx
                 },
                 success: function (data) {
                     if (data == false) {
@@ -443,7 +443,7 @@ $(function () {
                         closeLoding()
                     } else {
 
-                        tablecolumnsobj[tablexxx] = data;
+                        tablecolumnsobj[tablexxx] = data.columns;
                         closeLoding();
                         tablecolumnsobjfun(tablecolumnsobj, tablexxx);
 
@@ -452,7 +452,6 @@ $(function () {
                     alert("出错了！")
                     openfloatmain("#tablenamelist2");
                     closefloatmain("#tablencoumns");
-                    ;
                     closeLoding();
                 }
             });
@@ -473,7 +472,7 @@ $(function () {
                 pk = "<span style='color: #ffc300'>PK-> </span>"
             }
             var column_type = tablecolumnsobjtablexxx['Type'];
-            var column_name = v
+            var column_name = `\`v\``
             if (as_text_column(column_type)) {
                 column_name = ` AsText(\`${v}\`) as \`${v}\``
             }
@@ -526,26 +525,22 @@ function getTableData2() {
     openLoding()
     $("#tabledatashowthead2").empty();
     $("#tabledatashowtbody2").empty();
-    var dbobj = getLocalStorage(localStorageName.nowconn);//todo
-    var tableobj = getLocalStorage(localStorageName.tableobj);
     var sql = $("#zdysql").val()
     if (sql.indexOf('limit') == -1 && sql.indexOf('LIMIT') == -1) {
         closeLoding()
         alert("请加入limit")
         return
     }
-
+    var conn_name = GetMaoQueryString('conn_name')
+    var database = GetMaoQueryString('database')
     $.ajax({
         url: "/webdb/php/getTableDataZdy.php",
         type: "get",
         dataType: "json",
         data: {
-            mysql_server_name: dbobj.mysql_server_name,
-            mysql_username: dbobj.mysql_username,
-            mysql_password: dbobj.mysql_password,
-            mysql_database: dbobj.mysql_database,
-            mysql_table: tableobj.mysql_table,
-            sql: sql
+            'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
+            'mysql_database': database,
+            'sql': sql
         },
         success: function (data) {
             closeLoding()
@@ -578,9 +573,9 @@ function getTableData2() {
                         var xxtabledatashowtbody2 = $("#tabledatashowtbody2");
                         for (var d in data.data) {
                             var btr = $('<tr>');
-                            var xxtd =$(`<td class="xuhao table_left_sticky">${(parseInt(d) + 1)}</td>`)
+                            var xxtd = $(`<td class="xuhao table_left_sticky">${(parseInt(d) + 1)}</td>`)
                             var sqldata = data.data[d]
-                            xxtd.click(function (){
+                            xxtd.click(function () {
                                 sql_show_one_data(data.columns, sqldata)
                             })
                             btr.append(xxtd)
@@ -592,7 +587,7 @@ function getTableData2() {
                             }
                             xxtabledatashowtbody2.append(btr);
                         }
-                        $("html,body").animate({scrollTop: $("body").scrollTop()+$("#tablediv2").offset().top}, 0);
+                        $("html,body").animate({scrollTop: $("body").scrollTop() + $("#tablediv2").offset().top}, 0);
                     }
                 }
             }
