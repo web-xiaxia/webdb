@@ -57,7 +57,7 @@
 
             </div>
             <div style="position: sticky;bottom: 0px; background: white;">
-                <a class="btn" href="javascript:void(0)" onclick="zdycolumnsok()">确定</a>
+                <a class="btn" href="javascript:void(0)" onclick="zdycolumnsok()">刷新数据</a>
             </div>
         </div>
     </div>
