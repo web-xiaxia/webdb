@@ -45,6 +45,7 @@ function getLocalStorage(name, b, def = null) {
 
 
 var localStorageName = {
+    oldUrl: "oldUrl",
     lsbj: "lsbj",
 
     dbCookie: "dbCookieV2",
