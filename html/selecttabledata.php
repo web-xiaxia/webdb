@@ -1,8 +1,8 @@
 <div id="tabledata"
      style="display: none;padding: 80px 0 20px 0 ;box-sizing:border-box;-webkit-overflow-scrolling: touch;">
     <div style="height:70px ; margin: -80px 0 0;">
-        <a href="#tables" class="btn">切换数据表</a>
-        <a href="#tabledata2" class="btn">自定义sql</a>
+        <a href="javascript:btnHash('#tables')" class="btn">切换数据表</a>
+        <a href="javascript:btnHash('#tabledata2')" class="btn">自定义sql</a>
     </div>
     <div id="tablediv"
          style="overflow: scroll;height: 100%;box-sizing:border-box; -webkit-overflow-scrolling: touch; width: 100%;margin-top: 5px">

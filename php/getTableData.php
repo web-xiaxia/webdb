@@ -1,4 +1,5 @@
 <?php
+include 'MysqlHelper.php';
 
 class Datar
 {
@@ -9,9 +10,7 @@ class Datar
     public $esms;
 }
 
-$mysql_server_name = $_REQUEST['mysql_server_name'];
-$mysql_username = $_REQUEST['mysql_username'];
-$mysql_password = $_REQUEST['mysql_password'];
+$conn_str = $_REQUEST['conn_str'];
 $mysql_database = $_REQUEST['mysql_database'];
 $mysql_table = $_REQUEST['mysql_table'];
 $mysql_column = $_REQUEST['mysql_column'];
@@ -19,12 +18,12 @@ $data_num = $_REQUEST['data_num'];
 $data_page = $_REQUEST['data_page'];
 $query_where = $_REQUEST['query_where'];
 $query_orderby = $_REQUEST['query_orderby'];
-$db = new mysqli($mysql_server_name, $mysql_username, $mysql_password, $mysql_database);
-if (mysqli_connect_error()) {
-    echo "false";
-    exit;
-}
-$db->query("SET NAMES utf8");
+
+
+$mysqlHelper = new MysqlHelper(
+    $conn_str
+);
+
 $datar = new Datar();
 //$sql = "select count(1) as count from  " . $mysql_table . " where 1=1 " . $query_where;
 //$datar->e = $sql;
@@ -40,7 +39,7 @@ $sql2 = "select " . $mysql_column . " from  " . $mysql_table . " where 1=1 " . $
 //echo $sql2;
 $datar->e2 = $sql2;
 try {
-    $result = $db->query($sql2);
+    $result = $mysqlHelper->query($mysql_database, $sql2);
     $array = array();
     while ($row = $result->fetch_assoc())//循环读出数据
     {
@@ -51,4 +50,3 @@ try {
     $datar->esms = $e->getMessage();
 }
 echo json_encode($datar);
-$db->close();

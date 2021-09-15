@@ -117,6 +117,15 @@ class MysqlHelper
             $db->close();
         }
     }
+    public function multiQuery($mysql_table, $sql): bool
+    {
+        $db = $this->getDb($mysql_table);
+        try {
+            return $db->multi_query($sql);
+        } finally {
+            $db->close();
+        }
+    }
 
     public function getDb($mysql_table = null): mysqli
     {

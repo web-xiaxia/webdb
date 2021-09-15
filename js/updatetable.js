@@ -13,9 +13,12 @@ function data_cli_update_data(id, columns, oldvalue) {
         alert("暂不支持无主键表修改");
         return;
     }
-    var tableobj = getLocalStorage(localStorageName.tableobj); //todo
+    var conn_name = GetMaoQueryString('conn_name')
+    var database = GetMaoQueryString('database')
+    var table = GetMaoQueryString('table')
+    var table_columns = getLocalStorage(localStorageName.tableColumns + conn_name + ":" + database + ":" + table);
     //var sql="update "+mysql_table+" set "+columns+"="+"'"+ +"'"
-    updateobj.idcolumns = tableobj.mysql_table_columns_id
+    updateobj.idcolumns = table_columns.mysql_table_columns_id
     updateobj.id = id;
     updateobj.columns = columns;
     updateobj.oldvalue = oldvalue;
@@ -35,19 +38,18 @@ $(function () {
     });
     $("#unpdatebtn").click(function () {
         openLoding()
-        var tableobj = getLocalStorage(localStorageName.tableobj); //todo
-        var sql = "update `" + tableobj.mysql_table + "` set `" + updateobj.columns + "` ='" + $("#updatevalue").val() + "' where `" + updateobj.idcolumns + "`= '" + updateobj.id + "'";
-        var dbobj = getLocalStorage(localStorageName.nowconn);//todo
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
+        var sql = `update ${table} set ${updateobj.columns} ='${$("#updatevalue").val()}' where \`${updateobj.idcolumns}\`= '${updateobj.id}'`;
         $.ajax({
             url: "/webdb/php/updateData.php",
-            type: "get",
+            type: "post",
             dataType: "json",
             data: {
-                mysql_server_name: dbobj.mysql_server_name,
-                mysql_username: dbobj.mysql_username,
-                mysql_password: dbobj.mysql_password,
-                mysql_database: dbobj.mysql_database,
-                sql: sql
+                'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
+                'mysql_database': database,
+                'sql': sql
             },
             success: function (data) {
                 closeLoding()

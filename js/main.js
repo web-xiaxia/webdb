@@ -1,129 +1,131 @@
+var gddhms = 0;
 
-var gddhms=0;
-
-function setSessionStorage(name,value,b)
-{
-    if(b==false)
-    {
-        sessionStorage[name]=value;
-    }else
-    {
-        sessionStorage[name]=JSON.stringify(value);
+function setSessionStorage(name, value, b) {
+    if (b == false) {
+        sessionStorage[name] = value;
+    } else {
+        sessionStorage[name] = JSON.stringify(value);
     }
 
 }
-function getSessionStorage(name,b)
-{
-    var a=sessionStorage[name];
-    if(a==null)
-    {
+
+function getSessionStorage(name, b) {
+    var a = sessionStorage[name];
+    if (a == null) {
         return null;
     }
-    if(b==false)
-    {
+    if (b == false) {
         return a;
     }
     return JSON.parse(a);
 }
-function setLocalStorage(name,value,b)
-{
-    if(b==false)
-    {
-        localStorage[name]=(value);
-    }else
-    {
-        localStorage[name]=JSON.stringify(value);
+
+function setLocalStorage(name, value, b) {
+    if (b == false) {
+        localStorage[name] = (value);
+    } else {
+        localStorage[name] = JSON.stringify(value);
     }
 
 }
-function getLocalStorage(name,b)
-{
-    var a=localStorage[name];
-    if(a==null)
-    {
-        return null;
+
+function getLocalStorage(name, b, def = null) {
+    var a = localStorage[name];
+    if (a == null) {
+        if (def) {
+            setLocalStorage(name, def, b)
+        }
+        return def;
     }
-    if(b==false)
-    {
+    if (b == false) {
         return a;
     }
     return JSON.parse(a);
 }
 
 
+var localStorageName = {
+    dbCookie: "dbCookieV2",
 
-var localStorageName={
-    dbCookie:"dbCookieV2",
-
-    connObj:"connObj:",
-    databasesList:"databasesList:",
-    tableList:"tableList:",
-    tableColumns:"tableColumns:",
-
-
-
-    oldUrl:"oldUrl",
-    lsbj:"lsbj",
-    zdysql:"zdysql",
+    connObj: "connObj:",
+    databasesList: "databasesList:",
+    tableList: "tableList:",
+    tableColumns: "tableColumns:",
+    tablePage: "tablePage:",
+    querywhereobj: "querywhereobj:",
+    oderbyobj: "oderbyobj:",
+    lastSqldataList: "lastSqldataList:",
 
 
+    oldUrl: "oldUrl",
+    lsbj: "lsbj",
+    zdysql: "zdysql",
 
-
-    querywhereobj:"querywhereobj",
-    oderbyobj:"oderbyobj"
-}
-var sessionStorageName={
 
 }
+var sessionStorageName = {}
 
-var htmlover=0;
-function openLoding()
-{
+var htmlover = 0;
+
+function openLoding() {
     htmlover++;
-    $("#loding").css({display:""});
-    var lodingcontent=$("#lodingcontent");
+    $("#loding").css({display: ""});
+    var lodingcontent = $("#lodingcontent");
 }
-function closeLoding()
-{
+
+function closeLoding() {
     htmlover--;
-    if(htmlover<=0) {
-        htmlover=0;
+    if (htmlover <= 0) {
+        htmlover = 0;
     }
-    $("#loding").css({display:"none"});
+    $("#loding").css({display: "none"});
 }
-function GetQueryString(name)
-{
-    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
-    if (r!=null) return unescape(r[2]); return null;
+    if (r != null) return unescape(r[2]);
+    return null;
 }
-function GetMaoQueryString(name)
-{
-    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+
+function GetMaoQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var hash = window.location.hash
-    if(hash.indexOf('?')==-1){
+    if (hash.indexOf('?') == -1) {
         hash = ''
-    }else {
-        hash =  hash.substr(hash.indexOf('?'),hash.length)
+    } else {
+        hash = hash.substr(hash.indexOf('?'), hash.length)
     }
-    var r =hash.substr(1).match(reg);
-    if (r!=null) return unescape(r[2]); return null;
+    var r = hash.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
 }
-$(function(){
-    $(".close").click(function(){
-        $(this).parents(".floatmain").css("display","none");
+
+$(function () {
+    $(".close").click(function () {
+        $(this).parents(".floatmain").css("display", "none");
     })
 });
-function openfloatmain(id)
-{
+
+function openfloatmain(id) {
     htmlover++;
-    $(id).css("display","");
-}function closefloatmain(id)
-{
+    $(id).css("display", "");
+}
+
+function closefloatmain(id) {
     htmlover--;
-    if( htmlover<=0)
-    {
-        htmlover=0;
+    if (htmlover <= 0) {
+        htmlover = 0;
     }
-    $(id).css("display","none");
+    $(id).css("display", "none");
+}
+
+function btnHash(h) {
+    if (window.location.hash.indexOf('?') != -1) {
+        window.location.hash = h + window.location.hash.substr(window.location.hash.indexOf('?'), window.location.hash.length
+        )
+    } else {
+        window.location.hash = h
+    }
+
 }

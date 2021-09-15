@@ -37,7 +37,7 @@ $(function () {
                     closeLoding()
                 } else {
                     var tableobj = {};
-                    tableobj.mysql_table_columns = data;
+                    tableobj.mysql_table_columns = data.columns;
                     tableobj.mysql_table_columns_id = null;
                     for (var d in tableobj.mysql_table_columns) {
                         var v = tableobj.mysql_table_columns[d]['Key'];

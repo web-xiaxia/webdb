@@ -1,29 +1,33 @@
 function inittabledata() {
-    var tableobj = getLocalStorage(localStorageName.tableobj);
-    $('#zdycolumnsyablename').html(`表名：${tableobj.mysql_table}`)
+    var conn_name = GetMaoQueryString('conn_name')
+    var database = GetMaoQueryString('database')
+    var table = GetMaoQueryString('table')
+    var table_columns = getLocalStorage(localStorageName.tableColumns + conn_name + ":" + database + ":" + table);
+
+    $('#zdycolumnsyablename').html(`表名：${table}`)
+
     var zdycolumnswindowcontext = $("#zdycolumnswindowcontext")
     zdycolumnswindowcontext.empty()
-    for (var d in tableobj.mysql_table_columns) {
-        var column_name = tableobj.mysql_table_columns[d]['Field']
+    for (var d in table_columns.mysql_table_columns) {
+        var column_name = table_columns.mysql_table_columns[d]['Field']
         zdycolumnswindowcontext.append(`<div><input type="checkbox" class="zdycolumns" id="zdycolumns${column_name}" checked> <label for="zdycolumns${column_name}">${column_name}</label> </div>`)
     }
     getTableData();
     $("#tabledata").slideDown(gddhms);
 }
 
-function columnsx_set(val){
+function columnsx_set(val) {
     $('#columnsxt').val(val);
     columnsx_init($("#columnsxt"))
 
 }
-function columnsx_init(that){
+
+function columnsx_init(that) {
     var columnsx = $("#columnsx")
     columnsx.val('')
-    columnsx.attr('placeholder', that.find("option:selected").attr('tips')||'')
+    columnsx.attr('placeholder', that.find("option:selected").attr('tips') || '')
     $('#columnsx')[0].focus()
 }
-
-var lastSqldataList = null
 
 $(function () {
     $("#zshow_one_data_input").on("input propertychange", function () {
@@ -52,8 +56,11 @@ $(function () {
         if (column == null || column == undefined || column == "") {
             return;
         }
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
         openfloatmain("#columnswindow");
-        var oderbyobj = getLocalStorage(localStorageName.oderbyobj)
+        var oderbyobj = getLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table)
         var orderbycolumn = oderbyobj[column];
         if (orderbycolumn == null) {
             $("#delorder").css({"display": "none"});
@@ -69,7 +76,8 @@ $(function () {
             $("#descorder").css({"display": "none"});
         }
         $("#columnname").html(column);
-        var querywhereobj = getLocalStorage(localStorageName.querywhereobj)
+
+        var querywhereobj = getLocalStorage(localStorageName.querywhereobj + conn_name + ":" + database + ":" + table)
         var querywherecolumn = querywhereobj[column];
         if (querywherecolumn == null) {
             $("#columnsx").val("");
@@ -87,98 +95,152 @@ $(function () {
         var x = $("#columnsx").val();
         // alert((" and "+columnname+" = ").trim().length);
         // alert( x.trim().length)
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
         closefloatmain("#columnswindow");
         var columnsxt = $("#columnsxt")
         var input_type = columnsxt.val()
         var where_val = columnsxt.find("option:selected").attr('sql-str').replace('{column}', columnname).replace('{value}', x)
-        var querywhereobj = getLocalStorage(localStorageName.querywhereobj);
-        var tableobj = getLocalStorage(localStorageName.tableobj);
+        var querywhereobj = getLocalStorage(localStorageName.querywhereobj + conn_name + ":" + database + ":" + table);
+        var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
+            'data_num': 15,
+            'data_page': 1,
+        });
         querywhereobj[columnname] = {
             'input_val': x,
             'input_type': input_type,
             'where_val': where_val,
         };
-        tableobj.data_page = 1;
-        setLocalStorage(localStorageName.querywhereobj, querywhereobj)
-        setLocalStorage(localStorageName.tableobj, tableobj)
+        table_data_page.data_page = 1;
+        setLocalStorage(localStorageName.querywhereobj + conn_name + ":" + database + ":" + table, querywhereobj)
+        setLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, table_data_page)
         getTableData();
     });
     $("#datawheredel").click(function () {
         closefloatmain("#columnswindow");
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
         var columnname = $("#columnname").html();
-        var querywhereobj = getLocalStorage(localStorageName.querywhereobj);
-        var tableobj = getLocalStorage(localStorageName.tableobj);
+        var querywhereobj = getLocalStorage(localStorageName.querywhereobj + conn_name + ":" + database + ":" + table);
+        var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
+            'data_num': 15,
+            'data_page': 1,
+        });
         delete querywhereobj[columnname];
-        tableobj.data_page = 1;
-        setLocalStorage(localStorageName.querywhereobj, querywhereobj)
-        setLocalStorage(localStorageName.tableobj, tableobj)
+        table_data_page.data_page = 1;
+        setLocalStorage(localStorageName.querywhereobj + conn_name + ":" + database + ":" + table, querywhereobj)
+        setLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, table_data_page)
         getTableData();
     });
 
     $("#delorder").click(function () {
         closefloatmain("#columnswindow");
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
         var columnname = $("#columnname").html();
-        var oderbyobj = getLocalStorage(localStorageName.oderbyobj);
-        var tableobj = getLocalStorage(localStorageName.tableobj);
+        var oderbyobj = getLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table);
+        var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
+            'data_num': 15,
+            'data_page': 1,
+        });
         delete oderbyobj[columnname];
-        tableobj.data_page = 1;
-        setLocalStorage(localStorageName.oderbyobj, oderbyobj)
-        setLocalStorage(localStorageName.tableobj, tableobj)
+        table_data_page.data_page = 1;
+        setLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table, oderbyobj)
+        setLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, table_data_page)
         getTableData();
     });
     $("#escorder").click(function () {
         closefloatmain("#columnswindow");
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
         var columnname = $("#columnname").html();
-        var oderbyobj = getLocalStorage(localStorageName.oderbyobj);
-        var tableobj = getLocalStorage(localStorageName.tableobj);
+        var oderbyobj = getLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table);
+        var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
+            'data_num': 15,
+            'data_page': 1,
+        });
         oderbyobj[columnname] = " " + columnname + " ";
-        tableobj.data_page = 1;
-        setLocalStorage(localStorageName.oderbyobj, oderbyobj)
-        setLocalStorage(localStorageName.tableobj, tableobj)
+        table_data_page.data_page = 1;
+        setLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table, oderbyobj)
+        setLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, table_data_page)
         getTableData();
     });
 
     $("#descorder").click(function () {
         closefloatmain("#columnswindow");
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
         var columnname = $("#columnname").html();
-        var oderbyobj = getLocalStorage(localStorageName.oderbyobj);
-        var tableobj = getLocalStorage(localStorageName.tableobj);
+        var oderbyobj = getLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table);
+        var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
+            'data_num': 15,
+            'data_page': 1,
+        });
         oderbyobj[columnname] = " " + columnname + " desc ";
-        tableobj.data_page = 1;
-        setLocalStorage(localStorageName.oderbyobj, oderbyobj)
-        setLocalStorage(localStorageName.tableobj, tableobj)
+        table_data_page.data_page = 1;
+        setLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table, oderbyobj)
+        setLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, table_data_page)
         getTableData();
     });
 
 
     $("#pagenum").change(function () {
-        var tableobj = getLocalStorage(localStorageName.tableobj);
-        tableobj.data_page = 1;
-        tableobj.data_num = $(this).val();
-        setLocalStorage(localStorageName.tableobj, tableobj);
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
+        var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
+            'data_num': 15,
+            'data_page': 1,
+        });
+        table_data_page.data_page = 1;
+        table_data_page.data_num = $(this).val();
+        setLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, table_data_page)
         getTableData();
     });
 
     $("#pagesy").click(function () {
-        var tableobj = getLocalStorage(localStorageName.tableobj);
-        tableobj.data_page = 1;
-        setLocalStorage(localStorageName.tableobj, tableobj);
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
+        var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
+            'data_num': 15,
+            'data_page': 1,
+        });
+        table_data_page.data_page = 1;
+        setLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, table_data_page)
         getTableData();
     })
     $("#pageup").click(function () {
-        var tableobj = getLocalStorage(localStorageName.tableobj);
-        if (tableobj.data_page <= 1) {
-            tableobj.data_page = 1;
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
+        var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
+            'data_num': 15,
+            'data_page': 1,
+        });
+        if (table_data_page.data_page <= 1) {
+            table_data_page.data_page = 1;
         } else {
-            tableobj.data_page -= 1;
+            table_data_page.data_page -= 1;
         }
-        setLocalStorage(localStorageName.tableobj, tableobj);
+        setLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, table_data_page)
         getTableData()
     })
     $("#pagedowm").click(function () {
-        var tableobj = getLocalStorage(localStorageName.tableobj);
-        tableobj.data_page += 1;
-        setLocalStorage(localStorageName.tableobj, tableobj);
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
+        var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
+            'data_num': 15,
+            'data_page': 1,
+        });
+        table_data_page.data_page += 1;
+        setLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, table_data_page)
         getTableData()
     })
     $("#pagerefresh").click(function () {
@@ -211,18 +273,18 @@ function show_one_data_update_data(id, columns, that) {
     closefloatmain("#zshow_one_data_window");
 }
 
-function show_one_data(idx, sqldataList) {
-    var tableobj = getLocalStorage(localStorageName.tableobj);
-    var sqldata = sqldataList[idx]
+function show_one_data(idx, conn_name, database, table) {
+    var table_columns = getLocalStorage(localStorageName.tableColumns + conn_name + ":" + database + ":" + table);
+    var sqldata = getLocalStorage(localStorageName.lastSqldataList + conn_name + ":" + database + ":" + table, true, [])[idx]
     console.log(sqldata)
     var one_data_context = $("#zshow_one_data_windowcontext")
     one_data_context.empty()
-    for (var d2 in tableobj.mysql_table_columns) {
-        var field = tableobj.mysql_table_columns[d2]['Field'];
+    for (var d2 in table_columns.mysql_table_columns) {
+        var field = table_columns.mysql_table_columns[d2]['Field'];
         if (!$(`#zdycolumns${field}`).is(':checked')) {
             continue
         }
-        var showxxx_text = $(`<div class="show_one_data_field_context" onclick="show_one_data_update_data('${sqldata[tableobj.mysql_table_columns_id]}','${field}',this)"></div>`)
+        var showxxx_text = $(`<div class="show_one_data_field_context" onclick="show_one_data_update_data('${sqldata[table_columns.mysql_table_columns_id]}','${field}',this)"></div>`)
         showxxx_text.text(sqldata[field])
 
         var showxxx_text_box = $(`<div class="show_one_data_field"></div>`)
@@ -237,58 +299,61 @@ function show_one_data(idx, sqldataList) {
 
 function getTableData() {
     openLoding()
-
+    var conn_name = GetMaoQueryString('conn_name')
+    var database = GetMaoQueryString('database')
+    var table = GetMaoQueryString('table')
+    var table_columns = getLocalStorage(localStorageName.tableColumns + conn_name + ":" + database + ":" + table);
+    if (table_columns == null) {
+        window.location.hash = `#tables?conn_name=${conn_name}&database=${database}`;
+        return;
+    }
     $("#tabledatashowthead").empty();
     $("#tabledatashowtbody").empty();
-    var querywhereobj = getLocalStorage(localStorageName.querywhereobj);
+    var querywhereobj = getLocalStorage(localStorageName.querywhereobj + conn_name + ":" + database + ":" + table, true, {});
     var query_where = "";
     for (var ddd in querywhereobj) {
         query_where += " and " + querywhereobj[ddd].where_val + " ";
     }
-    var oderbyobj = getLocalStorage(localStorageName.oderbyobj);
+    var oderbyobj = getLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table, true, {});
     var query_orderby = "";
     var rrrrr = false;
     for (var ddd in oderbyobj) {
         query_orderby += " " + (rrrrr == false ? "" : ",") + oderbyobj[ddd] + " ";
         rrrrr = true;
     }
-    var dbobj = getLocalStorage(localStorageName.nowconn);//todo
-    var tableobj = getLocalStorage(localStorageName.tableobj);
-    if (tableobj == null) {
-        window.location.hash = "#tables";
-        return;
-    }
+
+    var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
+        'data_num': 15,
+        'data_page': 1,
+    });
 
     var mysql_column = []
-    for (var d in tableobj.mysql_table_columns) {
-        var column_name = tableobj.mysql_table_columns[d]['Field']
+    for (var d in table_columns.mysql_table_columns) {
+        var column_name = table_columns.mysql_table_columns[d]['Field']
         if (!$(`#zdycolumns${column_name}`).is(':checked')) {
             continue
         }
-        var column_type = tableobj.mysql_table_columns[d]['Type'];
+        var column_type = table_columns.mysql_table_columns[d]['Type'];
         if (as_text_column(column_type)) {
             mysql_column.push(` AsText(\`${column_name}\`) as \`${column_name}\` `)
         } else {
             mysql_column.push(` \`${column_name}\` `)
         }
-
     }
 
     $.ajax({
         url: "/webdb/php/getTableData.php",
-        type: "get",
+        type: "post",
         dataType: "json",
         data: {
-            mysql_server_name: dbobj.mysql_server_name,
-            mysql_username: dbobj.mysql_username,
-            mysql_password: dbobj.mysql_password,
-            mysql_database: dbobj.mysql_database,
-            mysql_table: tableobj.mysql_table,
-            mysql_column: mysql_column.join(","),
-            data_num: tableobj.data_num,
-            data_page: tableobj.data_page,
-            query_where: query_where,
-            query_orderby: query_orderby
+            'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
+            'mysql_database': database,
+            'mysql_table': table,
+            'mysql_column': mysql_column.join(","),
+            'query_where': query_where,
+            'query_orderby': query_orderby,
+            'data_num': table_data_page.data_num,
+            'data_page': table_data_page.data_page,
         },
         success: function (data) {
             closeLoding()
@@ -297,19 +362,19 @@ function getTableData() {
                 alert("数据库连接失败")
             } else {
                 var sqldataList = data["data"];
-                lastSqldataList = sqldataList
+                setLocalStorage(localStorageName.lastSqldataList + conn_name + ":" + database + ":" + table, sqldataList)
 
                 $("#tabledatashowthead").empty();
                 $("#tabledatashowtbody").empty();
                 var ttr2 = $('<tr style="text-align: center;" class="table_title_sticky">');
                 ttr2.append(`<td onclick="openfloatmain('#zdycolumnswindow');" class="table_left_sticky" style="background: #5a92ef">序号</td>`);
-                for (var d in tableobj.mysql_table_columns) {
-                    var mysql_table_column = tableobj.mysql_table_columns[d]['Field'];
+                for (var d in table_columns.mysql_table_columns) {
+                    var mysql_table_column = table_columns.mysql_table_columns[d]['Field'];
                     if (!$(`#zdycolumns${mysql_table_column}`).is(':checked')) {
                         continue
                     }
-                    var oderbyobj = getLocalStorage(localStorageName.oderbyobj);
-                    var querywhereobj = getLocalStorage(localStorageName.querywhereobj);
+                    var oderbyobj = getLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table);
+                    var querywhereobj = getLocalStorage(localStorageName.querywhereobj + conn_name + ":" + database + ":" + table);
                     var oderbyobjcolumnname = oderbyobj[mysql_table_column];
                     var querywhereobjcolumn = querywhereobj[mysql_table_column];
                     ttr2.append('<td data-column="' + mysql_table_column + '" >' + mysql_table_column + (querywhereobjcolumn == null ? "" : "<span style='color:red'> ->?</span>") + (oderbyobjcolumnname == null ? "" : "<span style='color: #feff08'> ->O</span>") + '</td>')
@@ -318,24 +383,28 @@ function getTableData() {
                 var xxtabledatashowtbody = $("#tabledatashowtbody");
                 for (var d in sqldataList) {
                     var sqldata = sqldataList[d]
-                    var btr = $('<tr>');
-                    btr.append(`<td onclick="show_one_data(${parseInt(d)},lastSqldataList)"  class="table_left_sticky">${(parseInt(d) + 1)}</td>`)
 
-                    for (var d2 in tableobj.mysql_table_columns) {
-                        var field = tableobj.mysql_table_columns[d2]['Field'];
+                    var bttd = $(`<td class="table_left_sticky">${(parseInt(d) + 1)}</td>`)
+                    bttd.click(function () {
+                        show_one_data(parseInt(d), conn_name, database, table)
+                    })
+                    var btr = $('<tr>');
+                    btr.append(bttd)
+
+                    for (var d2 in table_columns.mysql_table_columns) {
+                        var field = table_columns.mysql_table_columns[d2]['Field'];
                         if (!$(`#zdycolumns${field}`).is(':checked')) {
                             continue
                         }
-                        var btd = $(`<td data-columns="\`field\`"></td>`)
+                        var btd = $(`<td data-columns="\`${field}\`"></td>`)
                         btd.text(sqldata[field])
                         btr.append(btd)
                     }
-                    if (tableobj.mysql_table_columns_id != null) {
-                        btr.attr("data-id", sqldata[tableobj.mysql_table_columns_id]);
+                    if (table_columns.mysql_table_columns_id != null) {
+                        btr.attr("data-id", sqldata[table_columns.mysql_table_columns_id]);
                     }
                     xxtabledatashowtbody.append(btr);
                 }
-                setLocalStorage(localStorageName.tableobj, tableobj);
             }
         }, error: function () {
             alert("出错了！")
