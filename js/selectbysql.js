@@ -478,7 +478,7 @@ $(function () {
                 pk = "<span style='color: #ffc300'>PK-> </span>"
             }
             var column_type = tablecolumnsobjtablexxx['Type'];
-            var column_name = `\`v\``
+            var column_name = `\`${v}\``
             if (as_text_column(column_type)) {
                 column_name = ` AsText(\`${v}\`) as \`${v}\``
             }
