@@ -45,7 +45,7 @@ $(function () {
                             tableobj.mysql_table_columns_id = tableobj.mysql_table_columns[d]['Field']
                         }
                     }
-                    setLocalStorage(localStorageName.tableobj+conn_name+":"+database+":"+mysql_table, tableobj);
+                    setLocalStorage(localStorageName.tableColumns+conn_name+":"+database+":"+mysql_table, tableobj);
 
                     window.location.hash = `#tabledata?conn_name=${conn_name}&database=${database}&table=${mysql_table}`;
                     closeLoding()
