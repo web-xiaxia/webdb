@@ -22,6 +22,10 @@
             <td style="width: 20%;text-align:  center"> 密码:</td>
             <td><input style="width: 95%" type="password" id="mysql_password" value=""></td>
         </tr>
+        <tr id="conn_name_box" style="display: none">
+            <td style="width: 20%;text-align:  center"> 名称:</td>
+            <td><input style="width: 95%" id="conn_name" value=""></td>
+        </tr>
         <tr>
             <td><input type="checkbox" id="connsub"></td>
             <td><a href="javascript:void(0)" class="btn" id="sub">连接</a></td>

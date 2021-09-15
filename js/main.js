@@ -53,13 +53,17 @@ function getLocalStorage(name,b)
 
 
 var localStorageName={
-    dbCookie:"dbCookie",
+    dbCookie:"dbCookieV2",
+
     oldUrl:"oldUrl",
     lsbj:"lsbj",
     zdysql:"zdysql",
 
+    connObj:"connObj:",
+    databasesList:"databasesList:",
+
     nowconn:"nowconn",
-    databasesList:"databasesList",
+
     tableList:"tableList",
     tableobj:"tableobj",
     querywhereobj:"querywhereobj",
