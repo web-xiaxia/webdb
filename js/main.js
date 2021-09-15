@@ -61,10 +61,11 @@ var localStorageName={
 
     connObj:"connObj:",
     databasesList:"databasesList:",
+    tableList:"tableList:",
 
     nowconn:"nowconn",
 
-    tableList:"tableList",
+
     tableobj:"tableobj",
     querywhereobj:"querywhereobj",
     oderbyobj:"oderbyobj"
@@ -92,6 +93,18 @@ function GetQueryString(name)
 {
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
+    if (r!=null) return unescape(r[2]); return null;
+}
+function GetMaoQueryString(name)
+{
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var hash = window.location.hash
+    if(hash.indexOf('?')==-1){
+        hash = ''
+    }else {
+        hash =  hash.substr(hash.indexOf('?'),hash.length)
+    }
+    var r =hash.substr(1).match(reg);
     if (r!=null) return unescape(r[2]); return null;
 }
 $(function(){

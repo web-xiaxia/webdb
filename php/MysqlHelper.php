@@ -84,6 +84,21 @@ class MysqlHelper
         );
     }
 
+    public function getTables($mysql_database): array
+    {
+        $db = $this->getDb();
+        $result = $db->query("select table_name from information_schema.tables where table_schema='" . $mysql_database . "' and  table_type='base table'");
+        $db->close();
+        $array = array();
+        while ($row = $result->fetch_assoc())//循环读出数据
+        {
+            array_push($array, $row['table_name']);
+        }
+        return array(
+            'tables' => $array
+        );
+    }
+
     public function getDb($mysql_table = null): mysqli
     {
         $db = new mysqli($this->mysql_server_name, $this->mysql_username, $this->mysql_password, $mysql_table);

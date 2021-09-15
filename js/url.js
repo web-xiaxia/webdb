@@ -27,6 +27,9 @@ $(function(){
 })
 function nowurlfun(hashChangeEvent){
     var hash= window.location.hash;
+    if (hash.indexOf("?")!=-1){
+        hash=hash.substr(0,hash.indexOf("?"))
+    }
     if(hash=="#oldurl")
     {
         hash=getLocalStorage(localStorageName.oldUrl)
