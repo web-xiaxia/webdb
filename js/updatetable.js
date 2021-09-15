@@ -13,7 +13,7 @@ function data_cli_update_data(id, columns, oldvalue) {
         alert("暂不支持无主键表修改");
         return;
     }
-    var tableobj = getLocalStorage(localStorageName.tableobj);
+    var tableobj = getLocalStorage(localStorageName.tableobj); //todo
     //var sql="update "+mysql_table+" set "+columns+"="+"'"+ +"'"
     updateobj.idcolumns = tableobj.mysql_table_columns_id
     updateobj.id = id;
@@ -35,7 +35,7 @@ $(function () {
     });
     $("#unpdatebtn").click(function () {
         openLoding()
-        var tableobj = getLocalStorage(localStorageName.tableobj);
+        var tableobj = getLocalStorage(localStorageName.tableobj); //todo
         var sql = "update `" + tableobj.mysql_table + "` set `" + updateobj.columns + "` ='" + $("#updatevalue").val() + "' where `" + updateobj.idcolumns + "`= '" + updateobj.id + "'";
         var dbobj = getLocalStorage(localStorageName.nowconn);//todo
         $.ajax({

@@ -67,7 +67,6 @@ var localStorageName={
     zdysql:"zdysql",
 
 
-    tableobj:"tableobj:",
 
 
     querywhereobj:"querywhereobj",

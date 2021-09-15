@@ -70,7 +70,7 @@ class MysqlHelper
 
     public function getDatabases(): array
     {
-        $result = $this->query("show databases");
+        $result = $this->query(null,"show databases");
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
         {
@@ -84,7 +84,7 @@ class MysqlHelper
 
     public function getTables($mysql_database): array
     {
-        $result = $this->query("select table_name from information_schema.tables where table_schema='" . $mysql_database . "' and  table_type='base table'");
+        $result = $this->query($mysql_database,"select table_name from information_schema.tables where table_schema='" . $mysql_database . "' and  table_type='base table'");
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
         {
@@ -97,7 +97,7 @@ class MysqlHelper
 
     public function getColumns($mysql_database, $mysql_table): array
     {
-        $result = $this->query(" show columns from   " . $mysql_table);
+        $result = $this->query($mysql_database," show columns from   " . $mysql_table);
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
         {
@@ -108,9 +108,9 @@ class MysqlHelper
         );
     }
 
-    public function query($sql)
+    public function query($mysql_table, $sql)
     {
-        $db = $this->getDb();
+        $db = $this->getDb($mysql_table);
         try {
             return $db->query($sql);
         } finally {
