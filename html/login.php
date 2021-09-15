@@ -1,4 +1,4 @@
-<div  id="login" style="display: none" class="window">
+<div id="login" style="display: none" class="window">
     <div class="title">数据库连接</div>
     <table>
         <tr id="oldconntr" style="display: none">
@@ -29,6 +29,14 @@
         <tr>
             <td><input type="checkbox" id="connsub"></td>
             <td><a href="javascript:void(0)" class="btn" id="sub">连接</a></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="text-align: right">
+                <input type="file" id="json-dumps-file" onchange="config_load(this)" style="display: none">
+                <label for="json-dumps-file" >导入</label>
+                <label style="display: none;" id="json-dumps">导出</label>
+            </td>
         </tr>
     </table>
 </div>

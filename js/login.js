@@ -5,6 +5,50 @@ function logininit() {
 
 }
 
+function download(filename, text) {
+    var pom = document.createElement('a');
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    pom.setAttribute('download', filename);
+    if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        pom.dispatchEvent(event);
+    } else {
+        pom.click();
+    }
+}
+
+function config_load(input) {
+    var file = input.files[0];
+    var reader = new FileReader();
+    reader.onload = function () {
+        var dbCookie = getLocalStorage(localStorageName.dbCookie);
+        if (dbCookie == null) {
+            dbCookie = [];
+        }
+
+        var config = JSON.parse(this.result)
+        for (var index in config) {
+            var conn = config[index]
+            if (conn.conn_str) {
+                var canSave = true
+                for (var d in dbCookie) {
+                    if (dbCookie[d] == conn.conn_name) {
+                        canSave = false
+                    }
+                }
+                if (canSave) {
+                    setLocalStorage(localStorageName.connObj + conn.conn_name, conn.conn_str);
+                    dbCookie.push(conn.conn_name)
+                }
+            }
+        }
+        setLocalStorage(localStorageName.dbCookie, dbCookie, 360 * 24 * 60 * 60 * 1000);
+        logincookieinit();
+    }
+    reader.readAsText(file);
+}
+
 $(function () {
     $("#sub").click(function () {
         login($("#mysql_server_name").val(), $("#mysql_username").val(), $("#mysql_password").val(), false, '');
@@ -18,10 +62,28 @@ $(function () {
     $("#cookielogindel").click(function () {
         var dbCookiejson = getLocalStorage(localStorageName.dbCookie);
         if (dbCookiejson != null) {
-            delete dbCookiejson[$("#oldconn").val()];
-            setLocalStorage(localStorageName.dbCookie, dbCookiejson);
+            var del_conn=$("#oldconn").val()
+            var newDbCookiejson =[]
+            for (var d in dbCookiejson) {
+                if (dbCookiejson[d] != del_conn) {
+                    newDbCookiejson.push(dbCookiejson[d] )
+                }
+            }
+            setLocalStorage(localStorageName.dbCookie, newDbCookiejson);
             logincookieinit();
         }
+    })
+    $("#json-dumps").click(function () {
+        var config = []
+        var dbCookiejson = getLocalStorage(localStorageName.dbCookie);
+        for (var d in dbCookiejson) {
+            var conn_name = dbCookiejson[d]
+            config.push({
+                'conn_name': conn_name,
+                'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
+            })
+        }
+        download('web-db-config.json', JSON.stringify(config))
     })
 })
 
@@ -92,12 +154,14 @@ function login(mysql_server_name, mysql_username, mysql_password, cookie_login, 
 function logincookieinit() {
     var dbCookiejson = getLocalStorage(localStorageName.dbCookie);
     $("#oldconn").empty();
-    if (dbCookiejson != null && "{}" != JSON.stringify(dbCookiejson)) {
+    if (dbCookiejson != null && dbCookiejson.length>0) {
         $("#oldconntr").css({display: ""});
+        $("#json-dumps").css({display: ""});
         for (var d in dbCookiejson) {
             $("#oldconn").append(`<option value="${dbCookiejson[d]}"> ${dbCookiejson[d]}</option>`)
         }
     } else {
         $("#oldconntr").css({display: "none"});
+        $("#json-dumps").css({display: "none"});
     }
 }
