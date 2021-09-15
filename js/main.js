@@ -45,6 +45,8 @@ function getLocalStorage(name, b, def = null) {
 
 
 var localStorageName = {
+    lsbj: "lsbj",
+
     dbCookie: "dbCookieV2",
 
     connObj: "connObj:",
@@ -56,12 +58,7 @@ var localStorageName = {
     oderbyobj: "oderbyobj:",
     lastSqldataList: "lastSqldataList:",
 
-
-    oldUrl: "oldUrl",
-    lsbj: "lsbj",
-    zdysql: "zdysql",
-
-
+    zdysql: "zdysql:",
 }
 var sessionStorageName = {}
 

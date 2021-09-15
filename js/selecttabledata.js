@@ -307,27 +307,16 @@ function getTableData() {
         window.location.hash = `#tables?conn_name=${conn_name}&database=${database}`;
         return;
     }
-    $("#tabledatashowthead").empty();
-    $("#tabledatashowtbody").empty();
     var querywhereobj = getLocalStorage(localStorageName.querywhereobj + conn_name + ":" + database + ":" + table, true, {});
-    var query_where = "";
-    for (var ddd in querywhereobj) {
-        query_where += " and " + querywhereobj[ddd].where_val + " ";
-    }
     var oderbyobj = getLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table, true, {});
-    var query_orderby = "";
-    var rrrrr = false;
-    for (var ddd in oderbyobj) {
-        query_orderby += " " + (rrrrr == false ? "" : ",") + oderbyobj[ddd] + " ";
-        rrrrr = true;
-    }
-
     var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
         'data_num': 15,
         'data_page': 1,
     });
 
     var mysql_column = []
+    var query_where = [];
+    var query_orderby = [];
     for (var d in table_columns.mysql_table_columns) {
         var column_name = table_columns.mysql_table_columns[d]['Field']
         if (!$(`#zdycolumns${column_name}`).is(':checked')) {
@@ -339,8 +328,19 @@ function getTableData() {
         } else {
             mysql_column.push(` \`${column_name}\` `)
         }
+
+        var qwobj = querywhereobj[column_name]
+        if (qwobj){
+            query_where.push(` and ${qwobj.where_val} `)
+        }
+        var qoby = oderbyobj[column_name]
+        if(qoby){
+            query_orderby.push(` ${qoby} `)
+        }
     }
 
+    $("#tabledatashowthead").empty();
+    $("#tabledatashowtbody").empty();
     $.ajax({
         url: "/webdb/php/getTableData.php",
         type: "post",
@@ -350,8 +350,8 @@ function getTableData() {
             'mysql_database': database,
             'mysql_table': table,
             'mysql_column': mysql_column.join(","),
-            'query_where': query_where,
-            'query_orderby': query_orderby,
+            'query_where': query_where.join(' '),
+            'query_orderby': query_orderby.join(','),
             'data_num': table_data_page.data_num,
             'data_page': table_data_page.data_page,
         },

@@ -30,15 +30,10 @@ function nowurlfun(hashChangeEvent){
     if (hash.indexOf("?")!=-1){
         hash=hash.substr(0,hash.indexOf("?"))
     }
-    if(hash=="#oldurl")
-    {
-        hash=getLocalStorage(localStorageName.oldUrl)
-    }
     if(hash==null||hash=="")
     {
         hash="#login";
     }
-    setLocalStorage(localStorageName.oldUrl,hash);
     var maodian=maodianlist[hash];
     txxxxx(maodian);
 

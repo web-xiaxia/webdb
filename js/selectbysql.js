@@ -1,4 +1,6 @@
 var tablecolumnsobj = {};
+var sql_conn_name = ''
+var sql_database = ''
 
 function inittabledata2() {
     $("#tabledata2").slideDown(gddhms);
@@ -9,13 +11,15 @@ function inittabledata2() {
         window.location.hash = "#databases?conn_name" + conn_name;
         return;
     }
+    sql_conn_name = conn_name
+    sql_database = database
     $("#tablenamelistul").empty();
     $("#tablenamelistul2").empty();
     for (var d in tableList) {
         $("#tablenamelistul").append('<li data=" `' + tableList[d] + '` ">' + tableList[d] + '</li>')
         $("#tablenamelistul2").append('<li data=" `' + tableList[d] + '` ">' + tableList[d] + '</li>')
     }
-    $("#zdysql").val(getLocalStorage(localStorageName.zdysql, false));
+    $("#zdysql").val(getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database, false));
 }
 
 var sqlTips = [
@@ -217,6 +221,7 @@ function changeSqlText(startIndex, endIndex, insertText) {
     //sqlDom.val(`${sql.substring(0, startIndex)}${insertText}${sql.substring(endIndex, sql.length)}`)
     sqlDom[0].setRangeText(insertText, startIndex, endIndex, "end")
     sqlDom.focus()
+    setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database, sqlDom.val(), false);
     tipsSql(sqlDom[0])
 }
 
@@ -279,7 +284,7 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
         }
     }
 
-    var tableList = getLocalStorage(localStorageName.tableList);
+    var tableList = getLocalStorage(localStorageName.tableList + sql_conn_name + ':' + sql_database);
     for (var index in tableList) {
         var tableName = tableList[index]
         var table = tableName.toLowerCase()
@@ -338,13 +343,14 @@ function sql_show_one_data(columns, sqldata) {
 
 $(function () {
     $("#zdysql").keyup(function () {
-        setLocalStorage(localStorageName.zdysql, $(this).val(), false);
+        setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database, $(this).val(), false);
     });
     $("#zdysql").change(function () {
-        setLocalStorage(localStorageName.zdysql, $(this).val(), false);
+        setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database, $(this).val(), false);
     });
 
     $("#zdysql").on("input propertychange", function () {
+        setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database, $(this).val(), false);
         tipsSql(this)
     });
     $("#zdysql").click(function () {
@@ -489,7 +495,7 @@ $(function () {
             return;
         }
         changeSqlTextOld(a)
-        setLocalStorage(localStorageName.zdysql, $("#zdysql").val(), false);
+        setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database, $("#zdysql").val(), false);
         // $("html,body").animate({scrollTop: $("#zdysql").offset().top}, gddhms);
         // $("#zdysql").focus();
         closefloatmain('#tablenamelist');
