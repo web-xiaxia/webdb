@@ -28,6 +28,9 @@ function setLocalStorage(name, value, b) {
     }
 
 }
+function delLocalStorage(name){
+    delete localStorage[name]
+}
 
 function getLocalStorage(name, b, def = null) {
     var a = localStorage[name];

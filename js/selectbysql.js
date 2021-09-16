@@ -369,6 +369,7 @@ function deleteSqlList(){
         }
     }
     setLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, newZdysqllist)
+    delLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName)
     nowSqlName = newZdysqllist[0]
     sqlListBoxInit()
 }
