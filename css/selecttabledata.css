@@ -71,3 +71,27 @@
 #tabledata2{
     height: 100%;
 }
+
+#sqllistbox{
+    position: fixed;
+    z-index: 10;
+    right: 0px;
+    top: 80px;
+}
+
+#sqllistbox .sqllistitem{
+    margin: 10px 0 0 0;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    background: #5e5e5e;
+    color: white;
+    border: 1px solid white
+}
+#sqllistbox .sqllistitembtn{
+    background: #6aabf3;
+}
+#sqllistbox .sqllistitemact{
+    background: #387ef5;
+}

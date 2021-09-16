@@ -1,4 +1,5 @@
 var tablecolumnsobj = {};
+var nowSqlName = ''
 var sql_conn_name = ''
 var sql_database = ''
 
@@ -19,8 +20,15 @@ function inittabledata2() {
         $("#tablenamelistul").append('<li data=" `' + tableList[d] + '` ">' + tableList[d] + '</li>')
         $("#tablenamelistul2").append('<li data=" `' + tableList[d] + '` ">' + tableList[d] + '</li>')
     }
-    $("#zdysql").val(getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database, false));
+
+    nowSqlName = getLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, false)
+    if (!nowSqlName) {
+        addSqlList()
+    }else {
+        sqlListBoxInit()
+    }
 }
+
 
 var sqlTips = [
     {
@@ -222,7 +230,7 @@ function changeSqlText(startIndex, endIndex, insertText) {
     //sqlDom.val(`${sql.substring(0, startIndex)}${insertText}${sql.substring(endIndex, sql.length)}`)
     sqlDom[0].setRangeText(insertText, startIndex, endIndex, "end")
     sqlDom.focus()
-    setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database, sqlDom.val(), false);
+    setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, sqlDom.val(), false);
     tipsSql(sqlDom[0])
 }
 
@@ -342,16 +350,49 @@ function sql_show_one_data(columns, sqldata) {
     openfloatmain("#sqlzshow_one_data_window");
 }
 
+function addSqlList(){
+    nowSqlName = new Date().getTime() + ""
+    setLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, nowSqlName, false)
+    var zdysqllist = getLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, true, [])
+    zdysqllist.push(nowSqlName)
+    setLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, zdysqllist)
+    sqlListBoxInit()
+}
+function deleteSqlList(){
+    var zdysqllist = getLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, true, [])
+    var newZdysqllist =[]
+    for (var index in zdysqllist) {
+        if (zdysqllist[index] !=nowSqlName){
+            newZdysqllist.push(zdysqllist[index])
+        }else{
+
+        }
+    }
+    setLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, newZdysqllist)
+    nowSqlName = newZdysqllist[0]
+    sqlListBoxInit()
+}
+function sqlListBoxInit() {
+    var sqllistbox = $("#sqllistitembox")
+    sqllistbox.empty()
+    var zdysqllist = getLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, true, [])
+    for (var index in zdysqllist) {
+        sqllistbox.append(`<div class="sqllistitem ${zdysqllist[index] == nowSqlName ? 'sqllistitemact' : ''}" sql-name="${zdysqllist[index]}">${(parseInt(index) + 1)}</div>`)
+    }
+    $("#sqllistdelete").css({'display': zdysqllist.length > 1 ? '' : 'none'})
+    $("#zdysql").val(getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, false, ''));
+}
+
 $(function () {
     $("#zdysql").keyup(function () {
-        setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database, $(this).val(), false);
+        setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, $(this).val(), false);
     });
     $("#zdysql").change(function () {
-        setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database, $(this).val(), false);
+        setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, $(this).val(), false);
     });
 
     $("#zdysql").on("input propertychange", function () {
-        setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database, $(this).val(), false);
+        setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, $(this).val(), false);
         tipsSql(this)
     });
     $("#zdysql").click(function () {
@@ -386,6 +427,15 @@ $(function () {
         $("#sqlshowcolumn").slideDown(gddhms);
         $("#sqlshowcolumnvalue").text(_this.html());
     });
+
+    $("#sqllistitembox").delegate(".sqllistitem", "click", function () {
+        $("#sqllistitembox").find('.sqllistitem').removeClass("sqllistitemact");
+        var that = $(this)
+        that.addClass("sqllistitemact");
+        nowSqlName = that.attr('sql-name')
+        setLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, nowSqlName, false)
+        $("#zdysql").val(getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, false, ''));
+    })
 
     $("#tablediv2").scroll(function () {
         var tablediv2offsettop = $("#tablediv2").offset().top
@@ -496,7 +546,7 @@ $(function () {
             return;
         }
         changeSqlTextOld(a)
-        setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database, $("#zdysql").val(), false);
+        setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, $("#zdysql").val(), false);
         // $("html,body").animate({scrollTop: $("#zdysql").offset().top}, gddhms);
         // $("#zdysql").focus();
         closefloatmain('#tablenamelist');

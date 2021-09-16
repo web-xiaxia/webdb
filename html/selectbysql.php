@@ -1,4 +1,11 @@
 <div id="tabledata2" style="display: none">
+    <div id="sqllistbox">
+        <div >
+            <div id="sqllistadd" class="sqllistitem sqllistitembtn" onclick="addSqlList()" >+</div>
+            <div id="sqllistdelete" style="display: none" class="sqllistitem sqllistitembtn" onclick="deleteSqlList()" >-</div>
+        </div>
+        <div id="sqllistitembox" style="padding-top: 10px"></div>
+    </div>
     <a href="javascript:btnHash('#tables')" class="btn">切换数据表</a>
     <!--<div class="btn"  id="opentables2">切换数据表</div>-->
     <div class="btn" id="zdysqldown">增加编辑框行</div>

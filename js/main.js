@@ -59,7 +59,9 @@ var localStorageName = {
     oderbyobj: "oderbyobj:",
     lastSqldataList: "lastSqldataList:",
 
+    zdysqllist: "zdysqllist:",
     zdysql: "zdysql:",
+    zdysqlnow: "zdysqlnow:",
 }
 var sessionStorageName = {}
 
