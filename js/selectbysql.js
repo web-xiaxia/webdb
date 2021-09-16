@@ -192,8 +192,9 @@ function tipColumns(tablexxx, tableMatchNowSearchColumnsText, tipdom, nowTipColu
             if (data == false) {
                 //
             } else {
-                for (var index in data) {
-                    var field_name = data[index]['Field']
+                var columns = data.columns
+                for (var index in columns) {
+                    var field_name = columns[index]['Field']
                     console.log(field_name, tableMatchNowSearchColumnsText)
                     if (tableMatchNowSearchColumnsText && !test_start(tableMatchNowSearchColumnsText, [field_name])) {
                         continue
