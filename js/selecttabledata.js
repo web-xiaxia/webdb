@@ -273,10 +273,10 @@ function show_one_data_update_data(id, columns, that) {
     closefloatmain("#zshow_one_data_window");
 }
 
-function show_one_data(idx, conn_name, database, table) {
+function show_one_data(that, conn_name, database, table, sqldataList) {
+    var sqldata = sqldataList[parseInt($(that).attr("data-index"))]
+    console.log(sqldata, sqldataList)
     var table_columns = getLocalStorage(localStorageName.tableColumns + conn_name + ":" + database + ":" + table);
-    var sqldata = getLocalStorage(localStorageName.lastSqldataList + conn_name + ":" + database + ":" + table, true, [])[idx]
-    console.log(sqldata)
     var one_data_context = $("#zshow_one_data_windowcontext")
     one_data_context.empty()
     for (var d2 in table_columns.mysql_table_columns) {
@@ -330,11 +330,11 @@ function getTableData() {
         }
 
         var qwobj = querywhereobj[column_name]
-        if (qwobj){
+        if (qwobj) {
             query_where.push(` and ${qwobj.where_val} `)
         }
         var qoby = oderbyobj[column_name]
-        if(qoby){
+        if (qoby) {
             query_orderby.push(` ${qoby} `)
         }
     }
@@ -362,7 +362,6 @@ function getTableData() {
                 alert("数据库连接失败")
             } else {
                 var sqldataList = data["data"];
-                setLocalStorage(localStorageName.lastSqldataList + conn_name + ":" + database + ":" + table, sqldataList)
 
                 $("#tabledatashowthead").empty();
                 $("#tabledatashowtbody").empty();
@@ -384,9 +383,9 @@ function getTableData() {
                 for (var d in sqldataList) {
                     var sqldata = sqldataList[d]
 
-                    var bttd = $(`<td class="table_left_sticky">${(parseInt(d) + 1)}</td>`)
+                    var bttd = $(`<td class="table_left_sticky" data-index="${d}">${(parseInt(d) + 1)}</td>`)
                     bttd.click(function () {
-                        show_one_data(parseInt(d), conn_name, database, table)
+                        show_one_data(this, conn_name, database, table, sqldataList)
                     })
                     var btr = $('<tr>');
                     btr.append(bttd)

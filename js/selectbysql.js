@@ -330,8 +330,9 @@ function tipsSql(that) {
 }
 
 
-function sql_show_one_data(columns, sqldata) {
-    console.log(columns, sqldata)
+function sql_show_one_data(that,columns, sqldatalist) {
+    console.log(columns, sqldatalist)
+    var sqldata = sqldatalist[parseInt($(that).attr('data-index'))]
     var one_data_context = $("#sqlzshow_one_data_windowcontext")
     one_data_context.empty()
     for (var d2 in columns) {
@@ -370,6 +371,7 @@ function deleteSqlList(){
     }
     setLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, newZdysqllist)
     delLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName)
+    setLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, nowSqlName, false)
     nowSqlName = newZdysqllist[0]
     sqlListBoxInit()
 }
@@ -631,10 +633,9 @@ function getTableData2() {
                         var xxtabledatashowtbody2 = $("#tabledatashowtbody2");
                         for (var d in data.data) {
                             var btr = $('<tr>');
-                            var xxtd = $(`<td class="xuhao table_left_sticky">${(parseInt(d) + 1)}</td>`)
-                            var sqldata = data.data[d]
+                            var xxtd = $(`<td class="xuhao table_left_sticky" data-index="${d}">${(parseInt(d) + 1)}</td>`)
                             xxtd.click(function () {
-                                sql_show_one_data(data.columns, sqldata)
+                                sql_show_one_data(this,data.columns, data.data)
                             })
                             btr.append(xxtd)
                             for (var d2 in data.columns) {
