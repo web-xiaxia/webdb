@@ -24,7 +24,7 @@ function inittabledata2() {
     nowSqlName = getLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, false)
     if (!nowSqlName) {
         addSqlList()
-    }else {
+    } else {
         sqlListBoxInit()
     }
 }
@@ -330,9 +330,7 @@ function tipsSql(that) {
 }
 
 
-function sql_show_one_data(that,columns, sqldatalist) {
-    console.log(columns, sqldatalist)
-    var sqldata = sqldatalist[parseInt($(that).attr('data-index'))]
+function sql_show_one_data(columns, sqldata) {
     var one_data_context = $("#sqlzshow_one_data_windowcontext")
     one_data_context.empty()
     for (var d2 in columns) {
@@ -351,7 +349,15 @@ function sql_show_one_data(that,columns, sqldatalist) {
     openfloatmain("#sqlzshow_one_data_window");
 }
 
-function addSqlList(){
+function sql_xuhao_td(d, columns, data) {
+    var xxtd = $(`<td class="xuhao table_left_sticky" data-index="${d}">${(parseInt(d) + 1)}</td>`)
+    xxtd.click(function () {
+        sql_show_one_data(columns, data)
+    })
+    return xxtd
+}
+
+function addSqlList() {
     nowSqlName = new Date().getTime() + ""
     setLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, nowSqlName, false)
     var zdysqllist = getLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, true, [])
@@ -359,13 +365,14 @@ function addSqlList(){
     setLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, zdysqllist)
     sqlListBoxInit()
 }
-function deleteSqlList(){
+
+function deleteSqlList() {
     var zdysqllist = getLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, true, [])
-    var newZdysqllist =[]
+    var newZdysqllist = []
     for (var index in zdysqllist) {
-        if (zdysqllist[index] !=nowSqlName){
+        if (zdysqllist[index] != nowSqlName) {
             newZdysqllist.push(zdysqllist[index])
-        }else{
+        } else {
 
         }
     }
@@ -375,6 +382,7 @@ function deleteSqlList(){
     setLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, nowSqlName, false)
     sqlListBoxInit()
 }
+
 function sqlListBoxInit() {
     var sqllistbox = $("#sqllistitembox")
     sqllistbox.empty()
@@ -632,11 +640,9 @@ function getTableData2() {
                         $("#tabledatashowthead2").append(ttr2);
                         var xxtabledatashowtbody2 = $("#tabledatashowtbody2");
                         for (var d in data.data) {
+
+                            var xxtd = sql_xuhao_td(d, data.columns, data.data[d])
                             var btr = $('<tr>');
-                            var xxtd = $(`<td class="xuhao table_left_sticky" data-index="${d}">${(parseInt(d) + 1)}</td>`)
-                            xxtd.click(function () {
-                                sql_show_one_data(this,data.columns, data.data)
-                            })
                             btr.append(xxtd)
                             for (var d2 in data.columns) {
                                 var field = data.columns[d2];

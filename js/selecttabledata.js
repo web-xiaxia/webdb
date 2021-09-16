@@ -273,9 +273,7 @@ function show_one_data_update_data(id, columns, that) {
     closefloatmain("#zshow_one_data_window");
 }
 
-function show_one_data(that, conn_name, database, table, sqldataList) {
-    var sqldata = sqldataList[parseInt($(that).attr("data-index"))]
-    console.log(sqldata, sqldataList)
+function show_one_data(conn_name, database, table, sqldata) {
     var table_columns = getLocalStorage(localStorageName.tableColumns + conn_name + ":" + database + ":" + table);
     var one_data_context = $("#zshow_one_data_windowcontext")
     one_data_context.empty()
@@ -295,6 +293,14 @@ function show_one_data(that, conn_name, database, table, sqldataList) {
         one_data_context.append(showxxx_text_main_box)
     }
     openfloatmain("#zshow_one_data_window");
+}
+
+function xuhao_td(d, conn_name, database, table, sqldata) {
+    var bttd = $(`<td class="table_left_sticky" data-index="${d}">${(parseInt(d) + 1)}</td>`)
+    bttd.click(function () {
+        show_one_data(conn_name, database, table, sqldata)
+    })
+    return bttd
 }
 
 function getTableData() {
@@ -383,10 +389,7 @@ function getTableData() {
                 for (var d in sqldataList) {
                     var sqldata = sqldataList[d]
 
-                    var bttd = $(`<td class="table_left_sticky" data-index="${d}">${(parseInt(d) + 1)}</td>`)
-                    bttd.click(function () {
-                        show_one_data(this, conn_name, database, table, sqldataList)
-                    })
+                    var bttd = xuhao_td(d, conn_name, database, table, sqldata)
                     var btr = $('<tr>');
                     btr.append(bttd)
 
