@@ -319,6 +319,7 @@ function getTableData() {
         'data_num': 15,
         'data_page': 1,
     });
+    $("#pagenum").val(table_data_page.data_num)
 
     var mysql_column = []
     var query_where = [];
