@@ -76,7 +76,7 @@
     position: fixed;
     z-index: 1000;
     right: 0px;
-    top: 50px;
+    top: 105px;
 
     width: 20px;
     height: 20px;
@@ -123,6 +123,7 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    vertical-align:middle;
 }
 #tablefiltercontextbox .filter_box .filter_column{
     box-sizing: border-box;
@@ -130,6 +131,7 @@
     -webkit-box-sizing: border-box;
     height: 20px;
     margin: 0 5px;
+    width: 140px;
 }
 #tablefiltercontextbox .filter_box .filter_condition{
     box-sizing: border-box;
@@ -137,6 +139,7 @@
     -webkit-box-sizing: border-box;
     height: 20px;
     margin: 0 5px;
+    width: 70px;
 }
 #tablefiltercontextbox .filter_box .filter_add,#tablefiltercontextbox .filter_box .filter_delete{
     width: 20px;
@@ -153,17 +156,41 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     height: 30px;
+    border-radius: 5px;
+    border:1px solid #cbcbcb;
 }
 
 #sqllistbox{
     position: fixed;
     z-index: 10;
     right: 0px;
-    top: 70px;
+    top: 115px;
+    height: 50%;
+    overflow: hidden;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    padding-top: 90px;
+}
+#sqllistbtnbox{
+    height: 90px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin-top: -90px;
+    padding:5px 0 20px 0;
+}
+#sqllistitembox{
+    overflow-x: scroll;
+    height: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
 #sqllistbox .sqllistitem{
-    margin: 10px 0 0 0;
+
+    margin: 0 0 10px 0;
     width: 20px;
     height: 20px;
     text-align: center;
@@ -177,4 +204,5 @@
 }
 #sqllistbox .sqllistitemact{
     background: #387ef5;
+    overflow: scroll;
 }

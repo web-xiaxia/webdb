@@ -17,6 +17,7 @@ html, body {
 input {
     height: 20px;
     width: 100%;
+    outline: none;
 }
 
 input[type="checkbox"] {
