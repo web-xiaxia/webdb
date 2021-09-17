@@ -1,5 +1,11 @@
 <div id="tabledata"
      style="display: none;padding: 80px 0 20px 0 ;box-sizing:border-box;-webkit-overflow-scrolling: touch;">
+    <div id="tablefiltertipbox">
+        F
+        <div id="tablefiltertipboxtip">
+            .
+        </div>
+    </div>
     <div style="height:70px ; margin: -80px 0 0;">
         <a href="javascript:btnHash('#tables')" class="btn">切换数据表</a>
         <a href="javascript:btnHash('#tabledata2')" class="btn">自定义sql</a>
@@ -92,23 +98,7 @@
             <a class="btn" href="javascript:void(0)" id="descorder">倒序</a>
             <hr color="#387EF5">
             <select id="columnsxt">
-                <option value="=" sql-str="{column} = '{value}'">=</option>
-                <option value="<>" sql-str="{column} <> '{value}'"><></option>
-                <option value="<" sql-str="{column} < '{value}'"><</option>
-                <option value=">" sql-str="{column} > '{value}'">></option>
-                <option value="<=" sql-str="{column} <= '{value}'"><=</option>
-                <option value=">=" sql-str="{column} >= '{value}'">>=</option>
-                <option value="in" sql-str="{column} in ({value})" tips="1,2,3">IN</option>
-                <option value="not_in" sql-str="{column} not in ({value})" tips="1,2,3">NOT IN</option>
-                <option value="is_null" sql-str="{column} is null">IS NULL</option>
-                <option value="is_not_null" sql-str="{column} is not null">IS NOT NULL</option>
-                <option value="between" sql-str="{column} between {value} " tips="1 AND 3">BETWEEN</option>
-                <option value="not_between" sql-str="{column} not between {value} " tips="1 AND 3">NOT BETWEEN</option>
-                <option value="contains" sql-str="{column} like '%{value}%'">Contains</option>
-                <option value="not_contains" sql-str="{column} not like '%{value}%'">Not contains</option>
-                <option value="has_prefix" sql-str="{column} like '{value}%'">Has prefix</option>
-                <option value="has_suffix" sql-str="{column} like '%{value}'">Has suffix</option>
-                <option value="sql" sql-str="">SQL</option>
+
             </select>
             <a class="btn" style="width: auto;display: inline-block; min-width: 30px; height: 10px; line-height: 10px;"
                href="javascript:columnsx_set('=')">=</a>
@@ -152,4 +142,22 @@
         </div>
     </div>
 
+</div>
+
+<div class="floatmain" id="tablefilterbox" style="display: none;">
+    <div class="floatbg">
+    </div>
+    <div class="float">
+        <div class="title"><span class="content">过滤</span><a class="close" href="javascript:void(0)">X</a></div>
+
+        <div class="content">
+            <div id="tablefiltercontextbox">
+
+            </div>
+            <div style="position: sticky;bottom: 0px; background: white; text-align: center">
+                <a class="btn" style="display: inline-block;padding: 5px 15px;" href="javascript:open_table_filter('btn')">开启过滤</a>
+                <a class="btn" style="display: inline-block;padding: 5px 15px;" href="javascript:close_table_filter('btn')">关闭过滤</a>
+            </div>
+        </div>
+    </div>
 </div>

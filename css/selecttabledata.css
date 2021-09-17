@@ -72,11 +72,94 @@
     height: 100%;
 }
 
+#tablefiltertipbox{
+    position: fixed;
+    z-index: 1000;
+    right: 0px;
+    top: 50px;
+
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    background: #bc67ea;
+    color: white;
+    border: 1px solid white
+}
+
+#tablefiltertipboxtip{
+    position: absolute;
+    bottom: 5px;
+    right: -2px;
+    color: #00ff72;
+    font-size: 40px;
+    line-height: 20px;
+}
+
+#tablefiltercontextbox .filter_box{
+    padding: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+    width: 100%;
+}
+
+#tablefiltercontextbox .filter_box .filter_line1{
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+
+}
+#tablefiltercontextbox .filter_box .filter_line2{
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+    margin: 5px 0;
+
+}
+#tablefiltercontextbox .filter_box .filter_checkbox{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+#tablefiltercontextbox .filter_box .filter_column{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    height: 20px;
+    margin: 0 5px;
+}
+#tablefiltercontextbox .filter_box .filter_condition{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    height: 20px;
+    margin: 0 5px;
+}
+#tablefiltercontextbox .filter_box .filter_add,#tablefiltercontextbox .filter_box .filter_delete{
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    color: white;
+    background: #387ef5;
+    margin: 0 5px;
+    line-height: 20px;
+    display: inline-block;
+}
+#tablefiltercontextbox .filter_box .filter_value{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    height: 30px;
+}
+
 #sqllistbox{
     position: fixed;
     z-index: 10;
     right: 0px;
-    top: 80px;
+    top: 70px;
 }
 
 #sqllistbox .sqllistitem{

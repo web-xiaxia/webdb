@@ -60,6 +60,8 @@ var localStorageName = {
     tablePage: "tablePage:",
     querywhereobj: "querywhereobj:",
     oderbyobj: "oderbyobj:",
+    tablefilter: "tablefilter:",
+    tablefilterinfo: "tablefilterinfo:",
 
     zdysqllist: "zdysqllist:",
     zdysql: "zdysql:",

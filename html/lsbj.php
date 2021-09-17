@@ -17,7 +17,7 @@
         });
     });
 </script>
-<div id="openfloatmainlsbj" style="width: 20px;height: 20px;position: fixed;z-index: 10; right: 0px; top: 50px; text-align: center;line-height: 20px;background: #dd9822;color: white;border: 1px solid white">
+<div id="openfloatmainlsbj" style="width: 20px;height: 20px;position: fixed;z-index: 10; right: 0px; top: 20px; text-align: center;line-height: 20px;background: #dd9822;color: white;border: 1px solid white">
     O
 </div>
 <div class="floatmain" id="floatmainlsbj"  style="display: none;">

@@ -1,19 +1,92 @@
+var table_filter_box_open = false
+var filter_condition_sql_str = {
+    "=": "{column} = '{value}'",
+    "<>": "{column} <> '{value}'",
+    "<": "{column} < '{value}'",
+    ">": "{column} > '{value}'",
+    "<=": "{column} <= '{value}'",
+    ">=": "{column} >= '{value}'",
+    "in": "{column} in ({value})",
+    "not_in": "{column} not in ({value})",
+    "is_null": "{column} is null",
+    "is_not_null": "{column} is not null",
+    "between": "{column} between {value} ",
+    "not_between": "{column} not between {value} ",
+    "contains": "{column} like '%{value}%'",
+    "not_contains": "{column} not like '%{value}%'",
+    "has_prefix": "{column} like '{value}%'",
+    "has_suffix": "{column} like '%{value}'",
+    "sql": "{value}",
+}
+var filter_condition_option_list = [
+    `<option value="=" sql-str="{column} = '{value}'">=</option>`,
+    `<option value="<>" sql-str="{column} <> '{value}'"><></option>`,
+    `<option value="<" sql-str="{column} < '{value}'"><</option>`,
+    `<option value=">" sql-str="{column} > '{value}'">></option>`,
+    `<option value="<=" sql-str="{column} <= '{value}'"><=</option>`,
+    `<option value=">=" sql-str="{column} >= '{value}'">>=</option>`,
+    `<option value="in" sql-str="{column} in ({value})" tips="1,2,3">IN</option>`,
+    `<option value="not_in" sql-str="{column} not in ({value})" tips="1,2,3">NOT IN</option>`,
+    `<option value="is_null" sql-str="{column} is null">IS NULL</option>`,
+    `<option value="is_not_null" sql-str="{column} is not null">IS NOT NULL</option>`,
+    `<option value="between" sql-str="{column} between {value} " tips="1 AND 3">BETWEEN</option>`,
+    `<option value="not_between" sql-str="{column} not between {value} " tips="1 AND 3">NOT BETWEEN</option>`,
+    `<option value="contains" sql-str="{column} like '%{value}%'">Contains</option>`,
+    `<option value="not_contains" sql-str="{column} not like '%{value}%'">Not contains</option>`,
+    `<option value="has_prefix" sql-str="{column} like '{value}%'">Has prefix</option>`,
+    `<option value="has_suffix" sql-str="{column} like '%{value}'">Has suffix</option>`,
+    `<option value="sql" >SQL</option>`,
+]
+var filter_columns_option_list = []
+
 function inittabledata() {
+    close_table_filter()
+
+    var columnsxt = $('#columnsxt')
+    columnsxt.empty()
+    for (var index in filter_condition_option_list) {
+        var filter_option = $(filter_condition_option_list[index])
+        columnsxt.append(filter_option)
+    }
+
     var conn_name = GetMaoQueryString('conn_name')
     var database = GetMaoQueryString('database')
     var table = GetMaoQueryString('table')
     var table_columns = getLocalStorage(localStorageName.tableColumns + conn_name + ":" + database + ":" + table);
+    if (table_columns == null) {
+        window.location.hash = `#tables?conn_name=${conn_name}&database=${database}`;
+    }
 
     $('#zdycolumnsyablename').html(`表名：${table}`)
 
     var zdycolumnswindowcontext = $("#zdycolumnswindowcontext")
     zdycolumnswindowcontext.empty()
+    filter_columns_option_list = []
     for (var d in table_columns.mysql_table_columns) {
         var column_name = table_columns.mysql_table_columns[d]['Field']
         zdycolumnswindowcontext.append(`<div><input type="checkbox" class="zdycolumns" id="zdycolumns${column_name}" checked> <label for="zdycolumns${column_name}">${column_name}</label> </div>`)
+        filter_columns_option_list.push(`<option value="${column_name}">${column_name}</option>`)
     }
     getTableData();
     $("#tabledata").slideDown(gddhms);
+}
+
+function close_table_filter(source) {
+    table_filter_box_open = false
+    $('#tablefiltertipboxtip').css({'display': 'none'})
+    if (source == 'btn') {
+        closefloatmain("#tablefilterbox")
+        getTableData();
+    }
+}
+
+function open_table_filter(source) {
+    table_filter_box_open = true
+    $('#tablefiltertipboxtip').css({'display': ''})
+    if (source == 'btn') {
+        closefloatmain("#tablefilterbox")
+        getTableData();
+    }
 }
 
 function columnsx_set(val) {
@@ -29,8 +102,159 @@ function columnsx_init(that) {
     $('#columnsx')[0].focus()
 }
 
+function get_init_table_filter() {
+
+    return {
+        'checked': true,
+        'name': new Date().getTime() + "|" + Math.random(),
+        'condition': 'contains',
+        'column': $(filter_columns_option_list[0]).val(),
+        'value': '',
+    }
+}
+
+function tablefiltercontextboxaddbtn(filter_data_name) {
+    var table_filter = get_init_table_filter()
+    var conn_name = GetMaoQueryString('conn_name')
+    var database = GetMaoQueryString('database')
+    var table = GetMaoQueryString('table')
+    setLocalStorage(localStorageName.tablefilterinfo + conn_name + ":" + database + ":" + table + ':' + table_filter.name, table_filter);
+    $('#tablefiltercontextbox').find(`.filter_box[data-name='${filter_data_name}']`).after(tablefiltercontextboxadd(table_filter))
+    var table_filters = getLocalStorage(localStorageName.tablefilter + conn_name + ":" + database + ":" + table, true, []);
+    var new_table_filters = []
+    for (var index in table_filters) {
+        var xx = table_filters[index]
+        new_table_filters.push(xx)
+        console.log(xx, filter_data_name)
+        if (xx == filter_data_name) {
+            new_table_filters.push(table_filter.name)
+        }
+    }
+    setLocalStorage(localStorageName.tablefilter + conn_name + ":" + database + ":" + table, new_table_filters);
+}
+
+function tablefiltercontextboxdeletebtn(filter_data_name) {
+    var filter_box = $('#tablefiltercontextbox').find('.filter_box')
+    if (filter_box.length > 1) {
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
+        delLocalStorage(localStorageName.tablefilterinfo + conn_name + ":" + database + ":" + table + ':' + filter_data_name);
+        var table_filters = getLocalStorage(localStorageName.tablefilter + conn_name + ":" + database + ":" + table, true, []);
+        var new_table_filters = []
+        for (var index in table_filters) {
+            var xx = table_filters[index]
+
+            if (xx != filter_data_name) {
+                new_table_filters.push(xx)
+            }
+        }
+        setLocalStorage(localStorageName.tablefilter + conn_name + ":" + database + ":" + table, new_table_filters);
+        $('#tablefiltercontextbox').find(`[data-name='${filter_data_name}']`).remove()
+    }
+}
+
+function tablefiltercontextboxadd(table_filter) {
+    var checkbox = $(`<input type="checkbox" data-name="${table_filter.name}" class="filter_checkbox" ${table_filter.checked ? 'checked' : ''}>`)
+
+    var filter_column_select = $(`<select data-name="${table_filter.name}" class="filter_column"></select>`)
+    for (var index in filter_columns_option_list) {
+        var filter_columns_option = $(filter_columns_option_list[index])
+        filter_column_select.append(filter_columns_option)
+    }
+
+    if (table_filter.column) {
+        filter_column_select.val(table_filter.column)
+    }
+
+    var filter_condition_select = $(`<select data-name="${table_filter.name}" class="filter_condition"></select>`)
+    for (var index2 in filter_condition_option_list) {
+        var filter_option = $(filter_condition_option_list[index2])
+        filter_condition_select.append(filter_option)
+    }
+    filter_condition_select.val(table_filter.condition)
+
+
+    var input = $(`<input type="text" class="filter_value"  data-name="${table_filter.name}" value="${table_filter.value || ''}"/>`)
+
+    var bpxl1 = $(`<div class="filter_line1"></div>`)
+    bpxl1.append(checkbox)
+    bpxl1.append(filter_column_select)
+    bpxl1.append(filter_condition_select)
+    bpxl1.append($(`<div class="filter_add"  onclick="tablefiltercontextboxaddbtn('${table_filter.name}')">+</div>`))
+    bpxl1.append($(`<div class="filter_delete"   onclick="tablefiltercontextboxdeletebtn('${table_filter.name}')">-</div>`))
+
+    var bpxl2 = $(`<div  class="filter_line2"></div>`)
+    bpxl2.append(input)
+    var bpx = $(`<div class="filter_box" data-name="${table_filter.name}"></div>`)
+    bpx.append(bpxl1)
+    bpx.append(bpxl2)
+    return bpx
+}
+
+function change_table_filter_info(that, v) {
+    var data_name = $(that).attr('data-name')
+    console.log(data_name)
+    if (data_name) {
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
+        var table_filter = getLocalStorage(localStorageName.tablefilterinfo + conn_name + ":" + database + ":" + table + ':' + data_name);
+        if (table_filter) {
+            for (var iii in v) {
+                table_filter[iii] = v[iii]
+            }
+            setLocalStorage(localStorageName.tablefilterinfo + conn_name + ":" + database + ":" + table + ':' + data_name, table_filter);
+        }
+    }
+}
+
 $(function () {
-    $("#zshow_one_data_input").on("input propertychange", function () {
+    $("#tablefiltertipbox").click(function () {
+        var tablefiltercontextbox = $('#tablefiltercontextbox')
+        tablefiltercontextbox.empty()
+        var conn_name = GetMaoQueryString('conn_name')
+        var database = GetMaoQueryString('database')
+        var table = GetMaoQueryString('table')
+        var table_filters = getLocalStorage(localStorageName.tablefilter + conn_name + ":" + database + ":" + table, true, []);
+        if (table_filters.length == 0) {
+            var table_filter = get_init_table_filter()
+            setLocalStorage(localStorageName.tablefilterinfo + conn_name + ":" + database + ":" + table + ':' + table_filter.name, table_filter);
+            table_filters.push(table_filter.name)
+            setLocalStorage(localStorageName.tablefilter + conn_name + ":" + database + ":" + table, table_filters);
+        }
+        for (var index in table_filters) {
+            var table_filter_name = table_filters[index]
+            var table_filter = getLocalStorage(localStorageName.tablefilterinfo + conn_name + ":" + database + ":" + table + ':' + table_filter_name, table_filters);
+            if (table_filter) {
+                tablefiltercontextbox.append(tablefiltercontextboxadd(table_filter))
+            }
+        }
+
+        openfloatmain("#tablefilterbox")
+
+    })
+    $("#tablefiltercontextbox").delegate(".filter_checkbox", "click", function () {
+        change_table_filter_info(this, {
+            'checked': $(this).is(':checked'),
+        })
+    })
+    $("#tablefiltercontextbox").delegate(".filter_column", "change", function () {
+        change_table_filter_info(this, {
+            'column': $(this).val(),
+        })
+    })
+    $("#tablefiltercontextbox").delegate(".filter_condition", "change", function () {
+        change_table_filter_info(this, {
+            'condition': $(this).val(),
+        })
+    })
+    $("#tablefiltercontextbox").delegate(".filter_value", "input propertychange", function () {
+        change_table_filter_info(this, {
+            'value': $(this).val()
+        })
+    })
+    $("#zshow_one_data_input").on(". propertychange", function () {
         var aaa = $(this).val()
         var tablesList = $('.show_one_data_field_box')
         for (var index in tablesList) {
@@ -101,7 +325,6 @@ $(function () {
         closefloatmain("#columnswindow");
         var columnsxt = $("#columnsxt")
         var input_type = columnsxt.val()
-        var where_val = columnsxt.find("option:selected").attr('sql-str').replace('{column}', columnname).replace('{value}', x)
         var querywhereobj = getLocalStorage(localStorageName.querywhereobj + conn_name + ":" + database + ":" + table);
         var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
             'data_num': 15,
@@ -110,7 +333,6 @@ $(function () {
         querywhereobj[columnname] = {
             'input_val': x,
             'input_type': input_type,
-            'where_val': where_val,
         };
         table_data_page.data_page = 1;
         setLocalStorage(localStorageName.querywhereobj + conn_name + ":" + database + ":" + table, querywhereobj)
@@ -319,6 +541,22 @@ function getTableData() {
         'data_num': 15,
         'data_page': 1,
     });
+    var table_filter_group = {}
+    if (table_filter_box_open) {
+        var table_filters = getLocalStorage(localStorageName.tablefilter + conn_name + ":" + database + ":" + table, true, []);
+        for (var iiii in table_filters) {
+            var table_filter_name = table_filters[iiii]
+            var table_filter = getLocalStorage(localStorageName.tablefilterinfo + conn_name + ":" + database + ":" + table + ':' + table_filter_name);
+            if (table_filter.checked) {
+                var table_filter_sql_list = table_filter_group[table_filter.column]
+                if (table_filter_sql_list == null) {
+                    table_filter_sql_list = []
+                    table_filter_group[table_filter.column] = table_filter_sql_list
+                }
+                table_filter_sql_list.push(table_filter)
+            }
+        }
+    }
     $("#pagenum").val(table_data_page.data_num)
 
     var mysql_column = []
@@ -326,6 +564,16 @@ function getTableData() {
     var query_orderby = [];
     for (var d in table_columns.mysql_table_columns) {
         var column_name = table_columns.mysql_table_columns[d]['Field']
+
+        var tqwobj = table_filter_group[column_name]
+        if (tqwobj) {
+            for (var xxx in tqwobj) {
+                var table_filter = tqwobj[xxx]
+                var where_val = filter_condition_sql_str[table_filter.condition].replace('{column}', `\`${table_filter.column}\``).replace('{value}', table_filter.value)
+                query_where.push(` and ${where_val} `)
+            }
+        }
+
         if (!$(`#zdycolumns${column_name}`).is(':checked')) {
             continue
         }
@@ -338,8 +586,10 @@ function getTableData() {
 
         var qwobj = querywhereobj[column_name]
         if (qwobj) {
-            query_where.push(` and ${qwobj.where_val} `)
+            var where_val = filter_condition_sql_str[qwobj.input_type].replace('{column}', `\`${column_name}\``).replace('{value}', qwobj.input_val)
+            query_where.push(` and ${where_val} `)
         }
+
         var qoby = oderbyobj[column_name]
         if (qoby) {
             query_orderby.push(` ${qoby} `)
