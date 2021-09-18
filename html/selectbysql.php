@@ -37,7 +37,7 @@
         <table width="100%">
             <tr>
                 <td><a class="btn" href="javascript:getTableData2()" id="getTableDatazdy">执行sql</a></td>
-                <td><a class="btn" href="javascript:void(0)" id="getTableDatazdy">保存</a></td>
+                <td width="30%"><a class="btn" style="overflow: hidden" href="javascript:saveZdySql()" id="saveZdySqlBtn">保存</a></td>
             </tr>
         </table>
 

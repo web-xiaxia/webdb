@@ -367,16 +367,19 @@ function opensqllistboxwindow() {
 
         var sqllistcontexttitle = $(`<label class="sqllistcontexttitle"></label>`)
         sqllistcontexttitle.text(getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + zdysqlsave, false, ''))
-        var sqllistcontextbtnbox = $(`<div class="sqllistcontextbtnbox"><a class="sqllistcontextbtn" href="#">重命名</a><a class="sqllistcontextbtn" href="#">删除</a></div>`)
+        var sqllistcontextbtnbox = $(`<div class="sqllistcontextbtnbox">
+                    <a class="sqllistcontextbtn" href="javascript:changesavesqlname('${zdysqlsave}')">重命名</a>
+                    <a class="sqllistcontextbtn" href="javascript:deletesavesql('${zdysqlsave}')">删除</a>
+        </div>`)
         var sqllistcontexttitlebox = $(`<div class="sqllistcontexttitlebox"></div>`)
         sqllistcontexttitlebox.append(sqllistcontexttitle)
         sqllistcontexttitlebox.append(sqllistcontextbtnbox)
 
 
         var sqllistcontextsql = $(`<div class="sqllistcontextsql"></div>`)
-        sqllistcontextsql.text(getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' +zdysqlsave, false, ''))
+        sqllistcontextsql.text(getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + zdysqlsave, false, ''))
 
-        var sqllistcontextbox = $(`<div class="sqllistcontextbox"></div>`)
+        var sqllistcontextbox = $(`<div class="sqllistcontextbox" onclick="selectlistsql('${zdysqlsave}',true)"></div>`)
         sqllistcontextbox.append(sqllistcontexttitlebox)
         sqllistcontextbox.append(sqllistcontextsql)
         sqllistcontextboxlist.append(sqllistcontextbox)
@@ -385,12 +388,81 @@ function opensqllistboxwindow() {
     openfloatmain('#sqllistbox_window')
 }
 
-function addSqlList() {
-    nowSqlName = new Date().getTime() + ""
-    setLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, nowSqlName, false)
+function changesavesqlname(clickzdysqlsave) {
+    var oldzdysqlsavename = getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + clickzdysqlsave, false)
+    var zdysqlsavename = prompt("请输入名称", oldzdysqlsavename)
+    if (zdysqlsavename) {
+        setLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + clickzdysqlsave, zdysqlsavename, false)
+        opensqllistboxwindow()
+    }
+}
+
+function deletesavesql(clickzdysqlsave) {
+    var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
+    var newzdysqlsavelist = []
+    for (var index in zdysqlsavelist) {
+        var zdysqlsave = zdysqlsavelist[index]
+        if (zdysqlsave != clickzdysqlsave) {
+            newzdysqlsavelist.push(zdysqlsave)
+        }
+    }
+    delLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + clickzdysqlsave)
+    setLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, newzdysqlsavelist)
+
+
+    var candelete = true
     var zdysqllist = getLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, true, [])
-    zdysqllist.push(nowSqlName)
-    setLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, zdysqllist)
+    for (var index in zdysqllist) {
+        var zdysql = zdysqllist[index]
+        if (zdysql == clickzdysqlsave) {
+            candelete = false
+        }
+    }
+    if (candelete) {
+        delLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + clickzdysqlsave)
+    }
+    opensqllistboxwindow()
+}
+
+function saveZdySql() {
+    var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
+    for (var index in zdysqlsavelist) {
+        var zdysqlsave = zdysqlsavelist[index]
+        if (zdysqlsave == nowSqlName) {
+            var zdysqlsavename = getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + nowSqlName, false)
+            alert(`已保存名称：${zdysqlsavename}`)
+            return
+        }
+    }
+    var zdysqlsavename = prompt("请输入名称")
+    if (!zdysqlsavename) {
+        alert("无效的名称，保存失败")
+        return;
+    }
+    setLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + nowSqlName, zdysqlsavename, false)
+    zdysqlsavelist.push(nowSqlName)
+    setLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, zdysqlsavelist)
+    $("#saveZdySqlBtn").text(`已保存`)
+}
+
+function addSqlListbySqlName(sqlName) {
+    nowSqlName = sqlName
+    setLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, nowSqlName, false)
+    var canupdate = true
+    var zdysqllist = getLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, true, [])
+    for (var iii in zdysqllist) {
+        if (zdysqllist[iii] == sqlName) {
+            canupdate = false
+        }
+    }
+    if (canupdate) {
+        zdysqllist.push(nowSqlName)
+        setLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, zdysqllist)
+    }
+}
+
+function addSqlList() {
+    addSqlListbySqlName(new Date().getTime() + "")
     sqlListBoxInit()
 }
 
@@ -405,11 +477,50 @@ function deleteSqlList() {
         }
     }
     setLocalStorage(localStorageName.zdysqllist + sql_conn_name + ':' + sql_database, newZdysqllist)
-    delLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName)
+
+    var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
+    var candelete = true
+    for (var index in zdysqlsavelist) {
+        var zdysqlsave = zdysqlsavelist[index]
+        if (zdysqlsave == nowSqlName) {
+            candelete = false
+        }
+    }
+    if (candelete) {
+        delLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName)
+    }
     nowSqlName = newZdysqllist[0]
     setLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, nowSqlName, false)
     sqlListBoxInit()
 }
+
+function changeSaveBtnText() {
+    $("#saveZdySqlBtn").text('保存')
+    var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
+    for (var index in zdysqlsavelist) {
+        var zdysqlsave = zdysqlsavelist[index]
+        if (zdysqlsave == nowSqlName) {
+            $("#saveZdySqlBtn").text(`已保存`)
+            break
+        }
+    }
+}
+
+function selectlistsql(nowInSqlName, save) {
+    if (save) {
+        addSqlListbySqlName(nowInSqlName)
+    }
+    nowSqlName = nowInSqlName
+    setLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, nowSqlName, false)
+    $("#zdysql").val(getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, false, ''));
+    changeSaveBtnText()
+
+    $("#sqllistitembox").find('.sqllistitem').removeClass("sqllistitemact");
+    $("#sqllistitembox").find(`.sqllistitem[sql-name="${nowInSqlName}"]`).addClass("sqllistitemact");
+
+    closefloatmain("#sqllistbox_window")
+}
+
 
 function sqlListBoxInit() {
     var sqllistbox = $("#sqllistitembox")
@@ -420,6 +531,8 @@ function sqlListBoxInit() {
     }
     $("#sqllistdelete").css({'display': zdysqllist.length > 1 ? '' : 'none'})
     $("#zdysql").val(getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, false, ''));
+
+    changeSaveBtnText()
 }
 
 $(function () {
@@ -475,9 +588,8 @@ $(function () {
         $("#sqllistitembox").find('.sqllistitem').removeClass("sqllistitemact");
         var that = $(this)
         that.addClass("sqllistitemact");
-        nowSqlName = that.attr('sql-name')
-        setLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, nowSqlName, false)
-        $("#zdysql").val(getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, false, ''));
+        var xnowSqlName = that.attr('sql-name')
+        selectlistsql(xnowSqlName, false)
     })
 
     $("#tablediv2").scroll(function () {
