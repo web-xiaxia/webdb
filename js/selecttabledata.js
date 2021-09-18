@@ -664,6 +664,7 @@ function getTableData() {
 
     $("#tabledatashowthead").empty();
     $("#tabledatashowtbody").empty();
+    $("#page-other-sql").text('无')
     $.ajax({
         url: "/webdb/php/getTableData.php",
         type: "post",
