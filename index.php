@@ -12,6 +12,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta property="qc:admins" content="2450036450146316110063757" />
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Mysql">
     <link rel="icon" href="/webdb/favicon.ico">
