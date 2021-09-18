@@ -112,17 +112,18 @@ input[type="checkbox"] {
     max-height: 800px;
     z-index: 1501;
     margin: 0 auto;
-    border: 2px solid #387ef5;
-    padding:35px 0 0;
+    border: 3px solid #387ef5;
+    padding: 33px 0 0;
     overflow: hidden;
     box-sizing: border-box;
     -moz-box-sizing: border-box; /* Firefox */
     -webkit-box-sizing: border-box; /* Safari */
 }
 
-.float .title{
-    margin: -35px 0 0;
+.float .title {
+    margin: -33px 0 0;
 }
+
 .float .title .content {
     color: white;
 }
@@ -140,13 +141,25 @@ input[type="checkbox"] {
     text-decoration: none;
 }
 
+.float .contentbox {
+    padding: 5px;
+    height: 100%;
+    width: 100%;
+    border-radius: 7px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+}
+
 .float .content {
-    padding: 0 5px;
     -webkit-overflow-scrolling: touch;
     word-break: break-all;
     overflow-x: hidden;
     overflow-y: scroll;
     height: 100%;
+    width: 100%;
     box-sizing: border-box;
     -moz-box-sizing: border-box; /* Firefox */
     -webkit-box-sizing: border-box; /* Safari */

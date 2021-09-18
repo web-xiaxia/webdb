@@ -1,8 +1,10 @@
 <div id="tabledata2" style="display: none">
     <div id="sqllistbox">
         <div id="sqllistbtnbox">
-            <div id="sqllistadd" class="sqllistitem sqllistitembtn" onclick="addSqlList()" >+</div>
-            <div id="sqllistdelete" style="display: none" class="sqllistitem sqllistitembtn" onclick="deleteSqlList()" >-</div>
+            <div id="sqllistadd" class="sqllistitem sqllistitembtn" onclick="addSqlList()">+</div>
+            <div id="sqllistdelete" style="display: none" class="sqllistitem sqllistitembtn" onclick="deleteSqlList()">
+                -
+            </div>
         </div>
         <div id="sqllistitembox"></div>
     </div>
@@ -93,11 +95,14 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">插入函数</span><a class="close" href="javascript:void(0)">X</a></div>
-        <div class="content">
-            <ul class="kjlb" id="hanshufunlist">
+        <div class="contentbox">
+            <div class="content">
+                <ul class="kjlb" id="hanshufunlist">
 
-            </ul>
+                </ul>
+            </div>
         </div>
+
     </div>
 </div>
 <div class="floatmain" id="tablenamelist" style="display: none;">
@@ -105,15 +110,16 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">插入表名</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="contentbox">
+            <div class="content">
+                <div style="position: sticky; top:0px; background: white;padding:  5px 0; ">
+                    <input type="text" id="tablenamelistul_input" class="btn"
+                           style="width: 80%; margin: 0 auto; background: white; color: black;"/>
+                </div>
+                <ul class="kjlb" id="tablenamelistul">
 
-        <div class="content">
-            <div style="position: sticky; top:0px; background: white;padding:  5px 0 ">
-                <input type="text" id="tablenamelistul_input" class="btn"
-                       style="width: 80%; margin: 0 auto; background: white; color: black;"/>
+                </ul>
             </div>
-            <ul class="kjlb" id="tablenamelistul">
-
-            </ul>
         </div>
     </div>
 </div>
@@ -122,14 +128,16 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">选择表</span><a class="close" href="javascript:void(0)">X</a></div>
-        <div class="content">
-            <div style="position: sticky; top:0px; background: white;padding:  5px 0 ">
-                <input type="text" id="tablenamelistul2_input" class="btn"
-                       style=" width: 80%; margin: 0 auto; background: white; color: black;"/>
-            </div>
-            <ul class="kjlb2" id="tablenamelistul2">
+        <div class="contentbox">
+            <div class="content">
+                <div style="position: sticky; top:0px; background: white;padding:  5px 0;">
+                    <input type="text" id="tablenamelistul2_input" class="btn"
+                           style=" width: 80%; margin: 0 auto; background: white; color: black;"/>
+                </div>
+                <ul class="kjlb2" id="tablenamelistul2">
 
-            </ul>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -138,15 +146,16 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">插入列名</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="contentbox">
+            <div class="content">
+                <div style="position: sticky; top:0px; background: white;padding:  5px 0;">
+                    <input type="text" id="tablencoumnsul_input" class="btn"
+                           style="width: 80%; margin: 0 auto; background: white; color: black;"/>
+                </div>
+                <ul class="kjlb" id="tablencoumnsul">
 
-        <div class="content">
-            <div style="position: sticky; top:0px; background: white;padding:  5px 0 ">
-                <input type="text" id="tablencoumnsul_input" class="btn"
-                       style="width: 80%; margin: 0 auto; background: white; color: black;"/>
+                </ul>
             </div>
-            <ul class="kjlb" id="tablencoumnsul">
-
-            </ul>
         </div>
     </div>
 </div>
@@ -155,8 +164,10 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">查询数据</span><a class="close" href="javascript:void(0)">X</a></div>
-        <div class="content">
-            <div id="sqlshowcolumnvalue" style="width: 98%"></div>
+        <div class="contentbox">
+            <div class="content">
+                <div id="sqlshowcolumnvalue" style="width: 98%"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -165,14 +176,15 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">数据</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="contentbox" style="background-color: #e7e7e7;padding: 0;">
+            <div class="content">
+                <div style="position: sticky; top:0px; background: white;padding:  5px 0;">
+                    <input type="text" id="sqlzshow_one_data_input" class="btn"
+                           style=" width: 80%; margin: 0 auto; background: white; color: black; text-align: left"/>
+                </div>
+                <div id="sqlzshow_one_data_windowcontext">
 
-        <div class="content" style="background-color: #e7e7e7;">
-            <div style="position: sticky; top:0px; background: white;padding:  5px 0 ">
-                <input type="text" id="sqlzshow_one_data_input" class="btn"
-                       style=" width: 80%; margin: 0 auto; background: white; color: black; text-align: left"/>
-            </div>
-            <div id="sqlzshow_one_data_windowcontext">
-
+                </div>
             </div>
         </div>
     </div>

@@ -44,10 +44,12 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">修改数据</span><a class="close" href="javascript:void(0)">X</a></div>
-        <div class="content">
-            <div id="updatecolumnname"></div>
-            <textarea id="updatevalue" style="width: 98%" rows="10"></textarea>
-            <a id="unpdatebtn" class="btn" href="javascript:void(0)">修改</a>
+        <div class="contentbox">
+            <div class="content">
+                <div style="padding: 5px">列名：<label id="updatecolumnname"></label></div>
+                <textarea id="updatevalue" style="width: 98%" rows="10"></textarea>
+                <a id="unpdatebtn" class="btn" href="javascript:void(0)">修改</a>
+            </div>
         </div>
     </div>
 </div>
@@ -56,17 +58,19 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">选择显示列</span><a class="close" href="javascript:void(0)">X</a></div>
-        <div class="content">
-            <div style="position: sticky; top:0px; background: white;">
-                <div id="zdycolumnsyablename"></div>
-                <a class="btn" href="javascript:$('.zdycolumns').prop('checked',true)">全选</a>
-                <a class="btn" href="javascript:$('.zdycolumns').prop('checked',false)">全部取消</a>
-            </div>
-            <div id="zdycolumnswindowcontext">
+        <div class="contentbox">
+            <div class="content">
+                <div style="position: sticky; top:0px; background: white;">
+                    <div id="zdycolumnsyablename"></div>
+                    <a class="btn" href="javascript:$('.zdycolumns').prop('checked',true)">全选</a>
+                    <a class="btn" href="javascript:$('.zdycolumns').prop('checked',false)">全部取消</a>
+                </div>
+                <div id="zdycolumnswindowcontext">
 
-            </div>
-            <div style="position: sticky;bottom: 0px; background: white;">
-                <a class="btn" href="javascript:void(0)" onclick="zdycolumnsok()">刷新数据</a>
+                </div>
+                <div style="position: sticky;bottom: 0px; background: white;">
+                    <a class="btn" href="javascript:void(0)" onclick="zdycolumnsok()">刷新数据</a>
+                </div>
             </div>
         </div>
     </div>
@@ -77,14 +81,15 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">数据</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="contentbox" style="background-color: #e7e7e7;padding: 0;">
+            <div class="content" >
+                <div style="position: sticky; top:0px; background: white;padding:  5px 0 ;">
+                    <input type="text" id="zshow_one_data_input" class="btn"
+                           style=" background: white;  width: 80%; margin: 0px auto ;  color: black; text-align: left"/>
+                </div>
+                <div id="zshow_one_data_windowcontext">
 
-        <div class="content" style="background-color: #e7e7e7;">
-            <div style="position: sticky; top:0px; background: white;padding:  5px 0 ">
-                <input type="text" id="zshow_one_data_input" class="btn"
-                       style=" background: white;  width: 80%; margin: 0px auto ;  color: black; text-align: left"/>
-            </div>
-            <div id="zshow_one_data_windowcontext">
-
+                </div>
             </div>
         </div>
     </div>
@@ -95,18 +100,19 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">更多</span><a class="close" href="javascript:void(0)">X</a></div>
-
-        <div class="content" style="background-color: #e7e7e7;">
-            <div class="page-other-item-box">
-                <div class="page-other-item-title">
-                    总条数：<a id="page-other-count-btn" href="javascript:getTableDataCount()">刷新</a>
+        <div class="contentbox" style="background-color: #e7e7e7;">
+            <div class="content" style="padding:0 5px;">
+                <div class="page-other-item-box">
+                    <div class="page-other-item-title">
+                        总条数：<a id="page-other-count-btn" href="javascript:getTableDataCount()">刷新</a>
+                    </div>
+                    <div id="page-other-count" class="page-other-item-context">无</div>
                 </div>
-                <div id="page-other-count" class="page-other-item-context">无</div>
-            </div>
-            <div class="page-other-item-box">
-                <div class="page-other-item-title">sql：</div>
-                <div id="page-other-sql" class="page-other-item-context">
-                    无
+                <div class="page-other-item-box">
+                    <div class="page-other-item-title">sql：</div>
+                    <div id="page-other-sql" class="page-other-item-context">
+                        无
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,54 +123,59 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">列操作</span><a class="close" href="javascript:void(0)">X</a></div>
-        <div class="content">
-            列名：<span id="columnname">121212</span>
-            <a class="btn" href="javascript:void(0)" id="delorder">删除排序</a>
-            <a class="btn" href="javascript:void(0)" id="escorder">顺序</a>
-            <a class="btn" href="javascript:void(0)" id="descorder">倒序</a>
-            <hr color="#387EF5">
-            <select id="columnsxt">
+        <div class="contentbox">
+            <div class="content">
+                列名：<span id="columnname">121212</span>
+                <a class="btn" href="javascript:void(0)" id="delorder">删除排序</a>
+                <a class="btn" href="javascript:void(0)" id="escorder">顺序</a>
+                <a class="btn" href="javascript:void(0)" id="descorder">倒序</a>
+                <hr color="#387EF5">
+                <select id="columnsxt">
 
-            </select>
-            <a class="btn" style="width: auto;display: inline-block; min-width: 30px; height: 10px; line-height: 10px;"
-               href="javascript:columnsx_set('=')">=</a>
-            <a class="btn" style="width: auto;display: inline-block; min-width: 30px; height: 10px; line-height: 10px;"
-               href="javascript:columnsx_set('in')">in</a>
-            <a class="btn" style="width: auto;display: inline-block; min-width: 30px;  height: 10px;line-height: 10px;"
-               href="javascript:columnsx_set('contains')">Contains</a>
-            <input id="columnsx" style="width: 98%">
-            <a class="btn" href="javascript:void(0)" id="datawhere">筛选</a>
-            <a class="btn" href="javascript:void(0)" id="datawheredel">删除筛选</a>
-            <ul class="kjlb3">
-                <li data=" and">and</li>
-                <li data=" or">or</li>
-                <li data=" is">is</li>
-                <li data=" not">not</li>
-                <li data=" null">null</li>
-                <li data=" in">in</li>
-            </ul>
-            <ul class="kjlb3">
-                <li data=",">,</li>
-                <li data=".">.</li>
-                <li data="'">'</li>
-                <li data="-">-</li>
-                <li data="/">/</li>
-                <li data=" (">(</li>
-                <li data=") ">)</li>
-                <li data=";">;</li>
-            </ul>
-            <ul class="kjlb3">
-                <li data=" > ">></li>
-                <li data=" < "><</li>
-                <li data=" = ">=</li>
-                <li data=" like ">like</li>
-                <li data="%">%</li>
-            </ul>
-            <ul class="kjlb3">
-                <li data=" DATE_FORMAT('','%Y-%m-%d %H:%s:%i') ">DATE_FORMAT</li>
-                <li data=" NOW() ">NOW</li>
-                <li data=" CONCAT(">CONCAT</li>
-            </ul>
+                </select>
+                <a class="btn"
+                   style="width: auto;display: inline-block; min-width: 30px; height: 10px; line-height: 10px;"
+                   href="javascript:columnsx_set('=')">=</a>
+                <a class="btn"
+                   style="width: auto;display: inline-block; min-width: 30px; height: 10px; line-height: 10px;"
+                   href="javascript:columnsx_set('in')">in</a>
+                <a class="btn"
+                   style="width: auto;display: inline-block; min-width: 30px;  height: 10px;line-height: 10px;"
+                   href="javascript:columnsx_set('contains')">Contains</a>
+                <input id="columnsx" style="width: 100%;height:30px; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;">
+                <a class="btn" href="javascript:void(0)" id="datawhere">筛选</a>
+                <a class="btn" href="javascript:void(0)" id="datawheredel">删除筛选</a>
+                <ul class="kjlb3">
+                    <li data=" and">and</li>
+                    <li data=" or">or</li>
+                    <li data=" is">is</li>
+                    <li data=" not">not</li>
+                    <li data=" null">null</li>
+                    <li data=" in">in</li>
+                </ul>
+                <ul class="kjlb3">
+                    <li data=",">,</li>
+                    <li data=".">.</li>
+                    <li data="'">'</li>
+                    <li data="-">-</li>
+                    <li data="/">/</li>
+                    <li data=" (">(</li>
+                    <li data=") ">)</li>
+                    <li data=";">;</li>
+                </ul>
+                <ul class="kjlb3">
+                    <li data=" > ">></li>
+                    <li data=" < "><</li>
+                    <li data=" = ">=</li>
+                    <li data=" like ">like</li>
+                    <li data="%">%</li>
+                </ul>
+                <ul class="kjlb3">
+                    <li data=" DATE_FORMAT('','%Y-%m-%d %H:%s:%i') ">DATE_FORMAT</li>
+                    <li data=" NOW() ">NOW</li>
+                    <li data=" CONCAT(">CONCAT</li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -175,16 +186,17 @@
     </div>
     <div class="float">
         <div class="title"><span class="content">过滤</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="contentbox">
+            <div class="content">
+                <div id="tablefiltercontextbox">
 
-        <div class="content">
-            <div id="tablefiltercontextbox">
-
-            </div>
-            <div style="position: sticky;bottom: 0px; background: white; text-align: center">
-                <a class="btn" style="display: inline-block;padding: 5px 15px;"
-                   href="javascript:open_table_filter('btn')">开启过滤</a>
-                <a class="btn" style="display: inline-block;padding: 5px 15px;"
-                   href="javascript:close_table_filter('btn')">关闭过滤</a>
+                </div>
+                <div style="position: sticky;bottom: 0px; background: white; text-align: center">
+                    <a class="btn" style="display: inline-block;padding: 5px 15px;"
+                       href="javascript:open_table_filter('btn')">开启过滤</a>
+                    <a class="btn" style="display: inline-block;padding: 5px 15px;"
+                       href="javascript:close_table_filter('btn')">关闭过滤</a>
+                </div>
             </div>
         </div>
     </div>

@@ -27,7 +27,7 @@
     margin-top: 5px
 }
 
-#zshow_one_data_windowcontext {
+#zshow_one_data_windowcontext,#sqlzshow_one_data_windowcontext{
     margin: 10px;
 }
 #page-other-window{
