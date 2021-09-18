@@ -12,11 +12,14 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta property="qc:admins" content="2450036450146316110063757" />
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mysql">
     <link rel="icon" href="/webdb/favicon.ico">
     <link rel="shortcut icon" sizes="192x192" href="/webdb/favicon.ico">
     <link rel="shortcut icon" sizes="128x128" href="/webdb/favicon.ico">
     <link rel="apple-touch-icon" sizes="128x128" href="/webdb/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/webdb/favicon.ico">
+    <link rel="manifest" href="/webdb/manifest.json">
     <title>mysql</title>
     <style type="text/css">
         <?php

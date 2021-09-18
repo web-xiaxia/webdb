@@ -1,0 +1,16 @@
+{
+  "orientation": "portrait",
+  "background_color": "",
+  "theme_color": "",
+  "description": "mysql",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "webdb/favicon.ico",
+      "sizes": "192x192"
+    }
+  ],
+  "name": "Mysql",
+  "short_name": "Mysql",
+  "start_url": "/webdb/"
+}
