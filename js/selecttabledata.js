@@ -267,7 +267,7 @@ $(function () {
             'value': $(this).val()
         })
     })
-    $("#zshow_one_data_input").on(". propertychange", function () {
+    $("#zshow_one_data_input").on("input propertychange", function () {
         var aaa = $(this).val()
         var tablesList = $('.show_one_data_field_box')
         for (var index in tablesList) {
