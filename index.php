@@ -11,6 +11,12 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta property="qc:admins" content="2450036450146316110063757" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" href="/webdb/favicon.ico">
+    <link rel="shortcut icon" sizes="192x192" href="/webdb/favicon.ico">
+    <link rel="shortcut icon" sizes="128x128" href="/webdb/favicon.ico">
+    <link rel="apple-touch-icon" sizes="128x128" href="/webdb/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/webdb/favicon.ico">
     <title>mysql</title>
     <style type="text/css">
         <?php

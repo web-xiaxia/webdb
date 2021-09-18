@@ -30,14 +30,14 @@ function nowurlfun(hashChangeEvent) {
     var hash = window.location.hash;
     if (hash == "") {
         hash = getLocalStorage(localStorageName.oldUrl, false)
-        if (hash){
+        if (hash) {
             window.location.hash = hash
         }
     }
     if (hash == null || hash == "") {
         hash = "#login";
     }
-    setLocalStorage(localStorageName.oldUrl, hash, false);
+    setLocalStorage(localStorageName.oldUrl, hash == "#login" ? "" : hash, false);
     if (hash.indexOf("?") != -1) {
         hash = hash.substr(0, hash.indexOf("?"))
     }
