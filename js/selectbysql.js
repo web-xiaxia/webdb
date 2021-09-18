@@ -36,9 +36,17 @@ var sqlTips = [
         "show_text": "SELECT",
         "insert_text": "SELECT ",
     }, {
+        "search_text": "*",
+        "show_text": "*",
+        "insert_text": " * ",
+    }, {
         "search_text": "from",
         "show_text": "FROM",
         "insert_text": "FROM ",
+    }, {
+        "search_text": "where",
+        "show_text": "WHERE",
+        "insert_text": "WHERE ",
     }, {
         "search_text": "update",
         "show_text": "UPDATE",
@@ -71,10 +79,6 @@ var sqlTips = [
         "search_text": "inner",
         "show_text": "INNER JOIN",
         "insert_text": "INNER JOIN ",
-    }, {
-        "search_text": "where",
-        "show_text": "WHERE",
-        "insert_text": "WHERE ",
     }, {
         "search_text": "is",
         "show_text": "IS NULL",

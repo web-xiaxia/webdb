@@ -31,7 +31,7 @@
     </div>
     <div id="zdysqlmain" style="text-align: center;">
         <div style="padding: 0 5px;box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box; ">
-            <textarea id="zdysql" rows="18"
+            <textarea id="zdysql" rows="10"
                       style="width: 100%;box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box;  border: 1px solid #387EF5; border-radius: 2px;"></textarea>
         </div>
         <table width="100%">
@@ -43,7 +43,7 @@
         </table>
 
 
-        <div style="text-align: left">
+        <div style="text-align: left;padding: 0 5px;">
             <ul class="kjlb">
                 <li data=",">,</li>
                 <li data=".">.</li>
