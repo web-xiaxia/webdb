@@ -548,8 +548,12 @@ function getTableData() {
         window.location.hash = `#tables?conn_name=${conn_name}&database=${database}`;
         return;
     }
+    var oderbyobjdef={}
+    if (table_columns.mysql_table_columns_id != null) {
+        oderbyobjdef[table_columns.mysql_table_columns_id]=` \`${table_columns.mysql_table_columns_id}\` desc `
+    }
     var querywhereobj = getLocalStorage(localStorageName.querywhereobj + conn_name + ":" + database + ":" + table, true, {});
-    var oderbyobj = getLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table, true, {});
+    var oderbyobj = getLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table, true, oderbyobjdef);
     var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
         'data_num': 15,
         'data_page': 1,
