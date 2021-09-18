@@ -23,6 +23,7 @@ function data_cli_update_data(id, columns, oldvalue) {
     updateobj.columns = columns;
     updateobj.oldvalue = oldvalue;
     $("#updatecolumn").slideDown(gddhms);
+    $("#updatecolumnname").text(columns);
     $("#updatevalue").val(updateobj.oldvalue);
 }
 

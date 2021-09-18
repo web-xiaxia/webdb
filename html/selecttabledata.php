@@ -45,6 +45,7 @@
     <div class="float">
         <div class="title"><span class="content">修改数据</span><a class="close" href="javascript:void(0)">X</a></div>
         <div class="content">
+            <div id="updatecolumnname"></div>
             <textarea id="updatevalue" style="width: 98%" rows="10"></textarea>
             <a id="unpdatebtn" class="btn" href="javascript:void(0)">修改</a>
         </div>
