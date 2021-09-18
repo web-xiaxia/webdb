@@ -58,39 +58,39 @@
                 <li data=" > ">></li>
                 <li data=" < "><</li>
                 <li data=" = ">=</li>
-                <li data=" like ">like</li>
+                <li data=" LIKE ">LIKE</li>
                 <li data="%">%</li>
                 <li data=" (">(</li>
                 <li data=") ">)</li>
             </ul>
             <ul class="kjlb">
-                <li data=" select ">select</li>
+                <li data=" SELECT ">SELECT</li>
                 <li data=" * ">*</li>
-                <li data=" from ">from</li>
-                <li data=" update ">update</li>
-                <li data=" set ">set</li>
-                <li data=" insert into ">insert into</li>
-                <li data=" values ">values</li>
-                <li data=" delete ">delete</li>
+                <li data=" FROM ">FROM</li>
+                <li data=" UPDATE ">UPDATE</li>
+                <li data=" SET ">SET</li>
+                <li data=" INSERT INTO ">INSERT INTO</li>
+                <li data=" VALUES ">VALUES</li>
+                <li data=" DELETE ">DELETE</li>
             </ul>
             <ul class="kjlb">
-                <li data=" left join ">left</li>
-                <li data=" right join ">right</li>
-                <li data=" inner join ">inner</li>
-                <li data=" on ">on</li>
+                <li data=" LEFT JOIN ">LEFT</li>
+                <li data=" RIGHT JOIN ">RIGHT</li>
+                <li data=" INNER JOIN ">INNER</li>
+                <li data=" ON ">on</li>
             </ul>
             <ul class="kjlb">
-                <li data=" where ">where</li>
-                <li data=" and ">and</li>
-                <li data=" or ">or</li>
-                <li data=" is ">is</li>
-                <li data=" not ">not</li>
-                <li data=" null ">null</li>
-                <li data=" in ">in</li>
-                <li data=" exists ">exists</li>
-                <li data=" group by ">group</li>
-                <li data=" order by ">order</li>
-                <li data=" limit 0,100 ">limit 100</li>
+                <li data=" WHERE ">WHERE</li>
+                <li data=" AND ">AND</li>
+                <li data=" OR ">OR</li>
+                <li data=" IS ">IS</li>
+                <li data=" NOT ">NOT</li>
+                <li data=" NULL ">NULL</li>
+                <li data=" IN ">IN</li>
+                <li data=" EXISTS ">EXISTS</li>
+                <li data=" GROUP BY ">GROUP</li>
+                <li data=" ORDER BY ">ORDER</li>
+                <li data=" LIMIT 0,100 ">LIMIT 100</li>
 
             </ul>
 

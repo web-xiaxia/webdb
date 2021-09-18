@@ -71,21 +71,22 @@
 .sqltip {
     -webkit-overflow-scrolling: touch;
     margin: 3px;
-    padding: 5px;
+    padding: 2px 0px;
     overflow-x: scroll;
-    min-height: 25px;
-    line-height: 25px;
+    min-height: 20px;
+    line-height: 20px;
     border: 1px solid #387ef5;
     border-radius: 5px;
     white-space: nowrap;
 }
 
 .sqltip label {
-    padding: 3px 7px;
+    padding: 1px 7px;
     background-color: #387ef5;
     border-radius: 5px;
     color: white;
     margin: 0px 3px;
+    font-size: 12px;
 }
 
 #tabledata {

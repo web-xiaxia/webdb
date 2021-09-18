@@ -150,12 +150,12 @@
                 <a class="btn" href="javascript:void(0)" id="datawhere">筛选</a>
                 <a class="btn" href="javascript:void(0)" id="datawheredel">删除筛选</a>
                 <ul class="kjlb3">
-                    <li data=" and">and</li>
-                    <li data=" or">or</li>
-                    <li data=" is">is</li>
-                    <li data=" not">not</li>
-                    <li data=" null">null</li>
-                    <li data=" in">in</li>
+                    <li data=" AND ">AND</li>
+                    <li data=" OR ">OR</li>
+                    <li data=" IS ">IS</li>
+                    <li data=" NOT ">NOT</li>
+                    <li data=" NULL">NULL</li>
+                    <li data=" IN ">IN</li>
                 </ul>
                 <ul class="kjlb3">
                     <li data=",">,</li>
@@ -171,7 +171,7 @@
                     <li data=" > ">></li>
                     <li data=" < "><</li>
                     <li data=" = ">=</li>
-                    <li data=" like ">like</li>
+                    <li data=" LIKE ">LIKE</li>
                     <li data="%">%</li>
                 </ul>
                 <ul class="kjlb3">

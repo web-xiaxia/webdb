@@ -199,12 +199,13 @@ input[type="checkbox"] {
     list-style: none;
     padding: 0;
     margin: 0;
+    font-size: 12px;
 }
 
 .kjlb li, .kjlb2 li, .kjlb3 li {
     display: inline-block;
     margin: 3px;
-    padding: 5px 7px;
+    padding: 4px 4px;
     background-color: #387ef5;
     color: white;
     text-align: left;
