@@ -426,9 +426,14 @@ function deletesavesql(clickzdysqlsave) {
         delLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + clickzdysqlsave)
     }
     opensqllistboxwindow()
+    changeSaveBtnText()
 }
 
 function saveZdySql() {
+    if(!$("#zdysql").val().trim()){
+        alert("Sql无内容，保存失败")
+        return;
+    }
     var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
     for (var index in zdysqlsavelist) {
         var zdysqlsave = zdysqlsavelist[index]
