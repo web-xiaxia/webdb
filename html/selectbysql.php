@@ -1,6 +1,7 @@
 <div id="tabledata2" style="display: none">
     <div id="sqllistbox">
         <div id="sqllistbtnbox">
+            <div class="sqllistitem sqllistitembtn" onclick="opensqllistboxwindow()">=</div>
             <div id="sqllistadd" class="sqllistitem sqllistitembtn" onclick="addSqlList()">+</div>
             <div id="sqllistdelete" style="display: none" class="sqllistitem sqllistitembtn" onclick="deleteSqlList()">
                 -
@@ -8,20 +9,39 @@
         </div>
         <div id="sqllistitembox"></div>
     </div>
-    <a href="javascript:btnHash('#tables')" class="btn">切换数据表</a>
+
     <!--<div class="btn"  id="opentables2">切换数据表</div>-->
-    <div class="btn" id="zdysqldown">增加编辑框行</div>
-    <div class="btn" id="zdysqlup">减少编辑框行</div>
+    <table width="100%">
+        <tr>
+            <td>
+                <a href="javascript:btnHash('#tables')" class="btn">切换数据表</a>
+            </td>
+            <td>
+                <div class="btn" id="zdysqldown">增加编辑框行</div>
+            </td>
+            <td>
+                <div class="btn" id="zdysqlup">减少编辑框行</div>
+            </td>
+        </tr>
+    </table>
+
     <div id="sqltip" class="sqltip">
     </div>
     <div id="sqltip2" class="sqltip">
     </div>
     <div id="zdysqlmain" style="text-align: center;">
         <div style="padding: 0 5px;box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box; ">
-            <textarea id="zdysql" rows="10"
+            <textarea id="zdysql" rows="18"
                       style="width: 100%;box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box;  border: 1px solid #387EF5; border-radius: 2px;"></textarea>
         </div>
-        <a class="btn" href="javascript:getTableData2()" id="getTableDatazdy">执行sql</a>
+        <table width="100%">
+            <tr>
+                <td><a class="btn" href="javascript:getTableData2()" id="getTableDatazdy">执行sql</a></td>
+                <td><a class="btn" href="javascript:void(0)" id="getTableDatazdy">保存</a></td>
+            </tr>
+        </table>
+
+
         <div style="text-align: left">
             <ul class="kjlb">
                 <li data=",">,</li>
@@ -74,9 +94,13 @@
             </ul>
 
         </div>
-        <a class="btn" href="javascript:void(0)" id="queryhanshu">插入函数</a>
-        <a class="btn" href="javascript: openfloatmain('#tablenamelist');">插入表名</a>
-        <a class="btn" href="javascript:openfloatmain('#tablenamelist2');">插入列名</a>
+        <table width="100%">
+            <tr>
+                <td><a class="btn" href="javascript:void(0)" id="queryhanshu">插入函数</a></td>
+                <td><a class="btn" href="javascript: openfloatmain('#tablenamelist');">插入表名</a></td>
+                <td><a class="btn" href="javascript:openfloatmain('#tablenamelist2');">插入列名</a></td>
+            </tr>
+        </table>
     </div>
 
     <div id="tablediv2" style="overflow: scroll;width: 100%;margin-top: 5px;display: none; height: 100%;">
@@ -185,6 +209,67 @@
                 <div id="sqlzshow_one_data_windowcontext">
 
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="floatmain" id="sqllistbox_window" style="display: none;">
+    <div class="floatbg">
+    </div>
+    <div class="float">
+        <div class="title"><span class="content">SQL</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="contentbox" style="padding: 0px;background:#dcdcdc;">
+            <div class="content">
+                <div id="sqllistcontextboxlist">
+                    <div class="sqllistcontextbox sqllistcontexttitleboxsave">
+                        <div class="sqllistcontexttitlebox">
+                            <label class="sqllistcontexttitle">是否保存当前sql?</label>
+                            <div class="sqllistcontextbtnbox"><a class="sqllistcontextbtn" href="#">保存</a></div>
+                        </div>
+                        <div class="sqllistcontextsql">
+                            诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配
+                        </div>
+                    </div>
+                    <div class="sqllistcontextbox">
+                        <div class="sqllistcontexttitlebox">
+                            <label class="sqllistcontexttitle">诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配</label>
+                            <div class="sqllistcontextbtnbox"><a class="sqllistcontextbtn" href="#">删除</a></div>
+                        </div>
+                        <div class="sqllistcontextsql">
+                            诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配
+                        </div>
+                    </div>
+                    <div class="sqllistcontextbox">
+                        <div class="sqllistcontexttitlebox">
+                            <label class="sqllistcontexttitle">诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配</label>
+                            <div class="sqllistcontextbtnbox"><a class="sqllistcontextbtn" href="#">删除</a></div>
+                        </div>
+                        <div class="sqllistcontextsql">
+                            诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配
+                        </div>
+                    </div>
+                    <div class="sqllistcontextbox">
+                        <div class="sqllistcontexttitlebox">
+                            <label class="sqllistcontexttitle">诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配</label>
+                            <div class="sqllistcontextbtnbox"><a class="sqllistcontextbtn" href="#">删除</a></div>
+                        </div>
+                        <div class="sqllistcontextsql">
+                            诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配
+                        </div>
+                    </div>
+                    <div class="sqllistcontextbox">
+                        <div class="sqllistcontexttitlebox">
+                            <label class="sqllistcontexttitle">诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配</label>
+                            <div class="sqllistcontextbtnbox"><a class="sqllistcontextbtn" href="#">删除</a></div>
+                        </div>
+                        <div class="sqllistcontextsql">
+                            诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>

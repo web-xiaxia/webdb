@@ -66,6 +66,8 @@ var localStorageName = {
     zdysqllist: "zdysqllist:",
     zdysql: "zdysql:",
     zdysqlnow: "zdysqlnow:",
+    zdysqlsavelist: "zdysqlsavelist:",
+    zdysqlsavename: "zdysqlsavename:",
 }
 var sessionStorageName = {}
 

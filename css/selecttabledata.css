@@ -9,9 +9,11 @@
     max-width: 500px;
     overflow: hidden;
 }
-#tabledatashowthead, #tabledatashowthead2{
+
+#tabledatashowthead, #tabledatashowthead2 {
     background: #387EF5;
 }
+
 #tabledatashowthead tr, #tabledatashowthead2 tr {
     background: #387EF5;
 }
@@ -27,20 +29,23 @@
     margin-top: 5px
 }
 
-#zshow_one_data_windowcontext,#sqlzshow_one_data_windowcontext{
+#zshow_one_data_windowcontext, #sqlzshow_one_data_windowcontext {
     margin: 10px;
 }
-#page-other-window{
+
+#page-other-window {
 
 }
-#page-other-window .page-other-item-box{
+
+#page-other-window .page-other-item-box {
     padding: 5px 0;
 }
-#page-other-window .page-other-item-title{
+
+#page-other-window .page-other-item-title {
     padding: 3px 0;
 }
 
-#page-other-window .page-other-item-context{
+#page-other-window .page-other-item-context {
     border: 1px solid #d7d7d7;
     border-radius: 5px;
     background: white;
@@ -74,21 +79,24 @@
     border-radius: 5px;
     white-space: nowrap;
 }
-.sqltip label{
-    padding: 3px  7px;
+
+.sqltip label {
+    padding: 3px 7px;
     background-color: #387ef5;
     border-radius: 5px;
     color: white;
     margin: 0px 3px;
 }
-#tabledata{
-    height: 100%;
-}
-#tabledata2{
+
+#tabledata {
     height: 100%;
 }
 
-#tablefiltertipbox{
+#tabledata2 {
+    height: 100%;
+}
+
+#tablefiltertipbox {
     position: fixed;
     z-index: 1000;
     right: 0px;
@@ -103,7 +111,7 @@
     border: 1px solid white
 }
 
-#tablefiltertipboxtip{
+#tablefiltertipboxtip {
     position: absolute;
     bottom: 5px;
     right: -2px;
@@ -112,7 +120,7 @@
     line-height: 20px;
 }
 
-#tablefiltercontextbox .filter_box{
+#tablefiltercontextbox .filter_box {
     padding: 5px;
     box-sizing: border-box;
     -moz-box-sizing: border-box; /* Firefox */
@@ -120,14 +128,15 @@
     width: 100%;
 }
 
-#tablefiltercontextbox .filter_box .filter_line1{
+#tablefiltercontextbox .filter_box .filter_line1 {
     width: 100%;
     box-sizing: border-box;
     -moz-box-sizing: border-box; /* Firefox */
     -webkit-box-sizing: border-box; /* Safari */
 
 }
-#tablefiltercontextbox .filter_box .filter_line2{
+
+#tablefiltercontextbox .filter_box .filter_line2 {
     width: 100%;
     box-sizing: border-box;
     -moz-box-sizing: border-box; /* Firefox */
@@ -135,13 +144,15 @@
     margin: 5px 0;
 
 }
-#tablefiltercontextbox .filter_box .filter_checkbox{
+
+#tablefiltercontextbox .filter_box .filter_checkbox {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    vertical-align:middle;
+    vertical-align: middle;
 }
-#tablefiltercontextbox .filter_box .filter_column{
+
+#tablefiltercontextbox .filter_box .filter_column {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -149,7 +160,8 @@
     margin: 0 5px;
     width: 140px;
 }
-#tablefiltercontextbox .filter_box .filter_condition{
+
+#tablefiltercontextbox .filter_box .filter_condition {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -157,7 +169,8 @@
     margin: 0 5px;
     width: 70px;
 }
-#tablefiltercontextbox .filter_box .filter_add,#tablefiltercontextbox .filter_box .filter_delete{
+
+#tablefiltercontextbox .filter_box .filter_add, #tablefiltercontextbox .filter_box .filter_delete {
     width: 20px;
     height: 20px;
     text-align: center;
@@ -167,16 +180,17 @@
     line-height: 20px;
     display: inline-block;
 }
-#tablefiltercontextbox .filter_box .filter_value{
+
+#tablefiltercontextbox .filter_box .filter_value {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     height: 30px;
     border-radius: 5px;
-    border:1px solid #cbcbcb;
+    border: 1px solid #cbcbcb;
 }
 
-#sqllistbox{
+#sqllistbox {
     position: fixed;
     z-index: 10;
     right: 0px;
@@ -186,17 +200,19 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    padding-top: 90px;
+    padding-top: 121px;
 }
-#sqllistbtnbox{
-    height: 90px;
+
+#sqllistbtnbox {
+    height: 121px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    margin-top: -90px;
-    padding:5px 0 20px 0;
+    margin-top: -121px;
+    padding: 5px 0 20px 0;
 }
-#sqllistitembox{
+
+#sqllistitembox {
     overflow-x: scroll;
     height: 100%;
     box-sizing: border-box;
@@ -204,7 +220,7 @@
     -webkit-box-sizing: border-box;
 }
 
-#sqllistbox .sqllistitem{
+#sqllistbox .sqllistitem {
 
     margin: 0 0 10px 0;
     width: 20px;
@@ -215,10 +231,75 @@
     color: white;
     border: 1px solid white
 }
-#sqllistbox .sqllistitembtn{
+
+#sqllistbox .sqllistitembtn {
     background: #6aabf3;
 }
-#sqllistbox .sqllistitemact{
+
+#sqllistbox .sqllistitemact {
     background: #387ef5;
     overflow: scroll;
+}
+
+.sqllistcontextbox {
+    border-bottom: 2px solid #387ef5;
+    margin: 5px;
+    padding: 5px;
+    background: white;
+    border-radius: 2px 2px 0 0;
+}
+
+.sqllistcontexttitlebox {
+    padding: 5px;
+    overflow: hidden;
+    height: 20px;
+    position: relative;
+}
+.sqllistcontexttitleboxsave .sqllistcontexttitle {
+    color: #387ef5;
+}
+
+.sqllistcontexttitle {
+    vertical-align: middle;
+    line-height: 20px;
+    height: 20px;
+    overflow: hidden;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.sqllistcontextbtnbox {
+    background: white;
+    float: right;
+    right: 0px;
+    top: 0px;
+    padding: 5px 10px;
+    position: absolute;
+    line-height: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.sqllistcontextbtn {
+    vertical-align: middle;
+    line-height: 22px;
+    background: #387ef5;
+    margin: 0 3px;
+    height: 20px;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 3px;
+    text-underline: none;
+    padding: 0px 5px;
+    font-size: 12px;
+}
+
+.sqllistcontextsql {
+    padding: 5px;
+    color: #656565;
+    font-size: 8px;
+    height: 25px;
+    line-height: 15px;
+    overflow: hidden;
 }

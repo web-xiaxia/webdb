@@ -357,6 +357,34 @@ function sql_xuhao_td(d, columns, data) {
     return xxtd
 }
 
+function opensqllistboxwindow() {
+    var sqllistcontextboxlist = $("#sqllistcontextboxlist")
+    sqllistcontextboxlist.empty()
+
+    var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
+    for (var index in zdysqlsavelist) {
+        var zdysqlsave = zdysqlsavelist[index]
+
+        var sqllistcontexttitle = $(`<label class="sqllistcontexttitle"></label>`)
+        sqllistcontexttitle.text(getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + zdysqlsave, false, ''))
+        var sqllistcontextbtnbox = $(`<div class="sqllistcontextbtnbox"><a class="sqllistcontextbtn" href="#">重命名</a><a class="sqllistcontextbtn" href="#">删除</a></div>`)
+        var sqllistcontexttitlebox = $(`<div class="sqllistcontexttitlebox"></div>`)
+        sqllistcontexttitlebox.append(sqllistcontexttitle)
+        sqllistcontexttitlebox.append(sqllistcontextbtnbox)
+
+
+        var sqllistcontextsql = $(`<div class="sqllistcontextsql"></div>`)
+        sqllistcontextsql.text(getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' +zdysqlsave, false, ''))
+
+        var sqllistcontextbox = $(`<div class="sqllistcontextbox"></div>`)
+        sqllistcontextbox.append(sqllistcontexttitlebox)
+        sqllistcontextbox.append(sqllistcontextsql)
+        sqllistcontextboxlist.append(sqllistcontextbox)
+    }
+
+    openfloatmain('#sqllistbox_window')
+}
+
 function addSqlList() {
     nowSqlName = new Date().getTime() + ""
     setLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, nowSqlName, false)
@@ -411,10 +439,10 @@ $(function () {
     });
     $("#zdysql").focus(function () {
         tipsSql(this)
-        $('#sqllistbox').css({'display':'none'})
+        $('#sqllistbox').css({'display': 'none'})
     });
     $("#zdysql").blur(function () {
-        $('#sqllistbox').css({'display':''})
+        $('#sqllistbox').css({'display': ''})
     });
     $("#zdysql").on("touchend", function () {
         tipsSql(this)
