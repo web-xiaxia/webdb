@@ -445,6 +445,50 @@ function saveZdySql() {
     $("#saveZdySqlBtn").text(`已保存`)
 }
 
+function sqllistexport() {
+    var sqls = []
+    var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
+    for (var index in zdysqlsavelist) {
+        var zdysqlsave = zdysqlsavelist[index]
+
+        sqls.push({
+            'sql_name': zdysqlsave,
+            'save_name': getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + zdysqlsave, false, ''),
+            'sql': getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + zdysqlsave, false, ''),
+        })
+    }
+    download('web-db-sql.json', JSON.stringify(sqls))
+}
+
+function sqllistimport(input) {
+    var file = input.files[0];
+    var reader = new FileReader();
+    reader.onload = function () {
+        var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
+        var config = JSON.parse(this.result)
+        for (var index in config) {
+            var conn = config[index]
+            if (conn.sql_name) {
+                var cansave =true
+                for (var xxx in zdysqlsavelist){
+                    if (zdysqlsavelist[xxx]==conn.sql_name){
+                        cansave=false
+                    }
+                }
+                if(cansave){
+                    zdysqlsavelist.push(conn.sql_name)
+                }
+
+                setLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + conn.sql_name, conn.save_name, false)
+                setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + conn.sql_name, conn.sql, false)
+            }
+        }
+        setLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, zdysqlsavelist)
+        opensqllistboxwindow()
+    }
+    reader.readAsText(file);
+}
+
 function addSqlListbySqlName(sqlName) {
     nowSqlName = sqlName
     setLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, nowSqlName, false)
@@ -509,6 +553,7 @@ function changeSaveBtnText() {
 function selectlistsql(nowInSqlName, save) {
     if (save) {
         addSqlListbySqlName(nowInSqlName)
+        sqlListBoxInit()
     }
     nowSqlName = nowInSqlName
     setLocalStorage(localStorageName.zdysqlnow + sql_conn_name + ':' + sql_database, nowSqlName, false)

@@ -37,7 +37,8 @@
         <table width="100%">
             <tr>
                 <td><a class="btn" href="javascript:getTableData2()" id="getTableDatazdy">执行sql</a></td>
-                <td width="30%"><a class="btn" style="overflow: hidden" href="javascript:saveZdySql()" id="saveZdySqlBtn">保存</a></td>
+                <td width="30%"><a class="btn" style="overflow: hidden" href="javascript:saveZdySql()"
+                                   id="saveZdySqlBtn">保存</a></td>
             </tr>
         </table>
 
@@ -222,54 +223,23 @@
         <div class="contentbox" style="padding: 0px;background:#dcdcdc;">
             <div class="content">
                 <div id="sqllistcontextboxlist">
-                    <div class="sqllistcontextbox sqllistcontexttitleboxsave">
-                        <div class="sqllistcontexttitlebox">
-                            <label class="sqllistcontexttitle">是否保存当前sql?</label>
-                            <div class="sqllistcontextbtnbox"><a class="sqllistcontextbtn" href="#">保存</a></div>
-                        </div>
-                        <div class="sqllistcontextsql">
-                            诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配
-                        </div>
-                    </div>
-                    <div class="sqllistcontextbox">
-                        <div class="sqllistcontexttitlebox">
-                            <label class="sqllistcontexttitle">诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配</label>
-                            <div class="sqllistcontextbtnbox"><a class="sqllistcontextbtn" href="#">删除</a></div>
-                        </div>
-                        <div class="sqllistcontextsql">
-                            诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配
-                        </div>
-                    </div>
-                    <div class="sqllistcontextbox">
-                        <div class="sqllistcontexttitlebox">
-                            <label class="sqllistcontexttitle">诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配</label>
-                            <div class="sqllistcontextbtnbox"><a class="sqllistcontextbtn" href="#">删除</a></div>
-                        </div>
-                        <div class="sqllistcontextsql">
-                            诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配
-                        </div>
-                    </div>
-                    <div class="sqllistcontextbox">
-                        <div class="sqllistcontexttitlebox">
-                            <label class="sqllistcontexttitle">诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配</label>
-                            <div class="sqllistcontextbtnbox"><a class="sqllistcontextbtn" href="#">删除</a></div>
-                        </div>
-                        <div class="sqllistcontextsql">
-                            诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配
-                        </div>
-                    </div>
-                    <div class="sqllistcontextbox">
-                        <div class="sqllistcontexttitlebox">
-                            <label class="sqllistcontexttitle">诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配</label>
-                            <div class="sqllistcontextbtnbox"><a class="sqllistcontextbtn" href="#">删除</a></div>
-                        </div>
-                        <div class="sqllistcontextsql">
-                            诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配诶人家个jpg吉尔平见挂牌价而苹果将澎湃而jpg加帕尔几个泡人进入凭感觉平而jpg鸡儿拍几个配件如苹果鸡儿拍几个配
-                        </div>
-                    </div>
+
                 </div>
 
-
+                <div style="position: sticky;bottom: 0px;background:#dcdcdc;">
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <input type="file" id="sqllistimport" onchange="sqllistimport(this)"
+                                       style="display: none">
+                                <label class="btn" for="sqllistimport">
+                                    导入
+                                </label>
+                            </td>
+                            <td><a class="btn" href="javascript:sqllistexport()">导出</a></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
