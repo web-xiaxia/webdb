@@ -210,6 +210,19 @@ function change_table_filter_info(that, v) {
 }
 
 $(function () {
+    var tablefiltertipboxtouchtimeout=null
+    $("#tablefiltertipbox").on('touchstart',function (){
+        tablefiltertipboxtouchtimeout=setTimeout(function (){
+            $("#tablefiltertipbox").css({'display':"none"})
+            setTimeout(function (){
+                window.getSelection().removeAllRanges()
+                $("#tablefiltertipbox").css({'display':""})
+            },3000)
+        },1000)
+    })
+    $("#tablefiltertipbox").on('touchend',function (){
+        clearTimeout(tablefiltertipboxtouchtimeout)
+    })
     $("#tablefiltertipbox").click(function () {
         var tablefiltercontextbox = $('#tablefiltercontextbox')
         tablefiltercontextbox.empty()

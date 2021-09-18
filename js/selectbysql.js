@@ -411,6 +411,10 @@ $(function () {
     });
     $("#zdysql").focus(function () {
         tipsSql(this)
+        $('#sqllistbox').css({'display':'none'})
+    });
+    $("#zdysql").blur(function () {
+        $('#sqllistbox').css({'display':''})
     });
     $("#zdysql").on("touchend", function () {
         tipsSql(this)
