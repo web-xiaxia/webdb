@@ -30,6 +30,22 @@
 #zshow_one_data_windowcontext {
     margin: 10px;
 }
+#page-other-window{
+
+}
+#page-other-window .page-other-item-box{
+    padding: 5px 0;
+}
+#page-other-window .page-other-item-title{
+    padding: 3px 0;
+}
+
+#page-other-window .page-other-item-context{
+    border: 1px solid #d7d7d7;
+    border-radius: 5px;
+    background: white;
+    padding: 5px;
+}
 
 .show_one_data_field {
     padding-bottom: 5px;

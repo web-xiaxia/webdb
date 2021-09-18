@@ -538,8 +538,7 @@ function xuhao_td(d, conn_name, database, table, sqldata) {
     return bttd
 }
 
-function getTableData() {
-    openLoding()
+function getTableQueryData(){
     var conn_name = GetMaoQueryString('conn_name')
     var database = GetMaoQueryString('database')
     var table = GetMaoQueryString('table')
@@ -612,14 +611,8 @@ function getTableData() {
             query_orderby.push(` ${qoby} `)
         }
     }
-
-    $("#tabledatashowthead").empty();
-    $("#tabledatashowtbody").empty();
-    $.ajax({
-        url: "/webdb/php/getTableData.php",
-        type: "post",
-        dataType: "json",
-        data: {
+    return {
+        "query_data":{
             'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
             'mysql_database': database,
             'mysql_table': table,
@@ -629,12 +622,60 @@ function getTableData() {
             'data_num': table_data_page.data_num,
             'data_page': table_data_page.data_page,
         },
+        'conn_name':conn_name,
+        'database':database,
+        'table':table,
+        'table_columns':table_columns,
+        'oderbyobj':oderbyobj,
+        'querywhereobj':querywhereobj,
+    }
+}
+function getTableDataCount() {
+    var queryDataFull =getTableQueryData()
+    var query_data = queryDataFull.query_data
+    openLoding()
+    $('#page-other-count').text('无')
+    $.ajax({
+        url: "/webdb/php/getTableDataCount.php",
+        type: "post",
+        dataType: "json",
+        data: query_data,
+        success: function (data) {
+            closeLoding()
+            if (data == false) {
+                alert("数据库连接失败")
+            }else{
+                $('#page-other-count').text(data['count'])
+            }
+        }
+    })
+}
+function getTableData() {
+    openLoding()
+
+    var queryDataFull =getTableQueryData()
+    var query_data = queryDataFull.query_data
+    var conn_name = queryDataFull.conn_name
+    var database = queryDataFull.database
+    var table = queryDataFull.table
+    var table_columns = queryDataFull.table_columns
+    var oderbyobj = queryDataFull.oderbyobj
+    var querywhereobj = queryDataFull.querywhereobj
+
+    $("#tabledatashowthead").empty();
+    $("#tabledatashowtbody").empty();
+    $.ajax({
+        url: "/webdb/php/getTableData.php",
+        type: "post",
+        dataType: "json",
+        data: query_data,
         success: function (data) {
             closeLoding()
             console.log(data);
             if (data == false) {
                 alert("数据库连接失败")
             } else {
+                $("#page-other-sql").text(data["e2"])
                 var sqldataList = data["data"];
 
                 $("#tabledatashowthead").empty();
@@ -646,8 +687,6 @@ function getTableData() {
                     if (!$(`#zdycolumns${mysql_table_column}`).is(':checked')) {
                         continue
                     }
-                    var oderbyobj = getLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table);
-                    var querywhereobj = getLocalStorage(localStorageName.querywhereobj + conn_name + ":" + database + ":" + table);
                     var oderbyobjcolumnname = oderbyobj[mysql_table_column];
                     var querywhereobjcolumn = querywhereobj[mysql_table_column];
                     var oderbytip = "A"

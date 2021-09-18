@@ -34,6 +34,8 @@
         </select>
 
         <a id="pagerefresh" href="javascript:void(0)" style="margin-left: 15px">刷新</a>
+
+        <a id="page—other" href="javascript:openfloatmain('#page-other-window')" style="margin-left: 15px">...</a>
     </div>
 </div>
 
@@ -82,6 +84,29 @@
             </div>
             <div id="zshow_one_data_windowcontext">
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="floatmain" id="page-other-window" style="display: none;">
+    <div class="floatbg">
+    </div>
+    <div class="float">
+        <div class="title"><span class="content">更多</span><a class="close" href="javascript:void(0)">X</a></div>
+
+        <div class="content" style="background-color: #e7e7e7;">
+            <div class="page-other-item-box">
+                <div class="page-other-item-title">
+                    总条数：<a id="page-other-count-btn" href="javascript:getTableDataCount()">刷新</a>
+                </div>
+                <div id="page-other-count" class="page-other-item-context">无</div>
+            </div>
+            <div class="page-other-item-box">
+                <div class="page-other-item-title">sql：</div>
+                <div id="page-other-sql" class="page-other-item-context">
+                    无
+                </div>
             </div>
         </div>
     </div>
@@ -155,8 +180,10 @@
 
             </div>
             <div style="position: sticky;bottom: 0px; background: white; text-align: center">
-                <a class="btn" style="display: inline-block;padding: 5px 15px;" href="javascript:open_table_filter('btn')">开启过滤</a>
-                <a class="btn" style="display: inline-block;padding: 5px 15px;" href="javascript:close_table_filter('btn')">关闭过滤</a>
+                <a class="btn" style="display: inline-block;padding: 5px 15px;"
+                   href="javascript:open_table_filter('btn')">开启过滤</a>
+                <a class="btn" style="display: inline-block;padding: 5px 15px;"
+                   href="javascript:close_table_filter('btn')">关闭过滤</a>
             </div>
         </div>
     </div>
