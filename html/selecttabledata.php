@@ -1,14 +1,18 @@
 <div id="tabledata"
-     style="display: none;padding: 80px 0 20px 0 ;box-sizing:border-box;-webkit-overflow-scrolling: touch;">
+     style="display: none;padding: 48px 0 20px 0 ;box-sizing:border-box;-webkit-overflow-scrolling: touch;">
     <div id="tablefiltertipbox">
         F
         <div id="tablefiltertipboxtip">
             .
         </div>
     </div>
-    <div style="height:70px ; margin: -80px 0 0;">
-        <a href="javascript:btnHash('#tables')" class="btn">切换数据表</a>
-        <a href="javascript:btnHash('#tabledata2')" class="btn">自定义sql</a>
+    <div style="height:42px ; margin: -48px 0 0;">
+        <table width="100%">
+            <tr>
+                <td><a href="javascript:btnHash('#tables')" class="btn">切换数据表</a></td>
+                <td><a href="javascript:btnHash('#tabledata2')" class="btn">自定义sql</a></td>
+            </tr>
+        </table>
     </div>
     <div id="tablediv"
          style="overflow: scroll;height: 100%;box-sizing:border-box; -webkit-overflow-scrolling: touch; width: 100%;margin-top: 5px">
