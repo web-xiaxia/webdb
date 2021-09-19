@@ -193,7 +193,7 @@
 
 #sqllistbox {
     position: fixed;
-    z-index: 10;
+    z-index: 600;
     right: 0px;
     top: 115px;
     height: 50%;
