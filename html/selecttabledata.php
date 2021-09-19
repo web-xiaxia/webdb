@@ -1,12 +1,12 @@
 <div id="tabledata"
-     style="display: none;padding: 48px 0 20px 0 ;box-sizing:border-box;-webkit-overflow-scrolling: touch;">
+     style="display: none;padding: 54px 0 20px 0 ;box-sizing:border-box;-webkit-overflow-scrolling: touch;">
     <div id="tablefiltertipbox">
         F
         <div id="tablefiltertipboxtip">
             .
         </div>
     </div>
-    <div style="height:42px ; margin: -48px 0 0;">
+    <div style="height:46px ; margin: -54px 0 0;">
         <table width="100%">
             <tr>
                 <td><a href="javascript:btnHash('#tables')" class="btn">切换数据表</a></td>
@@ -15,7 +15,7 @@
         </table>
     </div>
     <div id="tablediv"
-         style="overflow: scroll;height: 100%;box-sizing:border-box; -webkit-overflow-scrolling: touch; width: 100%;margin-top: 5px">
+         style="overflow: scroll;height: 100%;box-sizing:border-box; -webkit-overflow-scrolling: touch; width: 100%;">
         <table id="tabledatashow" border="1" style="position: relative">
             <thead id="tabledatashowthead">
 
