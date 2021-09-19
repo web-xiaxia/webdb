@@ -36,9 +36,19 @@
         </div>
         <table width="100%">
             <tr>
-                <td><a class="btn" href="javascript:getTableData2()" id="getTableDatazdy">执行sql</a></td>
-                <td width="30%"><a class="btn" style="overflow: hidden" href="javascript:saveZdySql()"
-                                   id="saveZdySqlBtn">保存</a></td>
+                <td><a class="btn" href="javascript:getTableData2()" id="getTableDatazdy">执行SQL</a></td>
+                <td width="35">
+                    <a class="btn" href="javascript:void(0)" id="queryhanshu">F</a>
+                </td>
+                <td width="35">
+                    <a class="btn" href="javascript: openfloatmain('#tablenamelist');">T</a>
+                </td>
+                <td width="35">
+                    <a class="btn" href="javascript:openfloatmain('#tablenamelist2');">C</a>
+                </td>
+                <td width="70">
+                    <a class="btn" style="overflow: hidden" href="javascript:saveZdySql()" id="saveZdySqlBtn">保存</a>
+                </td>
             </tr>
         </table>
 
@@ -63,7 +73,7 @@
                 <li data=" (">(</li>
                 <li data=") ">)</li>
             </ul>
-            <ul class="kjlb">
+            <!--<ul class="kjlb">
                 <li data=" SELECT ">SELECT</li>
                 <li data=" * ">*</li>
                 <li data=" FROM ">FROM</li>
@@ -72,13 +82,13 @@
                 <li data=" INSERT INTO ">INSERT INTO</li>
                 <li data=" VALUES ">VALUES</li>
                 <li data=" DELETE ">DELETE</li>
-            </ul>
-            <ul class="kjlb">
+            </ul>-->
+            <!--<ul class="kjlb">
                 <li data=" LEFT JOIN ">LEFT</li>
                 <li data=" RIGHT JOIN ">RIGHT</li>
                 <li data=" INNER JOIN ">INNER</li>
                 <li data=" ON ">on</li>
-            </ul>
+            </ul>-->
             <ul class="kjlb">
                 <li data=" WHERE ">WHERE</li>
                 <li data=" AND ">AND</li>
@@ -95,13 +105,6 @@
             </ul>
 
         </div>
-        <table width="100%">
-            <tr>
-                <td><a class="btn" href="javascript:void(0)" id="queryhanshu">插入函数</a></td>
-                <td><a class="btn" href="javascript: openfloatmain('#tablenamelist');">插入表名</a></td>
-                <td><a class="btn" href="javascript:openfloatmain('#tablenamelist2');">插入列名</a></td>
-            </tr>
-        </table>
     </div>
 
     <div id="tablediv2" style="overflow: scroll;width: 100%;margin-top: 5px;display: none; height: 100%;">

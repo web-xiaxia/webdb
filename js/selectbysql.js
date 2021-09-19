@@ -80,6 +80,10 @@ var sqlTips = [
         "show_text": "INNER JOIN",
         "insert_text": "INNER JOIN ",
     }, {
+        "search_text": "on",
+        "show_text": "ON",
+        "insert_text": "ON ",
+    }, {
         "search_text": "is",
         "show_text": "IS NULL",
         "insert_text": "IS NULL ",

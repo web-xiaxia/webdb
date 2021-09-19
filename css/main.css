@@ -214,7 +214,8 @@ input[type="checkbox"] {
 
 .kjlb li.t {
     background-color: #FF7C13;
-    width: 90%;
+    width: 100%;
+    text-align: left;
 }
 
 #tablenamelistul li, #tablenamelistul2 li, #tablencoumnsul li {
