@@ -1,7 +1,7 @@
 {
   "orientation": "portrait",
-  "background_color": "",
-  "theme_color": "",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "description": "mysql",
   "display": "standalone",
   "icons": [
