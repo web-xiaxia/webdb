@@ -649,10 +649,18 @@ $(function () {
         var xnowSqlName = that.attr('sql-name')
         selectlistsql(xnowSqlName, false)
     })
+    $("html,body").scroll(function (){
+        var tablediv2offsettop = $("#tablediv2").offset().top
+        if (tablediv2offsettop > 10) {
+            $("#sqllistbox").css({'display':''})
+        }else {
+            $("#sqllistbox").css({'display':'none'})
+        }
+    })
 
     $("#tablediv2").scroll(function () {
         var tablediv2offsettop = $("#tablediv2").offset().top
-        if (tablediv2offsettop > 1) {
+        if (tablediv2offsettop > 10) {
             $("html,body").animate({scrollTop: $("body").scrollTop() + $("#tablediv2").offset().top}, 0);
         }
     })

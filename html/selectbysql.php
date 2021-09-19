@@ -107,7 +107,7 @@
         </div>
     </div>
 
-    <div id="tablediv2" style="overflow: scroll;width: 100%;margin-top: 5px;display: none; height: 100%;">
+    <div id="tablediv2" style="display: none;">
         <table id="tabledatashow2" border="1" style="position: relative">
             <thead id="tabledatashowthead2">
 
