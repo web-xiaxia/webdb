@@ -15,6 +15,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Mysql">
+    <meta name="orientation" content="portrait">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
     <link rel="icon" href="/webdb/favicon.ico">
     <link rel="shortcut icon" sizes="192x192" href="/webdb/favicon.ico">
     <link rel="shortcut icon" sizes="128x128" href="/webdb/favicon.ico">
