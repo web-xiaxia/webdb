@@ -109,7 +109,7 @@
     position: fixed;
     z-index: 1000;
     right: 0px;
-    top: 105px;
+    top: 40px;
 
     width: 20px;
     height: 20px;
@@ -203,22 +203,22 @@
     position: fixed;
     z-index: 600;
     right: 0px;
-    top: 115px;
+    top: 52px;
     height: 50%;
     overflow: hidden;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    padding-top: 121px;
+    padding-top: 100px;
 }
 
 #sqllistbtnbox {
-    height: 121px;
+    height: 100px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    margin-top: -121px;
-    padding: 5px 0 20px 0;
+    margin-top: -100px;
+    padding: 5px 0 10px 0;
 }
 
 #sqllistitembox {
@@ -231,7 +231,7 @@
 
 #sqllistbox .sqllistitem {
 
-    margin: 0 0 10px 0;
+    margin: 0 0 7px 0;
     width: 20px;
     height: 20px;
     text-align: center;
