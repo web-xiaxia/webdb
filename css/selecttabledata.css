@@ -237,7 +237,7 @@
 }
 
 #sqllistbox .sqllistitem {
-
+    border-radius: 5px 0 0 5px;
     margin: 0 0 7px 0;
     width: 20px;
     height: 20px;
@@ -255,6 +255,7 @@
 #sqllistbox .sqllistitemact {
     background: #6aabf3;
     overflow: scroll;
+
 }
 
 .sqllistcontextbox {
