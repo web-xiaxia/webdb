@@ -690,15 +690,15 @@ function getTableData() {
                     }
                     var oderbyobjcolumnname = oderbyobj[mysql_table_column];
                     var querywhereobjcolumn = querywhereobj[mysql_table_column];
-                    var oderbytip = "A"
+                    var oderbytip = "&#xe6f6;"
                     if (oderbyobjcolumnname){
                         var oderbyobjcolumnnamesplit = oderbyobjcolumnname.trim().split(" ")
                         if (oderbyobjcolumnnamesplit.length>1&&oderbyobjcolumnnamesplit[oderbyobjcolumnnamesplit.length-1].toLowerCase()=='desc'){
-                            oderbytip = 'D'
+                            oderbytip = '&#xe6f7;'
                         }
                     }
 
-                    ttr2.append('<td data-column="' + mysql_table_column + '" >' + mysql_table_column + (querywhereobjcolumn == null ? "" : "<span style='color:red'> ->?</span>") + (oderbyobjcolumnname == null ? "" : "<span style='color: #feff08'> ->"+oderbytip+"</span>") + '</td>')
+                    ttr2.append('<td data-column="' + mysql_table_column + '" >' + mysql_table_column + (querywhereobjcolumn == null ? "" : "<span class='iconfont' style='color:red'> &#xe612;</span>") + (oderbyobjcolumnname == null ? "" : "<span class='iconfont' style='color: #feff08'> "+oderbytip+"</span>") + '</td>')
                 }
                 $("#tabledatashowthead").append(ttr2);
                 var xxtabledatashowtbody = $("#tabledatashowtbody");
