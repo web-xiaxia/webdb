@@ -73,7 +73,7 @@ function inittabledata() {
 
 function close_table_filter(source) {
     table_filter_box_open = false
-    $('#tablefiltertipboxtip').css({'display': 'none'})
+    $('#tablefiltertipbox').css({'color': 'black'})
     if (source == 'btn') {
         closefloatmain("#tablefilterbox")
         getTableData();
@@ -82,7 +82,7 @@ function close_table_filter(source) {
 
 function open_table_filter(source) {
     table_filter_box_open = true
-    $('#tablefiltertipboxtip').css({'display': ''})
+    $('#tablefiltertipbox').css({'color': '#0062ff'})
     if (source == 'btn') {
         closefloatmain("#tablefilterbox")
         getTableData();
@@ -211,16 +211,16 @@ function change_table_filter_info(that, v) {
 
 $(function () {
     var tablefiltertipboxtouchtimeout=null
-    $("#tablefiltertipbox").on('touchstart',function (){
+    $("#tableffff").on('touchstart',function (){
         tablefiltertipboxtouchtimeout=setTimeout(function (){
-            $("#tablefiltertipbox").css({'display':"none"})
+            $("#tableffff").css({'display':"none"})
             setTimeout(function (){
                 window.getSelection().removeAllRanges()
-                $("#tablefiltertipbox").css({'display':""})
+                $("#tableffff").css({'display':""})
             },3000)
         },1000)
     })
-    $("#tablefiltertipbox").on('touchend',function (){
+    $("#tableffff").on('touchend',function (){
         clearTimeout(tablefiltertipboxtouchtimeout)
     })
     $("#tablefiltertipbox").click(function () {

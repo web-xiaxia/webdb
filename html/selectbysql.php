@@ -1,7 +1,8 @@
 <div id="tabledata2" style="display: none">
     <div id="sqllistbox">
         <div id="sqllistbtnbox">
-            <div class="sqllistitem sqllistitembtn" onclick="opensqllistboxwindow()">=</div>
+            <div class="sqllistitem sqllistitembtn iconfont" onclick="btnHash('#tables')">&#xe70d;</div>
+            <div class="sqllistitem sqllistitembtn iconfont" onclick="opensqllistboxwindow()">&#xe63a;</div>
             <div id="sqllistadd" class="sqllistitem sqllistitembtn" onclick="addSqlList()">+</div>
             <div id="sqllistdelete" style="display: none" class="sqllistitem sqllistitembtn" onclick="deleteSqlList()">
                 -
@@ -11,7 +12,7 @@
     </div>
 
     <!--<div class="btn"  id="opentables2">切换数据表</div>-->
-    <table width="100%">
+    <!--<table width="100%">
         <tr>
             <td>
                 <a href="javascript:btnHash('#tables')" class="btn">切换数据表</a>
@@ -23,8 +24,10 @@
                 <div class="btn" id="zdysqlup">减少编辑框行</div>
             </td>
         </tr>
-    </table>
+    </table>-->
+    <div style="height: 3px">
 
+    </div>
     <div id="sqltip" class="sqltip">
     </div>
     <div id="sqltip2" class="sqltip">
@@ -38,13 +41,13 @@
             <tr>
                 <td><a class="btn" href="javascript:getTableData2()" id="getTableDatazdy">执行SQL</a></td>
                 <td width="35">
-                    <a class="btn" href="javascript:void(0)" id="queryhanshu">F</a>
+                    <a class="btn iconfont" href="javascript:void(0)" id="queryhanshu">&#xeaef;</a>
                 </td>
                 <td width="35">
-                    <a class="btn" href="javascript: openfloatmain('#tablenamelist');">T</a>
+                    <a class="btn iconfont" style="font-weight: bold;" href="javascript: openfloatmain('#tablenamelist');">&#xe6b6;</a>
                 </td>
                 <td width="35">
-                    <a class="btn" href="javascript:openfloatmain('#tablenamelist2');">C</a>
+                    <a class="btn iconfont" style="font-weight: bold;" href="javascript:openfloatmain('#tablenamelist2');">&#xe648;</a>
                 </td>
                 <td width="70">
                     <a class="btn" style="overflow: hidden" href="javascript:saveZdySql()" id="saveZdySqlBtn">保存</a>

@@ -651,11 +651,14 @@ $(function () {
     })
     $("html,body").scroll(function (){
         var tablediv2offsettop = $("#tablediv2").offset().top
-        if (tablediv2offsettop > 10) {
-            $("#sqllistbox").css({'display':''})
-        }else {
-            $("#sqllistbox").css({'display':'none'})
+        if ($("#tablediv2").css('display') == 'block'){
+            if (tablediv2offsettop > 10) {
+                $("#sqllistbox").css({'display':''})
+            }else {
+                $("#sqllistbox").css({'display':'none'})
+            }
         }
+
     })
 
     $("#tablediv2").scroll(function () {

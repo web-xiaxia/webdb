@@ -69,7 +69,7 @@
 
 .sqltip {
     -webkit-overflow-scrolling: touch;
-    margin: 3px;
+    margin: 0px 3px 3px 3px;
     padding: 2px 0px;
     overflow-x: scroll;
     min-height: 20px;
@@ -104,11 +104,14 @@
     height: 100%;
 }
 
-#tablefiltertipbox {
+#tableffff{
     position: fixed;
     z-index: 1000;
     right: 0px;
-    top: 32px;
+    top: 3px;
+}
+/*
+#tablefiltertipbox {
 
     width: 20px;
     height: 20px;
@@ -118,13 +121,18 @@
     color: white;
     border: 1px solid white
 }
+*/
+#tablefiltertipbox {
+    position: relative;
+}
+
 
 #tablefiltertipboxtip {
     position: absolute;
-    bottom: 5px;
-    right: -2px;
+    bottom: 7px;
+    right: -4px;
     color: #00ff72;
-    font-size: 40px;
+    font-size: 38px;
     line-height: 20px;
 }
 
@@ -202,21 +210,21 @@
     position: fixed;
     z-index: 600;
     right: 0px;
-    top: 46px;
+    top: 0px;
     height: 50%;
     overflow: hidden;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    padding-top: 100px;
+    padding-top: 130px;
 }
 
 #sqllistbtnbox {
-    height: 100px;
+    height: 130px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    margin-top: -100px;
+    margin-top: -130px;
     padding: 5px 0 10px 0;
 }
 
@@ -241,11 +249,11 @@
 }
 
 #sqllistbox .sqllistitembtn {
-    background: #6aabf3;
+    background: #387ef5;
 }
 
 #sqllistbox .sqllistitemact {
-    background: #387ef5;
+    background: #6aabf3;
     overflow: scroll;
 }
 

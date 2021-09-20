@@ -1,19 +1,22 @@
 <div id="tabledata"
-     style="display: none;padding: 54px 0 20px 0 ;box-sizing:border-box;-webkit-overflow-scrolling: touch;">
-    <div id="tablefiltertipbox">
-        F
-        <div id="tablefiltertipboxtip">
-            .
-        </div>
+     style="display: none;padding: 0px 0 28px 0 ;box-sizing:border-box;-webkit-overflow-scrolling: touch;">
+    <div id="tableffff">
+        <!--<div id="tablefiltertipbox">
+            F
+            <div id="tablefiltertipboxtip">
+                .
+            </div>
+        </div>-->
+
     </div>
-    <div style="height:46px ; margin: -54px 0 0;">
+    <!--<div style="height:46px ; margin: -54px 0 0;">
         <table width="100%">
             <tr>
                 <td><a href="javascript:btnHash('#tables')" class="btn">切换数据表</a></td>
                 <td><a href="javascript:btnHash('#tabledata2')" class="btn">自定义sql</a></td>
             </tr>
         </table>
-    </div>
+    </div>-->
     <div id="tablediv"
          style="overflow: scroll;height: 100%;box-sizing:border-box; -webkit-overflow-scrolling: touch; width: 100%;">
         <table id="tabledatashow" border="1" style="position: relative">
@@ -37,9 +40,12 @@
             <option value="1000">1000</option>
         </select>
 
-        <a id="pagerefresh" href="javascript:void(0)" style="margin-left: 15px">刷新</a>
+        <a href="javascript:btnHash('#tables')" class="iconfont" style="margin-left: 6px">&#xe70d;</a>
+        <a href="javascript:btnHash('#tabledata2')" class="iconfont" style="margin-left: 5px">&#xe600;</a>
+        <a id="tablefiltertipbox" href="javascript:void(0)" class="iconfont" style="margin-left: 5px">&#xe612;</a>
 
-        <a id="page—other" href="javascript:openfloatmain('#page-other-window')" style="margin-left: 15px">...</a>
+        <a id="pagerefresh" href="javascript:void(0)" style="margin-left: 6px">刷新</a>
+        <a id="page—other" href="javascript:openfloatmain('#page-other-window')" style="margin-left: 6px">...</a>
     </div>
 </div>
 
