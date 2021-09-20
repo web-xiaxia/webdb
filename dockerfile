@@ -5,4 +5,4 @@ copy apache2.conf /etc/apache2/
 
 RUN /usr/local/bin/docker-php-ext-install mysqli
 
-#  docker run -d --restart=always -p 8984:80 --privileged=true  webxiaxia/webdb:0.0.45
+#  docker run -d --restart=always -p 8984:80 --privileged=true  webxiaxia/webdb:0.0.46
