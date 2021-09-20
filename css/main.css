@@ -74,7 +74,7 @@ input[type="checkbox"] {
     -moz-box-sizing: border-box; /* Firefox */
     -webkit-box-sizing: border-box; /* Safari */
     overflow: hidden;
-    padding-top: 37px;
+    padding-top: 34px;
 }
 
 .window-box {
@@ -98,11 +98,11 @@ input[type="checkbox"] {
 }
 
 .title {
-    margin-top: -37px;
+    margin-top: -34px;
     padding: 5px;
     background: #387ef5;
     color: white;
-    height: 37px;
+    height: 34px;
     box-sizing: border-box;
     -moz-box-sizing: border-box; /* Firefox */
     -webkit-box-sizing: border-box; /* Safari */
@@ -175,7 +175,7 @@ input[type="checkbox"] {
     margin: 0 auto;
     border: 3px solid #387ef5;
     background: #387ef5;
-    padding: 37px 0 0;
+    padding: 34px 0 0;
     overflow: hidden;
     box-sizing: border-box;
     -moz-box-sizing: border-box; /* Firefox */
@@ -183,7 +183,7 @@ input[type="checkbox"] {
 }
 
 .float .title {
-    margin: -37px 0 0;
+    margin: -34px 0 0;
 }
 
 .float .title .content {
