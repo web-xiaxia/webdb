@@ -91,6 +91,7 @@ input[type="checkbox"] {
     width: 20px;
     text-align: center;
     border-radius: 3px;
+    margin: 0px 5px;
 }
 
 .title {
