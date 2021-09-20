@@ -124,7 +124,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">插入函数</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">插入函数</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
                 <ul class="kjlb" id="hanshufunlist">
@@ -139,7 +139,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">插入表名</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">插入表名</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
                 <div style="position: sticky; top:0px; background: white;padding:  5px 0; ">
@@ -157,7 +157,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">选择表</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">选择表</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
                 <div style="position: sticky; top:0px; background: white;padding:  5px 0;">
@@ -175,7 +175,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">插入列名</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">插入列名</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
                 <div style="position: sticky; top:0px; background: white;padding:  5px 0;">
@@ -193,7 +193,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">查询数据</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">查询数据</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
                 <div id="sqlshowcolumnvalue" style="width: 98%"></div>
@@ -205,7 +205,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">数据</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">数据</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox" style="background-color: #e7e7e7;padding: 0;">
             <div class="content">
                 <div style="position: sticky; top:0px; background: white;padding:  5px 0;">
@@ -224,7 +224,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">SQL</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">SQL</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox" style="padding: 0px;background:#dcdcdc;">
             <div class="content">
                 <div id="sqllistcontextboxlist">

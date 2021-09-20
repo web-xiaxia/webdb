@@ -24,7 +24,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">临时笔记</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">临时笔记</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content" style="overflow:hidden">
                     <textarea id="floatmainlsbjcontent"

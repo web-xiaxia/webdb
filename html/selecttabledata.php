@@ -53,7 +53,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">修改数据</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">修改数据</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
                 <div style="padding: 5px">列名：<label id="updatecolumnname"></label></div>
@@ -67,7 +67,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">选择显示列</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">选择显示列</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
                 <div style="position: sticky; top:0px; background: white;">
@@ -90,7 +90,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">数据</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">数据</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox" style="background-color: #e7e7e7;padding: 0;">
             <div class="content" >
                 <div style="position: sticky; top:0px; background: white;padding:  5px 0 ;">
@@ -109,7 +109,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">更多</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">更多</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox" style="background-color: #e7e7e7;">
             <div class="content" style="padding:0 5px;">
                 <div class="page-other-item-box">
@@ -132,7 +132,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">列操作</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">列操作</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
                 列名：<span id="columnname">121212</span>
@@ -195,7 +195,7 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">过滤</span><a class="close" href="javascript:void(0)">X</a></div>
+        <div class="title"><span class="content">过滤</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
                 <div id="tablefiltercontextbox">

@@ -19,9 +19,9 @@
 }*/
 @font-face {
     font-family: 'iconfont';  /* Project id 2824470 */
-    src: url('//at.alicdn.com/t/font_2824470_1o5r854vxxb.woff2?t=1632113470868') format('woff2'),
-    url('//at.alicdn.com/t/font_2824470_1o5r854vxxb.woff?t=1632113470868') format('woff'),
-    url('//at.alicdn.com/t/font_2824470_1o5r854vxxb.ttf?t=1632113470868') format('truetype');
+    src: url('//at.alicdn.com/t/font_2824470_pkdyrmqge.woff2?t=1632115891879') format('woff2'),
+    url('//at.alicdn.com/t/font_2824470_pkdyrmqge.woff?t=1632115891879') format('woff'),
+    url('//at.alicdn.com/t/font_2824470_pkdyrmqge.ttf?t=1632115891879') format('truetype');
 }
 
 .iconfont {
@@ -191,15 +191,17 @@ input[type="checkbox"] {
 
 .float .title .close {
     color: white;
-    border: 1px solid white;
+    /*border: 1px solid white;*/
     border-radius: 2px;
     float: right;
     display: inline-block;
-    line-height: 17px;
-    width: 17px;
-    height: 17px;
+    line-height: 22px;
+    width: 22px;
+    height: 22px;
+    font-size: 22px;
     text-align: center;
     text-decoration: none;
+    vertical-align: center;
 }
 
 .float .contentbox {
