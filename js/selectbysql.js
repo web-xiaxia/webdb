@@ -2,6 +2,7 @@ var tablecolumnsobj = {};
 var nowSqlName = ''
 var sql_conn_name = ''
 var sql_database = ''
+var tempTipTablecolumns = {}
 
 function inittabledata2() {
     $("#tabledata2").slideDown(gddhms);
@@ -12,6 +13,7 @@ function inittabledata2() {
         window.location.hash = "#databases?conn_name" + conn_name;
         return;
     }
+    tempTipTablecolumns = {}
     sql_conn_name = conn_name
     sql_database = database
     $("#tablenamelistul").empty();
@@ -192,9 +194,27 @@ var sqlTips = [
 
 var tipColumnsIndex = 0;
 
+function tipColumnsFun(columns, tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex) {
+    for (var index in columns) {
+        var field_name = columns[index]['Field']
+        console.log(field_name, tableMatchNowSearchColumnsText)
+        if (tableMatchNowSearchColumnsText && !test_start(tableMatchNowSearchColumnsText, [field_name, `\`${field_name}\``])) {
+            continue
+        }
+        if (nowTipColumnsIndex == tipColumnsIndex) {
+            tipLabelAdd(tipdom, field_name, `\`${field_name}\``, startIndex, endIndex)
+        }
+    }
+}
+
 function tipColumns(tablexxx, tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex) {
     var conn_name = GetMaoQueryString('conn_name')
     var database = GetMaoQueryString('database')
+
+    if (tempTipTablecolumns[tablexxx]) {
+        tipColumnsFun(tempTipTablecolumns[tablexxx], tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex)
+        return
+    }
     $.ajax({
         url: "/webdb/php/getColumns.php",
         type: "get",
@@ -208,17 +228,8 @@ function tipColumns(tablexxx, tableMatchNowSearchColumnsText, tipdom, nowTipColu
             if (data == false) {
                 //
             } else {
-                var columns = data.columns
-                for (var index in columns) {
-                    var field_name = columns[index]['Field']
-                    console.log(field_name, tableMatchNowSearchColumnsText)
-                    if (tableMatchNowSearchColumnsText && !test_start(tableMatchNowSearchColumnsText, [field_name])) {
-                        continue
-                    }
-                    if (nowTipColumnsIndex == tipColumnsIndex) {
-                        tipLabelAdd(tipdom, field_name, `\`${field_name}\``, startIndex, endIndex)
-                    }
-                }
+                tempTipTablecolumns[tablexxx] = data.columns
+                tipColumnsFun(data.columns, tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex)
             }
         }, error: function () {
             //
@@ -284,6 +295,12 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
     if (isColumnsMatch) {
         var asMapping = {}
         var fromSplit = nowText.toLowerCase().split('from')
+        var tableList = getLocalStorage(localStorageName.tableList + sql_conn_name + ':' + sql_database);
+        var tableMap = {}
+        for (var xx in tableList) {
+            tableMap[tableList[xx]] = 1
+            tableMap[`\`${tableList[xx]}\``] = 1
+        }
         if (fromSplit.length > 1) {
             for (var z = 1; z < fromSplit.length; z++) {
                 var whereStr = fromSplit[z].split('where')[0]
@@ -293,6 +310,19 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
                     var asTableStr = asTableStrSplit[asTableStrSplit.length - 1]
                     var asStr = asSplit[y].trim().split(' ')[0]
                     asMapping[asStr] = asTableStr
+                }
+                var spanSplit = whereStr.split(' ')
+                var qspan = 0
+                for (var y = 1; y < spanSplit.length; y++) {
+                    if (spanSplit[y] == "") {
+                        qspan += 1
+
+                    } else {
+                        if (tableMap[spanSplit[y - (1 + qspan)]]) {
+                            asMapping[spanSplit[y]] = spanSplit[y - (1 + qspan)]
+                        }
+                        qspan = 0
+                    }
                 }
             }
         }
@@ -322,9 +352,12 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
 function tipsSql(that) {
     var nowText = $(that).val()
     var nowIndex = that.selectionEnd
-    var nowIndexStr = nowText.substr(0, nowIndex)
+    var fromIndex = 0;
+    var nowIndexStr = nowText.substr(fromIndex, nowIndex)
     var nowIndexStrSplit = nowIndexStr.split(' ')
     var nowSearchText = nowIndexStrSplit[nowIndexStrSplit.length - 1]
+    nowIndexStrSplit = nowSearchText.split('\n')
+    nowSearchText = nowIndexStrSplit[nowIndexStrSplit.length - 1]
 
     var nowIndexEndStr = nowText.substr(nowIndex, nowText.length)
     if (nowIndexEndStr && nowIndexEndStr.substr(0, 1) != ' ') {
@@ -434,7 +467,7 @@ function deletesavesql(clickzdysqlsave) {
 }
 
 function saveZdySql() {
-    if(!$("#zdysql").val().trim()){
+    if (!$("#zdysql").val().trim()) {
         alert("Sql无内容，保存失败")
         return;
     }
@@ -482,13 +515,13 @@ function sqllistimport(input) {
         for (var index in config) {
             var conn = config[index]
             if (conn.sql_name) {
-                var cansave =true
-                for (var xxx in zdysqlsavelist){
-                    if (zdysqlsavelist[xxx]==conn.sql_name){
-                        cansave=false
+                var cansave = true
+                for (var xxx in zdysqlsavelist) {
+                    if (zdysqlsavelist[xxx] == conn.sql_name) {
+                        cansave = false
                     }
                 }
-                if(cansave){
+                if (cansave) {
                     zdysqlsavelist.push(conn.sql_name)
                 }
 
@@ -649,13 +682,13 @@ $(function () {
         var xnowSqlName = that.attr('sql-name')
         selectlistsql(xnowSqlName, false)
     })
-    $("html,body").scroll(function (){
+    $("html,body").scroll(function () {
         var tablediv2offsettop = $("#tablediv2").offset().top
-        if ($("#tablediv2").css('display') == 'block'){
+        if ($("#tablediv2").css('display') == 'block') {
             if (tablediv2offsettop > 10) {
-                $("#sqllistbox").css({'display':''})
-            }else {
-                $("#sqllistbox").css({'display':'none'})
+                $("#sqllistbox").css({'display': ''})
+            } else {
+                $("#sqllistbox").css({'display': 'none'})
             }
         }
 
