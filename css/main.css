@@ -229,6 +229,7 @@ input[type="checkbox"] {
     box-sizing: border-box;
     -moz-box-sizing: border-box; /* Firefox */
     -webkit-box-sizing: border-box; /* Safari */
+    border-radius: 5px;
 }
 
 #lodingbg {
@@ -267,6 +268,7 @@ input[type="checkbox"] {
     color: white;
     text-align: left;
     min-width: 15px;
+    border-radius: 4px;
 }
 
 .kjlb li.t {
