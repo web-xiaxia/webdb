@@ -12,10 +12,16 @@
         display: none; /* Chrome Safari */
     }
 }
-
+/*
 @font-face {
     font-family: "iconfont";
     src: url('/webdb/font/iconfont.ttf?t=1632109433384') format('truetype');
+}*/
+@font-face {
+    font-family: 'iconfont';  /* Project id 2824470 */
+    src: url('//at.alicdn.com/t/font_2824470_1o5r854vxxb.woff2?t=1632113470868') format('woff2'),
+    url('//at.alicdn.com/t/font_2824470_1o5r854vxxb.woff?t=1632113470868') format('woff'),
+    url('//at.alicdn.com/t/font_2824470_1o5r854vxxb.ttf?t=1632113470868') format('truetype');
 }
 
 .iconfont {
@@ -37,6 +43,10 @@ html, body {
     box-sizing: border-box;
     -moz-box-sizing: border-box; /* Firefox */
     -webkit-box-sizing: border-box; /* Safari */
+}
+ul,ol{
+    margin: 0px;
+    padding: 0px;
 }
 
 input {
@@ -61,23 +71,38 @@ input[type="checkbox"] {
     box-sizing: border-box;
     -moz-box-sizing: border-box; /* Firefox */
     -webkit-box-sizing: border-box; /* Safari */
+    overflow: hidden;
+    padding-top: 37px;
 }
 
 .window-box {
     padding: 5px 5px;
     width: 100%;
     height: 100%;
+    overflow: hidden;
     box-sizing: border-box;
     -moz-box-sizing: border-box; /* Firefox */
     -webkit-box-sizing: border-box; /* Safari */
 }
+.window-title-btn{
+    color: white;
+    float: right;
+    border: 1px solid white;
+    width: 20px;
+    text-align: center;
+    border-radius: 3px;
+}
 
 .title {
+    margin-top: -37px;
     padding: 5px;
     background: #387ef5;
     border: 1px solid #387ef5;
     color: white;
-    height: 22px;
+    height: 37px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
 }
 
 .btn {
