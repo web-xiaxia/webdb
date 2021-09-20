@@ -34,7 +34,7 @@
         <a id="pagedowm" href="javascript:void(0)">下一页</a>
 
         <select id="pagenum" style="height: 17px;font-size: 13px; line-height: 17px;">
-            <option value="15">15</option>
+            <option value="25">25</option>
             <option value="50">50</option>
             <option value="100">100</option>
             <option value="1000">1000</option>

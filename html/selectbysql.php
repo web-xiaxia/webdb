@@ -35,7 +35,7 @@
     <div id="zdysqlmain" style="text-align: center;padding-bottom: 10px;">
         <div style="padding: 0 5px;box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box; ">
             <textarea id="zdysql" rows="10"
-                      style="width: 100%;box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box;  border: 1px solid #387EF5; border-radius: 2px;"></textarea>
+                      style="width: 100%;box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box;  border: 1px solid #387EF5; border-radius: 2px;-webkit-user-select:auto;"></textarea>
         </div>
         <table width="100%">
             <tr>
