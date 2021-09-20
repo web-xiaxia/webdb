@@ -690,11 +690,11 @@ function getTableData() {
                     }
                     var oderbyobjcolumnname = oderbyobj[mysql_table_column];
                     var querywhereobjcolumn = querywhereobj[mysql_table_column];
-                    var oderbytip = "&#xe6f6;"
+                    var oderbytip = "&#xe879;"
                     if (oderbyobjcolumnname){
                         var oderbyobjcolumnnamesplit = oderbyobjcolumnname.trim().split(" ")
                         if (oderbyobjcolumnnamesplit.length>1&&oderbyobjcolumnnamesplit[oderbyobjcolumnnamesplit.length-1].toLowerCase()=='desc'){
-                            oderbytip = '&#xe6f7;'
+                            oderbytip = '&#xe878;'
                         }
                     }
 
