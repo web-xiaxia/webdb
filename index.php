@@ -35,6 +35,7 @@
         ?>
     </style>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/sql-formatter@latest/dist/sql-formatter.min.js"></script>
     <script type="text/javascript">
 
         function test_start(str, start_array) {

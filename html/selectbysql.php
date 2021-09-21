@@ -41,6 +41,9 @@
             <tr>
                 <td><a class="btn" href="javascript:getTableData2()" id="getTableDatazdy">执行SQL</a></td>
                 <td width="35">
+                    <a class="btn iconfont" href="javascript:sqlFormat()">&#xe679;</a>
+                </td>
+                <td width="35">
                     <a class="btn iconfont" href="javascript:void(0)" id="queryhanshu">&#xeaef;</a>
                 </td>
                 <td width="35">

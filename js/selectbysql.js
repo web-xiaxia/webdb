@@ -223,28 +223,28 @@ var sqlColumnsTips = [
     {
         "show_text": "=",
         "insert_text": " = ",
-    },{
+    }, {
         "show_text": ">",
         "insert_text": " > ",
-    },{
+    }, {
         "show_text": ">=",
         "insert_text": " >= ",
-    },{
+    }, {
         "show_text": "<",
         "insert_text": " < ",
-    },{
+    }, {
         "show_text": "<=",
         "insert_text": " <= ",
-    },{
+    }, {
         "show_text": "IN",
         "insert_text": " IN () ",
-    },{
+    }, {
         "show_text": "LIKE",
         "insert_text": " LIKE '%%' ",
-    },{
+    }, {
         "show_text": "BETWEEN",
         "insert_text": " BETWEEN ",
-    },{
+    }, {
         "show_text": "BETWEEN AND",
         "insert_text": " BETWEEN  AND ",
     }
@@ -261,7 +261,7 @@ function tipColumnsFun(columns, tableMatchNowSearchColumnsText, tipdom, nowTipCo
             continue
         }
         if (nowTipColumnsIndex == tipColumnsIndex) {
-            if(!haseq) {
+            if (!haseq) {
                 haseq = tableMatchNowSearchColumnsText == field_name || tableMatchNowSearchColumnsText == `\`${field_name}\``
             }
             tipLabelAdd(tipdom, field_name, `\`${field_name}\``, startIndex, endIndex)
@@ -270,8 +270,8 @@ function tipColumnsFun(columns, tableMatchNowSearchColumnsText, tipdom, nowTipCo
     }
     if (haseq) {
         var tipdom2 = $("#sqltip")
-        for(var xx in sqlColumnsTips){
-            var sqlColumnsTip=sqlColumnsTips[xx]
+        for (var xx in sqlColumnsTips) {
+            var sqlColumnsTip = sqlColumnsTips[xx]
             tipLabelAdd(tipdom2, sqlColumnsTip.show_text, sqlColumnsTip.insert_text, endIndex, endIndex)
         }
     }
@@ -694,6 +694,15 @@ function sqlListBoxInit() {
     $("#zdysql").val(getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, false, ''));
 
     changeSaveBtnText()
+}
+
+function sqlFormat() {
+    var zdysql = $("#zdysql")
+    zdysql.val(sqlFormatter.format(zdysql.val(), {
+        language: 'mysql',
+        uppercase: true,
+    }));
+    setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, zdysql.val(), false);
 }
 
 var zdysql_input_propertychange_timeout = null
