@@ -98,6 +98,34 @@ var sqlTips = [
         "show_text": "EXISTS",
         "insert_text": "EXISTS ",
     }, {
+        "search_text": "and",
+        "show_text": "AND",
+        "insert_text": "AND ",
+    }, {
+        "search_text": "or",
+        "show_text": "OR",
+        "insert_text": "OR ",
+    }, {
+        "search_text": ">=",
+        "show_text": ">=",
+        "insert_text": ">= ",
+    }, {
+        "search_text": "<=",
+        "show_text": "<=",
+        "insert_text": "<= ",
+    }, {
+        "search_text": "like",
+        "show_text": "LIKE",
+        "insert_text": "LIKE '%%' ",
+    }, {
+        "search_text": "between",
+        "show_text": "BETWEEN",
+        "insert_text": "BETWEEN ",
+    }, {
+        "search_text": "between",
+        "show_text": "BETWEEN AND",
+        "insert_text": "BETWEEN  AND",
+    }, {
         "search_text": "group",
         "show_text": "GROUP BY",
         "insert_text": "GROUP BY ",
@@ -191,10 +219,43 @@ var sqlTips = [
         "insert_text": "UPPER( ",
     }
 ]
+var sqlColumnsTips = [
+    {
+        "show_text": "=",
+        "insert_text": " = ",
+    },{
+        "show_text": ">",
+        "insert_text": " > ",
+    },{
+        "show_text": ">=",
+        "insert_text": " >= ",
+    },{
+        "show_text": "<",
+        "insert_text": " < ",
+    },{
+        "show_text": "<=",
+        "insert_text": " <= ",
+    },{
+        "show_text": "IN",
+        "insert_text": " IN () ",
+    },{
+        "show_text": "LIKE",
+        "insert_text": " LIKE '%%' ",
+    },{
+        "show_text": "BETWEEN",
+        "insert_text": " BETWEEN ",
+    },{
+        "show_text": "BETWEEN AND",
+        "insert_text": " BETWEEN  AND ",
+    }
+]
 
 var tipColumnsIndex = 0;
 
 function tipColumnsFun(columns, tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex) {
+    var addnum = 0
+    var lasteq = false
+    var lasteqfield_name= null
     for (var index in columns) {
         var field_name = columns[index]['Field']
         console.log(field_name, tableMatchNowSearchColumnsText)
@@ -202,7 +263,24 @@ function tipColumnsFun(columns, tableMatchNowSearchColumnsText, tipdom, nowTipCo
             continue
         }
         if (nowTipColumnsIndex == tipColumnsIndex) {
-            tipLabelAdd(tipdom, field_name, `\`${field_name}\``, startIndex, endIndex)
+            lasteq = tableMatchNowSearchColumnsText == field_name || tableMatchNowSearchColumnsText == `\`${field_name}\``
+            addnum += 1
+            if(addnum==1 && lasteq){
+                lasteqfield_name = field_name
+            }else{
+                if(lasteqfield_name){
+                    tipLabelAdd(tipdom, lasteqfield_name, `\`${lasteqfield_name}\``, startIndex, endIndex)
+                    lasteqfield_name=null
+                }
+                tipLabelAdd(tipdom, field_name, `\`${field_name}\``, startIndex, endIndex)
+            }
+        }
+
+    }
+    if (nowTipColumnsIndex == tipColumnsIndex && addnum == 1 && lasteq) {
+        for(var xx in sqlColumnsTips){
+            var sqlColumnsTip=sqlColumnsTips[xx]
+            tipLabelAdd(tipdom, sqlColumnsTip.show_text, sqlColumnsTip.insert_text, endIndex, endIndex)
         }
     }
 }
@@ -626,6 +704,7 @@ function sqlListBoxInit() {
     changeSaveBtnText()
 }
 
+var zdysql_input_propertychange_timeout = null
 $(function () {
     $("#zdysql").keyup(function () {
         setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, $(this).val(), false);
@@ -636,7 +715,13 @@ $(function () {
 
     $("#zdysql").on("input propertychange", function () {
         setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, $(this).val(), false);
-        tipsSql(this)
+        if (zdysql_input_propertychange_timeout) {
+            clearTimeout(zdysql_input_propertychange_timeout)
+        }
+        var that = this
+        zdysql_input_propertychange_timeout = setTimeout(function () {
+            tipsSql(that)
+        }, 50)
     });
     $("#zdysql").click(function () {
         tipsSql(this)

@@ -72,7 +72,8 @@
     margin: 0px 3px 3px 3px;
     padding: 2px 0px;
     overflow-x: scroll;
-    min-height: 20px;
+    min-height: 22px;
+    height: 22px;
     line-height: 20px;
     border: 1px solid #387ef5;
     border-radius: 5px;

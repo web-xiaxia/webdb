@@ -64,14 +64,18 @@
                 <li data="`">`</li>
                 <li data="-">-</li>
                 <li data="/">/</li>
+                <li data=":">:</li>
                 <li data=";">;</li>
             </ul>
             <ul class="kjlb">
-                <li data=" > ">></li>
-                <li data=" < "><</li>
                 <li data=" = ">=</li>
+                <li data=" > ">></li>
+                <li data=" >= ">>=</li>
+                <li data=" < "><</li>
+                <li data=" <= "><=</li>
                 <li data=" LIKE ">LIKE</li>
                 <li data="%">%</li>
+                <li data=" in ()">in</li>
                 <li data=" (">(</li>
                 <li data=") ">)</li>
             </ul>
@@ -92,7 +96,6 @@
                 <li data=" ON ">on</li>
             </ul>-->
             <ul class="kjlb">
-                <li data=" WHERE ">WHERE</li>
                 <li data=" AND ">AND</li>
                 <li data=" OR ">OR</li>
                 <li data=" IS ">IS</li>
@@ -100,10 +103,7 @@
                 <li data=" NULL ">NULL</li>
                 <li data=" IN ">IN</li>
                 <li data=" EXISTS ">EXISTS</li>
-                <li data=" GROUP BY ">GROUP</li>
-                <li data=" ORDER BY ">ORDER</li>
                 <li data=" LIMIT 0,100 ">LIMIT 100</li>
-
             </ul>
 
         </div>
