@@ -130,7 +130,7 @@
         <div class="title"><span class="content">插入函数</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
-                <ul class="kjlb" id="hanshufunlist">
+                <ul class="kjlb2" id="hanshufunlist">
 
                 </ul>
             </div>
@@ -149,7 +149,7 @@
                     <input type="text" id="tablenamelistul_input" class="btn"
                            style="width: 80%; margin: 0 auto; background: white; color: black;"/>
                 </div>
-                <ul class="kjlb" id="tablenamelistul">
+                <ul class="kjlb2" id="tablenamelistul">
 
                 </ul>
             </div>
@@ -185,7 +185,7 @@
                     <input type="text" id="tablencoumnsul_input" class="btn"
                            style="width: 80%; margin: 0 auto; background: white; color: black;"/>
                 </div>
-                <ul class="kjlb" id="tablencoumnsul">
+                <ul class="kjlb2" id="tablencoumnsul">
 
                 </ul>
             </div>

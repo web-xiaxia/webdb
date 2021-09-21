@@ -189,6 +189,31 @@ function tablefiltercontextboxadd(table_filter) {
     var bpx = $(`<div class="filter_box" data-name="${table_filter.name}"></div>`)
     bpx.append(bpxl1)
     bpx.append(bpxl2)
+    bpx.append($(`<div style="text-align: center; display: none;">
+        <ul class="kjlb4">
+            <li data=",">,</li>
+            <li data=".">.</li>
+            <li data="'">'</li>
+            <li data='"'>"</li>
+            <li data="\`">\`</li>
+            <li data="-">-</li>
+            <li data="/">/</li>
+            <li data=":">:</li>
+            <li data=";">;</li>
+        </ul>
+        <ul class="kjlb4">
+            <li data=" = ">=</li>
+            <li data=" > ">></li>
+            <li data=" >= ">>=</li>
+            <li data=" < "><</li>
+            <li data=" <= "><=</li>
+            <li data=" LIKE '%%'">LIKE</li>
+            <li data="%">%</li>
+            <li data=" in ()">in</li>
+            <li data=" (">(</li>
+            <li data=") ">)</li>
+        </ul>
+    </div>`))
     return bpx
 }
 

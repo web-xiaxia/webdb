@@ -25,8 +25,7 @@
 @font-face {
     font-family: 'iconfont';  /* Project id 2824470 */
     src: url('//at.alicdn.com/t/font_2824470_erf30vdnazb.eot?t=1632215814893'); /* IE9 */
-    src: url('//at.alicdn.com/t/font_2824470_erf30vdnazb.eot?t=1632215814893#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('//at.alicdn.com/t/font_2824470_erf30vdnazb.woff2?t=1632215814893') format('woff2'),
+    src: url('//at.alicdn.com/t/font_2824470_erf30vdnazb.eot?t=1632215814893#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('//at.alicdn.com/t/font_2824470_erf30vdnazb.woff2?t=1632215814893') format('woff2'),
     url('//at.alicdn.com/t/font_2824470_erf30vdnazb.woff?t=1632215814893') format('woff'),
     url('//at.alicdn.com/t/font_2824470_erf30vdnazb.ttf?t=1632215814893') format('truetype'),
     url('//at.alicdn.com/t/font_2824470_erf30vdnazb.svg?t=1632215814893#iconfont') format('svg');
@@ -260,7 +259,7 @@ input[type="checkbox"] {
     z-index: 9999;
 }
 
-.kjlb, .kjlb2, .kjlb3, .kjlb4{
+.kjlb, .kjlb2, .kjlb3, .kjlb4 {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -273,12 +272,16 @@ input[type="checkbox"] {
     padding: 4px 4px;
     background-color: #387ef5;
     color: white;
-    text-align: left;
+    text-align: center;
     min-width: 15px;
     border-radius: 4px;
 }
 
-.kjlb li.t {
+.kjlb2 li {
+    text-align: left;
+}
+
+.kjlb2 li.t {
     background-color: #FF7C13;
     width: 100%;
     text-align: left;
