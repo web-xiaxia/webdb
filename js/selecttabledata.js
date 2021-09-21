@@ -331,16 +331,16 @@ $(function () {
         if (tablefilterfilterhinttimeout) {
             clearTimeout(tablefilterfilterhinttimeout)
         }
+        $("#tablefiltercontextbox").find('.filter_hint').css({"display": 'none'})
         $(this).parents('.filter_box').find('.filter_hint').css({"display": ''})
     })
     $("#tablefiltercontextbox").delegate(".filter_value", "blur", function () {
-        var that = this
         if (tablefilterfilterhinttimeout) {
             clearTimeout(tablefilterfilterhinttimeout)
         }
 
         tablefilterfilterhinttimeout = setTimeout(function () {
-            $(that).parents('.filter_box').find('.filter_hint').css({"display": 'none'})
+            $("#tablefiltercontextbox").find('.filter_hint').css({"display": 'none'})
         }, 500)
     })
 
