@@ -67,7 +67,7 @@ function inittabledata() {
         zdycolumnswindowcontext.append(`<div><input type="checkbox" class="zdycolumns" id="zdycolumns${column_name}" checked> <label for="zdycolumns${column_name}">${column_name}</label> </div>`)
         filter_columns_option_list.push(`<option value="${column_name}">${column_name}</option>`)
     }
-    getTableData();
+    pageSy();
     $("#tabledata").slideDown(gddhms);
 }
 
