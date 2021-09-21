@@ -164,18 +164,24 @@
                     <li data=",">,</li>
                     <li data=".">.</li>
                     <li data="'">'</li>
+                    <li data='"'>"</li>
+                    <li data="`">`</li>
                     <li data="-">-</li>
                     <li data="/">/</li>
-                    <li data=" (">(</li>
-                    <li data=") ">)</li>
+                    <li data=":">:</li>
                     <li data=";">;</li>
                 </ul>
                 <ul class="kjlb3">
-                    <li data=" > ">></li>
-                    <li data=" < "><</li>
                     <li data=" = ">=</li>
-                    <li data=" LIKE ">LIKE</li>
+                    <li data=" > ">></li>
+                    <li data=" >= ">>=</li>
+                    <li data=" < "><</li>
+                    <li data=" <= "><=</li>
+                    <li data=" LIKE '%%'">LIKE</li>
                     <li data="%">%</li>
+                    <li data=" in ()">in</li>
+                    <li data=" (">(</li>
+                    <li data=") ">)</li>
                 </ul>
                 <ul class="kjlb3">
                     <li data=" DATE_FORMAT('','%Y-%m-%d %H:%s:%i') ">DATE_FORMAT</li>
@@ -199,6 +205,7 @@
 
                 </div>
                 <div style="position: sticky;bottom: 0px; background: white; text-align: center">
+
                     <a class="btn" style="display: inline-block;padding: 5px 15px;"
                        href="javascript:open_table_filter('btn')">开启过滤</a>
                     <a class="btn" style="display: inline-block;padding: 5px 15px;"

@@ -260,14 +260,14 @@ input[type="checkbox"] {
     z-index: 9999;
 }
 
-.kjlb, .kjlb2, .kjlb3 {
+.kjlb, .kjlb2, .kjlb3, .kjlb4{
     list-style: none;
     padding: 0;
     margin: 0;
     font-size: 12px;
 }
 
-.kjlb li, .kjlb2 li, .kjlb3 li {
+.kjlb li, .kjlb2 li, .kjlb3 li, .kjlb4 li {
     display: inline-block;
     margin: 3px 0px 3px 0;
     padding: 4px 4px;

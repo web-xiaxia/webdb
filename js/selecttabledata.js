@@ -76,7 +76,7 @@ function close_table_filter(source) {
     $('#tablefiltertipbox').css({'color': 'black'})
     if (source == 'btn') {
         closefloatmain("#tablefilterbox")
-        getTableData();
+        pageSy()
     }
 }
 
@@ -85,7 +85,7 @@ function open_table_filter(source) {
     $('#tablefiltertipbox').css({'color': '#0062ff'})
     if (source == 'btn') {
         closefloatmain("#tablefilterbox")
-        getTableData();
+        pageSy()
     }
 }
 
@@ -207,6 +207,19 @@ function change_table_filter_info(that, v) {
             setLocalStorage(localStorageName.tablefilterinfo + conn_name + ":" + database + ":" + table + ':' + data_name, table_filter);
         }
     }
+}
+
+function pageSy(){
+    var conn_name = GetMaoQueryString('conn_name')
+    var database = GetMaoQueryString('database')
+    var table = GetMaoQueryString('table')
+    var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
+        'data_num': 15,
+        'data_page': 1,
+    });
+    table_data_page.data_page = 1;
+    setLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, table_data_page)
+    getTableData();
 }
 
 $(function () {
@@ -439,16 +452,7 @@ $(function () {
     });
 
     $("#pagesy").click(function () {
-        var conn_name = GetMaoQueryString('conn_name')
-        var database = GetMaoQueryString('database')
-        var table = GetMaoQueryString('table')
-        var table_data_page = getLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, true, {
-            'data_num': 15,
-            'data_page': 1,
-        });
-        table_data_page.data_page = 1;
-        setLocalStorage(localStorageName.tablePage + conn_name + ":" + database + ":" + table, table_data_page)
-        getTableData();
+        pageSy()
     })
     $("#pageup").click(function () {
         var conn_name = GetMaoQueryString('conn_name')
