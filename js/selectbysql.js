@@ -252,21 +252,55 @@ var sqlColumnsTips = [
 
 var tipColumnsIndex = 0;
 
-function tipColumnsFun(columns, tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex) {
-    var haseq = false
-    for (var index in columns) {
-        var field_name = columns[index]['Field']
-        console.log(field_name, tableMatchNowSearchColumnsText)
-        if (tableMatchNowSearchColumnsText && !test_start(tableMatchNowSearchColumnsText, [field_name, `\`${field_name}\``])) {
-            continue
+function sortTipText(arr, tableMatchNowSearchColumnsText, fun) {
+    tableMatchNowSearchColumnsText = tableMatchNowSearchColumnsText.toLowerCase()
+    var rarr = []
+    for (var x in arr) {
+        var x2 = fun(arr[x], tableMatchNowSearchColumnsText)
+        if (x2) {
+            rarr.push(x2)
         }
+    }
+
+    rarr.sort(function (a,b) {
+        var asum = 0
+        var bsum = 0
+        if(a == tableMatchNowSearchColumnsText){
+            asum+=1000000000
+        }
+        if(b == tableMatchNowSearchColumnsText){
+            bsum+=1000000000
+        }
+        var axindex = a.indexOf(tableMatchNowSearchColumnsText)
+        var bxindex = b.indexOf(tableMatchNowSearchColumnsText)
+        asum+=(10000-(axindex == -1?10000:axindex))*1000000
+        bsum+=(10000-(bxindex == -1?10000:bxindex))*1000000
+        asum+=(10000-a.length)
+        bsum+=(10000-b.length)
+        return bsum-asum
+    })
+
+    return rarr
+}
+
+function tipColumnsFun(columns, tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex) {
+    var tipsarr = sortTipText(columns, tableMatchNowSearchColumnsText, function (a, b) {
+        var field_name = a['Field'].toLowerCase()
+        if (b && !test_start(b, [field_name, `\`${field_name}\``])) {
+            return
+        }
+        return field_name;
+    });
+
+    var haseq = false
+    for (var index in tipsarr) {
+        var field_name = tipsarr[index]
         if (nowTipColumnsIndex == tipColumnsIndex) {
             if (!haseq) {
                 haseq = tableMatchNowSearchColumnsText == field_name || tableMatchNowSearchColumnsText == `\`${field_name}\``
             }
             tipLabelAdd(tipdom, field_name, `\`${field_name}\``, startIndex, endIndex)
         }
-
     }
     if (haseq) {
         var tipdom2 = $("#sqltip")
@@ -362,15 +396,17 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
         isColumnsMatch = true
     }
 
+    var tableList = getLocalStorage(localStorageName.tableList + sql_conn_name + ':' + sql_database);
+    var tableMap = {}
+    for (var xx in tableList) {
+        tableMap[tableList[xx]] = 1
+        tableMap[`\`${tableList[xx]}\``] = 1
+    }
+
     if (isColumnsMatch) {
         var asMapping = {}
         var fromSplit = nowText.toLowerCase().split('from')
-        var tableList = getLocalStorage(localStorageName.tableList + sql_conn_name + ':' + sql_database);
-        var tableMap = {}
-        for (var xx in tableList) {
-            tableMap[tableList[xx]] = 1
-            tableMap[`\`${tableList[xx]}\``] = 1
-        }
+
         if (fromSplit.length > 1) {
             for (var z = 1; z < fromSplit.length; z++) {
                 var whereStr = fromSplit[z].split('where')[0]
@@ -400,27 +436,30 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
             tableMatchNowSearchText = asMapping[tableMatchNowSearchText]
         }
     }
-
-    var tableList = getLocalStorage(localStorageName.tableList + sql_conn_name + ':' + sql_database);
-    for (var index in tableList) {
-        var tableName = tableList[index]
-        var table = tableName.toLowerCase()
-
-        if (isColumnsMatch) {
-            if (table == tableMatchNowSearchText || `\`${table}\`` == tableMatchNowSearchText) {
-                tipColumns(`\`${tableName}\``, tableMatchNowSearchColumnsText, tips2_box, tipColumnsIndex, nowIndex - tableMatchNowSearchColumnsText.length, nowIndex)
-            }
-        } else {
-            if (table.indexOf(tableMatchNowSearchText) != -1 || `\`${table}\``.indexOf(tableMatchNowSearchText) != -1) {
-                tipLabelAdd(tips2_box, tableName, `\`${tableName}\``, nowIndex - tableMatchNowSearchText.length, nowIndex)
-
-            }
+    if (isColumnsMatch && tableMap[tableMatchNowSearchText]) {
+        if (tableMap[`\`${tableMatchNowSearchText}\``]) {
+            tableMatchNowSearchText = `\`${tableMatchNowSearchText}\``
         }
+        tipColumns(tableMatchNowSearchText, tableMatchNowSearchColumnsText, tips2_box, tipColumnsIndex, nowIndex - tableMatchNowSearchColumnsText.length, nowIndex)
+    } else {
+        var tipsarr = sortTipText(tableList, tableMatchNowSearchText, function (a, b) {
+            var table = a.toLowerCase()
+            if (table.indexOf(b) != -1 || `\`${table}\``.indexOf(b) != -1) {
+                return a;
+            }
+            return null;
+        });
+        for (var index in tipsarr) {
+            var tableName = tipsarr[index]
+            tipLabelAdd(tips2_box, tableName, `\`${tableName}\``, nowIndex - tableMatchNowSearchText.length, nowIndex)
+        }
+
     }
+
 }
 
 function tipsSql(that) {
-    var nowText = $(that).val().replace(/\n/g,' ')
+    var nowText = $(that).val().replace(/\n/g, ' ')
     var nowIndex = that.selectionEnd
     var fromIndex = 0;
     var nowIndexStr = nowText.substr(fromIndex, nowIndex)
