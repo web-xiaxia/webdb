@@ -189,7 +189,15 @@ function tablefiltercontextboxadd(table_filter) {
     var bpx = $(`<div class="filter_box" data-name="${table_filter.name}"></div>`)
     bpx.append(bpxl1)
     bpx.append(bpxl2)
-    bpx.append($(`<div style="text-align: center; display: none;">
+    bpx.append($(`<div class="filter_hint" style="text-align: left; display: none;">
+        <ul class="kjlb4">
+            <li data=" AND ">AND</li>
+            <li data=" OR ">OR</li>
+            <li data=" IS ">IS</li>
+            <li data=" NOT ">NOT</li>
+            <li data=" NULL">NULL</li>
+            <li data=" IN ">IN</li>
+        </ul>
         <ul class="kjlb4">
             <li data=",">,</li>
             <li data=".">.</li>
@@ -234,7 +242,7 @@ function change_table_filter_info(that, v) {
     }
 }
 
-function pageSy(){
+function pageSy() {
     var conn_name = GetMaoQueryString('conn_name')
     var database = GetMaoQueryString('database')
     var table = GetMaoQueryString('table')
@@ -248,17 +256,21 @@ function pageSy(){
 }
 
 $(function () {
-    var tablefiltertipboxtouchtimeout=null
-    $("#tableffff").on('touchstart',function (){
-        tablefiltertipboxtouchtimeout=setTimeout(function (){
-            $("#tableffff").css({'display':"none"})
-            setTimeout(function (){
+    var tablefiltertipboxtouchtimeout = null
+    var tablefilterfilterhinttimeout = null
+    $("#tableffff").on('touchstart', function () {
+        if (tablefiltertipboxtouchtimeout) {
+            clearTimeout(tablefiltertipboxtouchtimeout)
+        }
+        tablefiltertipboxtouchtimeout = setTimeout(function () {
+            $("#tableffff").css({'display': "none"})
+            setTimeout(function () {
                 window.getSelection().removeAllRanges()
-                $("#tableffff").css({'display':""})
-            },3000)
-        },1000)
+                $("#tableffff").css({'display': ""})
+            }, 3000)
+        }, 1000)
     })
-    $("#tableffff").on('touchend',function (){
+    $("#tableffff").on('touchend', function () {
         clearTimeout(tablefiltertipboxtouchtimeout)
     })
     $("#tablefiltertipbox").click(function () {
@@ -305,6 +317,33 @@ $(function () {
             'value': $(this).val()
         })
     })
+    $("#tablefiltercontextbox").delegate("li", "click", function () {
+
+        var filter_value = $(this).parents('.filter_box').find('.filter_value')[0]
+        filter_value.focus()
+        var xfilter_value = $(filter_value)
+        xfilter_value.val(xfilter_value.val() + $(this).attr('data'))
+        change_table_filter_info(filter_value, {
+            'value': xfilter_value.val()
+        })
+    })
+    $("#tablefiltercontextbox").delegate(".filter_value", "focus", function () {
+        if (tablefilterfilterhinttimeout) {
+            clearTimeout(tablefilterfilterhinttimeout)
+        }
+        $(this).parents('.filter_box').find('.filter_hint').css({"display": ''})
+    })
+    $("#tablefiltercontextbox").delegate(".filter_value", "blur", function () {
+        var that = this
+        if (tablefilterfilterhinttimeout) {
+            clearTimeout(tablefilterfilterhinttimeout)
+        }
+
+        tablefilterfilterhinttimeout = setTimeout(function () {
+            $(that).parents('.filter_box').find('.filter_hint').css({"display": 'none'})
+        }, 500)
+    })
+
     $("#zshow_one_data_input").on("input propertychange", function () {
         var aaa = $(this).val()
         var tablesList = $('.show_one_data_field_box')
@@ -567,7 +606,7 @@ function xuhao_td(d, conn_name, database, table, sqldata) {
     return bttd
 }
 
-function getTableQueryData(){
+function getTableQueryData() {
     var conn_name = GetMaoQueryString('conn_name')
     var database = GetMaoQueryString('database')
     var table = GetMaoQueryString('table')
@@ -576,9 +615,9 @@ function getTableQueryData(){
         window.location.hash = `#tables?conn_name=${conn_name}&database=${database}`;
         return;
     }
-    var oderbyobjdef={}
+    var oderbyobjdef = {}
     if (table_columns.mysql_table_columns_id != null) {
-        oderbyobjdef[table_columns.mysql_table_columns_id]=` \`${table_columns.mysql_table_columns_id}\` desc `
+        oderbyobjdef[table_columns.mysql_table_columns_id] = ` \`${table_columns.mysql_table_columns_id}\` desc `
     }
     var querywhereobj = getLocalStorage(localStorageName.querywhereobj + conn_name + ":" + database + ":" + table, true, {});
     var oderbyobj = getLocalStorage(localStorageName.oderbyobj + conn_name + ":" + database + ":" + table, true, oderbyobjdef);
@@ -641,7 +680,7 @@ function getTableQueryData(){
         }
     }
     return {
-        "query_data":{
+        "query_data": {
             'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
             'mysql_database': database,
             'mysql_table': table,
@@ -651,16 +690,17 @@ function getTableQueryData(){
             'data_num': table_data_page.data_num,
             'data_page': table_data_page.data_page,
         },
-        'conn_name':conn_name,
-        'database':database,
-        'table':table,
-        'table_columns':table_columns,
-        'oderbyobj':oderbyobj,
-        'querywhereobj':querywhereobj,
+        'conn_name': conn_name,
+        'database': database,
+        'table': table,
+        'table_columns': table_columns,
+        'oderbyobj': oderbyobj,
+        'querywhereobj': querywhereobj,
     }
 }
+
 function getTableDataCount() {
-    var queryDataFull =getTableQueryData()
+    var queryDataFull = getTableQueryData()
     var query_data = queryDataFull.query_data
     openLoding()
     $('#page-other-count').text('无')
@@ -673,16 +713,17 @@ function getTableDataCount() {
             closeLoding()
             if (data == false) {
                 alert("数据库连接失败")
-            }else{
+            } else {
                 $('#page-other-count').text(data['count'])
             }
         }
     })
 }
+
 function getTableData() {
     openLoding()
 
-    var queryDataFull =getTableQueryData()
+    var queryDataFull = getTableQueryData()
     var query_data = queryDataFull.query_data
     var conn_name = queryDataFull.conn_name
     var database = queryDataFull.database
@@ -720,14 +761,14 @@ function getTableData() {
                     var oderbyobjcolumnname = oderbyobj[mysql_table_column];
                     var querywhereobjcolumn = querywhereobj[mysql_table_column];
                     var oderbytip = "&#xe876;"
-                    if (oderbyobjcolumnname){
+                    if (oderbyobjcolumnname) {
                         var oderbyobjcolumnnamesplit = oderbyobjcolumnname.trim().split(" ")
-                        if (oderbyobjcolumnnamesplit.length>1&&oderbyobjcolumnnamesplit[oderbyobjcolumnnamesplit.length-1].toLowerCase()=='desc'){
+                        if (oderbyobjcolumnnamesplit.length > 1 && oderbyobjcolumnnamesplit[oderbyobjcolumnnamesplit.length - 1].toLowerCase() == 'desc') {
                             oderbytip = '&#xe875;'
                         }
                     }
 
-                    ttr2.append('<td data-column="' + mysql_table_column + '" >' + mysql_table_column + (querywhereobjcolumn == null ? "" : "<span class='iconfont' style='color:red'> &#xe612;</span>") + (oderbyobjcolumnname == null ? "" : "<span class='iconfont' style='color: #feff08'> "+oderbytip+"</span>") + '</td>')
+                    ttr2.append('<td data-column="' + mysql_table_column + '" >' + mysql_table_column + (querywhereobjcolumn == null ? "" : "<span class='iconfont' style='color:red'> &#xe612;</span>") + (oderbyobjcolumnname == null ? "" : "<span class='iconfont' style='color: #feff08'> " + oderbytip + "</span>") + '</td>')
                 }
                 $("#tabledatashowthead").append(ttr2);
                 var xxtabledatashowtbody = $("#tabledatashowtbody");
