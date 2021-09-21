@@ -253,9 +253,7 @@ var sqlColumnsTips = [
 var tipColumnsIndex = 0;
 
 function tipColumnsFun(columns, tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex) {
-    var addnum = 0
-    var lasteq = false
-    var lasteqfield_name= null
+    var haseq = false
     for (var index in columns) {
         var field_name = columns[index]['Field']
         console.log(field_name, tableMatchNowSearchColumnsText)
@@ -263,24 +261,18 @@ function tipColumnsFun(columns, tableMatchNowSearchColumnsText, tipdom, nowTipCo
             continue
         }
         if (nowTipColumnsIndex == tipColumnsIndex) {
-            lasteq = tableMatchNowSearchColumnsText == field_name || tableMatchNowSearchColumnsText == `\`${field_name}\``
-            addnum += 1
-            if(addnum==1 && lasteq){
-                lasteqfield_name = field_name
-            }else{
-                if(lasteqfield_name){
-                    tipLabelAdd(tipdom, lasteqfield_name, `\`${lasteqfield_name}\``, startIndex, endIndex)
-                    lasteqfield_name=null
-                }
-                tipLabelAdd(tipdom, field_name, `\`${field_name}\``, startIndex, endIndex)
+            if(!haseq) {
+                haseq = tableMatchNowSearchColumnsText == field_name || tableMatchNowSearchColumnsText == `\`${field_name}\``
             }
+            tipLabelAdd(tipdom, field_name, `\`${field_name}\``, startIndex, endIndex)
         }
 
     }
-    if (nowTipColumnsIndex == tipColumnsIndex && addnum == 1 && lasteq) {
+    if (haseq) {
+        var tipdom2 = $("#sqltip")
         for(var xx in sqlColumnsTips){
             var sqlColumnsTip=sqlColumnsTips[xx]
-            tipLabelAdd(tipdom, sqlColumnsTip.show_text, sqlColumnsTip.insert_text, endIndex, endIndex)
+            tipLabelAdd(tipdom2, sqlColumnsTip.show_text, sqlColumnsTip.insert_text, endIndex, endIndex)
         }
     }
 }
