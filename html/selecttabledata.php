@@ -29,23 +29,20 @@
         </table>
     </div>
     <div style="position: fixed;bottom: 0; border-top:1px solid #e5e5e5; background:white;z-index: 1001;width: 100%; padding: 3px 0 3px 13px">
-        <a id="pagesy" href="javascript:void(0)">首页</a>
-        <a id="pageup" href="javascript:void(0)">上一页</a>
-        <a id="pagedowm" href="javascript:void(0)">下一页</a>
-
+        <a id="pagesy" href="javascript:void(0)" class="iconfont">&#xe60e;</a><!--第一页-->
+        <a id="pageup" href="javascript:void(0)" class="iconfont">&#xe746;</a><!--上一页-->
+        <a id="pagedowm" href="javascript:void(0)" class="iconfont">&#xe642;</a><!--下一页-->
+        <a id="pagerefresh" class="iconfont" href="javascript:void(0)">&#xe601;</a><!--刷新-->
         <select id="pagenum" style="height: 17px;font-size: 13px; line-height: 17px;">
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="100">100</option>
             <option value="1000">1000</option>
         </select>
-
-        <a href="javascript:btnHash('#tables')" class="iconfont" style="margin-left: 6px">&#xe70d;</a>
-        <a href="javascript:btnHash('#tabledata2')" class="iconfont" style="margin-left: 5px">&#xe600;</a>
-        <a id="tablefiltertipbox" href="javascript:void(0)" class="iconfont" style="margin-left: 5px">&#xe612;</a>
-
-        <a id="pagerefresh" href="javascript:void(0)" style="margin-left: 6px">刷新</a>
-        <a id="page—other" href="javascript:openfloatmain('#page-other-window')" style="margin-left: 6px">...</a>
+        <a id="page—other" class="iconfont" href="javascript:openfloatmain('#page-other-window')">&#xe635;</a><!--更多-->
+        <a id="tablefiltertipbox" href="javascript:void(0)" class="iconfont" style="margin-left: 3px">&#xe612;</a><!--过滤-->
+        <a href="javascript:btnHash('#tabledata2')" class="iconfont" style="margin-left: 10px">&#xe600;</a><!--sql-->
+        <a href="javascript:btnHash('#tables')" class="iconfont" style="margin-left: 3px">&#xe708;</a><!--选择表-->
     </div>
 </div>
 
@@ -114,7 +111,7 @@
             <div class="content" style="padding:0 5px;">
                 <div class="page-other-item-box">
                     <div class="page-other-item-title">
-                        总条数：<a id="page-other-count-btn" href="javascript:getTableDataCount()">刷新</a>
+                        总条数：<a id="page-other-count-btn" class="iconfont" href="javascript:getTableDataCount()">&#xe601;</a>
                     </div>
                     <div id="page-other-count" class="page-other-item-context">无</div>
                 </div>

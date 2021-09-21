@@ -1,8 +1,8 @@
 <div id="tabledata2" style="display: none">
     <div id="sqllistbox">
         <div id="sqllistbtnbox">
-            <div class="sqllistitem sqllistitembtn iconfont" onclick="btnHash('#tables')">&#xe70d;</div>
-            <div class="sqllistitem sqllistitembtn iconfont" onclick="opensqllistboxwindow()">&#xe63a;</div>
+            <div class="sqllistitem sqllistitembtn iconfont" onclick="btnHash('#tables')">&#xe708;</div>
+            <div class="sqllistitem sqllistitembtn iconfont" style="margin-top: 10px" onclick="opensqllistboxwindow()">&#xe63a;</div>
             <div id="sqllistadd" class="sqllistitem sqllistitembtn" onclick="addSqlList()">+</div>
             <div id="sqllistdelete" style="display: none" class="sqllistitem sqllistitembtn" onclick="deleteSqlList()">
                 -

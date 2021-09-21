@@ -123,10 +123,6 @@
     border: 1px solid white
 }
 */
-#tablefiltertipbox {
-    position: relative;
-}
-
 
 #tablefiltertipboxtip {
     position: absolute;
