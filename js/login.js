@@ -1,8 +1,5 @@
 function logininit() {
-    closeLoding()
-    $("#login").slideDown(gddhms);
     logincookieinit();
-
 }
 
 

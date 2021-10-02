@@ -19,6 +19,10 @@ var maodianlist = {
     "#tabledata2": {
         id: "#tabledata2",
         init: inittabledata2
+    },
+    "#choice-window": {
+        id: "#choice-window",
+        init: initchoicewindow
     }
 }
 window.onhashchange = nowurlfun;
@@ -54,6 +58,8 @@ function txxxxx(maodian) {
         }
     }
     nowmaodian = maodian.id;
+    closeLoding()
+    $(maodian.id).slideDown(gddhms);
     if (maodian.init != null) {
         maodian.init();
     }

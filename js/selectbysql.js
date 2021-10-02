@@ -5,7 +5,6 @@ var sql_database = ''
 var tempTipTablecolumns = {}
 
 function inittabledata2() {
-    $("#tabledata2").slideDown(gddhms);
     var conn_name = GetMaoQueryString('conn_name')
     var database = GetMaoQueryString('database')
     var tableList = getLocalStorage(localStorageName.tableList + conn_name + ':' + database);

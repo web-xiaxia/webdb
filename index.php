@@ -32,6 +32,7 @@
             include 'css/selectdatabases.css';
             include 'css/selecttable.css';
             include 'css/selecttabledata.css';
+            include 'css/choicewindow.css';
         ?>
     </style>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
@@ -95,6 +96,7 @@
             include 'js/selecttabledata.js';
             include 'js/updatetable.js';
             include 'js/selectbysql.js';
+            include 'js/choicewindow.js';
         ?>
     </script>
 </head>
@@ -108,6 +110,7 @@
     include 'html/selecttable.php';
     include 'html/selecttabledata.php';
     include 'html/selectbysql.php';
+    include 'html/choicewindow.php';
 ?>
 </body>
 </html>

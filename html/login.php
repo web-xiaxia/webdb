@@ -1,6 +1,8 @@
 <div id="login"  style="display: none" class="window-box">
     <div  class="window" style="height: auto;">
-        <div class="title">数据库连接</div>
+        <div class="title">数据库连接
+            <a href="javascript:choicewindow()" class="iconfont window-title-btn">&#xe69f;</a>
+        </div>
         <table>
             <tr id="oldconntr" style="display: none">
                 <td>历史连接:</td>

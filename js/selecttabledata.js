@@ -68,7 +68,6 @@ function inittabledata() {
         filter_columns_option_list.push(`<option value="${column_name}">${column_name}</option>`)
     }
     pageSy();
-    $("#tabledata").slideDown(gddhms);
 }
 
 function close_table_filter(source) {
