@@ -20,7 +20,11 @@ function initchoicewindow() {
 function addlistwindow(windowList, choice_window, last) {
     windowList.append($(`<li  class="choicewindowshowwindow" data-id="${choice_window.id}" data-url="${choice_window.url}" data-last="${last}" >
     <div>
-        <div class="wtitle">${choice_window.name}<div class="close iconfont" onclick="listwindowclose(this,${last ? false : true})">&#xe60d;</div></div>
+        <div class="wtitle">
+            ${choice_window.name}
+            <div class="tbtn iconfont" onclick="listwindowclose(this,${last ? false : true})">&#xe60d;</div>
+            <div class="tbtn iconfont" style="float: right;margin-right: 24px" onclick="choicewindowlinew(this)">&#xe65d;</div>
+        </div>
         <div class="wcontext"  onclick="choicewindowli(this)">
             <div class="wcontext2">
             <img class="wimage" src="${choice_window.image}"></image>
@@ -116,6 +120,11 @@ function savelast() {
     }
 }
 
+function choicewindowlinew(that){
+    var parent = $($(that).parents('.choicewindowshowwindow')[0])
+    window.location.open =
+    window.open( parent.attr('data-url'),"_blank");
+}
 function choicewindowli(that) {
     var parent = $($(that).parents('.choicewindowshowwindow')[0])
     if (parent.attr('data-last') != 'true') {

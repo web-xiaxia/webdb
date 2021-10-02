@@ -38,15 +38,15 @@
     overflow: hidden;
 }
 
-#choice-window-window-list .close{
+#choice-window-window-list .tbtn{
     color: white;
     font-size: 18px ;
     line-height: 24px;
     float: right;
-    padding: 0 3px;
     position: absolute;
     top:3px;
     right: 2px;
+    width: 24px;
     background: #626262;
 }
 #choice-window-window-list .wcontext{
