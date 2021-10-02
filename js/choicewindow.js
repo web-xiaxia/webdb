@@ -11,8 +11,8 @@ function initchoicewindow() {
         addlistwindow(windowList, lastchoicewindow, true)
     }
 
-    if (choice_window_list.length == 0 && !lastchoicewindow ){
-        window.location.hash='#login'
+    if (choice_window_list.length == 0 && !lastchoicewindow) {
+        window.location.hash = '#login'
     }
 }
 
@@ -20,7 +20,7 @@ function initchoicewindow() {
 function addlistwindow(windowList, choice_window, last) {
     windowList.append($(`<li  class="choicewindowshowwindow" data-id="${choice_window.id}" data-url="${choice_window.url}" data-last="${last}" >
     <div>
-        <div class="wtitle">${choice_window.name}<div class="close iconfont" onclick="listwindowclose(this,${last?false:true})">&#xe60d;</div></div>
+        <div class="wtitle">${choice_window.name}<div class="close iconfont" onclick="listwindowclose(this,${last ? false : true})">&#xe60d;</div></div>
         <div class="wcontext"  onclick="choicewindowli(this)">
             <div class="wcontext2">
             <img class="wimage" src="${choice_window.image}"></image>
@@ -30,20 +30,48 @@ function addlistwindow(windowList, choice_window, last) {
     </li>`))
 }
 
+var choicewindowing = false
+
 function choicewindow() {
-    var maodian = getmaodian(window.location.hash)
-    var maodian_name = maodian ? maodian.name : ""
-    if (maodian.id == '#tabledata') {
-        maodian_name = `${maodian_name}(${GetMaoQueryString('table')})`
+    if (choicewindowing) {
+        return
     }
+    choicewindowing = true
+
+
+    var conn_name = GetMaoQueryString('conn_name')
+    var database = GetMaoQueryString('database')
+    var window_show_name1 = ""
+    if (conn_name) {
+        window_show_name1 += conn_name
+    }
+    if (database) {
+        window_show_name1 += (' - ' + database)
+    }
+
+    var maodian = getmaodian(window.location.hash)
+    var window_show_name2 = maodian ? maodian.name : ""
+    if (maodian.id == '#tabledata') {
+        window_show_name2 = `${window_show_name2}(${GetMaoQueryString('table')})`
+    }
+
+    var window_show_name_list =[]
+    if (window_show_name1){
+        window_show_name_list.push(window_show_name1)
+    }
+    window_show_name_list.push(window_show_name2)
+
+    var window_show_name = window_show_name_list.join('<br/>')
+
     html2canvas(document.body).then(function (canvas) {
-        var strDataURI = canvas.toDataURL();
+        var strDataURI = canvas.toDataURL('image/png', 0.5);
         setLocalStorage(localStorageName.choicewindowlast, {
             id: new Date().getTime() + '',
-            name: maodian_name,
+            name: window_show_name,
             url: window.location.hash,
             image: strDataURI
         });
+        choicewindowing = false
         window.location.hash = "choice-window"
     });
 }
@@ -85,7 +113,7 @@ function savelast() {
 
 function choicewindowli(that) {
     var parent = $($(that).parents('.choicewindowshowwindow')[0])
-    if(parent.attr('data-last')!='true'){
+    if (parent.attr('data-last') != 'true') {
         savelast()
     }
     listwindowsaveall(parent.attr('data-id'))

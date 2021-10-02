@@ -28,20 +28,26 @@
 }
 
 #choice-window-window-list .wtitle{
+    position: relative;
     font-size: 10px ;
     line-height: 14px;
-    height: 14px;
+    height: 28px;
     padding: 2px 5px;
     color: white;
     background: #626262;
+    overflow: hidden;
 }
 
 #choice-window-window-list .close{
     color: white;
-    font-size: 10px ;
-    line-height: 14px;
+    font-size: 18px ;
+    line-height: 24px;
     float: right;
     padding: 0 3px;
+    position: absolute;
+    top:3px;
+    right: 2px;
+    background: #626262;
 }
 #choice-window-window-list .wcontext{
     background: white;
