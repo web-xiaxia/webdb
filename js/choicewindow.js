@@ -4,35 +4,28 @@ function initchoicewindow() {
 
     var choice_window_list = getLocalStorage(localStorageName.choicewindow, true, [])
     for (var index in choice_window_list) {
-        lasttr = windowListTr(windowList, lasttr, index)
-        addlistwindow(lasttr, choice_window_list[index])
+        addlistwindow(windowList, choice_window_list[index])
     }
     var lastchoicewindow = getLocalStorage(localStorageName.choicewindowlast)
     if (lastchoicewindow) {
         for (var i = 0; i < 10; i++) {
-            lasttr = windowListTr(windowList, lasttr, choice_window_list.length + i)
-            addlistwindow(lasttr, lastchoicewindow)
+            addlistwindow(windowList, lastchoicewindow)
         }
     }
 }
 
-function windowListTr(windowList, lasttr, index) {
-    if (index % 2 == 0) {
-        lasttr = $(`<tr></tr>`)
-        windowList.append(lasttr)
-    }
-    return lasttr
-}
 
-function addlistwindow(lasttr, choice_window) {
-    lasttr.append($(`<td><div data-id="${choice_window.id}" data-url="${choice_window.url}" onclick="choicewindowli(this)">
-        <div class="wtitle">${choice_window.name}<a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
-        <div class="wcontext">
-        <div class="wcontext2">
-        <img class="wimage" src="${choice_window.image}"></image>
+function addlistwindow(windowList, choice_window) {
+    windowList.append($(`<li  class="choicewindowshowwindow" data-id="${choice_window.id}" data-url="${choice_window.url}" >
+    <div>
+        <div class="wtitle">${choice_window.name}<div class="close iconfont" onclick="listwindowclose(this)">&#xe60d;</div></div>
+        <div class="wcontext"  onclick="choicewindowli(this)">
+            <div class="wcontext2">
+            <img class="wimage" src="${choice_window.image}"></image>
         </div>
         </div>
-    </div></td>`))
+    </div>
+    </li>`))
 }
 
 function choicewindow() {
@@ -51,7 +44,10 @@ function choicewindow() {
         });
         window.location.hash = "choice-window"
     });
+}
 
+function listwindowclose(that){
+    $(that).parents('.choicewindowshowwindow').remove()
 }
 
 

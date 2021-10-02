@@ -1,10 +1,23 @@
 
 #choice-window-window-list {
     width:100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+    display: block;
+    height: 100%;
+    overflow: scroll;
     padding-bottom: 30px;
 }
-
-#choice-window-window-list td> div {
+#choice-window-window-list li{
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+    padding: 5px;
+}
+#choice-window-window-list li> div {
     background: #626262;
     border: 2px solid #626262;
     border-radius: 7px;
