@@ -100,6 +100,11 @@ function listwindowclose(that, candelete) {
 function savelast() {
     var lastchoicewindow = getLocalStorage(localStorageName.choicewindowlast)
     if (lastchoicewindow) {
+        var lastli = $('#choice-window-window-list').find('li:last-child')
+        if(!lastli  || lastli.attr('data-id')!=lastchoicewindow.id){
+            return;
+        }
+
         var choice_window_list = getLocalStorage(localStorageName.choicewindow, true, [])
         for (var index in choice_window_list) {
             if (choice_window_list[index].id == lastchoicewindow.id) {
