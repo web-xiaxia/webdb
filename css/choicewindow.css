@@ -36,6 +36,7 @@
     color: white;
     background: #626262;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 #choice-window-window-list .tbtn{
@@ -45,8 +46,9 @@
     float: right;
     position: absolute;
     top:3px;
-    right: 2px;
+    right: 0px;
     width: 24px;
+    height: 36px;
     background: #626262;
 }
 #choice-window-window-list .wcontext{
