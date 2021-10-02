@@ -1,10 +1,11 @@
 <div id="tabledata2" style="display: none">
     <div id="sqllistbox">
         <div id="sqllistbtnbox">
-            <div class="sqllistitem sqllistitembtn iconfont" onclick="btnHash('#tables')">&#xe708;</div>
-            <div class="sqllistitem sqllistitembtn iconfont" style="margin-top: 10px" onclick="opensqllistboxwindow()">&#xe63a;</div>
-            <div id="sqllistadd" class="sqllistitem sqllistitembtn" onclick="addSqlList()">+</div>
-            <div id="sqllistdelete" style="display: none" class="sqllistitem sqllistitembtn" onclick="deleteSqlList()">
+            <div class="sqllistitem sqllistitembtn iconfont" onclick="btnHash('#tables')">&#xe708;</div><!--选择表-->
+            <div  class="sqllistitem sqllistitembtn iconfont"  style="margin-top: 10px" onclick="choicewindow()">&#xe69f;</div><!--选择窗口-->
+            <div class="sqllistitem sqllistitembtn iconfont" style="margin-top: 10px" onclick="opensqllistboxwindow()">&#xe63a;</div><!--保存sql列表-->
+            <div id="sqllistadd" class="sqllistitem sqllistitembtn" onclick="addSqlList()">+</div> <!--增加查询窗口-->
+            <div id="sqllistdelete" style="display: none" class="sqllistitem sqllistitembtn" onclick="deleteSqlList()"><!--关闭查询窗口-->
                 -
             </div>
         </div>

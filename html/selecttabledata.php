@@ -28,8 +28,8 @@
             </tbody>
         </table>
     </div>
-    <div style="position: fixed;bottom: 0; border-top:1px solid #e5e5e5; background:white;z-index: 1001;width: 100%; padding: 3px 0 3px 13px">
-        <a id="pagesy" href="javascript:void(0)" class="iconfont">&#xe60e;</a><!--第一页-->
+    <div style="position: fixed;bottom: 0; border-top:1px solid #e5e5e5; background:white;z-index: 1001;width: 100%; padding: 3px 0 3px 0px">
+        <a id="pagesy" href="javascript:void(0)" style="margin-left: 25px;" class="iconfont">&#xe60e;</a><!--第一页-->
         <a id="pageup" href="javascript:void(0)" class="iconfont">&#xe746;</a><!--上一页-->
         <a id="pagedowm" href="javascript:void(0)" class="iconfont">&#xe642;</a><!--下一页-->
         <a id="pagerefresh" class="iconfont" href="javascript:void(0)">&#xe601;</a><!--刷新-->
@@ -41,8 +41,11 @@
         </select>
         <a id="page—other" class="iconfont" href="javascript:openfloatmain('#page-other-window')">&#xe635;</a><!--更多-->
         <a id="tablefiltertipbox" href="javascript:void(0)" class="iconfont" style="margin-left: 3px">&#xe612;</a><!--过滤-->
-        <a href="javascript:btnHash('#tabledata2')" class="iconfont" style="margin-left: 10px">&#xe600;</a><!--sql-->
-        <a href="javascript:btnHash('#tables')" class="iconfont" style="margin-left: 3px">&#xe708;</a><!--选择表-->
+
+
+        <a href="javascript:choicewindow()" class="iconfont" style="margin-right: 25px; float: right;">&#xe69f;</a><!--选择窗口-->
+        <a href="javascript:btnHash('#tabledata2')" class="iconfont" style="margin-right: 3px; float: right;" >&#xe600;</a><!--sql-->
+        <a href="javascript:btnHash('#tables')" class="iconfont" style="margin-right: 3px; float: right;">&#xe708;</a><!--选择表-->
     </div>
 </div>
 

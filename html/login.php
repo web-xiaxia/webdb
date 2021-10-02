@@ -1,7 +1,7 @@
 <div id="login"  style="display: none" class="window-box">
     <div  class="window" style="height: auto;">
         <div class="title">数据库连接
-            <a href="javascript:choicewindow()" class="iconfont window-title-btn">&#xe69f;</a>
+            <a href="javascript:choicewindow()" class="iconfont window-title-btn">&#xe69f;</a><!--选择窗口-->
         </div>
         <table>
             <tr id="oldconntr" style="display: none">
