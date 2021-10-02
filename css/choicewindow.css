@@ -1,0 +1,57 @@
+
+#choice-window-window-list {
+    width:100%;
+    padding-bottom: 30px;
+}
+
+#choice-window-window-list td> div {
+    background: #626262;
+    border: 2px solid #626262;
+    border-radius: 7px;
+    overflow: hidden;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+}
+
+#choice-window-window-list .wtitle{
+    font-size: 10px ;
+    line-height: 14px;
+    height: 14px;
+    padding: 2px 5px;
+    color: white;
+    background: #626262;
+}
+
+#choice-window-window-list .close{
+    color: white;
+    font-size: 10px ;
+    line-height: 14px;
+    float: right;
+    padding: 0 3px;
+}
+#choice-window-window-list .wcontext{
+    background: white;
+    height: 246px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+    padding: 3px;
+}
+#choice-window-window-list .wcontext2{
+    height: 240px;
+    overflow: hidden;
+}
+
+#choice-window-window-list .wimage{
+    width: 100%;
+    overflow: hidden;
+}
+#choice-window-bottom{
+    position: fixed;
+    bottom: 0px;
+    height: 30px;
+    background: white;
+    width: 100%;
+    text-align: center;
+}

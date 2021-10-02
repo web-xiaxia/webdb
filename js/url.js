@@ -2,33 +2,47 @@ var nowmaodian = null;
 var maodianlist = {
     "#login": {
         id: "#login",
-        init: logininit
+        init: logininit,
+        name:'连接'
     },
     "#databases": {
         id: "#databases",
-        init: initselectdatabase
+        init: initselectdatabase,
+        name:'选择库'
     },
     "#tables": {
         id: "#tables",
-        init: inittables
+        init: inittables,
+        name:'选择表'
     },
     "#tabledata": {
         id: "#tabledata",
-        init: inittabledata
+        init: inittabledata,
+        name:'查看表'
     },
     "#tabledata2": {
         id: "#tabledata2",
-        init: inittabledata2
+        init: inittabledata2,
+        name:'SQL'
     },
     "#choice-window": {
         id: "#choice-window",
-        init: initchoicewindow
+        init: initchoicewindow,
+        name:'选择窗口'
     }
 }
 window.onhashchange = nowurlfun;
 $(function () {
     nowurlfun(window.location.href);
 })
+
+function getmaodian(hash){
+    if (hash.indexOf("?") != -1) {
+        hash = hash.substr(0, hash.indexOf("?"))
+    }
+    var maodian = maodianlist[hash];
+    return maodian
+}
 
 function nowurlfun(hashChangeEvent) {
     var hash = window.location.hash;
@@ -42,10 +56,8 @@ function nowurlfun(hashChangeEvent) {
         hash = "#login";
     }
     setLocalStorage(localStorageName.oldUrl, hash == "#login" ? "" : hash, false);
-    if (hash.indexOf("?") != -1) {
-        hash = hash.substr(0, hash.indexOf("?"))
-    }
-    var maodian = maodianlist[hash];
+
+    var maodian = getmaodian(hash)
     txxxxx(maodian);
 
 }
