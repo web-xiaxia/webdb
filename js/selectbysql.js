@@ -253,11 +253,16 @@ var sqlColumnsTips = [
 
 var tipColumnsIndex = 0;
 
+function strToRegular(text){
+    text = text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
+    return eval(`/^.*${text.split("").join('.*')}.*$/`)
+}
+
 function sortTipText(arr, tableMatchNowSearchColumnsText, fun) {
     var bRegular = null
     if (tableMatchNowSearchColumnsText) {
         tableMatchNowSearchColumnsText = tableMatchNowSearchColumnsText.toLowerCase()
-        bRegular = eval(`/^.*${tableMatchNowSearchColumnsText.split("").join('.*')}.*$/`)
+        bRegular = strToRegular(tableMatchNowSearchColumnsText)
     }
     var rarr = []
 
@@ -383,7 +388,7 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
     //    return
     //}
 
-    var matchNowSearchTextRegular = eval(`/^.*${matchNowSearchText.split("").join('.*')}.*$/`)
+    var matchNowSearchTextRegular = strToRegular(matchNowSearchText)
 
     for (var index in sqlTips) {
         var sqlTip = sqlTips[index]
