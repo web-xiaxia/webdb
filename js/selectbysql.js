@@ -12,6 +12,8 @@ function inittabledata2() {
         window.location.hash = "#databases?conn_name" + conn_name;
         return;
     }
+    $("#tabledatashowthead2").empty();
+    $("#tabledatashowtbody2").empty();
     tempTipTablecolumns = {}
     sql_conn_name = conn_name
     sql_database = database
@@ -285,8 +287,11 @@ function sortTipText(arr, tableMatchNowSearchColumnsText, fun) {
 function tipColumnsFun(columns, tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex) {
     var tipsarr = sortTipText(columns, tableMatchNowSearchColumnsText, function (a, b) {
         var field_name = a['Field'].toLowerCase()
-        if (b && !test_start(b, [field_name, `\`${field_name}\``])) {
-            return
+        if (b) {
+            var bRegular= eval(`/^.*${b.split("").join('.*')}.*$/`)
+            if(!bRegular.test(`\`${field_name}\``)){
+                return
+            }
         }
         return field_name;
     });
@@ -376,9 +381,11 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
     //    return
     //}
 
+    var matchNowSearchTextRegular= eval(`/^.*${matchNowSearchText.split("").join('.*')}.*$/`)
+
     for (var index in sqlTips) {
         var sqlTip = sqlTips[index]
-        if (sqlTip.search_text.indexOf(matchNowSearchText) != -1) {
+        if (matchNowSearchTextRegular.test(sqlTip.search_text)) {
             tipLabelAdd(tips1_box, sqlTip.show_text, sqlTip.insert_text, nowIndex - matchNowSearchText.length, nowIndex)
         }
     }
@@ -443,7 +450,8 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
     } else {
         var tipsarr = sortTipText(tableList, tableMatchNowSearchText, function (a, b) {
             var table = a.toLowerCase()
-            if (table.indexOf(b) != -1 || `\`${table}\``.indexOf(b) != -1) {
+            var bRegular= eval(`/^.*${b.split("").join('.*')}.*$/`)
+            if (bRegular.test(`\`${table}\``)) {
                 return a;
             }
             return null;

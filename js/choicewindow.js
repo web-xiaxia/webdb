@@ -121,9 +121,11 @@ function savelast() {
 }
 
 function choicewindowlinew(that){
-    var parent = $($(that).parents('.choicewindowshowwindow')[0])
-    window.location.open =
-    window.open( parent.attr('data-url'),"_blank");
+    if(window.confirm("确认删除？")){
+        var parent = $($(that).parents('.choicewindowshowwindow')[0])
+        window.location.open =
+            window.open( parent.attr('data-url'),"_blank");
+    }
 }
 function choicewindowli(that) {
     var parent = $($(that).parents('.choicewindowshowwindow')[0])
