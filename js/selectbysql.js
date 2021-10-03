@@ -253,16 +253,27 @@ var sqlColumnsTips = [
 
 var tipColumnsIndex = 0;
 
-function strToRegular(text){
-    text = text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
-    return eval(`/^.*${text.split("").join('.*')}.*$/`)
+function tipStrToRegular(text) {
+    if(!text || text==''){
+        return null
+    }
+    var textSplit = text.split("")
+    for (var index in textSplit) {
+        if (textSplit[index] == '/') {
+            textSplit[index] = '\\/'
+        } else {
+            textSplit[index] = textSplit[index].replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
+        }
+    }
+
+    return eval(`/^.*${textSplit.join('.*')}.*$/`)
 }
 
 function sortTipText(arr, tableMatchNowSearchColumnsText, fun) {
     var bRegular = null
     if (tableMatchNowSearchColumnsText) {
         tableMatchNowSearchColumnsText = tableMatchNowSearchColumnsText.toLowerCase()
-        bRegular = strToRegular(tableMatchNowSearchColumnsText)
+        bRegular = tipStrToRegular(tableMatchNowSearchColumnsText)
     }
     var rarr = []
 
@@ -388,11 +399,11 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
     //    return
     //}
 
-    var matchNowSearchTextRegular = strToRegular(matchNowSearchText)
+    var matchNowSearchTextRegular = tipStrToRegular(matchNowSearchText)
 
     for (var index in sqlTips) {
         var sqlTip = sqlTips[index]
-        if (matchNowSearchTextRegular.test(sqlTip.search_text)) {
+        if (!matchNowSearchTextRegular || matchNowSearchTextRegular.test(sqlTip.search_text)) {
             tipLabelAdd(tips1_box, sqlTip.show_text, sqlTip.insert_text, nowIndex - matchNowSearchText.length, nowIndex)
         }
     }
@@ -457,10 +468,10 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
     } else {
         var tipsarr = sortTipText(tableList, tableMatchNowSearchText, function (a, bRegular) {
             var table = a.toLowerCase()
-            if (bRegular && bRegular.test(`\`${table}\``)) {
-                return a;
+            if (bRegular && !bRegular.test(`\`${table}\``)) {
+                return null;
             }
-            return null;
+            return a;
         });
         for (var index in tipsarr) {
             var tableName = tipsarr[index]
