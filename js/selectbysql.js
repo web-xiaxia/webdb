@@ -254,44 +254,46 @@ var sqlColumnsTips = [
 var tipColumnsIndex = 0;
 
 function sortTipText(arr, tableMatchNowSearchColumnsText, fun) {
-    tableMatchNowSearchColumnsText = tableMatchNowSearchColumnsText.toLowerCase()
+    var bRegular = null
+    if (tableMatchNowSearchColumnsText) {
+        tableMatchNowSearchColumnsText = tableMatchNowSearchColumnsText.toLowerCase()
+        bRegular = eval(`/^.*${tableMatchNowSearchColumnsText.split("").join('.*')}.*$/`)
+    }
     var rarr = []
+
     for (var x in arr) {
-        var x2 = fun(arr[x], tableMatchNowSearchColumnsText)
+        var x2 = fun(arr[x], bRegular)
         if (x2) {
             rarr.push(x2)
         }
     }
 
-    rarr.sort(function (a,b) {
+    rarr.sort(function (a, b) {
         var asum = 0
         var bsum = 0
-        if(a == tableMatchNowSearchColumnsText){
-            asum+=1000000000
+        if (a == tableMatchNowSearchColumnsText) {
+            asum += 1000000000
         }
-        if(b == tableMatchNowSearchColumnsText){
-            bsum+=1000000000
+        if (b == tableMatchNowSearchColumnsText) {
+            bsum += 1000000000
         }
         var axindex = a.indexOf(tableMatchNowSearchColumnsText)
         var bxindex = b.indexOf(tableMatchNowSearchColumnsText)
-        asum+=(10000-(axindex == -1?10000:axindex))*1000000
-        bsum+=(10000-(bxindex == -1?10000:bxindex))*1000000
-        asum+=(10000-a.length)
-        bsum+=(10000-b.length)
-        return bsum-asum
+        asum += (10000 - (axindex == -1 ? 10000 : axindex)) * 1000000
+        bsum += (10000 - (bxindex == -1 ? 10000 : bxindex)) * 1000000
+        asum += (10000 - a.length)
+        bsum += (10000 - b.length)
+        return bsum - asum
     })
 
     return rarr
 }
 
 function tipColumnsFun(columns, tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex) {
-    var tipsarr = sortTipText(columns, tableMatchNowSearchColumnsText, function (a, b) {
+    var tipsarr = sortTipText(columns, tableMatchNowSearchColumnsText, function (a, bRegular) {
         var field_name = a['Field'].toLowerCase()
-        if (b) {
-            var bRegular= eval(`/^.*${b.split("").join('.*')}.*$/`)
-            if(!bRegular.test(`\`${field_name}\``)){
-                return
-            }
+        if (bRegular && !bRegular.test(`\`${field_name}\``)) {
+            return
         }
         return field_name;
     });
@@ -381,7 +383,7 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
     //    return
     //}
 
-    var matchNowSearchTextRegular= eval(`/^.*${matchNowSearchText.split("").join('.*')}.*$/`)
+    var matchNowSearchTextRegular = eval(`/^.*${matchNowSearchText.split("").join('.*')}.*$/`)
 
     for (var index in sqlTips) {
         var sqlTip = sqlTips[index]
@@ -448,10 +450,9 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
         }
         tipColumns(tableMatchNowSearchText, tableMatchNowSearchColumnsText, tips2_box, tipColumnsIndex, nowIndex - tableMatchNowSearchColumnsText.length, nowIndex)
     } else {
-        var tipsarr = sortTipText(tableList, tableMatchNowSearchText, function (a, b) {
+        var tipsarr = sortTipText(tableList, tableMatchNowSearchText, function (a, bRegular) {
             var table = a.toLowerCase()
-            var bRegular= eval(`/^.*${b.split("").join('.*')}.*$/`)
-            if (bRegular.test(`\`${table}\``)) {
+            if (bRegular && bRegular.test(`\`${table}\``)) {
                 return a;
             }
             return null;
