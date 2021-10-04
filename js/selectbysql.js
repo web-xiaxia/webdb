@@ -253,21 +253,6 @@ var sqlColumnsTips = [
 
 var tipColumnsIndex = 0;
 
-function tipStrToRegular(text) {
-    if(!text || text==''){
-        return null
-    }
-    var textSplit = text.split("")
-    for (var index in textSplit) {
-        if (textSplit[index] == '/') {
-            textSplit[index] = '\\/'
-        } else {
-            textSplit[index] = textSplit[index].replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
-        }
-    }
-
-    return eval(`/^.*${textSplit.join('.*')}.*$/`)
-}
 
 function sortTipText(arr, tableMatchNowSearchColumnsText, fun) {
     var bRegular = null

@@ -56,15 +56,32 @@
             return test_start(column_type, ['point', 'geometry', 'geometrycollection','json', 'multipoint', 'multipolygon', 'polygon', 'blob'])
         }
 
+
+        function tipStrToRegular(text) {
+            if(!text || text==''){
+                return null
+            }
+            var textSplit = text.split("")
+            for (var index in textSplit) {
+                if (textSplit[index] == '/') {
+                    textSplit[index] = '\\/'
+                } else {
+                    textSplit[index] = textSplit[index].replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
+                }
+            }
+
+            return eval(`/^.*${textSplit.join('.*')}.*$/`)
+        }
+
         function search_ul(that, ul_id) {
-            var aaa = $(that).val().toLowerCase()
+            var aaa = tipStrToRegular($(that).val().toLowerCase())
             var tablesList = $(ul_id).find("li")
             for (var index in tablesList) {
                 var table = tablesList[index]
                 var displayValue = "block"
                 if (aaa) {
                     var litext = table.innerHTML.toLowerCase()
-                    if (litext && litext.indexOf(aaa) == -1) {
+                    if (litext && !aaa.test(litext)) {
                         displayValue = "none"
                     }
                 }
@@ -73,14 +90,14 @@
         }
 
         function search_ul_text(that, ul_id) {
-            var aaa = $(that).val()
+            var aaa = tipStrToRegular($(that).val())
             var tablesList = $(ul_id).find("li")
             for (var index in tablesList) {
                 var table = tablesList[index]
                 var displayValue = "block"
                 if (aaa) {
                     var litext = table.innerHTML
-                    if (litext && litext.indexOf(aaa) == -1) {
+                    if (litext && !aaa.test(litext)) {
                         displayValue = "none"
                     }
                 }
