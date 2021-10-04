@@ -59,8 +59,8 @@ function choicewindow() {
         window_show_name2 = `${window_show_name2}(${GetMaoQueryString('table')})`
     }
 
-    var window_show_name_list =[]
-    if (window_show_name1){
+    var window_show_name_list = []
+    if (window_show_name1) {
         window_show_name_list.push(window_show_name1)
     }
     window_show_name_list.push(window_show_name2)
@@ -93,19 +93,21 @@ function listwindowsaveall(dataId) {
 }
 
 function listwindowclose(that, candelete) {
-    var parent = $($(that).parents('.choicewindowshowwindow')[0])
-    if (candelete) {
-        var dataId = parent.attr('data-id')
-        listwindowsaveall(dataId)
+    if (window.confirm("确认删除？")) {
+        var parent = $($(that).parents('.choicewindowshowwindow')[0])
+        if (candelete) {
+            var dataId = parent.attr('data-id')
+            listwindowsaveall(dataId)
+        }
+        parent.remove()
     }
-    parent.remove()
 }
 
 function savelast() {
     var lastchoicewindow = getLocalStorage(localStorageName.choicewindowlast)
     if (lastchoicewindow) {
         var lastli = $('#choice-window-window-list').find('li:last-child')
-        if(!lastli  || lastli.attr('data-id')!=lastchoicewindow.id){
+        if (!lastli || lastli.attr('data-id') != lastchoicewindow.id) {
             return;
         }
 
@@ -120,13 +122,13 @@ function savelast() {
     }
 }
 
-function choicewindowlinew(that){
-    if(window.confirm("确认删除？")){
-        var parent = $($(that).parents('.choicewindowshowwindow')[0])
-        window.location.open =
-            window.open( parent.attr('data-url'),"_blank");
-    }
+function choicewindowlinew(that) {
+
+    var parent = $($(that).parents('.choicewindowshowwindow')[0])
+    window.location.open =
+        window.open(parent.attr('data-url'), "_blank");
 }
+
 function choicewindowli(that) {
     var parent = $($(that).parents('.choicewindowshowwindow')[0])
     if (parent.attr('data-last') != 'true') {
