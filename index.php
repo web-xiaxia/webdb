@@ -9,8 +9,8 @@
     <meta http-equiv="expires" content="-1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta property="qc:admins" content="2450036450146316110063757" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta property="qc:admins" content="2450036450146316110063757"/>
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -52,13 +52,13 @@
             return false
         }
 
-        function as_text_column(column_type){
-            return test_start(column_type, ['point', 'geometry', 'geometrycollection','json', 'multipoint', 'multipolygon', 'polygon', 'blob'])
+        function as_text_column(column_type) {
+            return test_start(column_type, ['point', 'geometry', 'geometrycollection', 'json', 'multipoint', 'multipolygon', 'polygon', 'blob'])
         }
 
 
         function tipStrToRegular(text) {
-            if(!text || text==''){
+            if (!text || text == '') {
                 return null
             }
             var textSplit = text.split("")
@@ -85,7 +85,9 @@
                         displayValue = "none"
                     }
                 }
-                table.style.display = displayValue
+                if (table.style) {
+                    table.style.display = displayValue
+                }
             }
         }
 
@@ -101,34 +103,36 @@
                         displayValue = "none"
                     }
                 }
-                table.style.display = displayValue
+                if (table.style) {
+                    table.style.display = displayValue
+                }
             }
         }
 
         <?php
-            include 'js/url.js';
-            include 'js/main.js';
-            include 'js/login.js';
-            include 'js/selectdatabase.js';
-            include 'js/selecttables.js';
-            include 'js/selecttabledata.js';
-            include 'js/updatetable.js';
-            include 'js/selectbysql.js';
-            include 'js/choicewindow.js';
+        include 'js/url.js';
+        include 'js/main.js';
+        include 'js/login.js';
+        include 'js/selectdatabase.js';
+        include 'js/selecttables.js';
+        include 'js/selecttabledata.js';
+        include 'js/updatetable.js';
+        include 'js/selectbysql.js';
+        include 'js/choicewindow.js';
         ?>
     </script>
 </head>
-<body >
+<body>
 <?php
-    include 'html/main.php';
-    include 'html/lsbj.php';
+include 'html/main.php';
+include 'html/lsbj.php';
 
-    include 'html/login.php';
-    include 'html/selectdatabase.php';
-    include 'html/selecttable.php';
-    include 'html/selecttabledata.php';
-    include 'html/selectbysql.php';
-    include 'html/choicewindow.php';
+include 'html/login.php';
+include 'html/selectdatabase.php';
+include 'html/selecttable.php';
+include 'html/selecttabledata.php';
+include 'html/selectbysql.php';
+include 'html/choicewindow.php';
 ?>
 </body>
 </html>

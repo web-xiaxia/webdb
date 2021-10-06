@@ -840,14 +840,18 @@ $(function () {
         var tablesList = $('.sqlshow_one_data_field_box')
         for (var index in tablesList) {
             var table = tablesList[index]
-            var displayValue = "block"
-            if (aaa) {
-                var litext = table.getAttribute('data-field')
-                if (litext && litext.indexOf(aaa) == -1) {
-                    displayValue = "none"
+            if (table.getAttribute) {
+                var displayValue = "block"
+                if (aaa) {
+                    var litext = table.getAttribute('data-field')
+                    if (litext && litext.indexOf(aaa) == -1) {
+                        displayValue = "none"
+                    }
+                }
+                if (table.style) {
+                    table.style.display = displayValue
                 }
             }
-            table.style.display = displayValue
         }
     });
 
