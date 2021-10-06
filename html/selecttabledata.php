@@ -183,8 +183,8 @@
                     <li data=" LIKE '%%'">LIKE</li>
                     <li data="%">%</li>
                     <li data=" in ()">in</li>
-                    <li data=" (">(</li>
-                    <li data=") ">)</li>
+                    <li data="(">(</li>
+                    <li data=")">)</li>
                 </ul>
                 <ul class="kjlb3">
                     <li data=" DATE_FORMAT('','%Y-%m-%d %H:%s:%i') ">DATE_FORMAT</li>

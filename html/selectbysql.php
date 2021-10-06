@@ -80,8 +80,8 @@
                 <li data=" LIKE '%%'">LIKE</li>
                 <li data="%">%</li>
                 <li data=" in ()">in</li>
-                <li data=" (">(</li>
-                <li data=") ">)</li>
+                <li data="(">(</li>
+                <li data=")">)</li>
             </ul>
             <!--<ul class="kjlb">
                 <li data=" SELECT ">SELECT</li>
@@ -131,7 +131,7 @@
         <div class="title"><span class="content">插入函数</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
-                <ul class="kjlb2" id="hanshufunlist">
+                <ul class="kjlb2 llsqlinstall" id="hanshufunlist">
 
                 </ul>
             </div>
@@ -150,7 +150,7 @@
                     <input type="text" id="tablenamelistul_input" class="btn"
                            style="width: 80%; margin: 0 auto; background: white; color: black;"/>
                 </div>
-                <ul class="kjlb2" id="tablenamelistul">
+                <ul class="kjlb2 llsqlinstall" id="tablenamelistul">
 
                 </ul>
             </div>
@@ -186,7 +186,7 @@
                     <input type="text" id="tablencoumnsul_input" class="btn"
                            style="width: 80%; margin: 0 auto; background: white; color: black;"/>
                 </div>
-                <ul class="kjlb2" id="tablencoumnsul">
+                <ul class="kjlb2 llsqlinstall" id="tablencoumnsul">
 
                 </ul>
             </div>

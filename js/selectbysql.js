@@ -863,7 +863,7 @@ $(function () {
         var num = parseInt($("#zdysql").attr("rows"));
         $("#zdysql").attr("rows", num + 2);
     })
-    $(".kjlb2").delegate("li", "click", function () {
+    $("#tablenamelistul2").delegate("li", "click", function () {
         closefloatmain("#tablenamelist2");
         openfloatmain("#tablencoumns");
         $("#tablencoumnsul").empty();
@@ -931,7 +931,7 @@ $(function () {
         $("#tablencoumnsul").prepend(`<li data="SELECT \n  ${all_column_name.join(', ')} \nFROM \n  ${tablexxx} \nWHERE \n  ">查询</li>`)
     }
 
-    $(".kjlb").delegate("li", "click", function () {
+    $(".llsqlinstall").delegate("li", "click", function () {
         var a = $(this).attr("data");
         if (a == null || a == "") {
             return;

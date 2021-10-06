@@ -217,8 +217,8 @@ function tablefiltercontextboxadd(table_filter) {
             <li data=" LIKE '%%'">LIKE</li>
             <li data="%">%</li>
             <li data=" in ()">in</li>
-            <li data=" (">(</li>
-            <li data=") ">)</li>
+            <li data="(">(</li>
+            <li data=")">)</li>
         </ul>
     </div>`))
     return bpx
