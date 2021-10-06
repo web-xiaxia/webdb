@@ -59,7 +59,7 @@
             </tr>
         </table>
 
-        <div style="text-align: left;padding: 0 5px;">
+        <div style="text-align: left;padding: 0 5px;" class="llsqlinstall">
             <ul class="kjlb">
                 <li data=",">,</li>
                 <li data=".">.</li>
