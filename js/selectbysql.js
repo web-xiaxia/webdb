@@ -468,7 +468,7 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
 }
 
 function tipsSql(that) {
-    var nowText = $(that).val().replace(/\n/g, ' ')
+    var nowText = $(that).val().replace(/[\n\t()=><,]/g, ' ')
     var nowIndex = that.selectionEnd
     var fromIndex = 0;
     var nowIndexStr = nowText.substr(fromIndex, nowIndex)
