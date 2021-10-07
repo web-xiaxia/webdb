@@ -153,7 +153,7 @@ var sqlTips = [
     }, {
         "search_text": "abs",
         "show_text": "ABS",
-        "insert_text": "ABS( ",
+        "insert_text": "ABS(",
     }, {
         "search_text": "count",
         "show_text": "COUNT ID",
@@ -165,23 +165,23 @@ var sqlTips = [
     }, {
         "search_text": "sum",
         "show_text": "SUM",
-        "insert_text": "SUM( ",
+        "insert_text": "SUM(",
     }, {
         "search_text": "avg",
         "show_text": "AVG",
-        "insert_text": "AVG( ",
+        "insert_text": "AVG(",
     }, {
         "search_text": "round",
         "show_text": "ROUND",
-        "insert_text": "ROUND( ",
+        "insert_text": "ROUND(",
     }, {
         "search_text": "group",
         "show_text": "GROUP_CONCAT",
-        "insert_text": "GROUP_CONCAT( ",
+        "insert_text": "GROUP_CONCAT(",
     }, {
         "search_text": "concat",
         "show_text": "CONCAT",
-        "insert_text": "CONCAT( ",
+        "insert_text": "CONCAT(",
     }, {
         "search_text": "date",
         "show_text": "DATE_FORMAT",
@@ -189,35 +189,35 @@ var sqlTips = [
     }, {
         "search_text": "left",
         "show_text": "LEFT",
-        "insert_text": "LEFT( ",
+        "insert_text": "LEFT(",
     }, {
         "search_text": "length",
         "show_text": "LENGTH",
-        "insert_text": "LENGTH( ",
+        "insert_text": "LENGTH(",
     }, {
         "search_text": "ltrim",
         "show_text": "LTRIM",
-        "insert_text": "LTRIM( ",
+        "insert_text": "LTRIM(",
     }, {
         "search_text": "right",
         "show_text": "RIGHT",
-        "insert_text": "RIGHT( ",
+        "insert_text": "RIGHT(",
     }, {
         "search_text": "rtrim",
         "show_text": "RTRIM",
-        "insert_text": "RTRIM( ",
+        "insert_text": "RTRIM(",
     }, {
         "search_text": "trim",
         "show_text": "TRIM",
-        "insert_text": "TRIM( ",
+        "insert_text": "TRIM(",
     }, {
         "search_text": "ucase",
         "show_text": "UCASE",
-        "insert_text": "UCASE( ",
+        "insert_text": "UCASE(",
     }, {
         "search_text": "upper",
         "show_text": "UPPER",
-        "insert_text": "UPPER( ",
+        "insert_text": "UPPER(",
     }
 ]
 var sqlColumnsTips = [
