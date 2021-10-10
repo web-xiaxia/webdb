@@ -120,7 +120,15 @@
                 </div>
                 <div class="page-other-item-box">
                     <div class="page-other-item-title">sql：</div>
-                    <div id="page-other-sql" class="page-other-item-context">
+                    <div id="page-other-sql" style="overflow: scroll;white-space: pre;" class="page-other-item-context">
+                        无
+                    </div>
+                </div>
+                <div class="page-other-item-box">
+                    <div class="page-other-item-title">
+                        表结构：<a id="page-other-count-btn" class="iconfont" href="javascript:getTableCreate()">&#xe601;</a>
+                    </div>
+                    <div id="table-create-sql" style="overflow: scroll;white-space: pre;" class="page-other-item-context">
                         无
                     </div>
                 </div>

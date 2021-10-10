@@ -58,7 +58,9 @@ function inittabledata() {
     }
 
     $('#zdycolumnsyablename').html(`表名：${table}`)
-
+    $('#page-other-count').text('无')
+    $('#table-create-sql').text('无')
+    
     var zdycolumnswindowcontext = $("#zdycolumnswindowcontext")
     zdycolumnswindowcontext.empty()
     filter_columns_option_list = []
@@ -723,6 +725,31 @@ function getTableDataCount() {
     })
 }
 
+function getTableCreate(){
+    var queryDataFull = getTableQueryData()
+    var query_data = queryDataFull.query_data
+    openLoding()
+    $('#table-create-sql').text('无')
+    $.ajax({
+        url: "/webdb/php/getTableCreate.php",
+        type: "post",
+        dataType: "json",
+        data: query_data,
+        success: function (data) {
+            closeLoding()
+            if (data == false) {
+                alert("数据库连接失败")
+            } else {
+
+                $('#table-create-sql').text(sqlFormatter.format(data["count"], {
+                    language: 'mysql',
+                    uppercase: true,
+                }))
+            }
+        }
+    })
+}
+
 function getTableData() {
     openLoding()
 
@@ -749,7 +776,10 @@ function getTableData() {
             if (data == false) {
                 alert("数据库连接失败")
             } else {
-                $("#page-other-sql").text(data["e2"])
+                $("#page-other-sql").text(sqlFormatter.format(data["e2"], {
+                    language: 'mysql',
+                    uppercase: true,
+                }))
                 var sqldataList = data["data"];
 
                 $("#tabledatashowthead").empty();
