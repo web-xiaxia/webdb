@@ -37,6 +37,14 @@ function encrypt($string, $operation, $key = '')
     }
 }
 
+class MultiData
+{
+    public $data;
+    public $columns;
+    public $isrun;
+    public $isquery;
+    public $updateok;
+}
 
 class MysqlHelper
 {
@@ -70,7 +78,7 @@ class MysqlHelper
 
     public function getDatabases(): array
     {
-        $result = $this->query(null,"show databases");
+        $result = $this->query(null, "show databases");
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
         {
@@ -84,7 +92,7 @@ class MysqlHelper
 
     public function getTables($mysql_database): array
     {
-        $result = $this->query($mysql_database,"select table_name from information_schema.tables where table_schema='" . $mysql_database . "' and  table_type='base table'");
+        $result = $this->query($mysql_database, "select table_name from information_schema.tables where table_schema='" . $mysql_database . "' and  table_type='base table'");
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
         {
@@ -97,7 +105,7 @@ class MysqlHelper
 
     public function getColumns($mysql_database, $mysql_table): array
     {
-        $result = $this->query($mysql_database," show columns from   " . $mysql_table);
+        $result = $this->query($mysql_database, " show columns from   " . $mysql_table);
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
         {
@@ -117,11 +125,57 @@ class MysqlHelper
             $db->close();
         }
     }
+
     public function multiQuery($mysql_table, $sql): bool
     {
         $db = $this->getDb($mysql_table);
         try {
             return $db->multi_query($sql);
+        } finally {
+            $db->close();
+        }
+    }
+
+    public function multiQueryResult($mysql_table, $sql): array
+    {
+        $db = $this->getDb($mysql_table);
+        try {
+            if ($db->multi_query($sql)) {
+                $array = array();
+                do {
+                    $multiData = new MultiData();
+                    $multiData->data = array();
+                    $multiData->columns = array();
+                    $multiData->isrun = false;
+                    $multiData->isquery = true;
+                    $multiData->updateok = false;
+
+                    if ($rs = $db->store_result()) {//store_result()方法获取第一条sql语句查询结果
+                        while ($row = $rs->fetch_assoc()) {
+                            if ($multiData->isrun == false) {
+                                foreach ($row as $rowName => $rowValue) {
+                                    array_push($multiData->columns, $rowName);
+                                }
+                                $multiData->isrun = true;
+                            }
+                            array_push($multiData->data, $row);
+
+                        }
+
+                        $rs->Close(); //关闭结果集
+
+                    } else {
+                        $multiData->isquery = false;
+                        $multiData->updateok = true;
+                    }
+
+                    array_push($array, $multiData);
+
+                } while ($db->next_result());//next_result()方法获取下一结果集，返回bool值
+
+                return $array;
+            }
+            return array();
         } finally {
             $db->close();
         }

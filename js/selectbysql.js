@@ -992,54 +992,57 @@ function getTableData2() {
             'mysql_database': database,
             'sql': sql
         },
-        success: function (data) {
+        success: function (datas) {
             closeLoding()
-            console.log(data);
-            if (data == false) {
+            console.log(datas);
+            if(!datas){
                 alert("数据库连接失败")
-            } else {
-                if (data.isquery == false) {
-                    if (data.updateok == 1) {
-                        alert("执行非查询成功")
-                    } else {
-                        alert("执行非查询失败")
-                    }
-                } else {
-                    if (data.isrun == false) {
-                        alert("未查找到数据");
-                    } else {
-
-                        var tabledatashowthead2 = $(`<thead class="tabledatashowthead2"></thead>`).empty();
-                        $("#tablediv2").css({display: "block"})
-                        var ttr2 = $('<tr style="text-align: center;" class="table_title_sticky">');
-                        ttr2.append('<td class="xuhao table_left_sticky" style="background: #5a92ef">序号</td>');
-
-                        for (var d in data.columns) {
-                            var mysql_table_column = data.columns[d];
-                            ttr2.append('<td>' + mysql_table_column + '</td>');
+            }else{
+                for(var xxxxxi in datas){
+                    var data = datas[xxxxxi]
+                    if (data.isquery == false) {
+                        if (data.updateok == 1) {
+                            alert("执行非查询成功")
+                        } else {
+                            alert("执行非查询失败")
                         }
-                        tabledatashowthead2.append(ttr2);
-                        var xxtabledatashowtbody2 = $(`<tbody class="tabledatashowtbody2"></tbody>`);
-                        for (var d in data.data) {
+                    } else {
+                        if (data.isrun == false) {
+                            alert("未查找到数据");
+                        } else {
 
-                            var xxtd = sql_xuhao_td(d, data.columns, data.data[d])
-                            var btr = $('<tr>');
-                            btr.append(xxtd)
-                            for (var d2 in data.columns) {
-                                var field = data.columns[d2];
-                                var btd = $(`<td data-columns="' + field + '"></td>`)
-                                btd.text(data.data[d][field])
-                                btr.append(btd)
+                            var tabledatashowthead2 = $(`<thead class="tabledatashowthead2"></thead>`).empty();
+                            $("#tablediv2").css({display: "block"})
+                            var ttr2 = $('<tr style="text-align: center;" class="table_title_sticky">');
+                            ttr2.append('<td class="xuhao table_left_sticky" style="background: #5a92ef">序号</td>');
+
+                            for (var d in data.columns) {
+                                var mysql_table_column = data.columns[d];
+                                ttr2.append('<td>' + mysql_table_column + '</td>');
                             }
-                            xxtabledatashowtbody2.append(btr);
+                            tabledatashowthead2.append(ttr2);
+                            var xxtabledatashowtbody2 = $(`<tbody class="tabledatashowtbody2"></tbody>`);
+                            for (var d in data.data) {
+
+                                var xxtd = sql_xuhao_td(d, data.columns, data.data[d])
+                                var btr = $('<tr>');
+                                btr.append(xxtd)
+                                for (var d2 in data.columns) {
+                                    var field = data.columns[d2];
+                                    var btd = $(`<td data-columns="' + field + '"></td>`)
+                                    btd.text(data.data[d][field])
+                                    btr.append(btd)
+                                }
+                                xxtabledatashowtbody2.append(btr);
+                            }
+
+                            var xxxtableshow2=$(`<table class="tabledatashow2" border="1" style="position: relative"></table>`)
+                            xxxtableshow2.append(tabledatashowthead2)
+                            xxxtableshow2.append(xxtabledatashowtbody2)
+
+                            $("#tablediv2").append(xxxtableshow2)
+                            $("html,body").animate({scrollTop: $("body").scrollTop() + $("#tablediv2").offset().top}, 0);
                         }
-
-                        var xxxtableshow2=$(`<table class="tabledatashow2" border="1" style="position: relative"></table>`)
-                        xxxtableshow2.append(tabledatashowthead2)
-                        xxxtableshow2.append(xxtabledatashowtbody2)
-
-                        $("#tablediv2").append(xxxtableshow2)
-                        $("html,body").animate({scrollTop: $("body").scrollTop() + $("#tablediv2").offset().top}, 0);
                     }
                 }
             }
