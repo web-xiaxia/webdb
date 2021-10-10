@@ -559,8 +559,8 @@ function opensqllistboxwindow() {
         var sqllistcontexttitle = $(`<label class="sqllistcontexttitle"></label>`)
         sqllistcontexttitle.text(getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + zdysqlsave, false, ''))
         var sqllistcontextbtnbox = $(`<div class="sqllistcontextbtnbox">
-                    <a class="sqllistcontextbtn" href="javascript:changesavesqlname('${zdysqlsave}')">重命名</a>
-                    <a class="sqllistcontextbtn" href="javascript:deletesavesql('${zdysqlsave}')">删除</a>
+                    <div class="sqllistcontextbtn" onclick="changesavesqlname('${zdysqlsave}')">重命名</div>
+                    <div class="sqllistcontextbtn" onclick="deletesavesql('${zdysqlsave}')">删除</div>
         </div>`)
         var sqllistcontexttitlebox = $(`<div class="sqllistcontexttitlebox"></div>`)
         sqllistcontexttitlebox.append(sqllistcontexttitle)
@@ -580,6 +580,7 @@ function opensqllistboxwindow() {
 }
 
 function changesavesqlname(clickzdysqlsave) {
+    event.stopPropagation();
     var oldzdysqlsavename = getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + clickzdysqlsave, false)
     var zdysqlsavename = prompt("请输入名称", oldzdysqlsavename)
     if (zdysqlsavename) {
@@ -588,7 +589,12 @@ function changesavesqlname(clickzdysqlsave) {
     }
 }
 
-function deletesavesql(clickzdysqlsave) {
+function deletesavesql( clickzdysqlsave) {
+    event.stopPropagation();
+    if(!window.confirm('确认删除?')){
+        return
+    }
+
     var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
     var newzdysqlsavelist = []
     for (var index in zdysqlsavelist) {
