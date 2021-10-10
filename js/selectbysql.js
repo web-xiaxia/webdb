@@ -413,7 +413,40 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
 
     if (isColumnsMatch) {
         var asMapping = {}
-        var fromSplit = nowText.toLowerCase().split('from')
+
+        var fenSqlTextArrayArray = []
+        var fenSqlTextArrayAdd = true
+        var fenSqlTextLength = 0
+        var fenSqlTextSplit = nowText.split(';')
+        var ffffenSqlText = null
+        if (fenSqlTextSplit.length > 1) {
+            for (var xxx in fenSqlTextSplit) {
+                var fenSqlText = fenSqlTextSplit[xxx]
+                if (fenSqlTextArrayAdd) {
+                    fenSqlTextArrayArray.push([fenSqlText])
+                } else {
+                    fenSqlTextArrayArray[fenSqlTextArrayArray.length - 1].push(fenSqlText)
+                }
+                var nowFenSqlText = fenSqlTextArrayArray[fenSqlTextArrayArray.length - 1].join(';')
+                if (nowFenSqlText.replace(/\\'/g, '').split('\'').length % 2 == 0) {
+                    fenSqlTextArrayAdd = false
+                } else {
+                    fenSqlTextArrayAdd = true
+                }
+
+                if (fenSqlTextArrayAdd && ffffenSqlText == null && fenSqlTextLength < nowIndex && fenSqlTextLength + nowFenSqlText.length > nowIndex) {
+                    ffffenSqlText = nowFenSqlText
+                }
+                fenSqlTextLength += nowFenSqlText.length
+            }
+            if(ffffenSqlText == null){
+                ffffenSqlText = fenSqlTextArrayArray[fenSqlTextArrayArray.length - 1].join(';')
+            }
+        } else {
+            ffffenSqlText = nowText
+        }
+
+        var fromSplit = ffffenSqlText.toLowerCase().split('from')
 
         if (fromSplit.length > 1) {
             for (var z = 1; z < fromSplit.length; z++) {
