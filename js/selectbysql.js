@@ -1009,7 +1009,17 @@ function getTableData2() {
     openLoding()
     $("#tablediv2").empty();
     var sql = $("#zdysql").val()
-    var xxsql = sql.toLowerCase()
+    var xxxxxsqlarr = sql.toLowerCase().split('\n')
+    var xxsqlarray = []
+    for (var xxx in xxxxxsqlarr){
+        var xac = xxxxxsqlarr[xxx]
+        if(xac.indexOf('--')==0){
+            continue
+        }
+        xxsqlarray.push(xac)
+    }
+
+    var xxsql = xxsqlarray.join('\n')
     var updateIndex = xxsql.indexOf('select')
     if (!(updateIndex < 5 && updateIndex >= 0)) {
         if (!window.confirm("非查询语句 是否继续执行？")) {
@@ -1017,7 +1027,7 @@ function getTableData2() {
             return
         }
     } else {
-        if (xxsql.indexOf('limit') == -1) {
+        if (sql.toLowerCase().indexOf('limit') == -1) {
             if (!window.confirm("未添加 limit 是否继续执行？")) {
                 closeLoding()
                 return
