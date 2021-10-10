@@ -976,11 +976,22 @@ function getTableData2() {
     openLoding()
     $("#tablediv2").empty();
     var sql = $("#zdysql").val()
-    if (sql.indexOf('limit') == -1 && sql.indexOf('LIMIT') == -1) {
-        closeLoding()
-        alert("请加入limit")
-        return
+    var xxsql = sql.toLowerCase()
+    var updateIndex = xxsql.indexOf('select')
+    if (!(updateIndex < 5 && updateIndex >= 0)) {
+        if (!window.confirm("非查询语句 是否继续执行？")) {
+            closeLoding()
+            return
+        }
+    } else {
+        if (xxsql.indexOf('limit') == -1) {
+            if (!window.confirm("未添加 limit 是否继续执行？")) {
+                closeLoding()
+                return
+            }
+        }
     }
+
     var conn_name = GetMaoQueryString('conn_name')
     var database = GetMaoQueryString('database')
     $.ajax({
@@ -995,10 +1006,10 @@ function getTableData2() {
         success: function (datas) {
             closeLoding()
             console.log(datas);
-            if(!datas){
+            if (!datas) {
                 alert("数据库连接失败")
-            }else{
-                for(var xxxxxi in datas){
+            } else {
+                for (var xxxxxi in datas) {
                     var data = datas[xxxxxi]
                     if (data.isquery == false) {
                         if (data.updateok == 1) {
@@ -1036,7 +1047,7 @@ function getTableData2() {
                                 xxtabledatashowtbody2.append(btr);
                             }
 
-                            var xxxtableshow2=$(`<table class="tabledatashow2" border="1" style="position: relative"></table>`)
+                            var xxxtableshow2 = $(`<table class="tabledatashow2" border="1" style="position: relative"></table>`)
                             xxxtableshow2.append(tabledatashowthead2)
                             xxxtableshow2.append(xxtabledatashowtbody2)
 
