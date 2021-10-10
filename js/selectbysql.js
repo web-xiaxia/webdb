@@ -638,6 +638,7 @@ function saveZdySql() {
     setLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + nowSqlName, zdysqlsavename, false)
     zdysqlsavelist.push(nowSqlName)
     setLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, zdysqlsavelist)
+    $("#zdysqltipnametext").text(zdysqlsavename)
     $("#saveZdySqlBtn").text(`已保存`)
 }
 
@@ -735,11 +736,17 @@ function deleteSqlList() {
 }
 
 function changeSaveBtnText() {
+    $('#zdysqltipname').css({'display': 'none'})
     $("#saveZdySqlBtn").text('保存')
     var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
     for (var index in zdysqlsavelist) {
         var zdysqlsave = zdysqlsavelist[index]
         if (zdysqlsave == nowSqlName) {
+            var xxxname = getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + nowSqlName,false)
+            if(xxxname!=null) {
+                $("#zdysqltipnametext").text(xxxname)
+                $('#zdysqltipname').css({'display': ''})
+            }
             $("#saveZdySqlBtn").text(`已保存`)
             break
         }
@@ -809,10 +816,12 @@ $(function () {
     });
     $("#zdysql").focus(function () {
         tipsSql(this)
+        $('#zdysqltipname').css({'display': 'none'})
         $('#sqllistbox').css({'display': 'none'})
     });
     $("#zdysql").blur(function () {
         $('#sqllistbox').css({'display': ''})
+        $('#zdysqltipname').css({'display': ''})
     });
     $("#zdysql").on("touchend", function () {
         tipsSql(this)

@@ -97,6 +97,23 @@
     -webkit-box-sizing: border-box; /* Safari */
 }
 
+#zdysqltipname{
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+}
+#zdysqltipnametext{
+    background: rgba(56, 126, 245, 0.62);
+    color: white;
+    padding: 3px;
+    font-size: 10px;
+    border-radius: 0 2px 0 2px;
+}
+
 #tabledata {
     height: 100%;
 }
