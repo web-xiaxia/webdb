@@ -1,24 +1,24 @@
-#tabledatashow, #tabledatashow2 {
+#tabledatashow, .tabledatashow2 {
     border-collapse: collapse;
     border: 1px;
 }
 
-#tabledatashow td, #tabledatashow2 td {
+#tabledatashow td, .tabledatashow2 td {
     padding: 3px 15px;
     white-space: nowrap;
     max-width: 500px;
     overflow: hidden;
 }
 
-#tabledatashowthead, #tabledatashowthead2 {
+#tabledatashowthead, .tabledatashowthead2 {
     background: #387EF5;
 }
 
-#tabledatashowthead tr, #tabledatashowthead2 tr {
+#tabledatashowthead tr, .tabledatashowthead2 tr {
     background: #387EF5;
 }
 
-#tabledatashowthead td, #tabledatashowthead2 td {
+#tabledatashowthead td, .tabledatashowthead2 td {
     color: white;
 }
 

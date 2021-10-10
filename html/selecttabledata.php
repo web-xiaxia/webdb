@@ -57,7 +57,7 @@
         <div class="contentbox">
             <div class="content">
                 <div style="padding: 5px">列名：<label id="updatecolumnname"></label></div>
-                <textarea id="updatevalue" style="width: 98%" rows="10"></textarea>
+                <textarea id="updatevalue" style="width: 100%" rows="10"></textarea>
                 <a id="unpdatebtn" class="btn" href="javascript:void(0)">修改</a>
             </div>
         </div>

@@ -12,8 +12,7 @@ function inittabledata2() {
         window.location.hash = "#databases?conn_name" + conn_name;
         return;
     }
-    $("#tabledatashowthead2").empty();
-    $("#tabledatashowtbody2").empty();
+    $("#tablediv2").empty();
     tempTipTablecolumns = {}
     sql_conn_name = conn_name
     sql_database = database
@@ -800,7 +799,7 @@ $(function () {
         search_ul_text(this, "#tablencoumnsul")
     });
 
-    $("#tabledatashowtbody2").delegate("td", "click", function () {
+    $("#tablediv2").delegate(".tabledatashowtbody2 td", "click", function () {
         var _this = $(this);
         if (_this.hasClass("xuhao")) {
             return
@@ -975,8 +974,7 @@ $(function () {
 
 function getTableData2() {
     openLoding()
-    $("#tabledatashowthead2").empty();
-    $("#tabledatashowtbody2").empty();
+    $("#tablediv2").empty();
     var sql = $("#zdysql").val()
     if (sql.indexOf('limit') == -1 && sql.indexOf('LIMIT') == -1) {
         closeLoding()
@@ -1011,8 +1009,7 @@ function getTableData2() {
                         alert("未查找到数据");
                     } else {
 
-                        $("#tabledatashowthead2").empty();
-                        $("#tabledatashowtbody2").empty();
+                        var tabledatashowthead2 = $(`<thead class="tabledatashowthead2"></thead>`).empty();
                         $("#tablediv2").css({display: "block"})
                         var ttr2 = $('<tr style="text-align: center;" class="table_title_sticky">');
                         ttr2.append('<td class="xuhao table_left_sticky" style="background: #5a92ef">序号</td>');
@@ -1021,8 +1018,8 @@ function getTableData2() {
                             var mysql_table_column = data.columns[d];
                             ttr2.append('<td>' + mysql_table_column + '</td>');
                         }
-                        $("#tabledatashowthead2").append(ttr2);
-                        var xxtabledatashowtbody2 = $("#tabledatashowtbody2");
+                        tabledatashowthead2.append(ttr2);
+                        var xxtabledatashowtbody2 = $(`<tbody class="tabledatashowtbody2"></tbody>`);
                         for (var d in data.data) {
 
                             var xxtd = sql_xuhao_td(d, data.columns, data.data[d])
@@ -1036,6 +1033,12 @@ function getTableData2() {
                             }
                             xxtabledatashowtbody2.append(btr);
                         }
+
+                        var xxxtableshow2=$(`<table class="tabledatashow2" border="1" style="position: relative"></table>`)
+                        xxxtableshow2.append(tabledatashowthead2)
+                        xxxtableshow2.append(xxtabledatashowtbody2)
+
+                        $("#tablediv2").append(xxxtableshow2)
                         $("html,body").animate({scrollTop: $("body").scrollTop() + $("#tablediv2").offset().top}, 0);
                     }
                 }

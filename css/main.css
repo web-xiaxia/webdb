@@ -66,6 +66,12 @@ input {
     outline: none;
 }
 
+textarea{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
 input[type="checkbox"] {
     height: auto;
     width: auto;

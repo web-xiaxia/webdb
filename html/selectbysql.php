@@ -114,14 +114,14 @@
     </div>
 
     <div id="tablediv2" style="display: none;">
-        <table id="tabledatashow2" border="1" style="position: relative">
-            <thead id="tabledatashowthead2">
+        <!--<table class="tabledatashow2" border="1" style="position: relative">
+            <thead class="tabledatashowthead2">
 
             </thead>
-            <tbody id="tabledatashowtbody2">
+            <tbody class="tabledatashowtbody2">
 
             </tbody>
-        </table>
+        </table>-->
     </div>
 </div>
 <div class="floatmain" id="sqlfunlist" style="display: none;">
@@ -200,7 +200,7 @@
         <div class="title"><span class="content">查询数据</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
-                <div id="sqlshowcolumnvalue" style="width: 98%"></div>
+                <div id="sqlshowcolumnvalue" style="width: 100%"></div>
             </div>
         </div>
     </div>
