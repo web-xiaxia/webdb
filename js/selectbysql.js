@@ -1070,14 +1070,30 @@ function getTableData2() {
             var datas = dataInfo.data
             if (datas) {
                 for (var xxxxxi in datas) {
-                    var sqlIndexTitle=`SQL${parseInt(xxxxxi)+1}`
                     var data = datas[xxxxxi]
+                    var sqlIndexTitle=`SQL${parseInt(xxxxxi)+1}`
+                    if (data.title){
+                        sqlIndexTitle = data.title
+                    }
+
                     if (data.isquery == false) {
                         $("#tablediv2").append(`<div>${sqlIndexTitle} 执行非查询成功</div>`);
                     } else {
                         if (data.isrun == false) {
                             $("#tablediv2").append(`<div>${sqlIndexTitle} 未查找到数据</div>`);
                         } else {
+                            if (data.title){
+                                $("#tablediv2").append(`<div style="min-width: 50px;
+                                    text-align: center;
+                                    background: #387EF5;
+                                    color: white;
+                                    width: fit-content;
+                                    padding: 3px 15px 0px 15px;
+                                    margin-left: 15px;
+                                    margin-top: 3px;
+                                    border-radius: 15px 15px 0 0;
+                                ">${data.title}</div>`);
+                            }
                             var tabledatashowthead2 = $(`<thead class="tabledatashowthead2"></thead>`).empty();
                             $("#tablediv2").css({display: "block"})
                             var ttr2 = $('<tr style="text-align: center;" class="table_title_sticky">');
