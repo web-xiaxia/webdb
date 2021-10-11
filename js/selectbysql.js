@@ -1070,13 +1070,13 @@ function getTableData2() {
             var datas = dataInfo.data
             if (datas) {
                 for (var xxxxxi in datas) {
-                    var sqlIndex=parseInt(xxxxxi)+1
+                    var sqlIndexTitle=`SQL${parseInt(xxxxxi)+1}`
                     var data = datas[xxxxxi]
                     if (data.isquery == false) {
-                        $("#tablediv2").append(`<div>SQL${sqlIndex} 执行非查询成功</div>`);
+                        $("#tablediv2").append(`<div>${sqlIndexTitle} 执行非查询成功</div>`);
                     } else {
                         if (data.isrun == false) {
-                            $("#tablediv2").append(`<div>SQL${sqlIndex} 未查找到数据</div>`);
+                            $("#tablediv2").append(`<div>${sqlIndexTitle} 未查找到数据</div>`);
                         } else {
                             var tabledatashowthead2 = $(`<thead class="tabledatashowthead2"></thead>`).empty();
                             $("#tablediv2").css({display: "block"})

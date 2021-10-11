@@ -43,6 +43,7 @@ class MultiDataInfo
 }
 class MultiData
 {
+    public $title;
     public $data;
     public $columns;
     public $isrun;
@@ -148,6 +149,7 @@ class MysqlHelper
                 $array = array();
                 do {
                     $multiData = new MultiData();
+                    $multiData->title = "";
                     $multiData->data = array();
                     $multiData->columns = array();
                     $multiData->isrun = false;
