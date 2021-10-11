@@ -773,6 +773,9 @@ function getTableData() {
         success: function (data) {
             closeLoding()
             console.log(data);
+            if(data.esms){
+                alert(data.esms)
+            }
             if (data == false) {
                 alert("数据库连接失败")
             } else {

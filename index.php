@@ -53,7 +53,7 @@
         }
 
         function as_text_column(column_type) {
-            return test_start(column_type, ['point', 'geometry', 'geometrycollection', 'json', 'multipoint', 'multipolygon', 'polygon', 'blob'])
+            return test_start(column_type, ['point', 'geometry', 'geometrycollection', 'multipoint', 'multipolygon', 'polygon', 'blob'])
         }
 
 

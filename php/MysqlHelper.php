@@ -36,7 +36,11 @@ function encrypt($string, $operation, $key = '')
         return str_replace('=', '', base64_encode($result));
     }
 }
-
+class MultiDataInfo
+{
+    public $data;
+    public $esms;
+}
 class MultiData
 {
     public $data;
@@ -136,7 +140,7 @@ class MysqlHelper
         }
     }
 
-    public function multiQueryResult($mysql_table, $sql): array
+    public function multiQueryResult($mysql_table, $sql): MultiDataInfo
     {
         $db = $this->getDb($mysql_table);
         try {
@@ -172,10 +176,15 @@ class MysqlHelper
                     array_push($array, $multiData);
 
                 } while ($db->next_result());//next_result()方法获取下一结果集，返回bool值
-
-                return $array;
+                $r = new MultiDataInfo();
+                $r->data = $array;
+                return $r;
             }
-            return array();
+            return new MultiDataInfo();
+        } catch (Exception $e) {
+            $r = new MultiDataInfo();
+            $r->esms = $e->getMessage();
+            return $r;
         } finally {
             $db->close();
         }

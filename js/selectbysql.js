@@ -327,7 +327,7 @@ function tipColumns(tablexxx, tableMatchNowSearchColumnsText, tipdom, nowTipColu
     }
     $.ajax({
         url: "/webdb/php/getColumns.php",
-        type: "get",
+        type: "post",
         dataType: "json",
         data: {
             'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
@@ -439,7 +439,7 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
                 }
                 fenSqlTextLength += nowFenSqlText.length
             }
-            if(ffffenSqlText == null){
+            if (ffffenSqlText == null) {
                 ffffenSqlText = fenSqlTextArrayArray[fenSqlTextArrayArray.length - 1].join(';')
             }
         } else {
@@ -589,9 +589,9 @@ function changesavesqlname(clickzdysqlsave) {
     }
 }
 
-function deletesavesql( clickzdysqlsave) {
+function deletesavesql(clickzdysqlsave) {
     event.stopPropagation();
-    if(!window.confirm('确认删除?')){
+    if (!window.confirm('确认删除?')) {
         return
     }
 
@@ -748,8 +748,8 @@ function changeSaveBtnText() {
     for (var index in zdysqlsavelist) {
         var zdysqlsave = zdysqlsavelist[index]
         if (zdysqlsave == nowSqlName) {
-            var xxxname = getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + nowSqlName,false)
-            if(xxxname!=null) {
+            var xxxname = getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + nowSqlName, false)
+            if (xxxname != null) {
                 $("#zdysqltipnametext").text(xxxname)
                 $('#zdysqltipname').css({'display': ''})
             }
@@ -926,7 +926,7 @@ $(function () {
             var database = GetMaoQueryString('database')
             $.ajax({
                 url: "/webdb/php/getColumns.php",
-                type: "get",
+                type: "post",
                 dataType: "json",
                 data: {
                     'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
@@ -1004,7 +1004,7 @@ $(function () {
             openLoding()
             $.ajax({
                 url: "/webdb/html/hanshu.html",
-                type: "get",
+                type: "post",
                 dataType: "html",
                 success: function (data) {
                     $("#hanshufunlist").html(data);
@@ -1026,9 +1026,9 @@ function getTableData2() {
     var sql = $("#zdysql").val()
     var xxxxxsqlarr = sql.toLowerCase().split('\n')
     var xxsqlarray = []
-    for (var xxx in xxxxxsqlarr){
+    for (var xxx in xxxxxsqlarr) {
         var xac = xxxxxsqlarr[xxx]
-        if(xac.indexOf('--')==0){
+        if (xac.indexOf('--') == 0) {
             continue
         }
         xxsqlarray.push(xac)
@@ -1054,19 +1054,21 @@ function getTableData2() {
     var database = GetMaoQueryString('database')
     $.ajax({
         url: "/webdb/php/getTableDataZdy.php",
-        type: "get",
+        type: "post",
         dataType: "json",
         data: {
             'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
             'mysql_database': database,
             'sql': sql
         },
-        success: function (datas) {
+        success: function (dataInfo) {
             closeLoding()
-            console.log(datas);
-            if (!datas) {
-                alert("数据库连接失败")
-            } else {
+            console.log(dataInfo);
+            if (dataInfo.esms) {
+                alert(dataInfo.esms)
+            }
+            var datas = dataInfo.data
+            if (datas) {
                 for (var xxxxxi in datas) {
                     var data = datas[xxxxxi]
                     if (data.isquery == false) {
