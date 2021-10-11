@@ -337,6 +337,7 @@
 
 .tablediv2sqltip{
     border: 1px solid #dedede;
+    white-space: nowrap;
     background: #387EF5;
     color: white;
     width: fit-content;

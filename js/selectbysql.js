@@ -1077,12 +1077,11 @@ function getTableData2() {
                     }
 
                     if (data.isquery == false) {
-                        $("#tablediv2").append(`<div class="tablediv2sqltip">${sqlIndexTitle} 执行非查询成功</div>`);
+                        $("#tablediv2").append(`<div class="tablediv2sqltip">${sqlIndexTitle} 执行非查询 结果：${data.info}</div>`);
                     } else {
                         if (data.isrun == false) {
                             $("#tablediv2").append(`<div class="tablediv2sqltip">${sqlIndexTitle} 未查找到数据</div>`);
                         } else {
-                            data.title = 111
                             if (data.title){
                                 $("#tablediv2").append(`<div class="tablediv2sqltip tablediv2sqltiptitle">${data.title}</div>`);
                             }
