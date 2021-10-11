@@ -48,6 +48,7 @@ class MultiData
     public $isrun;
     public $isquery;
     public $updateok;
+    public $msg;
 }
 
 class MysqlHelper
@@ -153,6 +154,7 @@ class MysqlHelper
                     $multiData->isrun = false;
                     $multiData->isquery = true;
                     $multiData->updateok = false;
+                    $multiData->msg = "";
 
                     if ($rs = $db->store_result()) {//store_result()方法获取第一条sql语句查询结果
                         while ($row = $rs->fetch_assoc()) {
@@ -167,7 +169,6 @@ class MysqlHelper
                         }
 
                         $rs->Close(); //关闭结果集
-
                     } else {
                         $multiData->isquery = false;
                         $multiData->updateok = true;
