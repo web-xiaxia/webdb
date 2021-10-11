@@ -1077,22 +1077,14 @@ function getTableData2() {
                     }
 
                     if (data.isquery == false) {
-                        $("#tablediv2").append(`<div>${sqlIndexTitle} 执行非查询成功</div>`);
+                        $("#tablediv2").append(`<div class="tablediv2sqltip">${sqlIndexTitle} 执行非查询成功</div>`);
                     } else {
                         if (data.isrun == false) {
-                            $("#tablediv2").append(`<div>${sqlIndexTitle} 未查找到数据</div>`);
+                            $("#tablediv2").append(`<div class="tablediv2sqltip">${sqlIndexTitle} 未查找到数据</div>`);
                         } else {
+                            data.title = 111
                             if (data.title){
-                                $("#tablediv2").append(`<div style="min-width: 50px;
-                                    text-align: center;
-                                    background: #387EF5;
-                                    color: white;
-                                    width: fit-content;
-                                    padding: 3px 15px 0px 15px;
-                                    margin-left: 15px;
-                                    margin-top: 3px;
-                                    border-radius: 15px 15px 0 0;
-                                ">${data.title}</div>`);
+                                $("#tablediv2").append(`<div class="tablediv2sqltip tablediv2sqltiptitle">${data.title}</div>`);
                             }
                             var tabledatashowthead2 = $(`<thead class="tabledatashowthead2"></thead>`).empty();
                             $("#tablediv2").css({display: "block"})

@@ -334,3 +334,20 @@
     line-height: 15px;
     overflow: hidden;
 }
+
+.tablediv2sqltip{
+    border: 1px solid #dedede;
+    background: #387EF5;
+    color: white;
+    width: fit-content;
+    padding: 3px 10px 3px 10px;
+
+}
+.tablediv2sqltiptitle{
+    padding: 3px 15px 0px 15px;
+    min-width: 50px;
+    text-align: center;
+    margin-top: 3px;
+    margin-left: 15px;
+    border-radius: 15px 15px 0 0;
+}
