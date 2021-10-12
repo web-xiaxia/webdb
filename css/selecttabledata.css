@@ -2,6 +2,12 @@
     border-collapse: collapse;
     border: 1px;
 }
+.tabledatashow2{
+    margin-bottom: 5px;
+}
+.tabledatashow2:last-child{
+    margin-bottom: 0px;
+}
 
 #tabledatashow td, .tabledatashow2 td {
     padding: 3px 15px;
@@ -342,13 +348,31 @@
     color: white;
     width: fit-content;
     padding: 3px 10px 3px 10px;
+    margin-bottom: 10px;
 
 }
-.tablediv2sqltiptitle{
-    padding: 3px 15px 0px 15px;
-    min-width: 50px;
-    text-align: center;
+.tablediv2sqltiptitlebox{
+    white-space: nowrap;
+    position: sticky;
+    left: 0;
+}
+.tablediv2sqltiptitlemain{
+    border: 0;
     margin-top: 3px;
-    margin-left: 15px;
-    border-radius: 15px 15px 0 0;
+    padding: 3px 0px 0px 0px;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+.tablediv2sqltiptitleleft{
+    color: rgba(255, 255, 255, 0);
+    width: 10px;
+    margin-left: 1px;
+    margin-right: 2px;
+}
+.tablediv2sqltiptitle{
+    padding-left: 10px;
+    padding-right: 30px;
+    border-radius: 0px 50px 0 0;
 }
