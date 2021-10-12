@@ -371,7 +371,44 @@ function tipLabelAdd(dom, showText, insertText, startIndex, endIndex) {
     dom.append(lll)
 }
 
-function tipsSearchList(nowText, nowSearchText, nowIndex) {
+function sqlTextSplitFen(nowText, sqlSplitSep = ';', replaceN = true) {
+    var nowTextArr = nowText.split('\n')
+    for (var xxx in nowTextArr) {
+        if (/^--.*/.test(nowTextArr[xxx])) {
+            nowTextArr[xxx] = nowTextArr[xxx].replace(/;/g, ' ')
+        }
+    }
+    var fenSqlTextSplit = nowTextArr.join('\n').split(sqlSplitSep)
+    if (fenSqlTextSplit.length <= 1) {
+        if (replaceN) {
+            return [fenSqlTextSplit[0].replace(/\n/g, ' ')]
+        }
+        return [fenSqlTextSplit[0]]
+    }
+    var fenSqlTextArrayArray = []
+    var fenSqlTextArrayAdd = true
+    for (var xxx in fenSqlTextSplit) {
+        var fenSqlText = fenSqlTextSplit[xxx]
+        if (replaceN) {
+            fenSqlText = fenSqlText.replace(/\n/g, ' ')
+        }
+        if (fenSqlTextArrayAdd) {
+            fenSqlTextArrayArray.push([fenSqlText])
+        } else {
+            fenSqlTextArrayArray[fenSqlTextArrayArray.length - 1].push(fenSqlText)
+        }
+        var nowFenSqlText = fenSqlTextArrayArray[fenSqlTextArrayArray.length - 1].join(';')
+        fenSqlTextArrayAdd = nowFenSqlText.replace(/\\'/g, '').split('\'').length % 2 !== 0;
+    }
+    var fenSqlTextArray = []
+    for (var xxxx in fenSqlTextArrayArray) {
+        fenSqlTextArray.push(fenSqlTextArrayArray[xxxx].join(';'))
+    }
+
+    return fenSqlTextArray
+}
+
+function tipsSearchList(orgSql, nowText, nowSearchText, nowIndex) {
     var matchNowSearchText = nowSearchText.toLowerCase()
     tipColumnsIndex = tipColumnsIndex + 1
     console.log(nowSearchText)
@@ -412,42 +449,27 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
     }
 
     if (isColumnsMatch) {
-        var asMapping = {}
-
-        var fenSqlTextArrayArray = []
-        var fenSqlTextArrayAdd = true
-        var fenSqlTextLength = 0
-        var fenSqlTextSplit = nowText.split(';')
+        var fenSqlTextArrayArray = sqlTextSplitFen(orgSql)
         var ffffenSqlText = null
-        if (fenSqlTextSplit.length > 1) {
-            for (var xxx in fenSqlTextSplit) {
-                var fenSqlText = fenSqlTextSplit[xxx]
-                if (fenSqlTextArrayAdd) {
-                    fenSqlTextArrayArray.push([fenSqlText])
-                } else {
-                    fenSqlTextArrayArray[fenSqlTextArrayArray.length - 1].push(fenSqlText)
-                }
-                var nowFenSqlText = fenSqlTextArrayArray[fenSqlTextArrayArray.length - 1].join(';')
-                if (nowFenSqlText.replace(/\\'/g, '').split('\'').length % 2 == 0) {
-                    fenSqlTextArrayAdd = false
-                } else {
-                    fenSqlTextArrayAdd = true
-                }
-
-                if (fenSqlTextArrayAdd && ffffenSqlText == null && fenSqlTextLength < nowIndex && fenSqlTextLength + nowFenSqlText.length > nowIndex) {
+        if (fenSqlTextArrayArray.length == 1) {
+            ffffenSqlText = fenSqlTextArrayArray[0]
+        } else if (fenSqlTextArrayArray.length > 1) {
+            var fenSqlTextLength = 0
+            for (var xxxii in fenSqlTextArrayArray) {
+                var nowFenSqlText = fenSqlTextArrayArray[xxxii]
+                if (ffffenSqlText == null && fenSqlTextLength < nowIndex && (fenSqlTextLength + nowFenSqlText.length) > nowIndex) {
                     ffffenSqlText = nowFenSqlText
                 }
                 fenSqlTextLength += nowFenSqlText.length
             }
             if (ffffenSqlText == null) {
-                ffffenSqlText = fenSqlTextArrayArray[fenSqlTextArrayArray.length - 1].join(';')
+                ffffenSqlText = fenSqlTextArrayArray[fenSqlTextArrayArray.length]
             }
         } else {
-            ffffenSqlText = nowText
+            ffffenSqlText = ''
         }
-
         var fromSplit = ffffenSqlText.toLowerCase().split('from')
-
+        var asMapping = {}
         if (fromSplit.length > 1) {
             for (var z = 1; z < fromSplit.length; z++) {
                 var whereStr = fromSplit[z].split('where')[0]
@@ -499,8 +521,11 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
 
 }
 
+var sqlR = /[\t()=><,]/g
+
 function tipsSql(that) {
-    var nowText = $(that).val().replace(/[\n\t()=><,]/g, ' ')
+    var orgSql = $(that).val().replace(sqlR, ' ')
+    var nowText = orgSql.replace(/[\n]/g, ' ')
     var nowIndex = that.selectionEnd
     var fromIndex = 0;
     var nowIndexStr = nowText.substr(fromIndex, nowIndex)
@@ -517,7 +542,7 @@ function tipsSql(that) {
     }
 
     console.log(nowIndex, nowIndexStr, nowIndexStrSplit, nowSearchText)
-    tipsSearchList(nowText, nowSearchText, nowIndex)
+    tipsSearchList(orgSql, nowText, nowSearchText, nowIndex)
 }
 
 
@@ -1050,6 +1075,25 @@ function getTableData2() {
         }
     }
 
+    var fenSqlTextArray = sqlTextSplitFen(sqlFormatter.format(sql.replace(/^--[ ]{0,2}limit[ ]*\n/g,'\n').replace(/\n--[ ]{0,2}limit[ ]*\n/g,'\n'), {
+        language: 'mysql',
+        uppercase: true,
+    }), sqlSplitSep = ';\n', replaceN = false)
+
+    var fenSqlTitleArray = []
+    for (var xxx in fenSqlTextArray) {
+        fenSqlTitleArray[xxx] = []
+        var canTitleAdd = true
+        var fenSqlTextX = fenSqlTextArray[xxx].split('\n')
+        for (var xxxxx in fenSqlTextX) {
+            if (canTitleAdd && fenSqlTextX[xxxxx].startsWith('--')) {
+                fenSqlTitleArray[xxx].push(fenSqlTextX[xxxxx].substr(2, fenSqlTextX[xxxxx].length))
+            } else {
+                canTitleAdd = false
+            }
+        }
+    }
+
     var conn_name = GetMaoQueryString('conn_name')
     var database = GetMaoQueryString('database')
     $.ajax({
@@ -1071,8 +1115,12 @@ function getTableData2() {
             if (datas) {
                 for (var xxxxxi in datas) {
                     var data = datas[xxxxxi]
-                    var sqlIndexTitle=`SQL${parseInt(xxxxxi)+1}`
-                    if (data.title){
+                    var sqlIndexTitle = `SQL${parseInt(xxxxxi) + 1}`
+                    var xxxfenSqlTitleArray = fenSqlTitleArray[xxxxxi]
+                    if (!data.title  && xxxfenSqlTitleArray.length>0){
+                        data.title = xxxfenSqlTitleArray[xxxfenSqlTitleArray.length-1]
+                    }
+                    if (data.title) {
                         sqlIndexTitle = data.title
                     }
 
@@ -1082,7 +1130,7 @@ function getTableData2() {
                         if (data.isrun == false) {
                             $("#tablediv2").append(`<div class="tablediv2sqltip">${sqlIndexTitle} 未查找到数据</div>`);
                         } else {
-                            if (data.title){
+                            if (data.title) {
                                 $("#tablediv2").append(`<div class="tablediv2sqltip tablediv2sqltiptitle">${data.title}</div>`);
                             }
                             var tabledatashowthead2 = $(`<thead class="tabledatashowthead2"></thead>`).empty();
