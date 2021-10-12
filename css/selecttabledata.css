@@ -364,6 +364,7 @@
     text-align: center;
     margin-bottom: 0px;
     font-size: 14px;
+    line-height: 20px;
 }
 .tablediv2sqltiptitleleft{
     color: rgba(255, 255, 255, 0);
@@ -373,6 +374,6 @@
 }
 .tablediv2sqltiptitle{
     padding-left: 10px;
-    padding-right: 30px;
-    border-radius: 0px 50px 0 0;
+    padding-right: 20px;
+    border-radius: 0px 20px 0 0;
 }

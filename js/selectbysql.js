@@ -1131,7 +1131,7 @@ function getTableData2() {
                             $("#tablediv2").append(`<div class="tablediv2sqltip">${sqlIndexTitle} 未查找到数据</div>`);
                         } else {
                             if (data.title) {
-                                $("#tablediv2").append(`<div class="tablediv2sqltiptitlebox"><div class="tablediv2sqltip tablediv2sqltiptitlemain tablediv2sqltiptitleleft ">1</div><div class="tablediv2sqltip tablediv2sqltiptitlemain tablediv2sqltiptitle">${data.title}</div></div>`);
+                                $("#tablediv2").append(`<div class="tablediv2sqltiptitlebox"><div class="tablediv2sqltip tablediv2sqltiptitlemain tablediv2sqltiptitleleft ">发</div><div class="tablediv2sqltip tablediv2sqltiptitlemain tablediv2sqltiptitle">${data.title}</div></div>`);
                             }
                             var tabledatashowthead2 = $(`<thead class="tabledatashowthead2"></thead>`).empty();
                             $("#tablediv2").css({display: "block"})
