@@ -1,24 +1,30 @@
-#tabledatashow, #tabledatashow2 {
+#tabledatashow, .tabledatashow2 {
     border-collapse: collapse;
     border: 1px;
 }
+.tabledatashow2{
+    margin-bottom: 5px;
+}
+.tabledatashow2:last-child{
+    margin-bottom: 0px;
+}
 
-#tabledatashow td, #tabledatashow2 td {
+#tabledatashow td, .tabledatashow2 td {
     padding: 3px 15px;
     white-space: nowrap;
     max-width: 500px;
     overflow: hidden;
 }
 
-#tabledatashowthead, #tabledatashowthead2 {
+#tabledatashowthead, .tabledatashowthead2 {
     background: #387EF5;
 }
 
-#tabledatashowthead tr, #tabledatashowthead2 tr {
+#tabledatashowthead tr, .tabledatashowthead2 tr {
     background: #387EF5;
 }
 
-#tabledatashowthead td, #tabledatashowthead2 td {
+#tabledatashowthead td, .tabledatashowthead2 td {
     color: white;
 }
 
@@ -95,6 +101,23 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box; /* Firefox */
     -webkit-box-sizing: border-box; /* Safari */
+}
+
+#zdysqltipname{
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+}
+#zdysqltipnametext{
+    background: rgba(56, 126, 245, 0.62);
+    color: white;
+    padding: 3px;
+    font-size: 10px;
+    border-radius: 0 2px 0 2px;
 }
 
 #tabledata {
@@ -213,15 +236,15 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    padding-top: 130px;
+    padding-top: 165px;
 }
 
 #sqllistbtnbox {
-    height: 130px;
+    height: 165px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    margin-top: -130px;
+    margin-top: -165px;
     padding: 5px 0 10px 0;
 }
 
@@ -316,4 +339,41 @@
     height: 25px;
     line-height: 15px;
     overflow: hidden;
+}
+
+.tablediv2sqltip{
+    border: 1px solid #dedede;
+    white-space: nowrap;
+    background: #387EF5;
+    color: white;
+    width: fit-content;
+    padding: 3px 10px 3px 10px;
+    margin-bottom: 10px;
+
+}
+.tablediv2sqltiptitlebox{
+    white-space: nowrap;
+    position: sticky;
+    left: 0;
+}
+.tablediv2sqltiptitlemain{
+    border: 0;
+    margin-top: 3px;
+    padding: 3px 0px 0px 0px;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 0px;
+    font-size: 14px;
+    line-height: 20px;
+}
+.tablediv2sqltiptitleleft{
+    color: rgba(255, 255, 255, 0);
+    width: 10px;
+    margin-left: 1px;
+    margin-right: 2px;
+}
+.tablediv2sqltiptitle{
+    padding-left: 10px;
+    padding-right: 20px;
+    border-radius: 0px 20px 0 0;
 }

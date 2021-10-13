@@ -28,8 +28,8 @@
             </tbody>
         </table>
     </div>
-    <div style="position: fixed;bottom: 0; border-top:1px solid #e5e5e5; background:white;z-index: 1001;width: 100%; padding: 3px 0 3px 13px">
-        <a id="pagesy" href="javascript:void(0)" class="iconfont">&#xe60e;</a><!--第一页-->
+    <div style="position: fixed;bottom: 0; border-top:1px solid #e5e5e5; background:white;z-index: 1001;width: 100%; padding: 3px 0 3px 0px">
+        <a id="pagesy" href="javascript:void(0)" style="margin-left: 25px;" class="iconfont">&#xe60e;</a><!--第一页-->
         <a id="pageup" href="javascript:void(0)" class="iconfont">&#xe746;</a><!--上一页-->
         <a id="pagedowm" href="javascript:void(0)" class="iconfont">&#xe642;</a><!--下一页-->
         <a id="pagerefresh" class="iconfont" href="javascript:void(0)">&#xe601;</a><!--刷新-->
@@ -41,8 +41,11 @@
         </select>
         <a id="page—other" class="iconfont" href="javascript:openfloatmain('#page-other-window')">&#xe635;</a><!--更多-->
         <a id="tablefiltertipbox" href="javascript:void(0)" class="iconfont" style="margin-left: 3px">&#xe612;</a><!--过滤-->
-        <a href="javascript:btnHash('#tabledata2')" class="iconfont" style="margin-left: 10px">&#xe600;</a><!--sql-->
-        <a href="javascript:btnHash('#tables')" class="iconfont" style="margin-left: 3px">&#xe708;</a><!--选择表-->
+
+
+        <a href="javascript:choicewindow()" class="iconfont" style="margin-right: 25px; float: right;">&#xe69f;</a><!--选择窗口-->
+        <a href="javascript:btnHash('#tabledata2')" class="iconfont" style="margin-right: 3px; float: right;" >&#xe600;</a><!--sql-->
+        <a href="javascript:btnHash('#tables')" class="iconfont" style="margin-right: 3px; float: right;">&#xe708;</a><!--选择表-->
     </div>
 </div>
 
@@ -54,7 +57,7 @@
         <div class="contentbox">
             <div class="content">
                 <div style="padding: 5px">列名：<label id="updatecolumnname"></label></div>
-                <textarea id="updatevalue" style="width: 98%" rows="10"></textarea>
+                <textarea id="updatevalue" style="width: 100%" rows="10"></textarea>
                 <a id="unpdatebtn" class="btn" href="javascript:void(0)">修改</a>
             </div>
         </div>
@@ -117,7 +120,15 @@
                 </div>
                 <div class="page-other-item-box">
                     <div class="page-other-item-title">sql：</div>
-                    <div id="page-other-sql" class="page-other-item-context">
+                    <div id="page-other-sql" style="overflow: scroll;white-space: pre;" class="page-other-item-context">
+                        无
+                    </div>
+                </div>
+                <div class="page-other-item-box">
+                    <div class="page-other-item-title">
+                        表结构：<a id="page-other-count-btn" class="iconfont" href="javascript:getTableCreate()">&#xe601;</a>
+                    </div>
+                    <div id="table-create-sql" style="overflow: scroll;white-space: pre;" class="page-other-item-context">
                         无
                     </div>
                 </div>
@@ -180,8 +191,8 @@
                     <li data=" LIKE '%%'">LIKE</li>
                     <li data="%">%</li>
                     <li data=" in ()">in</li>
-                    <li data=" (">(</li>
-                    <li data=") ">)</li>
+                    <li data="(">(</li>
+                    <li data=")">)</li>
                 </ul>
                 <ul class="kjlb3">
                     <li data=" DATE_FORMAT('','%Y-%m-%d %H:%s:%i') ">DATE_FORMAT</li>

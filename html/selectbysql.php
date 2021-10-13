@@ -1,10 +1,11 @@
 <div id="tabledata2" style="display: none">
     <div id="sqllistbox">
         <div id="sqllistbtnbox">
-            <div class="sqllistitem sqllistitembtn iconfont" onclick="btnHash('#tables')">&#xe708;</div>
-            <div class="sqllistitem sqllistitembtn iconfont" style="margin-top: 10px" onclick="opensqllistboxwindow()">&#xe63a;</div>
-            <div id="sqllistadd" class="sqllistitem sqllistitembtn" onclick="addSqlList()">+</div>
-            <div id="sqllistdelete" style="display: none" class="sqllistitem sqllistitembtn" onclick="deleteSqlList()">
+            <div class="sqllistitem sqllistitembtn iconfont" onclick="btnHash('#tables')">&#xe708;</div><!--选择表-->
+            <div  class="sqllistitem sqllistitembtn iconfont"  style="margin-top: 10px" onclick="choicewindow()">&#xe69f;</div><!--选择窗口-->
+            <div class="sqllistitem sqllistitembtn iconfont" style="margin-top: 10px" onclick="opensqllistboxwindow()">&#xe63a;</div><!--保存sql列表-->
+            <div id="sqllistadd" class="sqllistitem sqllistitembtn" onclick="addSqlList()">+</div> <!--增加查询窗口-->
+            <div id="sqllistdelete" style="display: none" class="sqllistitem sqllistitembtn" onclick="deleteSqlList()"><!--关闭查询窗口-->
                 -
             </div>
         </div>
@@ -32,10 +33,11 @@
     </div>
     <div id="sqltip2" class="sqltip">
     </div>
-    <div id="zdysqlmain" style="text-align: center;padding-bottom: 10px;">
-        <div style="padding: 0 5px;box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box; ">
+    <div id="zdysqlmain" style="text-align: center;padding-bottom: 10px; box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box;">
+        <div style="padding: 0 5px; position:relative; box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box; ">
             <textarea id="zdysql" rows="10"
                       style="width: 100%;box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box;  border: 1px solid #387EF5; border-radius: 2px;-webkit-user-select:auto;"></textarea>
+            <div id="zdysqltipname"><span id="zdysqltipnametext"></span></div>
         </div>
         <table width="100%">
             <tr>
@@ -58,7 +60,7 @@
             </tr>
         </table>
 
-        <div style="text-align: left;padding: 0 5px;">
+        <div style="text-align: left;padding: 0 5px;" class="llsqlinstall">
             <ul class="kjlb">
                 <li data=",">,</li>
                 <li data=".">.</li>
@@ -79,8 +81,8 @@
                 <li data=" LIKE '%%'">LIKE</li>
                 <li data="%">%</li>
                 <li data=" in ()">in</li>
-                <li data=" (">(</li>
-                <li data=") ">)</li>
+                <li data="(">(</li>
+                <li data=")">)</li>
             </ul>
             <!--<ul class="kjlb">
                 <li data=" SELECT ">SELECT</li>
@@ -113,14 +115,14 @@
     </div>
 
     <div id="tablediv2" style="display: none;">
-        <table id="tabledatashow2" border="1" style="position: relative">
-            <thead id="tabledatashowthead2">
+        <!--<table class="tabledatashow2" border="1" style="position: relative">
+            <thead class="tabledatashowthead2">
 
             </thead>
-            <tbody id="tabledatashowtbody2">
+            <tbody class="tabledatashowtbody2">
 
             </tbody>
-        </table>
+        </table>-->
     </div>
 </div>
 <div class="floatmain" id="sqlfunlist" style="display: none;">
@@ -130,7 +132,7 @@
         <div class="title"><span class="content">插入函数</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
-                <ul class="kjlb2" id="hanshufunlist">
+                <ul class="kjlb2 llsqlinstall" id="hanshufunlist">
 
                 </ul>
             </div>
@@ -149,7 +151,7 @@
                     <input type="text" id="tablenamelistul_input" class="btn"
                            style="width: 80%; margin: 0 auto; background: white; color: black;"/>
                 </div>
-                <ul class="kjlb2" id="tablenamelistul">
+                <ul class="kjlb2 llsqlinstall" id="tablenamelistul">
 
                 </ul>
             </div>
@@ -185,7 +187,7 @@
                     <input type="text" id="tablencoumnsul_input" class="btn"
                            style="width: 80%; margin: 0 auto; background: white; color: black;"/>
                 </div>
-                <ul class="kjlb2" id="tablencoumnsul">
+                <ul class="kjlb2 llsqlinstall" id="tablencoumnsul">
 
                 </ul>
             </div>
@@ -199,7 +201,7 @@
         <div class="title"><span class="content">查询数据</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
         <div class="contentbox">
             <div class="content">
-                <div id="sqlshowcolumnvalue" style="width: 98%"></div>
+                <div id="sqlshowcolumnvalue" style="width: 100%"></div>
             </div>
         </div>
     </div>

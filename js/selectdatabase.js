@@ -9,9 +9,6 @@ function initselectdatabase() {
     for (var d in databasesList) {
         $("#databasesList").append('<li class="btn">' + databasesList[d] + '</li>');
     }
-    closeLoding()
-    $("#databases").slideDown(gddhms);
-
 }
 
 $(function () {

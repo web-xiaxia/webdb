@@ -10,10 +10,6 @@ function inittables() {
     for (var d in tableList) {
         $("#tablesList").append('<li class="btn">' + tableList[d] + '</li>');
     }
-    closeLoding()
-    $("#tables").slideDown(gddhms);
-
-
 }
 
 $(function () {

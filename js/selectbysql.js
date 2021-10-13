@@ -5,7 +5,6 @@ var sql_database = ''
 var tempTipTablecolumns = {}
 
 function inittabledata2() {
-    $("#tabledata2").slideDown(gddhms);
     var conn_name = GetMaoQueryString('conn_name')
     var database = GetMaoQueryString('database')
     var tableList = getLocalStorage(localStorageName.tableList + conn_name + ':' + database);
@@ -13,6 +12,7 @@ function inittabledata2() {
         window.location.hash = "#databases?conn_name" + conn_name;
         return;
     }
+    $("#tablediv2").empty();
     tempTipTablecolumns = {}
     sql_conn_name = conn_name
     sql_database = database
@@ -152,7 +152,7 @@ var sqlTips = [
     }, {
         "search_text": "abs",
         "show_text": "ABS",
-        "insert_text": "ABS( ",
+        "insert_text": "ABS(",
     }, {
         "search_text": "count",
         "show_text": "COUNT ID",
@@ -164,23 +164,23 @@ var sqlTips = [
     }, {
         "search_text": "sum",
         "show_text": "SUM",
-        "insert_text": "SUM( ",
+        "insert_text": "SUM(",
     }, {
         "search_text": "avg",
         "show_text": "AVG",
-        "insert_text": "AVG( ",
+        "insert_text": "AVG(",
     }, {
         "search_text": "round",
         "show_text": "ROUND",
-        "insert_text": "ROUND( ",
+        "insert_text": "ROUND(",
     }, {
         "search_text": "group",
         "show_text": "GROUP_CONCAT",
-        "insert_text": "GROUP_CONCAT( ",
+        "insert_text": "GROUP_CONCAT(",
     }, {
         "search_text": "concat",
         "show_text": "CONCAT",
-        "insert_text": "CONCAT( ",
+        "insert_text": "CONCAT(",
     }, {
         "search_text": "date",
         "show_text": "DATE_FORMAT",
@@ -188,35 +188,35 @@ var sqlTips = [
     }, {
         "search_text": "left",
         "show_text": "LEFT",
-        "insert_text": "LEFT( ",
+        "insert_text": "LEFT(",
     }, {
         "search_text": "length",
         "show_text": "LENGTH",
-        "insert_text": "LENGTH( ",
+        "insert_text": "LENGTH(",
     }, {
         "search_text": "ltrim",
         "show_text": "LTRIM",
-        "insert_text": "LTRIM( ",
+        "insert_text": "LTRIM(",
     }, {
         "search_text": "right",
         "show_text": "RIGHT",
-        "insert_text": "RIGHT( ",
+        "insert_text": "RIGHT(",
     }, {
         "search_text": "rtrim",
         "show_text": "RTRIM",
-        "insert_text": "RTRIM( ",
+        "insert_text": "RTRIM(",
     }, {
         "search_text": "trim",
         "show_text": "TRIM",
-        "insert_text": "TRIM( ",
+        "insert_text": "TRIM(",
     }, {
         "search_text": "ucase",
         "show_text": "UCASE",
-        "insert_text": "UCASE( ",
+        "insert_text": "UCASE(",
     }, {
         "search_text": "upper",
         "show_text": "UPPER",
-        "insert_text": "UPPER( ",
+        "insert_text": "UPPER(",
     }
 ]
 var sqlColumnsTips = [
@@ -252,41 +252,47 @@ var sqlColumnsTips = [
 
 var tipColumnsIndex = 0;
 
+
 function sortTipText(arr, tableMatchNowSearchColumnsText, fun) {
-    tableMatchNowSearchColumnsText = tableMatchNowSearchColumnsText.toLowerCase()
+    var bRegular = null
+    if (tableMatchNowSearchColumnsText) {
+        tableMatchNowSearchColumnsText = tableMatchNowSearchColumnsText.toLowerCase()
+        bRegular = tipStrToRegular(tableMatchNowSearchColumnsText)
+    }
     var rarr = []
+
     for (var x in arr) {
-        var x2 = fun(arr[x], tableMatchNowSearchColumnsText)
+        var x2 = fun(arr[x], bRegular)
         if (x2) {
             rarr.push(x2)
         }
     }
 
-    rarr.sort(function (a,b) {
+    rarr.sort(function (a, b) {
         var asum = 0
         var bsum = 0
-        if(a == tableMatchNowSearchColumnsText){
-            asum+=1000000000
+        if (a == tableMatchNowSearchColumnsText) {
+            asum += 1000000000
         }
-        if(b == tableMatchNowSearchColumnsText){
-            bsum+=1000000000
+        if (b == tableMatchNowSearchColumnsText) {
+            bsum += 1000000000
         }
         var axindex = a.indexOf(tableMatchNowSearchColumnsText)
         var bxindex = b.indexOf(tableMatchNowSearchColumnsText)
-        asum+=(10000-(axindex == -1?10000:axindex))*1000000
-        bsum+=(10000-(bxindex == -1?10000:bxindex))*1000000
-        asum+=(10000-a.length)
-        bsum+=(10000-b.length)
-        return bsum-asum
+        asum += (10000 - (axindex == -1 ? 10000 : axindex)) * 1000000
+        bsum += (10000 - (bxindex == -1 ? 10000 : bxindex)) * 1000000
+        asum += (10000 - a.length)
+        bsum += (10000 - b.length)
+        return bsum - asum
     })
 
     return rarr
 }
 
 function tipColumnsFun(columns, tableMatchNowSearchColumnsText, tipdom, nowTipColumnsIndex, startIndex, endIndex) {
-    var tipsarr = sortTipText(columns, tableMatchNowSearchColumnsText, function (a, b) {
+    var tipsarr = sortTipText(columns, tableMatchNowSearchColumnsText, function (a, bRegular) {
         var field_name = a['Field'].toLowerCase()
-        if (b && !test_start(b, [field_name, `\`${field_name}\``])) {
+        if (bRegular && !bRegular.test(`\`${field_name}\``)) {
             return
         }
         return field_name;
@@ -321,7 +327,7 @@ function tipColumns(tablexxx, tableMatchNowSearchColumnsText, tipdom, nowTipColu
     }
     $.ajax({
         url: "/webdb/php/getColumns.php",
-        type: "get",
+        type: "post",
         dataType: "json",
         data: {
             'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
@@ -365,7 +371,44 @@ function tipLabelAdd(dom, showText, insertText, startIndex, endIndex) {
     dom.append(lll)
 }
 
-function tipsSearchList(nowText, nowSearchText, nowIndex) {
+function sqlTextSplitFen(nowText, sqlSplitSep = ';', replaceN = true) {
+    var nowTextArr = nowText.split('\n')
+    for (var xxx in nowTextArr) {
+        if (/^--.*/.test(nowTextArr[xxx])) {
+            nowTextArr[xxx] = nowTextArr[xxx].replace(/;/g, ' ')
+        }
+    }
+    var fenSqlTextSplit = nowTextArr.join('\n').split(sqlSplitSep)
+    if (fenSqlTextSplit.length <= 1) {
+        if (replaceN) {
+            return [fenSqlTextSplit[0].replace(/\n/g, ' ')]
+        }
+        return [fenSqlTextSplit[0]]
+    }
+    var fenSqlTextArrayArray = []
+    var fenSqlTextArrayAdd = true
+    for (var xxx in fenSqlTextSplit) {
+        var fenSqlText = fenSqlTextSplit[xxx]
+        if (replaceN) {
+            fenSqlText = fenSqlText.replace(/\n/g, ' ')
+        }
+        if (fenSqlTextArrayAdd) {
+            fenSqlTextArrayArray.push([fenSqlText])
+        } else {
+            fenSqlTextArrayArray[fenSqlTextArrayArray.length - 1].push(fenSqlText)
+        }
+        var nowFenSqlText = fenSqlTextArrayArray[fenSqlTextArrayArray.length - 1].join(';')
+        fenSqlTextArrayAdd = nowFenSqlText.replace(/\\'/g, '').split('\'').length % 2 !== 0;
+    }
+    var fenSqlTextArray = []
+    for (var xxxx in fenSqlTextArrayArray) {
+        fenSqlTextArray.push(fenSqlTextArrayArray[xxxx].join(';'))
+    }
+
+    return fenSqlTextArray
+}
+
+function tipsSearchList(orgSql, nowText, nowSearchText, nowIndex) {
     var matchNowSearchText = nowSearchText.toLowerCase()
     tipColumnsIndex = tipColumnsIndex + 1
     console.log(nowSearchText)
@@ -377,9 +420,11 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
     //    return
     //}
 
+    var matchNowSearchTextRegular = tipStrToRegular(matchNowSearchText)
+
     for (var index in sqlTips) {
         var sqlTip = sqlTips[index]
-        if (sqlTip.search_text.indexOf(matchNowSearchText) != -1) {
+        if (!matchNowSearchTextRegular || matchNowSearchTextRegular.test(sqlTip.search_text)) {
             tipLabelAdd(tips1_box, sqlTip.show_text, sqlTip.insert_text, nowIndex - matchNowSearchText.length, nowIndex)
         }
     }
@@ -404,9 +449,27 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
     }
 
     if (isColumnsMatch) {
+        var fenSqlTextArrayArray = sqlTextSplitFen(orgSql)
+        var ffffenSqlText = null
+        if (fenSqlTextArrayArray.length == 1) {
+            ffffenSqlText = fenSqlTextArrayArray[0]
+        } else if (fenSqlTextArrayArray.length > 1) {
+            var fenSqlTextLength = 0
+            for (var xxxii in fenSqlTextArrayArray) {
+                var nowFenSqlText = fenSqlTextArrayArray[xxxii]
+                if (ffffenSqlText == null && fenSqlTextLength < nowIndex && (fenSqlTextLength + nowFenSqlText.length) > nowIndex) {
+                    ffffenSqlText = nowFenSqlText
+                }
+                fenSqlTextLength += nowFenSqlText.length
+            }
+            if (ffffenSqlText == null) {
+                ffffenSqlText = fenSqlTextArrayArray[fenSqlTextArrayArray.length]
+            }
+        } else {
+            ffffenSqlText = ''
+        }
+        var fromSplit = ffffenSqlText.toLowerCase().split('from')
         var asMapping = {}
-        var fromSplit = nowText.toLowerCase().split('from')
-
         if (fromSplit.length > 1) {
             for (var z = 1; z < fromSplit.length; z++) {
                 var whereStr = fromSplit[z].split('where')[0]
@@ -442,12 +505,12 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
         }
         tipColumns(tableMatchNowSearchText, tableMatchNowSearchColumnsText, tips2_box, tipColumnsIndex, nowIndex - tableMatchNowSearchColumnsText.length, nowIndex)
     } else {
-        var tipsarr = sortTipText(tableList, tableMatchNowSearchText, function (a, b) {
+        var tipsarr = sortTipText(tableList, tableMatchNowSearchText, function (a, bRegular) {
             var table = a.toLowerCase()
-            if (table.indexOf(b) != -1 || `\`${table}\``.indexOf(b) != -1) {
-                return a;
+            if (bRegular && !bRegular.test(`\`${table}\``)) {
+                return null;
             }
-            return null;
+            return a;
         });
         for (var index in tipsarr) {
             var tableName = tipsarr[index]
@@ -458,8 +521,11 @@ function tipsSearchList(nowText, nowSearchText, nowIndex) {
 
 }
 
+var sqlR = /[\t()=><,]/g
+
 function tipsSql(that) {
-    var nowText = $(that).val().replace(/\n/g, ' ')
+    var orgSql = $(that).val().replace(sqlR, ' ')
+    var nowText = orgSql.replace(/[\n]/g, ' ')
     var nowIndex = that.selectionEnd
     var fromIndex = 0;
     var nowIndexStr = nowText.substr(fromIndex, nowIndex)
@@ -476,7 +542,7 @@ function tipsSql(that) {
     }
 
     console.log(nowIndex, nowIndexStr, nowIndexStrSplit, nowSearchText)
-    tipsSearchList(nowText, nowSearchText, nowIndex)
+    tipsSearchList(orgSql, nowText, nowSearchText, nowIndex)
 }
 
 
@@ -518,8 +584,8 @@ function opensqllistboxwindow() {
         var sqllistcontexttitle = $(`<label class="sqllistcontexttitle"></label>`)
         sqllistcontexttitle.text(getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + zdysqlsave, false, ''))
         var sqllistcontextbtnbox = $(`<div class="sqllistcontextbtnbox">
-                    <a class="sqllistcontextbtn" href="javascript:changesavesqlname('${zdysqlsave}')">重命名</a>
-                    <a class="sqllistcontextbtn" href="javascript:deletesavesql('${zdysqlsave}')">删除</a>
+                    <div class="sqllistcontextbtn" onclick="changesavesqlname('${zdysqlsave}')">重命名</div>
+                    <div class="sqllistcontextbtn" onclick="deletesavesql('${zdysqlsave}')">删除</div>
         </div>`)
         var sqllistcontexttitlebox = $(`<div class="sqllistcontexttitlebox"></div>`)
         sqllistcontexttitlebox.append(sqllistcontexttitle)
@@ -539,6 +605,7 @@ function opensqllistboxwindow() {
 }
 
 function changesavesqlname(clickzdysqlsave) {
+    event.stopPropagation();
     var oldzdysqlsavename = getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + clickzdysqlsave, false)
     var zdysqlsavename = prompt("请输入名称", oldzdysqlsavename)
     if (zdysqlsavename) {
@@ -548,6 +615,11 @@ function changesavesqlname(clickzdysqlsave) {
 }
 
 function deletesavesql(clickzdysqlsave) {
+    event.stopPropagation();
+    if (!window.confirm('确认删除?')) {
+        return
+    }
+
     var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
     var newzdysqlsavelist = []
     for (var index in zdysqlsavelist) {
@@ -597,6 +669,7 @@ function saveZdySql() {
     setLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + nowSqlName, zdysqlsavename, false)
     zdysqlsavelist.push(nowSqlName)
     setLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, zdysqlsavelist)
+    $("#zdysqltipnametext").text(zdysqlsavename)
     $("#saveZdySqlBtn").text(`已保存`)
 }
 
@@ -694,11 +767,17 @@ function deleteSqlList() {
 }
 
 function changeSaveBtnText() {
+    $('#zdysqltipname').css({'display': 'none'})
     $("#saveZdySqlBtn").text('保存')
     var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
     for (var index in zdysqlsavelist) {
         var zdysqlsave = zdysqlsavelist[index]
         if (zdysqlsave == nowSqlName) {
+            var xxxname = getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + nowSqlName, false)
+            if (xxxname != null) {
+                $("#zdysqltipnametext").text(xxxname)
+                $('#zdysqltipname').css({'display': ''})
+            }
             $("#saveZdySqlBtn").text(`已保存`)
             break
         }
@@ -768,10 +847,12 @@ $(function () {
     });
     $("#zdysql").focus(function () {
         tipsSql(this)
+        $('#zdysqltipname').css({'display': 'none'})
         $('#sqllistbox').css({'display': 'none'})
     });
     $("#zdysql").blur(function () {
         $('#sqllistbox').css({'display': ''})
+        $('#zdysqltipname').css({'display': ''})
     });
     $("#zdysql").on("touchend", function () {
         tipsSql(this)
@@ -791,7 +872,7 @@ $(function () {
         search_ul_text(this, "#tablencoumnsul")
     });
 
-    $("#tabledatashowtbody2").delegate("td", "click", function () {
+    $("#tablediv2").delegate(".tabledatashowtbody2 td", "click", function () {
         var _this = $(this);
         if (_this.hasClass("xuhao")) {
             return
@@ -831,14 +912,18 @@ $(function () {
         var tablesList = $('.sqlshow_one_data_field_box')
         for (var index in tablesList) {
             var table = tablesList[index]
-            var displayValue = "block"
-            if (aaa) {
-                var litext = table.getAttribute('data-field')
-                if (litext && litext.indexOf(aaa) == -1) {
-                    displayValue = "none"
+            if (table.getAttribute) {
+                var displayValue = "block"
+                if (aaa) {
+                    var litext = table.getAttribute('data-field')
+                    if (litext && litext.indexOf(aaa) == -1) {
+                        displayValue = "none"
+                    }
+                }
+                if (table.style) {
+                    table.style.display = displayValue
                 }
             }
-            table.style.display = displayValue
         }
     });
 
@@ -854,7 +939,7 @@ $(function () {
         var num = parseInt($("#zdysql").attr("rows"));
         $("#zdysql").attr("rows", num + 2);
     })
-    $(".kjlb2").delegate("li", "click", function () {
+    $("#tablenamelistul2").delegate("li", "click", function () {
         closefloatmain("#tablenamelist2");
         openfloatmain("#tablencoumns");
         $("#tablencoumnsul").empty();
@@ -866,7 +951,7 @@ $(function () {
             var database = GetMaoQueryString('database')
             $.ajax({
                 url: "/webdb/php/getColumns.php",
-                type: "get",
+                type: "post",
                 dataType: "json",
                 data: {
                     'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
@@ -922,7 +1007,7 @@ $(function () {
         $("#tablencoumnsul").prepend(`<li data="SELECT \n  ${all_column_name.join(', ')} \nFROM \n  ${tablexxx} \nWHERE \n  ">查询</li>`)
     }
 
-    $(".kjlb").delegate("li", "click", function () {
+    $(".llsqlinstall").delegate("li", "click", function () {
         var a = $(this).attr("data");
         if (a == null || a == "") {
             return;
@@ -944,7 +1029,7 @@ $(function () {
             openLoding()
             $.ajax({
                 url: "/webdb/html/hanshu.html",
-                type: "get",
+                type: "post",
                 dataType: "html",
                 success: function (data) {
                     $("#hanshufunlist").html(data);
@@ -962,68 +1047,124 @@ $(function () {
 
 function getTableData2() {
     openLoding()
-    $("#tabledatashowthead2").empty();
-    $("#tabledatashowtbody2").empty();
+    $("#tablediv2").empty();
     var sql = $("#zdysql").val()
-    if (sql.indexOf('limit') == -1 && sql.indexOf('LIMIT') == -1) {
-        closeLoding()
-        alert("请加入limit")
-        return
+    var xxxxxsqlarr = sql.toLowerCase().split('\n')
+    var xxsqlarray = []
+    for (var xxx in xxxxxsqlarr) {
+        var xac = xxxxxsqlarr[xxx]
+        if (xac.indexOf('--') == 0) {
+            continue
+        }
+        xxsqlarray.push(xac)
     }
+
+    var xxsql = xxsqlarray.join('\n')
+    var updateIndex = xxsql.indexOf('select')
+    if (!(updateIndex < 5 && updateIndex >= 0)) {
+        if (!window.confirm("非查询语句 是否继续执行？")) {
+            closeLoding()
+            return
+        }
+    } else {
+        if (sql.toLowerCase().indexOf('limit') == -1) {
+            if (!window.confirm("未添加 limit 是否继续执行？")) {
+                closeLoding()
+                return
+            }
+        }
+    }
+
+    var fenSqlTextArray = sqlTextSplitFen(sqlFormatter.format(sql.replace(/^--[ ]{0,2}limit[ ]*\n/g,'\n').replace(/\n--[ ]{0,2}limit[ ]*\n/g,'\n'), {
+        language: 'mysql',
+        uppercase: true,
+    }), sqlSplitSep = ';\n', replaceN = false)
+
+    var fenSqlTitleArray = []
+    for (var xxx in fenSqlTextArray) {
+        fenSqlTitleArray[xxx] = []
+        var canTitleAdd = true
+        var fenSqlTextX = fenSqlTextArray[xxx].split('\n')
+        for (var xxxxx in fenSqlTextX) {
+            if (canTitleAdd && fenSqlTextX[xxxxx].startsWith('--')) {
+                fenSqlTitleArray[xxx].push(fenSqlTextX[xxxxx].substr(2, fenSqlTextX[xxxxx].length))
+            } else {
+                canTitleAdd = false
+            }
+        }
+    }
+
     var conn_name = GetMaoQueryString('conn_name')
     var database = GetMaoQueryString('database')
     $.ajax({
         url: "/webdb/php/getTableDataZdy.php",
-        type: "get",
+        type: "post",
         dataType: "json",
         data: {
             'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
             'mysql_database': database,
             'sql': sql
         },
-        success: function (data) {
+        success: function (dataInfo) {
             closeLoding()
-            console.log(data);
-            if (data == false) {
-                alert("数据库连接失败")
-            } else {
-                if (data.isquery == false) {
-                    if (data.updateok == 1) {
-                        alert("执行非查询成功")
-                    } else {
-                        alert("执行非查询失败")
+            console.log(dataInfo);
+            if (dataInfo.esms) {
+                alert(dataInfo.esms)
+            }
+            var datas = dataInfo.data
+            if (datas) {
+                for (var xxxxxi in datas) {
+                    var data = datas[xxxxxi]
+                    var sqlIndexTitle = `SQL${parseInt(xxxxxi) + 1}`
+                    var xxxfenSqlTitleArray = fenSqlTitleArray[xxxxxi]
+                    if (!data.title  && xxxfenSqlTitleArray.length>0){
+                        data.title = xxxfenSqlTitleArray[xxxfenSqlTitleArray.length-1]
                     }
-                } else {
-                    if (data.isrun == false) {
-                        alert("未查找到数据");
+                    if (data.title) {
+                        sqlIndexTitle = data.title
+                    }
+
+                    if (data.isquery == false) {
+                        $("#tablediv2").append(`<div class="tablediv2sqltip">${sqlIndexTitle} 执行非查询 结果：${data.info}</div>`);
                     } else {
-
-                        $("#tabledatashowthead2").empty();
-                        $("#tabledatashowtbody2").empty();
-                        $("#tablediv2").css({display: "block"})
-                        var ttr2 = $('<tr style="text-align: center;" class="table_title_sticky">');
-                        ttr2.append('<td class="xuhao table_left_sticky" style="background: #5a92ef">序号</td>');
-
-                        for (var d in data.columns) {
-                            var mysql_table_column = data.columns[d];
-                            ttr2.append('<td>' + mysql_table_column + '</td>');
-                        }
-                        $("#tabledatashowthead2").append(ttr2);
-                        var xxtabledatashowtbody2 = $("#tabledatashowtbody2");
-                        for (var d in data.data) {
-
-                            var xxtd = sql_xuhao_td(d, data.columns, data.data[d])
-                            var btr = $('<tr>');
-                            btr.append(xxtd)
-                            for (var d2 in data.columns) {
-                                var field = data.columns[d2];
-                                var btd = $(`<td data-columns="' + field + '"></td>`)
-                                btd.text(data.data[d][field])
-                                btr.append(btd)
+                        if (data.isrun == false) {
+                            $("#tablediv2").append(`<div class="tablediv2sqltip">${sqlIndexTitle} 未查找到数据</div>`);
+                        } else {
+                            if (data.title) {
+                                $("#tablediv2").append(`<div class="tablediv2sqltiptitlebox"><div class="tablediv2sqltip tablediv2sqltiptitlemain tablediv2sqltiptitleleft ">发</div><div class="tablediv2sqltip tablediv2sqltiptitlemain tablediv2sqltiptitle">${data.title}</div></div>`);
                             }
-                            xxtabledatashowtbody2.append(btr);
+                            var tabledatashowthead2 = $(`<thead class="tabledatashowthead2"></thead>`).empty();
+                            $("#tablediv2").css({display: "block"})
+                            var ttr2 = $('<tr style="text-align: center;" class="table_title_sticky">');
+                            ttr2.append('<td class="xuhao table_left_sticky" style="background: #5a92ef">序号</td>');
+
+                            for (var d in data.columns) {
+                                var mysql_table_column = data.columns[d];
+                                ttr2.append('<td>' + mysql_table_column + '</td>');
+                            }
+                            tabledatashowthead2.append(ttr2);
+                            var xxtabledatashowtbody2 = $(`<tbody class="tabledatashowtbody2"></tbody>`);
+                            for (var d in data.data) {
+
+                                var xxtd = sql_xuhao_td(d, data.columns, data.data[d])
+                                var btr = $('<tr>');
+                                btr.append(xxtd)
+                                for (var d2 in data.columns) {
+                                    var field = data.columns[d2];
+                                    var btd = $(`<td data-columns="' + field + '"></td>`)
+                                    btd.text(data.data[d][field])
+                                    btr.append(btd)
+                                }
+                                xxtabledatashowtbody2.append(btr);
+                            }
+
+                            var xxxtableshow2 = $(`<table class="tabledatashow2" border="1" style="position: relative"></table>`)
+                            xxxtableshow2.append(tabledatashowthead2)
+                            xxxtableshow2.append(xxtabledatashowtbody2)
+
+                            $("#tablediv2").append(xxxtableshow2)
+                            $("html,body").animate({scrollTop: $("body").scrollTop() + $("#tablediv2").offset().top}, 0);
                         }
-                        $("html,body").animate({scrollTop: $("body").scrollTop() + $("#tablediv2").offset().top}, 0);
                     }
                 }
             }
