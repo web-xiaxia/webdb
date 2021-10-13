@@ -32,7 +32,7 @@ $datar = new Datar();
 //    $count = $row['count'];
 //}
 //$datar->count = $count;
-$sql2 = "SHOW CREATE TABLE  " .$mysql_database.".". $mysql_table;
+$sql2 = "SHOW CREATE TABLE ". $mysql_table;
 //echo $sql2;
 $datar->e2 = $sql2;
 try {

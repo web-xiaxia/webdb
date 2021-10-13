@@ -1138,9 +1138,14 @@ function getTableData2() {
                             var ttr2 = $('<tr style="text-align: center;" class="table_title_sticky">');
                             ttr2.append('<td class="xuhao table_left_sticky" style="background: #5a92ef">序号</td>');
 
+                            var data_field_is_numerics = {}
                             for (var d in data.columns) {
-                                var mysql_table_column = data.columns[d];
+                                var data_field = data.columns[d]
+                                var mysql_table_column = data_field['name'];
                                 ttr2.append('<td>' + mysql_table_column + '</td>');
+                                if (is_numerics_type[data_field['type']]) {
+                                    data_field_is_numerics[data_field['name']] = true
+                                }
                             }
                             tabledatashowthead2.append(ttr2);
                             var xxtabledatashowtbody2 = $(`<tbody class="tabledatashowtbody2"></tbody>`);
@@ -1150,8 +1155,13 @@ function getTableData2() {
                                 var btr = $('<tr>');
                                 btr.append(xxtd)
                                 for (var d2 in data.columns) {
-                                    var field = data.columns[d2];
-                                    var btd = $(`<td data-columns="' + field + '"></td>`)
+                                    var field = data.columns[d2]['name'];
+
+                                    var textRight=""
+                                    if (data_field_is_numerics[field]){
+                                        textRight ="text-right"
+                                    }
+                                    var btd = $(`<td class="${textRight}" data-columns="' + field + '"></td>`)
                                     btd.text(data.data[d][field])
                                     btr.append(btd)
                                 }

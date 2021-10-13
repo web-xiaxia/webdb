@@ -158,16 +158,13 @@ class MysqlHelper
                     $multiData->updateok = false;
                     $multiData->info = $db->info ;
                     if ($rs = $db->store_result()) {//store_result()方法获取第一条sql语句查询结果
-
+                        $multiData->columns = $rs->fetch_fields();
                         while ($row = $rs->fetch_assoc()) {
                             if ($multiData->isrun == false) {
-                                foreach ($row as $rowName => $rowValue) {
-                                    array_push($multiData->columns, $rowName);
-                                }
                                 $multiData->isrun = true;
                             }
-                            array_push($multiData->data, $row);
 
+                            array_push($multiData->data, $row);
                         }
 
                         $rs->Close(); //关闭结果集

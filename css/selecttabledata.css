@@ -15,6 +15,13 @@
     max-width: 500px;
     overflow: hidden;
 }
+#tabledatashow td:first-child, .tabledatashow2 td:first-child {
+    padding: 3px;
+    text-align: center;
+}
+.text-right{
+    text-align: right;
+}
 
 #tabledatashowthead, .tabledatashowthead2 {
     background: #387EF5;

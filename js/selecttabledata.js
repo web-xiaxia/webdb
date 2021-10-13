@@ -60,7 +60,7 @@ function inittabledata() {
     $('#zdycolumnsyablename').html(`表名：${table}`)
     $('#page-other-count').text('无')
     $('#table-create-sql').text('无')
-    
+
     var zdycolumnswindowcontext = $("#zdycolumnswindowcontext")
     zdycolumnswindowcontext.empty()
     filter_columns_option_list = []
@@ -725,7 +725,7 @@ function getTableDataCount() {
     })
 }
 
-function getTableCreate(){
+function getTableCreate() {
     var queryDataFull = getTableQueryData()
     var query_data = queryDataFull.query_data
     openLoding()
@@ -773,7 +773,7 @@ function getTableData() {
         success: function (data) {
             closeLoding()
             console.log(data);
-            if(data.esms){
+            if (data.esms) {
                 alert(data.esms)
             }
             if (data == false) {
@@ -783,6 +783,19 @@ function getTableData() {
                     language: 'mysql',
                     uppercase: true,
                 }))
+
+
+                // https://www.php.net/manual/zh/mysqli-result.fetch-field.php
+                var data_field_is_numerics = {}
+                var data_fields = data["fields"]
+                for (var xd in data_fields) {
+                    var data_field = data_fields[xd]
+                    if (is_numerics_type[data_field['type']]) {
+                        data_field_is_numerics[data_field['name']] = true
+                    }
+                    //data_field_map[data_field.]
+                }
+
                 var sqldataList = data["data"];
 
                 $("#tabledatashowthead").empty();
@@ -820,7 +833,11 @@ function getTableData() {
                         if (!$(`#zdycolumns${field}`).is(':checked')) {
                             continue
                         }
-                        var btd = $(`<td data-columns="\`${field}\`"></td>`)
+                        var textRight=""
+                        if (data_field_is_numerics[field]){
+                            textRight ="text-right"
+                        }
+                        var btd = $(`<td class="${textRight}" data-columns="\`${field}\`"></td>`)
                         btd.text(sqldata[field])
                         btr.append(btd)
                     }

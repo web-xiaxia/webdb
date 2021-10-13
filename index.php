@@ -39,7 +39,7 @@
     <script type="text/javascript" src="https://unpkg.com/sql-formatter@latest/dist/sql-formatter.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <script type="text/javascript">
-
+        var is_numerics_type = {16:true, 1:true, 2:true, 9:true, 3:true, 8:true, 4:true, 5:true, 246:true}
         function test_start(str, start_array) {
             str = str.toLowerCase()
             var str_length = str.length

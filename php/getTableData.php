@@ -4,6 +4,7 @@ include 'MysqlHelper.php';
 class Datar
 {
     public $data;
+    public $fields;
     public $count;
     public $e;
     public $e2; //sql
@@ -40,6 +41,7 @@ $sql2 = "select " . $mysql_column . " from  " . $mysql_table . " where 1=1 " . $
 $datar->e2 = $sql2;
 try {
     $result = $mysqlHelper->query($mysql_database, $sql2);
+    $datar->fields = $result->fetch_fields();
     $array = array();
     while ($row = $result->fetch_assoc())//循环读出数据
     {
