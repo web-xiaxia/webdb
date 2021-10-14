@@ -566,7 +566,7 @@ function sql_show_one_data(columns, sqldata) {
 }
 
 function sql_xuhao_td(d, columns, data) {
-    var xxtd = $(`<td class="xuhao table_left_sticky" data-index="${d}">${(parseInt(d) + 1)}</td>`)
+    var xxtd = $(`<td class="xuhao" data-index="${d}">${(parseInt(d) + 1)}</td>`)
     xxtd.click(function () {
         sql_show_one_data(columns, data)
     })
@@ -1136,7 +1136,7 @@ function getTableData2() {
                             var tabledatashowthead2 = $(`<thead class="tabledatashowthead2"></thead>`).empty();
                             $("#tablediv2").css({display: "block"})
                             var ttr2 = $('<tr style="text-align: center;" class="table_title_sticky">');
-                            ttr2.append('<td class="xuhao table_left_sticky" style="background: #5a92ef">序号</td>');
+                            ttr2.append('<td class="xuhao">序号</td>');
 
                             var data_field_is_numerics = {}
                             for (var d in data.columns) {

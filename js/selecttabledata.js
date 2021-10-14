@@ -604,7 +604,7 @@ function show_one_data(conn_name, database, table, sqldata) {
 }
 
 function xuhao_td(d, conn_name, database, table, sqldata) {
-    var bttd = $(`<td class="table_left_sticky" data-index="${d}">${(parseInt(d) + 1)}</td>`)
+    var bttd = $(`<td data-index="${d}">${(parseInt(d) + 1)}</td>`)
     bttd.click(function () {
         show_one_data(conn_name, database, table, sqldata)
     })
@@ -801,7 +801,7 @@ function getTableData() {
                 $("#tabledatashowthead").empty();
                 $("#tabledatashowtbody").empty();
                 var ttr2 = $('<tr style="text-align: center;" class="table_title_sticky">');
-                ttr2.append(`<td onclick="openfloatmain('#zdycolumnswindow');" class="table_left_sticky" style="background: #5a92ef">序号</td>`);
+                ttr2.append(`<td onclick="openfloatmain('#zdycolumnswindow');">序号</td>`);
                 for (var d in table_columns.mysql_table_columns) {
                     var mysql_table_column = table_columns.mysql_table_columns[d]['Field'];
                     if (!$(`#zdycolumns${mysql_table_column}`).is(':checked')) {

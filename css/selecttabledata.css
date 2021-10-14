@@ -19,6 +19,10 @@
     padding: 3px;
     text-align: center;
     border-left: 0px;
+    position: sticky;
+    left: 0;
+    z-index: 400;
+    background: #f7f6f6;
 }
 .text-right{
     text-align: right;
@@ -34,6 +38,9 @@
 
 #tabledatashowthead tr:first-child td, .tabledatashowthead2 tr:first-child td{
     border-top:0px;
+}
+#tabledatashowthead tr:first-child td:first-child, .tabledatashowthead2 tr:first-child td:first-child{
+    background: #5a92ef
 }
 
 #tabledatashowthead td, .tabledatashowthead2 td {
