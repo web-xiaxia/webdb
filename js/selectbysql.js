@@ -1142,7 +1142,11 @@ function getTableData2() {
                             for (var d in data.columns) {
                                 var data_field = data.columns[d]
                                 var mysql_table_column = data_field['name'];
-                                ttr2.append('<td>' + mysql_table_column + '</td>');
+                                var dingTitle = ""
+                                if(d=="0"){
+                                    dingTitle="<span class='iconfont title-ding' onclick='titleDing(this)'>&#xe62d;</span>"
+                                }
+                                ttr2.append(`<td>${dingTitle}${mysql_table_column}</td>`);
                                 if (is_numerics_type[data_field['type']]) {
                                     data_field_is_numerics[data_field['name']] = true
                                 }

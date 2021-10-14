@@ -68,3 +68,9 @@ $(function () {
         });
     });
 });
+
+
+function titleDing(that){
+    event.stopPropagation()
+    $(that).parents("table").toggleClass("tabledatashowleft")
+}

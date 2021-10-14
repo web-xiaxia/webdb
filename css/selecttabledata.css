@@ -24,6 +24,13 @@
     z-index: 400;
     background: #f7f6f6;
 }
+.tabledatashowleft td:nth-child(2) {
+    border-left: 0px;
+    position: sticky;
+    left: 0;
+    z-index: 400;
+    background: #f7f6f6;
+}
 .text-right{
     text-align: right;
 }
@@ -42,6 +49,23 @@
 #tabledatashowthead tr:first-child td:first-child, .tabledatashowthead2 tr:first-child td:first-child{
     background: #5a92ef
 }
+.tabledatashowleft thead tr:first-child td:nth-child(2){
+    background: #5a92ef
+}
+
+#tabledatashowthead tr:first-child td:nth-child(2), .tabledatashowthead2 tr:first-child td:nth-child(2){
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.title-ding{
+    color: white;
+    padding: 3px;
+}
+.tabledatashowleft .title-ding{
+    color: #394bd3;
+}
+
 
 #tabledatashowthead td, .tabledatashowthead2 td {
     color: white;

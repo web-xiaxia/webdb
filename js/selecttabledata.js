@@ -817,7 +817,20 @@ function getTableData() {
                         }
                     }
 
-                    ttr2.append('<td data-column="' + mysql_table_column + '" >' + mysql_table_column + (querywhereobjcolumn == null ? "" : "<span class='iconfont' style='color:red'> &#xe612;</span>") + (oderbyobjcolumnname == null ? "" : "<span class='iconfont' style='color: #feff08'> " + oderbytip + "</span>") + '</td>')
+                    var querywhereobjcolumntext = ""
+                    if (querywhereobjcolumn != null) {
+                        querywhereobjcolumntext = "<span class='iconfont' style='color:red'> &#xe612;</span>"
+                    }
+                    var oderbyobjcolumnnametext = ""
+                    if (oderbyobjcolumnname != null) {
+                        oderbyobjcolumnnametext = `<span class='iconfont' style='color: #feff08'>${oderbytip}</span>`
+                    }
+                    var dingTitle = ""
+                    if(d=="0"){
+                        dingTitle="<span class='iconfont title-ding' onclick='titleDing(this)'>&#xe62d;</span>"
+                    }
+
+                    ttr2.append(`<td data-column="${mysql_table_column}" >${dingTitle}${mysql_table_column} ${querywhereobjcolumntext} ${oderbyobjcolumnnametext}</td>`)
                 }
                 $("#tabledatashowthead").append(ttr2);
                 var xxtabledatashowtbody = $("#tabledatashowtbody");
@@ -833,9 +846,9 @@ function getTableData() {
                         if (!$(`#zdycolumns${field}`).is(':checked')) {
                             continue
                         }
-                        var textRight=""
-                        if (data_field_is_numerics[field]){
-                            textRight ="text-right"
+                        var textRight = ""
+                        if (data_field_is_numerics[field]) {
+                            textRight = "text-right"
                         }
                         var btd = $(`<td class="${textRight}" data-columns="\`${field}\`"></td>`)
                         btd.text(sqldata[field])
