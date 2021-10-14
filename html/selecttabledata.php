@@ -19,8 +19,8 @@
     </div>-->
     <div id="tablediv"
          style="overflow: scroll;height: 100%;box-sizing:border-box; -webkit-overflow-scrolling: touch; width: 100%;">
-        <table id="tabledatashow" border="1" style="position: relative">
-            <thead id="tabledatashowthead">
+        <table id="tabledatashow" class="tabledatashow2" border="1" style="position: relative">
+            <thead id="tabledatashowthead" class="tabledatashowthead2">
 
             </thead>
             <tbody id="tabledatashowtbody">

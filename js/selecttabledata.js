@@ -60,6 +60,7 @@ function inittabledata() {
     $('#zdycolumnsyablename').html(`表名：${table}`)
     $('#page-other-count').text('无')
     $('#table-create-sql').text('无')
+    $("#tabledatashow").removeClass("tabledatashowleft")
 
     var zdycolumnswindowcontext = $("#zdycolumnswindowcontext")
     zdycolumnswindowcontext.empty()

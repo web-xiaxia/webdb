@@ -1,4 +1,4 @@
-#tabledatashow, .tabledatashow2 {
+.tabledatashow2 {
     border-collapse: collapse;
     border: 1px;
 }
@@ -9,13 +9,13 @@
     margin-bottom: 0px;
 }
 
-#tabledatashow td, .tabledatashow2 td {
+.tabledatashow2 td {
     padding: 3px 15px;
     white-space: nowrap;
     max-width: 500px;
     overflow: hidden;
 }
-#tabledatashow td:first-child, .tabledatashow2 td:first-child {
+.tabledatashow2 td:first-child {
     padding: 3px;
     text-align: center;
     border-left: 0px;
@@ -37,25 +37,25 @@
     text-align: right;
 }
 
-#tabledatashowthead, .tabledatashowthead2 {
+ .tabledatashowthead2 {
     background: #387EF5;
 }
 
-#tabledatashowthead tr, .tabledatashowthead2 tr {
+ .tabledatashowthead2 tr {
     background: #387EF5;
 }
 
-#tabledatashowthead tr:first-child td, .tabledatashowthead2 tr:first-child td{
+ .tabledatashowthead2 tr:first-child td{
     border-top:0px;
 }
-#tabledatashowthead tr:first-child td:first-child, .tabledatashowthead2 tr:first-child td:first-child{
+ .tabledatashowthead2 tr:first-child td:first-child{
     background: #5a92ef
 }
 .tabledatashowleft thead tr:first-child td:nth-child(2){
     background: #5a92ef
 }
 
-#tabledatashowthead tr:first-child td:nth-child(2), .tabledatashowthead2 tr:first-child td:nth-child(2){
+.tabledatashowthead2 tr:first-child td:nth-child(2){
     padding-left: 3px;
     padding-right: 5px;
 }
@@ -69,7 +69,7 @@
 }
 
 
-#tabledatashowthead td, .tabledatashowthead2 td {
+.tabledatashowthead2 td {
     color: white;
 }
 
