@@ -4,6 +4,6 @@ RUN /usr/local/bin/docker-php-ext-install mysqli
 
 copy apache2.conf /etc/apache2/
 copy . /var/www/html/webdb/
-#  docker build -t webxiaxia/webdb:0.0.70 --platform=linux/amd64 -f Dockerfile .
-#  docker push webxiaxia/webdb:0.0.70
-#  docker run -d --restart=always -p 8984:80   webxiaxia/webdb:0.0.70
+#  docker build -t webxiaxia/webdb:0.0.71 --platform=linux/amd64 -f Dockerfile .
+#  docker push webxiaxia/webdb:0.0.71
+#  docker run -d --restart=always -p 8984:80   webxiaxia/webdb:0.0.71
