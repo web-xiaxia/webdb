@@ -29,6 +29,9 @@ function inittabledata2() {
     } else {
         sqlListBoxInit()
     }
+    setTimeout(function (){
+        $("html,body").animate({scrollTop: 1}, 0);
+    },200)
 }
 
 
