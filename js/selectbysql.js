@@ -685,7 +685,7 @@ function sqllistexport() {
             'sql': getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + zdysqlsave, false, ''),
         })
     }
-    download('web-db-sql.json', JSON.stringify(sqls))
+    download(`web-db-${sql_conn_name}-${sql_database}-sql-list.json`, JSON.stringify(sqls))
 }
 
 function sqllistimport(input) {
