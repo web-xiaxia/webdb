@@ -10,4 +10,4 @@ $sql = $_REQUEST['sql'];
 $mysqlHelper = new MysqlHelper(
     $conn_str
 );
-echo json_encode($mysqlHelper->multiQueryResult($mysql_database, $sql));
+echo json_encode($mysqlHelper->multiQueryResult($mysql_database, urldecode(base64_decode($sql))));

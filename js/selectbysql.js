@@ -1117,7 +1117,7 @@ function getTableData2() {
         data: {
             'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
             'mysql_database': database,
-            'sql': sql
+            'sql': window.btoa(encodeURIComponent(sql))
         },
         success: function (dataInfo) {
             closeLoding()
