@@ -29,9 +29,9 @@ function inittabledata2() {
     } else {
         sqlListBoxInit()
     }
-    setTimeout(function (){
+    setTimeout(function () {
         $("html,body").animate({scrollTop: 1}, 0);
-    },200)
+    }, 200)
 }
 
 
@@ -612,6 +612,7 @@ function changesavesqlname(clickzdysqlsave) {
     var oldzdysqlsavename = getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + clickzdysqlsave, false)
     var zdysqlsavename = prompt("请输入名称", oldzdysqlsavename)
     if (zdysqlsavename) {
+        zdysqlsavename = zdysqlsavename.replace(/:/g,'_')
         setLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + clickzdysqlsave, zdysqlsavename, false)
         opensqllistboxwindow()
     }
@@ -669,6 +670,7 @@ function saveZdySql() {
         alert("无效的名称，保存失败")
         return;
     }
+    zdysqlsavename = zdysqlsavename.replace(/:/g,'_')
     setLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + nowSqlName, zdysqlsavename, false)
     zdysqlsavelist.push(nowSqlName)
     setLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, zdysqlsavelist)
@@ -676,45 +678,54 @@ function saveZdySql() {
     $("#saveZdySqlBtn").text(`已保存`)
 }
 
-function sqllistexport() {
+function sqllistexportdata(export_sql_conn_name, export_sql_database) {
     var sqls = []
-    var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
+    var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + export_sql_conn_name + ':' + export_sql_database, true, [])
     for (var index in zdysqlsavelist) {
         var zdysqlsave = zdysqlsavelist[index]
 
         sqls.push({
             'sql_name': zdysqlsave,
-            'save_name': getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + zdysqlsave, false, ''),
-            'sql': getLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + zdysqlsave, false, ''),
+            'save_name': getLocalStorage(localStorageName.zdysqlsavename + export_sql_conn_name + ':' + export_sql_database + ':' + zdysqlsave, false, ''),
+            'sql': getLocalStorage(localStorageName.zdysql + export_sql_conn_name + ':' + export_sql_database + ':' + zdysqlsave, false, ''),
         })
     }
+    return sqls
+}
+
+function sqllistexport() {
+    var sqls = sqllistexportdata(sql_conn_name, sql_database)
     download(`web-db-${sql_conn_name}-${sql_database}-sql-list.json`, JSON.stringify(sqls))
+}
+
+function sqllistimportdata(config, import_sql_conn_name, import_sql_database) {
+    var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + import_sql_conn_name + ':' + import_sql_database, true, [])
+    for (var index in config) {
+        var conn = config[index]
+        if (conn.sql_name) {
+            var cansave = true
+            for (var xxx in zdysqlsavelist) {
+                if (zdysqlsavelist[xxx] == conn.sql_name) {
+                    cansave = false
+                }
+            }
+            if (cansave) {
+                zdysqlsavelist.push(conn.sql_name)
+            }
+
+            setLocalStorage(localStorageName.zdysqlsavename + import_sql_conn_name + ':' + import_sql_database + ':' + conn.sql_name, conn.save_name, false)
+            setLocalStorage(localStorageName.zdysql + import_sql_conn_name + ':' + import_sql_database + ':' + conn.sql_name, conn.sql, false)
+        }
+    }
+    setLocalStorage(localStorageName.zdysqlsavelist + import_sql_conn_name + ':' + import_sql_database, zdysqlsavelist)
 }
 
 function sqllistimport(input) {
     var file = input.files[0];
     var reader = new FileReader();
     reader.onload = function () {
-        var zdysqlsavelist = getLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, true, [])
         var config = JSON.parse(this.result)
-        for (var index in config) {
-            var conn = config[index]
-            if (conn.sql_name) {
-                var cansave = true
-                for (var xxx in zdysqlsavelist) {
-                    if (zdysqlsavelist[xxx] == conn.sql_name) {
-                        cansave = false
-                    }
-                }
-                if (cansave) {
-                    zdysqlsavelist.push(conn.sql_name)
-                }
-
-                setLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + conn.sql_name, conn.save_name, false)
-                setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + conn.sql_name, conn.sql, false)
-            }
-        }
-        setLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, zdysqlsavelist)
+        sqllistimportdata(config, sql_conn_name, sql_database)
         opensqllistboxwindow()
     }
     reader.readAsText(file);
@@ -1078,7 +1089,7 @@ function getTableData2() {
         }
     }
 
-    var fenSqlTextArray = sqlTextSplitFen(sqlFormatter.format(sql.replace(/^--[ ]{0,2}limit[ ]*\n/g,'\n').replace(/\n--[ ]{0,2}limit[ ]*\n/g,'\n'), {
+    var fenSqlTextArray = sqlTextSplitFen(sqlFormatter.format(sql.replace(/^--[ ]{0,2}limit[ ]*\n/g, '\n').replace(/\n--[ ]{0,2}limit[ ]*\n/g, '\n'), {
         language: 'mysql',
         uppercase: true,
     }), sqlSplitSep = ';\n', replaceN = false)
@@ -1120,8 +1131,8 @@ function getTableData2() {
                     var data = datas[xxxxxi]
                     var sqlIndexTitle = `SQL${parseInt(xxxxxi) + 1}`
                     var xxxfenSqlTitleArray = fenSqlTitleArray[xxxxxi]
-                    if (!data.title  && xxxfenSqlTitleArray.length>0){
-                        data.title = xxxfenSqlTitleArray[xxxfenSqlTitleArray.length-1]
+                    if (!data.title && xxxfenSqlTitleArray.length > 0) {
+                        data.title = xxxfenSqlTitleArray[xxxfenSqlTitleArray.length - 1]
                     }
                     if (data.title) {
                         sqlIndexTitle = data.title
@@ -1146,8 +1157,8 @@ function getTableData2() {
                                 var data_field = data.columns[d]
                                 var mysql_table_column = data_field['name'];
                                 var dingTitle = ""
-                                if(d=="0"){
-                                    dingTitle="<span class='iconfont title-ding' onclick='titleDing(this)'>&#xe62d;</span>"
+                                if (d == "0") {
+                                    dingTitle = "<span class='iconfont title-ding' onclick='titleDing(this)'>&#xe62d;</span>"
                                 }
                                 ttr2.append(`<td>${dingTitle}${mysql_table_column}</td>`);
                                 if (is_numerics_type[data_field['type']]) {
@@ -1164,9 +1175,9 @@ function getTableData2() {
                                 for (var d2 in data.columns) {
                                     var field = data.columns[d2]['name'];
 
-                                    var textRight=""
-                                    if (data_field_is_numerics[field]){
-                                        textRight ="text-right"
+                                    var textRight = ""
+                                    if (data_field_is_numerics[field]) {
+                                        textRight = "text-right"
                                     }
                                     var btd = $(`<td class="${textRight}" data-columns="' + field + '"></td>`)
                                     btd.text(data.data[d][field])
