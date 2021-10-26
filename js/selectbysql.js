@@ -553,7 +553,7 @@ function sql_show_one_data(columns, sqldata) {
     var one_data_context = $("#sqlzshow_one_data_windowcontext")
     one_data_context.empty()
     for (var d2 in columns) {
-        var field = columns[d2];
+        var field = columns[d2].name;
 
         var showxxx_text = $(`<div class="show_one_data_field_context""></div>`)
         showxxx_text.text(sqldata[field])
