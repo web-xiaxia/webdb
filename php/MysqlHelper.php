@@ -98,15 +98,11 @@ class MysqlHelper
 
     public function getTables($mysql_database): array
     {
-        $result = $this->query($mysql_database, "select table_name from information_schema.tables where table_schema='" . $mysql_database . "' and  (table_type='base table' or table_type='BASE TABLE')");
+        $result = $this->query($mysql_database, "select table_name as 'TABLE_NAME' from information_schema.tables where table_schema='" . $mysql_database . "' and  table_type in ('base table','BASE TABLE')");
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
         {
-            if ($row['TABLE_NAME'] != null){
-                array_push($array, $row['TABLE_NAME']);
-            }else{
-                array_push($array, $row['table_name']);
-            }
+            array_push($array, $row['TABLE_NAME']);
         }
         return array(
             'tables' => $array
