@@ -25,6 +25,15 @@ function data_cli_update_data(id, columns, oldvalue) {
     $("#updatecolumn").slideDown(gddhms);
     $("#updatecolumnname").text(columns);
     $("#updatevalue").val(updateobj.oldvalue);
+    $("#updatevaluejsonbox").css("display", "none")
+    try {
+        $(`#updatevaluejson`).JSONView(JSON.parse(updateobj.oldvalue))
+        $("#updatevaluejsonbox").css("display", "")
+    } catch (e) {
+        console.log(e)
+    }
+
+
 }
 
 $(function () {

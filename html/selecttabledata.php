@@ -53,12 +53,26 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">修改数据</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
+        <div class="title"><span class="content">修改数据</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a>
+        </div>
         <div class="contentbox">
             <div class="content">
                 <div style="padding: 5px">列名：<label id="updatecolumnname"></label></div>
                 <textarea id="updatevalue" style="width: 100%" rows="10"></textarea>
                 <a id="unpdatebtn" class="btn" href="javascript:void(0)">修改</a>
+
+                <div id="updatevaluejsonbox">
+                    <div class="json-window-tools">
+                        <button onClick="$('#updatevaluejson').JSONView('toggle');">toggle</button>
+                        <button onClick="$('#updatevaluejson').JSONView('toggle',1);">toggle1</button>
+                        <button onClick="$('#updatevaluejson').JSONView('toggle',2);">toggle2</button>
+                        <button onClick="$('#updatevaluejson').JSONView('toggle',3);">toggle3</button>
+                    </div>
+                    <div id="updatevaluejson">
+                        <div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -67,7 +81,8 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">选择显示列</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
+        <div class="title"><span class="content">选择显示列</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a>
+        </div>
         <div class="contentbox">
             <div class="content">
                 <div style="position: sticky; top:0px; background: white;">
