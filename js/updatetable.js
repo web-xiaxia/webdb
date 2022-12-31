@@ -30,7 +30,7 @@ function data_cli_update_data(id, columns, oldvalue) {
         $(`#updatevaluejson`).JSONView(JSON.parse(updateobj.oldvalue))
         $("#updatevaluejsonbox").css("display", "")
     } catch (e) {
-        console.log(e)
+        //console.log(e)
     }
 
 

@@ -899,7 +899,7 @@ $(function () {
             $(`#sqlshowcolumnvaluejson`).JSONView(JSON.parse(showValue))
             $("#sqlshowcolumnvaluejsonbox").css("display", "")
         } catch (e) {
-            console.log(e)
+            //console.log(e)
         }
     });
 
