@@ -58,10 +58,7 @@
         <div class="contentbox">
             <div class="content">
                 <div style="padding: 5px">列名：<label id="updatecolumnname"></label></div>
-                <textarea id="updatevalue" style="width: 100%" rows="10"></textarea>
-                <a id="unpdatebtn" class="btn" href="javascript:void(0)">修改</a>
-
-                <div id="updatevaluejsonbox">
+                <div id="updatevaluejsonbox" style="padding-bottom: 10px;">
                     <div class="json-window-tools">
                         <button onClick="$('#updatevaluejson').JSONView('toggle');">toggle</button>
                         <button onClick="$('#updatevaluejson').JSONView('toggle',1);">toggle1</button>
@@ -71,6 +68,8 @@
                     <div id="updatevaluejson">
                     </div>
                 </div>
+                <textarea id="updatevalue" style="width: 100%" rows="10"></textarea>
+                <a id="unpdatebtn" class="btn" href="javascript:void(0)">修改</a>
             </div>
         </div>
     </div>

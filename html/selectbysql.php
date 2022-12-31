@@ -202,8 +202,7 @@
         </div>
         <div class="contentbox">
             <div class="content">
-                <div id="sqlshowcolumnvalue" style="width: 100%"></div>
-                <div id="sqlshowcolumnvaluejsonbox">
+                <div id="sqlshowcolumnvaluejsonbox" style="padding-bottom: 10px;">
                     <div class="json-window-tools">
                         <button onClick="$('#sqlshowcolumnvaluejson').JSONView('toggle');">toggle</button>
                         <button onClick="$('#sqlshowcolumnvaluejson').JSONView('toggle',1);">toggle1</button>
@@ -213,6 +212,7 @@
                     <div id="sqlshowcolumnvaluejson">
                     </div>
                 </div>
+                <div id="sqlshowcolumnvalue" style="width: 100%"></div>
             </div>
         </div>
     </div>
