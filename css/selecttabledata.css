@@ -438,3 +438,11 @@
     z-index: 100;
     padding: 3px 5px;
 }
+
+.json-window-context-nowrap {
+    overflow-x: scroll;
+}
+
+.json-window-context-nowrap *, .json-window-context-nowrap .jsonview .string {
+    white-space: nowrap;
+}

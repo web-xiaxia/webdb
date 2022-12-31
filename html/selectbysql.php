@@ -209,7 +209,7 @@
                         <button onClick="$('#sqlshowcolumnvaluejson').JSONView('toggle',2);">toggle2</button>
                         <button onClick="$('#sqlshowcolumnvaluejson').JSONView('toggle',3);">toggle3</button>
                     </div>
-                    <div id="sqlshowcolumnvaluejson">
+                    <div id="sqlshowcolumnvaluejson" class="json-window-context-nowrap">
                     </div>
                 </div>
                 <div id="sqlshowcolumnvalue" style="width: 100%"></div>

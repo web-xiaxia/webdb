@@ -65,7 +65,7 @@
                         <button onClick="$('#updatevaluejson').JSONView('toggle',2);">toggle2</button>
                         <button onClick="$('#updatevaluejson').JSONView('toggle',3);">toggle3</button>
                     </div>
-                    <div id="updatevaluejson">
+                    <div id="updatevaluejson" class="json-window-context-nowrap">
                     </div>
                 </div>
                 <textarea id="updatevalue" style="width: 100%" rows="10"></textarea>
