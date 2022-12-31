@@ -102,11 +102,11 @@ class MysqlHelper
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
         {
-            $table_name = $row['table_name']
-            if ($table_name == null){
-                $table_name = $row['TABLE_NAME']
+            if ($row['TABLE_NAME'] != null){
+                array_push($array, $row['TABLE_NAME']);
+            }else{
+                array_push($array, $row['table_name']);
             }
-            array_push($array, $table_name);
         }
         return array(
             'tables' => $array
