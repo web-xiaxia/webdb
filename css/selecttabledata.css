@@ -113,9 +113,8 @@
 
 .show_one_data_field_comment {
     color: #999999;
-    padding: 2px 2px;
+    padding: 0px 2px 3px 3px;
     font-size: 10px;
-    zoom: 0.75;
 }
 
 .show_one_data_field_context {
