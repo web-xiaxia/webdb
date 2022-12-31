@@ -111,6 +111,13 @@
     padding: 3px 3px;
 }
 
+.show_one_data_field_comment {
+    color: #999999;
+    padding: 2px 2px;
+    font-size: 10px;
+    zoom: 0.75;
+}
+
 .show_one_data_field_context {
     background-color: #ffffff;
     padding: 3px 10px;

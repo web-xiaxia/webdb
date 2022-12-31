@@ -98,11 +98,11 @@ class MysqlHelper
 
     public function getTables($mysql_database): array
     {
-        $result = $this->query($mysql_database, "select table_name as 'TABLE_NAME' from information_schema.tables where table_schema='" . $mysql_database . "' and  table_type in ('base table','BASE TABLE')");
+        $result = $this->query($mysql_database, "select table_name as 'table_name' from information_schema.tables where table_schema='" . $mysql_database . "' and  table_type in ('base table','BASE TABLE')");
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
         {
-            array_push($array, $row['TABLE_NAME']);
+            array_push($array, $row['table_name']);
         }
         return array(
             'tables' => $array
@@ -111,7 +111,8 @@ class MysqlHelper
 
     public function getColumns($mysql_database, $mysql_table): array
     {
-        $result = $this->query($mysql_database, " show columns from   " . $mysql_table);
+        //$result = $this->query($mysql_database, " show columns from   " . $mysql_table);
+        $result = $this->query($mysql_database, "SELECT column_name as 'Field' ,column_type as 'Type', is_nullable as 'Null',column_key as 'Key',  column_default as 'Default', extra as 'Extra', column_comment as 'Comment'   from information_schema.COLUMNS   WHERE table_schema='" . $mysql_database . "' and table_name='".$mysql_table."' order by ordinal_position ");
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
         {

@@ -583,11 +583,14 @@ function show_one_data_update_data(id, columns, that) {
 }
 
 function show_one_data(conn_name, database, table, sqldata) {
+
+
     var table_columns = getLocalStorage(localStorageName.tableColumns + conn_name + ":" + database + ":" + table);
     var one_data_context = $("#zshow_one_data_windowcontext")
     one_data_context.empty()
     for (var d2 in table_columns.mysql_table_columns) {
         var field = table_columns.mysql_table_columns[d2]['Field'];
+        var comment = table_columns.mysql_table_columns[d2]['Comment'];
         if (!$(`#zdycolumns${field}`).is(':checked')) {
             continue
         }
@@ -596,6 +599,9 @@ function show_one_data(conn_name, database, table, sqldata) {
 
         var showxxx_text_box = $(`<div class="show_one_data_field"></div>`)
         showxxx_text_box.append(`<div class="show_one_data_field_title">${field}</div>`)
+        if (comment) {
+            showxxx_text_box.append(`<div class="show_one_data_field_comment">${comment}</div>`)
+        }
         showxxx_text_box.append(showxxx_text)
         var showxxx_text_main_box = $(`<div id="show_one_data${field}" class="show_one_data_field_box" data-field="${field}"></div>`)
         showxxx_text_main_box.append(showxxx_text_box)
