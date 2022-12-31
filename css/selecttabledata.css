@@ -424,8 +424,16 @@
     margin-left: 1px;
     margin-right: 2px;
 }
-.tablediv2sqltiptitle{
+.tablediv2sqltiptitle {
     padding-left: 10px;
     padding-right: 20px;
     border-radius: 0px 20px 0 0;
+}
+
+.json-window-tools {
+    position: sticky;
+    top: 0px;
+    background: white;
+    width: 100%;
+    z-index: 100;
 }

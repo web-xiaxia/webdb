@@ -891,8 +891,16 @@ $(function () {
         if (_this.hasClass("xuhao")) {
             return
         }
+        var showValue = _this.html()
         $("#sqlshowcolumn").slideDown(gddhms);
-        $("#sqlshowcolumnvalue").text(_this.html());
+        $("#sqlshowcolumnvalue").text(showValue);
+        $("#sqlshowcolumnvaluejsonbox").css("display", "none")
+        try {
+            $(`#sqlshowcolumnvaluejson`).JSONView(JSON.parse(showValue))
+            $("#sqlshowcolumnvaluejsonbox").css("display", "")
+        } catch (e) {
+            console.log(e)
+        }
     });
 
     $("#sqllistitembox").delegate(".sqllistitem", "click", function () {

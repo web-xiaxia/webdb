@@ -69,8 +69,6 @@
                         <button onClick="$('#updatevaluejson').JSONView('toggle',3);">toggle3</button>
                     </div>
                     <div id="updatevaluejson">
-                        <div>
-                        </div>
                     </div>
                 </div>
             </div>
