@@ -335,7 +335,7 @@ function tipColumns(tablexxx, tableMatchNowSearchColumnsText, tipdom, nowTipColu
         data: {
             'conn_str': getLocalStorage(localStorageName.connObj + conn_name),
             'mysql_database': database,
-            'mysql_table': tablexxx
+            'mysql_table': tablexxx.replace("`", "").replace("`", "")
         },
         success: function (data) {
             if (data == false) {
@@ -957,7 +957,7 @@ $(function () {
         closefloatmain("#tablenamelist2");
         openfloatmain("#tablencoumns");
         $("#tablencoumnsul").empty();
-        var tablexxx = "`" + $(this).html() + "`";
+        var tablexxx = "" + $(this).html() + "";
         var tablecolumns = tablecolumnsobj[tablexxx];
         if (tablecolumns == null) {
             openLoding();

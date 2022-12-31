@@ -17,7 +17,7 @@ $(function () {
         openLoding()
         var conn_name = GetMaoQueryString('conn_name')
         var database = GetMaoQueryString('database')
-        var mysql_table = "`" + $(this).html() + "`"
+        var mysql_table = "" + $(this).html() + ""
         $.ajax({
             url: "/webdb/php/getColumns.php",
             type: "post",
