@@ -866,7 +866,9 @@ $(function () {
     });
     $("#zdysql").blur(function () {
         $('#sqllistbox').css({'display': ''})
-        $('#zdysqltipname').css({'display': ''})
+        if ($("#zdysqltipnametext").text()) {
+            $('#zdysqltipname').css({'display': ''})
+        }
     });
     $("#zdysql").on("touchend", function () {
         tipsSql(this)
