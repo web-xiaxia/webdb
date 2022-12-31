@@ -674,6 +674,7 @@ function saveZdySql() {
     setLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + nowSqlName, zdysqlsavename, false)
     zdysqlsavelist.push(nowSqlName)
     setLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, zdysqlsavelist)
+    $('#zdysqltipname').css({'display': ''})
     $("#zdysqltipnametext").text(zdysqlsavename)
     $("#saveZdySqlBtn").text(`已保存`)
 }
