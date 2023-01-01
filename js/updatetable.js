@@ -9,10 +9,6 @@ function data_cli_update_data(id, columns, oldvalue) {
     if (columns == null || columns == undefined || columns == "") {
         return;
     }
-    if (id == null || id == '') {
-        alert("暂不支持无主键表修改");
-        return;
-    }
     var conn_name = GetMaoQueryString('conn_name')
     var database = GetMaoQueryString('database')
     var table = GetMaoQueryString('table')
@@ -50,11 +46,17 @@ $(function () {
 
     });
     $("#unpdatebtn").click(function () {
+        if (updateobj.id == null || updateobj.id == '') {
+            alert("暂不支持无主键表修改");
+            return;
+        }
         openLoding()
         var conn_name = GetMaoQueryString('conn_name')
         var database = GetMaoQueryString('database')
         var table = GetMaoQueryString('table')
-        var sql = `update ${table} set ${updateobj.columns} ='${$("#updatevalue").val()}' where \`${updateobj.idcolumns}\`= '${updateobj.id}'`;
+        var sql = `update ${table}
+                   set ${updateobj.columns} ='${$("#updatevalue").val()}'
+                   where \`${updateobj.idcolumns}\` = '${updateobj.id}'`;
         $.ajax({
             url: "/webdb/php/updateData.php",
             type: "post",
