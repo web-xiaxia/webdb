@@ -2,6 +2,13 @@
 
 手机网页版mysql查看工具
 
+## 运行
+
+```
+docker run -d --restart=always -p 8984:80   webxiaxia/webdb:0.0.73
+http://127.0.0.1:8984/webdb/
+```
+
 ## 截图
 
 <table>
