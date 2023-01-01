@@ -612,7 +612,7 @@ function changesavesqlname(clickzdysqlsave) {
     var oldzdysqlsavename = getLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + clickzdysqlsave, false)
     var zdysqlsavename = prompt("请输入名称", oldzdysqlsavename)
     if (zdysqlsavename) {
-        zdysqlsavename = zdysqlsavename.replace(/:/g,'_')
+        zdysqlsavename = zdysqlsavename.replace(/:/g, '_')
         setLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + clickzdysqlsave, zdysqlsavename, false)
         opensqllistboxwindow()
     }
@@ -670,7 +670,7 @@ function saveZdySql() {
         alert("无效的名称，保存失败")
         return;
     }
-    zdysqlsavename = zdysqlsavename.replace(/:/g,'_')
+    zdysqlsavename = zdysqlsavename.replace(/:/g, '_')
     setLocalStorage(localStorageName.zdysqlsavename + sql_conn_name + ':' + sql_database + ':' + nowSqlName, zdysqlsavename, false)
     zdysqlsavelist.push(nowSqlName)
     setLocalStorage(localStorageName.zdysqlsavelist + sql_conn_name + ':' + sql_database, zdysqlsavelist)
@@ -899,8 +899,11 @@ $(function () {
         $("#sqlshowcolumnvalue").text(showValue);
         $("#sqlshowcolumnvaluejsonbox").css("display", "none")
         try {
-            $(`#sqlshowcolumnvaluejson`).JSONView(JSON.parse(showValue))
-            $("#sqlshowcolumnvaluejsonbox").css("display", "")
+            var showValueJson = JSON.parse(showValue)
+            if (typeof (showValueJson) === "object") {
+                $(`#sqlshowcolumnvaluejson`).JSONView(showValueJson)
+                $("#sqlshowcolumnvaluejsonbox").css("display", "")
+            }
         } catch (e) {
             //console.log(e)
         }

@@ -27,8 +27,11 @@ function data_cli_update_data(id, columns, oldvalue) {
     $("#updatevalue").val(updateobj.oldvalue);
     $("#updatevaluejsonbox").css("display", "none")
     try {
-        $(`#updatevaluejson`).JSONView(JSON.parse(updateobj.oldvalue))
-        $("#updatevaluejsonbox").css("display", "")
+        var oldvalueJson = JSON.parse(updateobj.oldvalue)
+        if (typeof (oldvalueJson) === "object") {
+            $(`#updatevaluejson`).JSONView(oldvalueJson)
+            $("#updatevaluejsonbox").css("display", "")
+        }
     } catch (e) {
         //console.log(e)
     }
