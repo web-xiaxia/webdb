@@ -23,12 +23,19 @@ var maodianlist = {
     "#tabledata2": {
         id: "#tabledata2",
         init: inittabledata2,
-        name:'SQL'
+        name: 'SQL'
     },
     "#choice-window": {
         id: "#choice-window",
         init: initchoicewindow,
-        name:'选择窗口'
+        name: '选择窗口'
+    },
+    "#choice-window-back": {
+        id: "#choice-window-back",
+        init: function () {
+            window.history.forward()
+        },
+        name: '选择窗口（back）'
     }
 }
 window.onhashchange = nowurlfun;

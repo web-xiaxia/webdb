@@ -123,10 +123,15 @@ function savelast() {
 }
 
 function choicewindowlinew(that) {
-
     var parent = $($(that).parents('.choicewindowshowwindow')[0])
-    window.location.open =
-        window.open(parent.attr('data-url'), "_blank");
+    window.open(parent.attr('data-url'), "_blank");
+}
+
+function choicewindowAddBack() {
+    window.history.pushState({
+        title: "title",
+        url: "#choice-window-back"
+    }, "title", "#");
 }
 
 function choicewindowli(that) {
@@ -135,10 +140,12 @@ function choicewindowli(that) {
         savelast()
     }
     listwindowsaveall(parent.attr('data-id'))
+    choicewindowAddBack()
     window.location.hash = parent.attr('data-url')
 }
 
 function choicewindownew() {
     savelast()
+    choicewindowAddBack()
     window.location.hash = "#login"
 }
