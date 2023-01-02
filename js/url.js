@@ -55,7 +55,7 @@ function addUrlBack2() {
     window.history.pushState({
         title: "title",
         url: "#url-back"
-    }, "title", "#");
+    }, "title", "#url-back");
 }
 
 function addUrlBack() {
@@ -63,13 +63,21 @@ function addUrlBack() {
     addUrlBack2()
 }
 
+function replaceUrlBack() {
+    window.history.replaceState({
+        title: "title",
+        url: "#url-back"
+    }, "title", "#url-back");
+}
+
 function nowurlfun(hashChangeEvent) {
     var hash = window.location.hash;
     if (hash == "") {
         hash = getLocalStorage(localStorageName.oldUrl, false)
         if (hash) {
+            //replaceUrlBack()
             addUrlBack()
-            window.location.hash = hash
+            window.location.href = hash
         }
     }
     if (hash == null || hash == "") {
