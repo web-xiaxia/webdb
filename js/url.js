@@ -51,11 +51,16 @@ function getmaodian(hash) {
     return maodian
 }
 
-function addUrlBack() {
+function addUrlBack2() {
     window.history.pushState({
         title: "title",
         url: "#url-back"
     }, "title", "#");
+}
+
+function addUrlBack() {
+    addUrlBack2()
+    addUrlBack2()
 }
 
 function nowurlfun(hashChangeEvent) {
@@ -63,7 +68,6 @@ function nowurlfun(hashChangeEvent) {
     if (hash == "") {
         hash = getLocalStorage(localStorageName.oldUrl, false)
         if (hash) {
-            addUrlBack()
             addUrlBack()
             window.location.hash = hash
         }
