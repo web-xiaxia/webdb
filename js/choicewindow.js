@@ -127,25 +127,18 @@ function choicewindowlinew(that) {
     window.open(parent.attr('data-url'), "_blank");
 }
 
-function choicewindowAddBack() {
-    window.history.pushState({
-        title: "title",
-        url: "#choice-window-back"
-    }, "title", "#");
-}
-
 function choicewindowli(that) {
     var parent = $($(that).parents('.choicewindowshowwindow')[0])
     if (parent.attr('data-last') != 'true') {
         savelast()
     }
     listwindowsaveall(parent.attr('data-id'))
-    choicewindowAddBack()
+    addUrlBack()
     window.location.hash = parent.attr('data-url')
 }
 
 function choicewindownew() {
     savelast()
-    choicewindowAddBack()
+    addUrlBack()
     window.location.hash = "#login"
 }
