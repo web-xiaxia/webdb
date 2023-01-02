@@ -64,6 +64,7 @@ function nowurlfun(hashChangeEvent) {
         hash = getLocalStorage(localStorageName.oldUrl, false)
         if (hash) {
             addUrlBack()
+            addUrlBack()
             window.location.hash = hash
         }
     }
