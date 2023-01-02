@@ -9,7 +9,7 @@ function inittabledata2() {
     var database = GetMaoQueryString('database')
     var tableList = getLocalStorage(localStorageName.tableList + conn_name + ':' + database);
     if (tableList == null) {
-        window.location.replace("#databases?conn_name" + conn_name);
+        window.location.hash = "#databases?conn_name" + conn_name;
         return;
     }
     $("#tablediv2").empty();

@@ -4,7 +4,7 @@ function inittables() {
     var database = GetMaoQueryString('database')
     var tableList = getLocalStorage(localStorageName.tableList + conn_name + ':' + database);
     if (tableList == null) {
-        window.location.replace("#databases?conn_name=" + conn_name);
+        window.location.hash = "#databases?conn_name=" + conn_name;
     }
     $("#tablesList").empty();
     for (var d in tableList) {
@@ -43,7 +43,7 @@ $(function () {
                     }
                     setLocalStorage(localStorageName.tableColumns+conn_name+":"+database+":"+mysql_table, tableobj);
 
-                    window.location.replace(`#tabledata?conn_name=${conn_name}&database=${database}&table=${mysql_table}`);
+                    window.location.hash = `#tabledata?conn_name=${conn_name}&database=${database}&table=${mysql_table}`;
                     closeLoding()
                 }
             }, error: function () {

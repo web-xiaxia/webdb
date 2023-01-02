@@ -54,7 +54,7 @@ function inittabledata() {
     var table = GetMaoQueryString('table')
     var table_columns = getLocalStorage(localStorageName.tableColumns + conn_name + ":" + database + ":" + table);
     if (table_columns == null) {
-        window.location.replace(`#tables?conn_name=${conn_name}&database=${database}`);
+        window.location.hash = `#tables?conn_name=${conn_name}&database=${database}`;
     }
 
     $('#zdycolumnsyablename').html(`表名：${table}`)
@@ -624,7 +624,7 @@ function getTableQueryData() {
     var table = GetMaoQueryString('table')
     var table_columns = getLocalStorage(localStorageName.tableColumns + conn_name + ":" + database + ":" + table);
     if (table_columns == null) {
-        window.location.replace(`#tables?conn_name=${conn_name}&database=${database}`);
+        window.location.hash = `#tables?conn_name=${conn_name}&database=${database}`;
         return;
     }
     var oderbyobjdef = {}

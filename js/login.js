@@ -157,7 +157,7 @@ function login(mysql_server_name, mysql_username, mysql_password, cookie_login, 
                     }
                 }
 
-                window.location.replace("#databases?conn_name=" + conn_name);
+                window.location.hash = "#databases?conn_name=" + conn_name;
                 closeLoding()
             }
         }, error: function () {
