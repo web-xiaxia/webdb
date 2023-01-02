@@ -76,7 +76,7 @@ function choicewindow() {
             image: strDataURI
         });
         choicewindowing = false
-        window.location.replace("#choice-window")
+        window.location.replace("choice-window")
     });
 }
 
