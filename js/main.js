@@ -49,6 +49,7 @@ function getLocalStorage(name, b, def = null) {
 
 var localStorageName = {
     oldUrl: "oldUrl",
+    initUrl: "initUrl",
     lsbj: "lsbj",
     choicewindowlast: "choicewindowlast",
     choicewindow: "choicewindow",

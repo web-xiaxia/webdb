@@ -5,12 +5,28 @@ var maodianlist = {
         init: function () {
             window.history.forward()
         },
-        name: 'back'
+        name: 'back',
+        skipSave: true,
+    },
+    "#url-init": {
+        id: "#url-init",
+        init: function () {
+            var hash = getLocalStorage(localStorageName.initUrl, false)
+            if (hash) {
+                delLocalStorage(localStorageName.initUrl)
+                window.location.href = hash
+            } else {
+                window.history.forward()
+            }
+        },
+        name: 'back',
+        skipSave: true,
     },
     "#login": {
         id: "#login",
         init: logininit,
-        name: '连接'
+        name: '连接',
+        skipSave: true,
     },
     "#databases": {
         id: "#databases",
@@ -75,18 +91,24 @@ function nowurlfun(hashChangeEvent) {
     if (hash == "") {
         hash = getLocalStorage(localStorageName.oldUrl, false)
         if (hash) {
-            //replaceUrlBack()
             addUrlBack()
-            window.location.href = hash
+            setLocalStorage(localStorageName.initUrl, hash, false)
+            window.location.href = "#url-init"
+            return
         }
     }
     if (hash == null || hash == "") {
         hash = "#login";
     }
-    setLocalStorage(localStorageName.oldUrl, hash == "#login" ? "" : hash, false);
-
     var maodian = getmaodian(hash)
-    txxxxx(maodian);
+    if (maodian) {
+        if (!maodian.skipSave) {
+            setLocalStorage(localStorageName.oldUrl, hash, false);
+        }
+        txxxxx(maodian);
+    } else {
+        window.location.href = "#login"
+    }
 
 }
 
