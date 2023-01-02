@@ -12,7 +12,7 @@ function initchoicewindow() {
     }
 
     if (choice_window_list.length == 0 && !lastchoicewindow) {
-        window.location.hash = '#login'
+        window.location.replace('#login')
     }
 }
 
@@ -76,7 +76,7 @@ function choicewindow() {
             image: strDataURI
         });
         choicewindowing = false
-        window.location.hash = "choice-window"
+        window.location.replace("choice-window")
     });
 }
 
@@ -123,10 +123,8 @@ function savelast() {
 }
 
 function choicewindowlinew(that) {
-
     var parent = $($(that).parents('.choicewindowshowwindow')[0])
-    window.location.open =
-        window.open(parent.attr('data-url'), "_blank");
+    window.open(parent.attr('data-url'), "_blank");
 }
 
 function choicewindowli(that) {
@@ -135,10 +133,10 @@ function choicewindowli(that) {
         savelast()
     }
     listwindowsaveall(parent.attr('data-id'))
-    window.location.hash = parent.attr('data-url')
+    window.location.replace(parent.attr('data-url'))
 }
 
 function choicewindownew() {
     savelast()
-    window.location.hash = "#login"
+    window.location.replace("#login")
 }

@@ -2,7 +2,7 @@ function initselectdatabase() {
     var conn_name = GetMaoQueryString('conn_name')
     var databasesList = getLocalStorage(localStorageName.databasesList + conn_name);
     if (databasesList == null) {
-        window.location.hash = "#login";
+        window.location.replace("#login");
         return;
     }
     $("#databasesList").empty();
@@ -31,7 +31,7 @@ $(function () {
                 } else {
                     setLocalStorage(localStorageName.tableList + conn_name + ':' + mysql_database, data.tables);
 
-                    window.location.hash = `#tables?conn_name=${conn_name}&database=${mysql_database}`;
+                    window.location.replace(`#tables?conn_name=${conn_name}&database=${mysql_database}`);
                     closeLoding()
                 }
             }, error: function () {

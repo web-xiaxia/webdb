@@ -49,7 +49,7 @@ function nowurlfun(hashChangeEvent) {
     if (hash == "") {
         hash = getLocalStorage(localStorageName.oldUrl, false)
         if (hash) {
-            window.location.hash = hash
+            window.location.replace(hash)
         }
     }
     if (hash == null || hash == "") {

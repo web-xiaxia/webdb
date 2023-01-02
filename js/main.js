@@ -28,7 +28,8 @@ function setLocalStorage(name, value, b) {
     }
 
 }
-function delLocalStorage(name){
+
+function delLocalStorage(name) {
     delete localStorage[name]
 }
 
@@ -130,10 +131,9 @@ function closefloatmain(id) {
 
 function btnHash(h) {
     if (window.location.hash.indexOf('?') != -1) {
-        window.location.hash = h + window.location.hash.substr(window.location.hash.indexOf('?'), window.location.hash.length
-        )
+        window.location.replace(h + window.location.hash.substr(window.location.hash.indexOf('?'), window.location.hash.length))
     } else {
-        window.location.hash = h
+        window.location.replace(h)
     }
 
 }
