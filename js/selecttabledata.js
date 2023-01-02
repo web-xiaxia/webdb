@@ -73,6 +73,27 @@ function inittabledata() {
     pageSy();
 }
 
+
+function getZdycolumns() {
+    var zdycolumns = $("#zdycolumnswindowcontext").find("input.zdycolumns:checked")
+    if (zdycolumns.length === 0) {
+        zdycolumns = $("#zdycolumnswindowcontext").find("input.zdycolumns")
+    }
+
+    const zdycolumnsStartsWith = 'zdycolumns'
+    const columns = new Set()
+    for (let i = 0; i < zdycolumns.length; i++) {
+        const zdycolumn = zdycolumns.eq(i)
+        const zdycolumnId = zdycolumn.attr("id")
+
+        if (zdycolumnId.startsWith(zdycolumnsStartsWith)) {
+            columns.add(zdycolumnId.substring(zdycolumnsStartsWith.length))
+        }
+    }
+
+    return columns
+}
+
 function close_table_filter(source) {
     table_filter_box_open = false
     $('#tablefiltertipbox').css({'color': 'black'})
@@ -619,25 +640,6 @@ function xuhao_td(d, conn_name, database, table, sqldata) {
     return bttd
 }
 
-function getZdycolumns() {
-    var zdycolumns = $("#zdycolumnswindowcontext").find("input.zdycolumns:checked")
-    if (zdycolumns.length === 0) {
-        zdycolumns = $("#zdycolumnswindowcontext").find("input.zdycolumns")
-    }
-
-    const zdycolumnsStartsWith = 'zdycolumns'
-    const columns = new Set()
-    for (let i = 0; i < zdycolumns.length; i++) {
-        const zdycolumn = zdycolumns.eq(i)
-        const zdycolumnId = zdycolumn.attr("id")
-
-        if (zdycolumnId.startsWith(zdycolumnsStartsWith)) {
-            columns.add(zdycolumnId.substring(zdycolumnsStartsWith.length))
-        }
-    }
-
-    return columns
-}
 
 function getTableQueryData() {
     var conn_name = GetMaoQueryString('conn_name')
@@ -789,7 +791,6 @@ function getTableData() {
     var table_columns = queryDataFull.table_columns
     var oderbyobj = queryDataFull.oderbyobj
     var querywhereobj = queryDataFull.querywhereobj
-    const zdycolumns = getZdycolumns()
     $("#tabledatashowthead").empty();
     $("#tabledatashowtbody").empty();
     $("#page-other-sql").text('无')
@@ -828,6 +829,7 @@ function getTableData() {
 
                 $("#tabledatashowthead").empty();
                 $("#tabledatashowtbody").empty();
+                var zdycolumns = getZdycolumns()
                 var ttr2 = $('<tr style="text-align: center;" class="table_title_sticky">');
                 ttr2.append(`<td onclick="openfloatmain('#zdycolumnswindow');">序号</td>`);
                 for (var d in table_columns.mysql_table_columns) {
@@ -861,7 +863,6 @@ function getTableData() {
                     ttr2.append(`<td data-column="${mysql_table_column}" >${dingTitle}${mysql_table_column} ${querywhereobjcolumntext} ${oderbyobjcolumnnametext}</td>`)
                 }
                 $("#tabledatashowthead").append(ttr2);
-                const zdycolumns = getZdycolumns()
                 var xxtabledatashowtbody = $("#tabledatashowtbody");
                 for (var d in sqldataList) {
                     var sqldata = sqldataList[d]
