@@ -8,20 +8,6 @@ var maodianlist = {
         name: 'back',
         skipSave: true,
     },
-    "#url-init": {
-        id: "#url-init",
-        init: function () {
-            var hash = getLocalStorage(localStorageName.initUrl, false)
-            if (hash) {
-                delLocalStorage(localStorageName.initUrl)
-                window.location.href = hash
-            } else {
-                window.history.forward()
-            }
-        },
-        name: 'back',
-        skipSave: true,
-    },
     "#login": {
         id: "#login",
         init: logininit,
@@ -92,8 +78,7 @@ function nowurlfun(hashChangeEvent) {
         hash = getLocalStorage(localStorageName.oldUrl, false)
         if (hash) {
             addUrlBack()
-            setLocalStorage(localStorageName.initUrl, hash, false)
-            window.location.href = "#url-init"
+            window.location.href = hash
             return
         }
     }
