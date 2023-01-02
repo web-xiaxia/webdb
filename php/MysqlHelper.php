@@ -36,11 +36,13 @@ function encrypt($string, $operation, $key = '')
         return str_replace('=', '', base64_encode($result));
     }
 }
+
 class MultiDataInfo
 {
     public $data;
     public $esms;
 }
+
 class MultiData
 {
     public $title;
@@ -98,6 +100,17 @@ class MysqlHelper
 
     public function getTables($mysql_database): array
     {
+        if ($mysql_database == "information_schema") {
+            $result = $this->query($mysql_database, "show TABLES");
+            $array = array();
+            while ($row = $result->fetch_assoc())//循环读出数据
+            {
+                array_push($array, array_values($row)[0]);
+            }
+            return array(
+                'tables' => $array
+            );
+        }
         $result = $this->query($mysql_database, "select table_name as 'table_name' from information_schema.tables where table_schema='" . $mysql_database . "' and  table_type in ('base table','BASE TABLE')");
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
@@ -112,7 +125,7 @@ class MysqlHelper
     public function getColumns($mysql_database, $mysql_table): array
     {
         //$result = $this->query($mysql_database, " show columns from   " . $mysql_table);
-        $result = $this->query($mysql_database, "SELECT column_name as 'Field' ,column_type as 'Type', is_nullable as 'Null',column_key as 'Key',  column_default as 'Default', extra as 'Extra', column_comment as 'Comment'   from information_schema.COLUMNS   WHERE table_schema='" . $mysql_database . "' and table_name='".$mysql_table."' order by ordinal_position ");
+        $result = $this->query($mysql_database, "SELECT column_name as 'Field' ,column_type as 'Type', is_nullable as 'Null',column_key as 'Key',  column_default as 'Default', extra as 'Extra', column_comment as 'Comment'   from information_schema.COLUMNS   WHERE table_schema='" . $mysql_database . "' and table_name='" . $mysql_table . "' order by ordinal_position ");
         $array = array();
         while ($row = $result->fetch_assoc())//循环读出数据
         {
@@ -157,7 +170,7 @@ class MysqlHelper
                     $multiData->isrun = false;
                     $multiData->isquery = true;
                     $multiData->updateok = false;
-                    $multiData->info = $db->info ;
+                    $multiData->info = $db->info;
                     if ($rs = $db->store_result()) {//store_result()方法获取第一条sql语句查询结果
                         $multiData->columns = $rs->fetch_fields();
                         while ($row = $rs->fetch_assoc()) {

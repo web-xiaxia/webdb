@@ -588,10 +588,11 @@ function show_one_data(conn_name, database, table, sqldata) {
     var table_columns = getLocalStorage(localStorageName.tableColumns + conn_name + ":" + database + ":" + table);
     var one_data_context = $("#zshow_one_data_windowcontext")
     one_data_context.empty()
+    const zdycolumns = getZdycolumns()
     for (var d2 in table_columns.mysql_table_columns) {
         var field = table_columns.mysql_table_columns[d2]['Field'];
         var comment = table_columns.mysql_table_columns[d2]['Comment'];
-        if (!$(`#zdycolumns${field}`).is(':checked')) {
+        if (!zdycolumns.has(field)) {
             continue
         }
         var showxxx_text = $(`<div class="show_one_data_field_context" onclick="show_one_data_update_data('${sqldata[table_columns.mysql_table_columns_id]}','${field}',this)"></div>`)
@@ -616,6 +617,26 @@ function xuhao_td(d, conn_name, database, table, sqldata) {
         show_one_data(conn_name, database, table, sqldata)
     })
     return bttd
+}
+
+function getZdycolumns() {
+    var zdycolumns = $("#zdycolumnswindowcontext").find("input.zdycolumns:checked")
+    if (zdycolumns.length === 0) {
+        zdycolumns = $("#zdycolumnswindowcontext").find("input.zdycolumns")
+    }
+
+    const zdycolumnsStartsWith = 'zdycolumns'
+    const columns = new Set()
+    for (let i = 0; i < zdycolumns.length; i++) {
+        const zdycolumn = zdycolumns.eq(i)
+        const zdycolumnId = zdycolumn.attr("id")
+
+        if (zdycolumnId.startsWith(zdycolumnsStartsWith)) {
+            columns.add(zdycolumnId.substring(zdycolumnsStartsWith.length))
+        }
+    }
+
+    return columns
 }
 
 function getTableQueryData() {
@@ -654,7 +675,7 @@ function getTableQueryData() {
         }
     }
     $("#pagenum").val(table_data_page.data_num)
-
+    const zdycolumns = getZdycolumns()
     var mysql_column = []
     var query_where = [];
     var query_orderby = [];
@@ -670,7 +691,7 @@ function getTableQueryData() {
             }
         }
 
-        if (!$(`#zdycolumns${column_name}`).is(':checked')) {
+        if (!zdycolumns.has(column_name)) {
             continue
         }
         var column_type = table_columns.mysql_table_columns[d]['Type'];
@@ -768,7 +789,7 @@ function getTableData() {
     var table_columns = queryDataFull.table_columns
     var oderbyobj = queryDataFull.oderbyobj
     var querywhereobj = queryDataFull.querywhereobj
-
+    const zdycolumns = getZdycolumns()
     $("#tabledatashowthead").empty();
     $("#tabledatashowtbody").empty();
     $("#page-other-sql").text('无')
@@ -811,7 +832,7 @@ function getTableData() {
                 ttr2.append(`<td onclick="openfloatmain('#zdycolumnswindow');">序号</td>`);
                 for (var d in table_columns.mysql_table_columns) {
                     var mysql_table_column = table_columns.mysql_table_columns[d]['Field'];
-                    if (!$(`#zdycolumns${mysql_table_column}`).is(':checked')) {
+                    if (!zdycolumns.has(mysql_table_column)) {
                         continue
                     }
                     var oderbyobjcolumnname = oderbyobj[mysql_table_column];
@@ -840,6 +861,7 @@ function getTableData() {
                     ttr2.append(`<td data-column="${mysql_table_column}" >${dingTitle}${mysql_table_column} ${querywhereobjcolumntext} ${oderbyobjcolumnnametext}</td>`)
                 }
                 $("#tabledatashowthead").append(ttr2);
+                const zdycolumns = getZdycolumns()
                 var xxtabledatashowtbody = $("#tabledatashowtbody");
                 for (var d in sqldataList) {
                     var sqldata = sqldataList[d]
@@ -850,7 +872,7 @@ function getTableData() {
 
                     for (var d2 in table_columns.mysql_table_columns) {
                         var field = table_columns.mysql_table_columns[d2]['Field'];
-                        if (!$(`#zdycolumns${field}`).is(':checked')) {
+                        if (!zdycolumns.has(field)) {
                             continue
                         }
                         var textRight = ""
