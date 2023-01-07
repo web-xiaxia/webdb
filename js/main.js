@@ -51,6 +51,23 @@ function getLocalStorage(name, b, def = null) {
 }
 
 
+function getSatrtIdLocalStorage(name, b, def = null) {
+    const startId = getSessionStorage(sessionStorageName.startId, false)
+    if (startId) {
+        return getLocalStorage("startId:" + startId + name, b, def)
+    }
+    return getLocalStorage(name, b, def)
+}
+
+
+function setSatrtIdLocalStorage(name, value, b) {
+    const startId = getSessionStorage(sessionStorageName.startId, false)
+    if (startId) {
+        return setLocalStorage("startId:" + startId + name, value, b)
+    }
+    return setLocalStorage(name, value, b)
+}
+
 var localStorageName = {
     oldUrl: "oldUrl",
     lsbj: "lsbj",
@@ -76,22 +93,6 @@ var localStorageName = {
     zdysqlsavename: "zdysqlsavename:",
 }
 
-function getSatrtIdLocalStorage(name, b, def = null) {
-    const startId = getSessionStorage(sessionStorageName.startId, false)
-    if (startId) {
-        return getLocalStorage("startId:" + startId + name, b, def)
-    }
-    return getLocalStorage(name, b, def)
-}
-
-
-function setSatrtIdLocalStorage(name, value, b) {
-    const startId = getSessionStorage(sessionStorageName.startId, false)
-    if (startId) {
-        return setLocalStorage("startId:" + startId + name, value, b)
-    }
-    return setLocalStorage(name, value, b)
-}
 
 var sessionStorageName = {}
 
