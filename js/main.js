@@ -79,7 +79,7 @@ var localStorageName = {
 function getSatrtIdLocalStorage(name, b, def = null) {
     const startId = getSessionStorage(sessionStorageName.startId, false)
     if (startId) {
-        return getLocalStorage(startId + name, b, def)
+        return getLocalStorage("startId:" + startId + name, b, def)
     }
     return getLocalStorage(name, b, def)
 }
@@ -88,7 +88,7 @@ function getSatrtIdLocalStorage(name, b, def = null) {
 function setSatrtIdLocalStorage(name, value, b) {
     const startId = getSessionStorage(sessionStorageName.startId, false)
     if (startId) {
-        return setLocalStorage(startId + name, value, b)
+        return setLocalStorage("startId:" + startId + name, value, b)
     }
     return setLocalStorage(name, value, b)
 }
