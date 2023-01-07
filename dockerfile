@@ -6,6 +6,6 @@ RUN a2enmod rewrite
 copy apache2.conf /etc/apache2/
 copy 000-default.conf /etc/apache2/sites-enabled/
 copy . /var/www/html/webdb/
-#  docker build -t webxiaxia/webdb:0.0.76 --platform=linux/amd64 -f Dockerfile .
-#  docker push webxiaxia/webdb:0.0.76
-#  docker run -d --restart=always -p 8984:80   webxiaxia/webdb:0.0.76
+#  docker build -t webxiaxia/webdb:0.0.77 --platform=linux/amd64 -f Dockerfile .
+#  docker push webxiaxia/webdb:0.0.77
+#  docker run -d --restart=always -p 8984:80   webxiaxia/webdb:0.0.77

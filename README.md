@@ -5,7 +5,7 @@
 ## 运行
 
 ```
-docker run -d --restart=always -p 8984:80   webxiaxia/webdb:0.0.76
+docker run -d --restart=always -p 8984:80   webxiaxia/webdb:0.0.77
 http://127.0.0.1:8984/webdb/
 ```
 

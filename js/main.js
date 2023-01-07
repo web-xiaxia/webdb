@@ -98,10 +98,17 @@ var sessionStorageName = {}
 
 var htmlover = 0;
 
+var lastOpenLodingCancelTimeoutId = null
 function openLoding() {
     htmlover++;
+    $("#lodingcancel").css({display: "none"});
     $("#loding").css({display: ""});
-    var lodingcontent = $("#lodingcontent");
+    if (lastOpenLodingCancelTimeoutId) {
+        clearTimeout(lastOpenLodingCancelTimeoutId)
+    }
+    lastOpenLodingCancelTimeoutId = setTimeout(function () {
+        $("#lodingcancel").css({display: ""});
+    }, 7000)
 }
 
 function closeLoding() {
