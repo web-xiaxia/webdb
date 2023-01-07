@@ -12,7 +12,6 @@ var maodianlist = {
         id: "#login",
         init: logininit,
         name: '连接',
-        skipSave: true,
     },
     "#databases": {
         id: "#databases",
@@ -41,13 +40,30 @@ var maodianlist = {
     }
 }
 window.onhashchange = nowurlfun;
+
+function getQueryString(name) {
+    const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    const r = window.location.search.substring(1).match(reg);
+    if (r != null) {
+        return decodeURIComponent(r[2]);
+    }
+    return null;
+}
+
 $(function () {
+    const startId = getQueryString("startId")
+    if (startId) {
+        setSessionStorage(sessionStorageName.startId, startId, false)
+    }
     nowurlfun(window.location.href);
 })
 
 function getmaodian(hash) {
     if (hash.indexOf("?") != -1) {
         hash = hash.substr(0, hash.indexOf("?"))
+    }
+    if (!hash) {
+        hash = "#login"
     }
     var maodian = maodianlist[hash];
     return maodian
@@ -75,7 +91,7 @@ function replaceUrlBack() {
 function nowurlfun(hashChangeEvent) {
     var hash = window.location.hash;
     if (hash == "") {
-        hash = getLocalStorage(localStorageName.oldUrl, false)
+        hash = getSatrtIdLocalStorage(localStorageName.oldUrl, false)
         if (hash) {
             addUrlBack()
             window.location.href = hash
@@ -88,7 +104,7 @@ function nowurlfun(hashChangeEvent) {
     var maodian = getmaodian(hash)
     if (maodian) {
         if (!maodian.skipSave) {
-            setLocalStorage(localStorageName.oldUrl, hash, false);
+            setSatrtIdLocalStorage(localStorageName.oldUrl, hash, false);
         }
         txxxxx(maodian);
     } else {

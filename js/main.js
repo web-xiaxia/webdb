@@ -1,4 +1,7 @@
 var gddhms = 0;
+var sessionStorageName = {
+    startId: "startId"
+}
 
 function setSessionStorage(name, value, b) {
     if (b == false) {
@@ -28,7 +31,8 @@ function setLocalStorage(name, value, b) {
     }
 
 }
-function delLocalStorage(name){
+
+function delLocalStorage(name) {
     delete localStorage[name]
 }
 
@@ -49,7 +53,6 @@ function getLocalStorage(name, b, def = null) {
 
 var localStorageName = {
     oldUrl: "oldUrl",
-    initUrl: "initUrl",
     lsbj: "lsbj",
     choicewindowlast: "choicewindowlast",
     choicewindow: "choicewindow",
@@ -72,6 +75,24 @@ var localStorageName = {
     zdysqlsavelist: "zdysqlsavelist:",
     zdysqlsavename: "zdysqlsavename:",
 }
+
+function getSatrtIdLocalStorage(name, b, def = null) {
+    const startId = getSessionStorage(sessionStorageName.startId, false)
+    if (startId) {
+        return getLocalStorage(startId + name, b, def)
+    }
+    return getLocalStorage(name, b, def)
+}
+
+
+function setSatrtIdLocalStorage(name, value, b) {
+    const startId = getSessionStorage(sessionStorageName.startId, false)
+    if (startId) {
+        return setLocalStorage(startId + name, value, b)
+    }
+    return setLocalStorage(name, value, b)
+}
+
 var sessionStorageName = {}
 
 var htmlover = 0;

@@ -1,13 +1,13 @@
 <script type="text/javascript">
     $(function () {
         $("#floatmainlsbjcontent").keyup(function () {
-            setLocalStorage(localStorageName.lsbj, $(this).val(), false);
+            setSatrtIdLocalStorage(localStorageName.lsbj, $(this).val(), false);
         });
         $("#floatmainlsbjcontent").change(function () {
-            setLocalStorage(localStorageName.lsbj, $(this).val(), false);
+            setSatrtIdLocalStorage(localStorageName.lsbj, $(this).val(), false);
         });
         $("#openfloatmainlsbj").click(function () {
-            var a = getLocalStorage(localStorageName.lsbj, false);
+            var a = getSatrtIdLocalStorage(localStorageName.lsbj, false);
             if (a == null) {
                 a = "临时笔记，可用于临时记录！\n不清空缓存下，永久保持！";
             }

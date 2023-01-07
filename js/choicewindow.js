@@ -2,11 +2,11 @@ function initchoicewindow() {
     var windowList = $('#choice-window-window-list')
     windowList.empty()
 
-    var choice_window_list = getLocalStorage(localStorageName.choicewindow, true, [])
+    var choice_window_list = getSatrtIdLocalStorage(localStorageName.choicewindow, true, [])
     for (var index in choice_window_list) {
         addlistwindow(windowList, choice_window_list[index], false)
     }
-    var lastchoicewindow = getLocalStorage(localStorageName.choicewindowlast)
+    var lastchoicewindow = getSatrtIdLocalStorage(localStorageName.choicewindowlast)
     if (lastchoicewindow) {
         addlistwindow(windowList, lastchoicewindow, true)
     }
@@ -53,10 +53,13 @@ function choicewindow() {
         window_show_name1 += (' - ' + database)
     }
 
+    var window_show_name2 = ""
     var maodian = getmaodian(window.location.hash)
-    var window_show_name2 = maodian ? maodian.name : ""
-    if (maodian.id == '#tabledata') {
-        window_show_name2 = `${window_show_name2}(${GetMaoQueryString('table')})`
+    if (maodian) {
+        window_show_name2 = maodian.name
+        if (maodian.id === '#tabledata') {
+            window_show_name2 = `${window_show_name2}(${GetMaoQueryString('table')})`
+        }
     }
 
     var window_show_name_list = []
@@ -69,7 +72,7 @@ function choicewindow() {
 
     html2canvas(document.body).then(function (canvas) {
         var strDataURI = canvas.toDataURL('image/png', 0.5);
-        setLocalStorage(localStorageName.choicewindowlast, {
+        setSatrtIdLocalStorage(localStorageName.choicewindowlast, {
             id: new Date().getTime() + '',
             name: window_show_name,
             url: window.location.hash,
@@ -81,7 +84,7 @@ function choicewindow() {
 }
 
 function listwindowsaveall(dataId) {
-    var choice_window_list = getLocalStorage(localStorageName.choicewindow, true, [])
+    var choice_window_list = getSatrtIdLocalStorage(localStorageName.choicewindow, true, [])
     var new_choice_window_list = []
     for (var index in choice_window_list) {
         var choice_window = choice_window_list[index]
@@ -89,7 +92,7 @@ function listwindowsaveall(dataId) {
             new_choice_window_list.push(choice_window)
         }
     }
-    setLocalStorage(localStorageName.choicewindow, new_choice_window_list)
+    setSatrtIdLocalStorage(localStorageName.choicewindow, new_choice_window_list)
 }
 
 function listwindowclose(that, candelete) {
@@ -104,21 +107,21 @@ function listwindowclose(that, candelete) {
 }
 
 function savelast() {
-    var lastchoicewindow = getLocalStorage(localStorageName.choicewindowlast)
+    var lastchoicewindow = getSatrtIdLocalStorage(localStorageName.choicewindowlast)
     if (lastchoicewindow) {
         var lastli = $('#choice-window-window-list').find('li:last-child')
         if (!lastli || lastli.attr('data-id') != lastchoicewindow.id) {
             return;
         }
 
-        var choice_window_list = getLocalStorage(localStorageName.choicewindow, true, [])
+        var choice_window_list = getSatrtIdLocalStorage(localStorageName.choicewindow, true, [])
         for (var index in choice_window_list) {
             if (choice_window_list[index].id == lastchoicewindow.id) {
                 return
             }
         }
         choice_window_list.push(lastchoicewindow)
-        setLocalStorage(localStorageName.choicewindow, choice_window_list)
+        setSatrtIdLocalStorage(localStorageName.choicewindow, choice_window_list)
     }
 }
 
