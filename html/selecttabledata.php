@@ -28,7 +28,7 @@
             </tbody>
         </table>
     </div>
-    <div style="position: fixed;bottom: 0; border-top:1px solid #e5e5e5; background:white;z-index: 1001;width: 100%; padding: 3px 0 3px 0px">
+    <div style="position: fixed;bottom: 0; border-top:1px solid #e5e5e5; background:white;z-index: 1001;width: 100%; padding: 3px 0 3px 0px;  padding-bottom: calc(constant(safe-area-inset-bottom)/2); padding-bottom: calc(env(safe-area-inset-bottom)/2); ">
         <a id="pagesy" href="javascript:void(0)" style="margin-left: 25px;" class="iconfont">&#xe60e;</a><!--第一页-->
         <a id="pageup" href="javascript:void(0)" class="iconfont">&#xe746;</a><!--上一页-->
         <a id="pagedowm" href="javascript:void(0)" class="iconfont">&#xe642;</a><!--下一页-->

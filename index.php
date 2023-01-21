@@ -2,12 +2,12 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
     <meta http-equiv="expires" content="-1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="viewport"
+          content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta property="qc:admins" content="2450036450146316110063757"/>
@@ -133,7 +133,7 @@
         ?>
     </script>
 </head>
-<body>
+<body style="padding-bottom: calc(constant(safe-area-inset-bottom)/2); padding-bottom: calc(env(safe-area-inset-bottom)/2); ">
 <?php
 include 'html/main.php';
 include 'html/lsbj.php';
