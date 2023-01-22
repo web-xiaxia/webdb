@@ -873,6 +873,7 @@ $(function () {
         }
     });
     $("#zdysql").on("touchend", function () {
+        $("#zdysql").focus()
         tipsSql(this)
     });
     $("#zdysql").on("touchmove", function () {
