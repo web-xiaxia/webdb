@@ -116,7 +116,8 @@
         </div>
     </div>
 
-    <div id="tablediv2" style="display: none;">
+    <div id="tablediv2"
+         style="display: none;padding-bottom: calc(constant(safe-area-inset-bottom)/2); padding-bottom: calc(env(safe-area-inset-bottom)/2); ">
         <!--<table class="tabledatashow2" border="1" style="position: relative">
             <thead class="tabledatashowthead2">
 

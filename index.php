@@ -133,7 +133,7 @@
         ?>
     </script>
 </head>
-<body style="margin-bottom: calc(constant(safe-area-inset-bottom)/2); margin-bottom: calc(env(safe-area-inset-bottom)/2); ">
+<body style="padding-bottom: calc(constant(safe-area-inset-bottom)/2); padding-bottom: calc(env(safe-area-inset-bottom)/2); ">
 <?php
 include 'html/main.php';
 include 'html/lsbj.php';
