@@ -555,7 +555,7 @@ function sql_show_one_data(columns, sqldata) {
     for (var d2 in columns) {
         var field = columns[d2].name;
 
-        var showxxx_text = $(`<div class="show_one_data_field_context""></div>`)
+        var showxxx_text = $(`<div class="show_one_data_field_context" onclick="show_one_data_update_data('${sqldata[table_columns.mysql_table_columns_id]}','${field}',this)"></div>`)
         showxxx_text.text(sqldata[field])
 
         var showxxx_text_box = $(`<div class="show_one_data_field"></div>`)
@@ -838,6 +838,26 @@ function sqlFormat() {
     setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, zdysql.val(), false);
 }
 
+function sqlShowColumn(that) {
+    var _this = $(that);
+    if (_this.hasClass("xuhao")) {
+        return
+    }
+    var showValue = _this.html()
+    $("#sqlshowcolumn").slideDown(gddhms);
+    $("#sqlshowcolumnvalue").text(showValue);
+    $("#sqlshowcolumnvaluejsonbox").css("display", "none")
+    try {
+        var showValueJson = JSON.parse(showValue)
+        if (typeof (showValueJson) === "object") {
+            $(`#sqlshowcolumnvaluejson`).JSONView(showValueJson)
+            $("#sqlshowcolumnvaluejsonbox").css("display", "")
+        }
+    } catch (e) {
+        //console.log(e)
+    }
+}
+
 var zdysql_input_propertychange_timeout = null
 $(function () {
     $("#zdysql").keyup(function () {
@@ -891,24 +911,9 @@ $(function () {
         search_ul_text(this, "#tablencoumnsul")
     });
 
+
     $("#tablediv2").delegate(".tabledatashowtbody2 td", "click", function () {
-        var _this = $(this);
-        if (_this.hasClass("xuhao")) {
-            return
-        }
-        var showValue = _this.html()
-        $("#sqlshowcolumn").slideDown(gddhms);
-        $("#sqlshowcolumnvalue").text(showValue);
-        $("#sqlshowcolumnvaluejsonbox").css("display", "none")
-        try {
-            var showValueJson = JSON.parse(showValue)
-            if (typeof (showValueJson) === "object") {
-                $(`#sqlshowcolumnvaluejson`).JSONView(showValueJson)
-                $("#sqlshowcolumnvaluejsonbox").css("display", "")
-            }
-        } catch (e) {
-            //console.log(e)
-        }
+        sqlShowColumn(this)
     });
 
     $("#sqllistitembox").delegate(".sqllistitem", "click", function () {

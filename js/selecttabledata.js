@@ -616,7 +616,7 @@ function show_one_data(conn_name, database, table, sqldata) {
         if (!zdycolumns.has(field)) {
             continue
         }
-        var showxxx_text = $(`<div class="show_one_data_field_context" onclick="show_one_data_update_data('${sqldata[table_columns.mysql_table_columns_id]}','${field}',this)"></div>`)
+        var showxxx_text = $(`<div class="show_one_data_field_context" onclick="sqlShowColumn(this)"></div>`)
         showxxx_text.text(sqldata[field])
 
         var showxxx_text_box = $(`<div class="show_one_data_field"></div>`)
