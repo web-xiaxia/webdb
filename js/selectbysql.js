@@ -857,9 +857,9 @@ $(function () {
             tipsSql(that)
         }, 50)
     });
-    $("#zdysql").click(function () {
-        tipsSql(this)
-    });
+    // $("#zdysql").click(function () {
+    //     tipsSql(this)
+    // });
     $("#zdysql").focus(function () {
         tipsSql(this)
         $('#zdysqltipname').css({'display': 'none'})
