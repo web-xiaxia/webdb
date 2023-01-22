@@ -839,7 +839,7 @@ function sqlFormat() {
 }
 
 function sqlShowColumn(that) {
-    var _this = $(this)
+    var _this = $(that)
     if (_this.hasClass("xuhao")) {
         return
     }
