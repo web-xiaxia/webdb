@@ -838,7 +838,8 @@ function sqlFormat() {
     setLocalStorage(localStorageName.zdysql + sql_conn_name + ':' + sql_database + ':' + nowSqlName, zdysql.val(), false);
 }
 
-function sqlShowColumn(_this) {
+function sqlShowColumn(that) {
+    var _this = $(this)
     if (_this.hasClass("xuhao")) {
         return
     }
