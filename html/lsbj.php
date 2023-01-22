@@ -30,7 +30,7 @@
             <div class="content" style="overflow:hidden">
                     <textarea id="floatmainlsbjcontent"
                               contenteditable="true"
-                              style="display:block;width:100%;height: 100%;box-sizing: border-box; -moz-box-sizing: border-box;-webkit-box-sizing: border-box; -webkit-user-select:text;"
+                              style="display:block;width:100%;height: 100%;box-sizing: border-box; -moz-box-sizing: border-box;-webkit-box-sizing: border-box; -webkit-user-select:text !important;"
                               rows="30"></textarea>
             </div>
         </div>
