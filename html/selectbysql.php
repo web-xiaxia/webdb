@@ -138,7 +138,9 @@
         <div class="contentbox">
             <div class="content">
                 <ul class="kjlb2 llsqlinstall" id="hanshufunlist">
-
+                    <?php
+                    include 'hanshu.html';
+                    ?>
                 </ul>
             </div>
         </div>

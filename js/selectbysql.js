@@ -1058,24 +1058,24 @@ $(function () {
     var isloadhanshu = false;
     $("#queryhanshu").click(function () {
         openfloatmain('#sqlfunlist');
-        if (isloadhanshu == false) {
-            isloadhanshu = true;
-            openLoding()
-            $.ajax({
-                url: "/webdb/html/hanshu.html",
-                type: "post",
-                dataType: "html",
-                success: function (data) {
-                    $("#hanshufunlist").html(data);
-                    closeLoding()
-                },
-                error: function () {
-                    closeLoding();
-                    alert("加载出错请重试！")
-                    isloadhanshu = false;
-                }
-            });
-        }
+        //if (isloadhanshu == false) {
+        //    isloadhanshu = true;
+        //    openLoding()
+        //    $.ajax({
+        //        url: "/webdb/html/hanshu.html",
+        //        type: "post",
+        //        dataType: "html",
+        //        success: function (data) {
+        //            $("#hanshufunlist").html(data);
+        //            closeLoding()
+        //        },
+        //        error: function () {
+        //            closeLoding();
+        //            alert("加载出错请重试！")
+        //            isloadhanshu = false;
+        //        }
+        //    });
+        //}
     });
 });
 
