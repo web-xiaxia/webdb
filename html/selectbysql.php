@@ -117,7 +117,7 @@
     </div>
 
     <div id="tablediv2"
-         style="display: none;margin-bottom: calc(constant(safe-area-inset-bottom)/2); margin-bottom: calc(env(safe-area-inset-bottom)/2); ">
+         style="display: none; ">
         <!--<table class="tabledatashow2" border="1" style="position: relative">
             <thead class="tabledatashowthead2">
 
@@ -127,12 +127,14 @@
             </tbody>
         </table>-->
     </div>
+    <div style="height: calc(constant(safe-area-inset-bottom)/2); height: calc(env(safe-area-inset-bottom)/2);"></div>
 </div>
 <div class="floatmain" id="sqlfunlist" style="display: none;">
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">插入函数</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
+        <div class="title"><span class="content">插入函数</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a>
+        </div>
         <div class="contentbox">
             <div class="content">
                 <ul class="kjlb2 llsqlinstall" id="hanshufunlist">
