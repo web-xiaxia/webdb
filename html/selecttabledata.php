@@ -68,7 +68,9 @@
                     <div id="updatevaluejson" class="json-window-context-nowrap">
                     </div>
                 </div>
-                <textarea id="updatevalue" style="width: 100%" rows="10"></textarea>
+                <textarea id="updatevalue"
+                          contenteditable="true"
+                          style="width: 100%; -webkit-user-select:text;" rows="10"></textarea>
                 <a id="unpdatebtn" class="btn" href="javascript:void(0)">修改</a>
             </div>
         </div>

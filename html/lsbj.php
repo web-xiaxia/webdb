@@ -24,11 +24,13 @@
     <div class="floatbg">
     </div>
     <div class="float">
-        <div class="title"><span class="content">临时笔记</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a></div>
+        <div class="title"><span class="content">临时笔记</span><a class="close iconfont" href="javascript:void(0)">&#xe60d;</a>
+        </div>
         <div class="contentbox">
             <div class="content" style="overflow:hidden">
                     <textarea id="floatmainlsbjcontent"
-                              style="display:block;width:100%;height: 100%;box-sizing: border-box; -moz-box-sizing: border-box;-webkit-box-sizing: border-box; "
+                              contenteditable="true"
+                              style="display:block;width:100%;height: 100%;box-sizing: border-box; -moz-box-sizing: border-box;-webkit-box-sizing: border-box; -webkit-user-select:text;"
                               rows="30"></textarea>
             </div>
         </div>

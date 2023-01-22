@@ -33,10 +33,12 @@
     </div>
     <div id="sqltip2" class="sqltip">
     </div>
-    <div id="zdysqlmain" style="text-align: center;padding-bottom: 10px; box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box;">
+    <div id="zdysqlmain"
+         style="text-align: center;padding-bottom: 10px; box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box;">
         <div style="padding: 0 5px; position:relative; box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box; ">
             <textarea id="zdysql" rows="10"
-                      style="width: 100%;box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box;  border: 1px solid #387EF5; border-radius: 2px;-webkit-user-select:auto;"></textarea>
+                      contenteditable="true"
+                      style="width: 100%;box-sizing: border-box;    -moz-box-sizing: border-box;    -webkit-box-sizing: border-box;  border: 1px solid #387EF5; border-radius: 2px;-webkit-user-select:text;"></textarea>
             <div id="zdysqltipname"><span id="zdysqltipnametext"></span></div>
         </div>
         <table width="100%">
