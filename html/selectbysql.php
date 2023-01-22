@@ -199,7 +199,7 @@
         </div>
     </div>
 </div>
-<div class="floatmain" id="sqlshowcolumn" style="display: none;">
+<div class="floatmain" id="sqlshowcolumn" style="display: none; z-index: 2500; ">
     <div class="floatbg">
     </div>
     <div class="float">
